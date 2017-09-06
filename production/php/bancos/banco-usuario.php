@@ -1,7 +1,7 @@
 <?php
 
 function buscaUsuario($conexao , $id){
-    $query = "select  * from usuarios where id = '{$id}'";
+    $query = "select  * from usuarios where id_usuario = '{$id}'";
     $resultado = mysqli_query($conexao, $query);
     $usuario = mysqli_fetch_assoc($resultado);
     return $usuario;

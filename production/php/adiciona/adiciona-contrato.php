@@ -1,5 +1,5 @@
-<?php include ("conecta.php");?>
-<?php include ("banco-contrato.php");?>
+<?php include "../bancos/conecta.php";?>
+<?php include "../bancos/banco-contrato.php";?>
 
 <?php 
    
@@ -20,7 +20,7 @@
    $query = "insert into contratos (n_contrato, empresa, fantasia, cnpj, administrador, cpf, residencia, sede, data_inicio, data_fim, id_consultor, id_clientes, id_produto, status) values ('{$n_contrato}','{$empresa}','{$fantasia}' ,'{$cnpj}' ,'{$administrador}', '{$cpf}'  ,'{$residencia}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor, $id_cliente, $id_produto, 'inicial')";
 
    if(mysqli_query($conexao, $query)){
-      header("Location: contratos.php");
+      header("Location: ../contratos/contratos.php");
    }else{
       echo mysqli_error($conexao);
       echo "nao foi adicionado";

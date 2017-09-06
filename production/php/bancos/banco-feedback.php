@@ -26,6 +26,8 @@ function listaConsultorFeedback($conexao, $id_consultor){
     while ($consultor= mysqli_fetch_assoc($resultado)) {
       array_push($consultores, $consultor);
     }
-    
+    if(!empty($consultores)){
+      
+    }
     return $consultores;
 }

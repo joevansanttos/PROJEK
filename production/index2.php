@@ -65,7 +65,7 @@
                       <li><a href="php/empresas/suspects.php">SUSPECTS</a></li>
                       <li><a href="php/empresas/prospects.php">PROSPECTS</a></li>
                       <li><a href="php/contratos/contratos.php">CONTRATOS</a></li>                     
-                      <li><a href="php/pos-vendas/pos-venda.php">PÓS-VENDA</a></li>
+                      <li><a href="php/pos-venda/pos-venda.php">PÓS-VENDA</a></li>
                     </ul>
                   </li>
                     <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>

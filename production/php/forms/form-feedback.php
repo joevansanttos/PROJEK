@@ -1,6 +1,7 @@
-<?php include "conecta.php";?>
-<?php include "banco-usuario.php";?>
-<?php include "banco-contrato.php";?>
+<?php include "../bancos/conecta.php";?>
+<?php include "../bancos/banco-contrato.php";?>
+<?php include "../bancos/banco-usuario.php";?>
+
 <?php
 $id = $_GET['id'];
 $contrato = buscaContrato($conexao , $id);
@@ -17,20 +18,20 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PROJEK</title>
-  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-  <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+  <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+  <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
   <!-- Datatables -->
-  <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript">
     function handle(){
         value = $("button").text();
@@ -49,12 +50,12 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index2.php" class="site_title"><img src="images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+            <a href="../../index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
           </div>
           <div class="clearfix"></div>
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
+              <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Bem Vindo,</span>
@@ -146,7 +147,7 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img2.jpg" alt="">Fabio
+                  <img src="../../images/img2.jpg" alt="">Fabio
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -209,7 +210,7 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
                 <div class="clearfix"></div>                
                 <div class="x_content">
                  
-                    <form action="adiciona-feedback.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="../adiciona/adiciona-feedback.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <div class="item form-group">
                          <h2>Pontualidade</h2>
                         <label class="radio-inline">
@@ -276,7 +277,7 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
                           <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
                           <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button> 
                           <input type="hidden" name="id_contrato" id="id_contrato" value="<?=$contrato['id_contrato']?>"/>
-                          <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$consultor['id']?>" />                         
+                          <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$consultor['id_usuario']?>" />                         
                         </div>
                       </div>
                     </form>                  
@@ -299,53 +300,53 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
       <!-- /footer content -->
     </div>
   </div>
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
 
   <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
+  <script src="../../../vendors/nprogress/nprogress.js"></script>
   <!-- bootstrap-progressbar -->
-  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
   <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
+  <script src="../../../vendors/iCheck/icheck.min.js"></script>
   <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
+  <script src="../../../vendors/moment/min/moment.min.js"></script>
   <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap-wysiwyg -->
-  <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-  <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-  <script src="../vendors/google-code-prettify/src/prettify.js"></script>
+  <script src="../../../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+  <script src="../../../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+  <script src="../../../vendors/google-code-prettify/src/prettify.js"></script>
   <!-- jQuery Tags Input -->
-  <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+  <script src="../../../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
   <!-- Switchery -->
-  <script src="../vendors/switchery/dist/switchery.min.js"></script>
+  <script src="../../../vendors/switchery/dist/switchery.min.js"></script>
   <!-- Select2 -->
-  <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+  <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
   <!-- Parsley -->
-  <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+  <script src="../../../vendors/parsleyjs/dist/parsley.min.js"></script>
   <!-- Autosize -->
-  <script src="../vendors/autosize/dist/autosize.min.js"></script>
+  <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
   <!-- jQuery autocomplete -->
-  <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+  <script src="../../../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
   <!-- starrr -->
-  <script src="../vendors/starrr/dist/starrr.js"></script>
+  <script src="../../../vendors/starrr/dist/starrr.js"></script>
   <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.min.js"></script>
-  <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-  <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-  <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-  <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="../../../build/js/custom.min.js"></script>
+  <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="../../../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../../../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="../../../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="../../../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="../../../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="../../../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="../../../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <!-- Cidades e Estados -->
     <script src="js/cidades-estados-utf8.js"></script>
   <script language="JavaScript" type="text/javascript" charset="utf-8">

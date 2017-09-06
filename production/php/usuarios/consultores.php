@@ -186,43 +186,39 @@
                   <div class="clearfix"></div>                
                   <div class="x_content">
                     <table id="tabela" class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th>Nome</th>
-                                <th>Profissão</th>
-                                <th>Email</th>
-                                <th>Estado</th>
-                                <th>Telefone</th>
-                                <th>Ações</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php
-                                $usuarios = listaUsuarios($conexao);
-                                foreach ($usuarios as $usuario) {                                  
-                              ?>
-                                <tr>
-                                  <td><?=$usuario['nome']?></td>
-                              <?php
-                                $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
-                                if($profissao['descricao'] == 'Consultor'){
-                              ?>
-                                  <td><?=$profissao['descricao']?></td>
-                                  <td><?=$usuario['email']?></td>
-                                  <td><?=$usuario['estado']?></td>
-                                  <td><?=$usuario['telefone']?></td>
-                                  <td align="center">                                  
-                                    <a href="usuario-profile.php?id=<?=$usuario['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                                  </td>
-                              <?php
-                                }
-                              ?>                                   
-                                </tr>
-                              <?php
-                                }
-                              ?>
-                            </tbody>
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Profissão</th>
+                          <th>Email</th>
+                          <th>Estado</th>
+                          <th>Telefone</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <?php
+                          $usuarios = listaUsuarios($conexao);
+                          foreach ($usuarios as $usuario) { 
+                            $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
+                            if($profissao['descricao'] == 'Consultor'){                                 
+                          ?>
+                              <td><?=$usuario['nome']?></td>                              
+                              <td><?=$profissao['descricao']?></td>
+                              <td><?=$usuario['email']?></td>
+                              <td><?=$usuario['estado']?></td>
+                              <td><?=$usuario['telefone']?></td>
+                              <td align="center">                                  
+                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                                <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                              </td>
+                          <?php
+                            }
+                          }
+                          ?>                                   
+                        </tr>                  
+                      </tbody>
                     </table>
                     <div class="ln_solid"></div>
                       <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?">Novo Usuário</a>

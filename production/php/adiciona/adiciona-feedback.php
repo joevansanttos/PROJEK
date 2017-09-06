@@ -1,4 +1,4 @@
-<?php include ("conecta.php");?>
+<?php include "../bancos/conecta.php";?>
 
 <?php
     $id_consultor = $_GET["id_consultor"];
@@ -11,7 +11,7 @@
     $query = "insert into feedback (id_consultor, id_contrato, pontual, conhecimento, assiduo, empatia) values ({$id_consultor},{$id_contrato},{$pontual}, {$conhecimento}, {$assiduo}, {$empatia} )";
 
     if(mysqli_query($conexao, $query)){
-        header("Location: pos-venda.php");
+        header("Location: ../pos-venda/pos-venda.php");
     }else{
         echo "nao foi adicionado";
     }

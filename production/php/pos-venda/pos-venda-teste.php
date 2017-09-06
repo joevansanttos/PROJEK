@@ -1,11 +1,7 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-
-
-<?php
-$id = $_GET['id'];
-$usuario = buscaUsuario($conexao, $id);
-?>
+<?php include "conecta.php";?>
+<?php include "banco-contrato.php";?>
+<?php include "banco-usuario.php";?>
+<?php include "banco-feedback.php";?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,23 +13,23 @@ $usuario = buscaUsuario($conexao, $id);
     <title>PROJEK</title>
 
     <!-- Bootstrap -->
-    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
-    <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
 
     <!-- Custom Theme Style -->
-    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -42,12 +38,12 @@ $usuario = buscaUsuario($conexao, $id);
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../../index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+              <a href="index2.php" class="site_title"><img src="images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
             </div>
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -62,19 +58,19 @@ $usuario = buscaUsuario($conexao, $id);
                   <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="usuarios.php">USUÁRIOS</a></li>
-                      <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
+                      <li><a href="produtos.php">PRODUTOS</a></li>
+                      <li><a href="usuarios-consultores.php">CONSULTORES</a></li>
+                      <li><a href="clientes.php">CLIENTES</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../empresas/market.php">MARKET</a></li>
-                      <li><a href="../empresas/leads.php">LEADS</a></li>
-                      <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
-                      <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
-                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
-                      <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
+                      <li><a href="clientes-mercado.php">MERCADO</a></li>
+                      <li><a href="clientes-prospeccao.php">PROSPECÇÃO</a></li>
+                      <li><a href="clientes-apresentacao.php">APRESENTAÇÃO</a></li>
+                      <li><a href="clientes-oportunidade.php">OPORTUNIDADE</a></li>
+                      <li><a href="contratos.php">CONTRATOS</a></li>                     
+                      <li><a href="pos-venda.php">PÓS-VENDA</a></li>
                     </ul>
                   </li>
                     <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
@@ -129,7 +125,7 @@ $usuario = buscaUsuario($conexao, $id);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../images/img2.jpg" alt="">Fabio
+                    <img src="images/img2.jpg" alt="">Fabio
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -156,123 +152,128 @@ $usuario = buscaUsuario($conexao, $id);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Página do Usuário</h3>
+                <h3>Pós-Venda</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                      </span>
                   </div>
                 </div>
               </div>
-            </div>
-
+            </div> 
+            <!--Page Title-->             
             <div class="clearfix"></div>
-
-            <div class="row" >
+            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" >
+                <div class="x_panel">
                   <div class="x_title">
-                    <h2>Dados do Usuário</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
+                          <li><a href="#">Settings 1</a></li>
+                          <li><a href="#">Settings 2</a></li>
                         </ul>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
-                    <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" align="center">
-                    <div class="col-md-12 col-sm-3 col-xs-12 profile_left " >
-                      <div class="profile_img">
-                        <div id="crop-avatar">
-                          <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/user.png" alt="Avatar" title="Change the avatar">
-                        </div>
-                      </div>
-                      <h3><?=$usuario['nome']?></h3>
+                  <div class="clearfix"></div>                
+                  <div class="x_content">
+                    <table id="tabela" class="table table-bordered table-striped">
+                      <thead>
+                        <tr role="row">
+                          <th>Inicio</th>
+                          <th>Fim</th>
+                          <th>Nº Contrato</th>
+                          <th>Empresa</th>
+                          <th>Consultor</th>
+                          <th>Feedback</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $contratos = listaContratos($conexao);
+                        foreach ($contratos as $contrato) {
+                          if($contrato['status'] == 'andamento'){
+                            $usuario = buscaUsuario($conexao, $contrato['id_consultor']);
+                          ?>
+                          <tr>
+                            <td><?=$contrato['data_inicio']?></td>
+                            <td><?=$contrato['data_fim']?></td>
+                            <td><?=$contrato['n_contrato']?></td>
+                            <td><?=$contrato['empresa']?></td>
+                            <td><?=$usuario['nome']?></td>
+                            <?php
+                              $feedback = buscaContratoFeedback($conexao, $contrato['id_contrato']);
+                              if($feedback != null){
 
-                      <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i><?=$usuario['profissao']?>
-                        </li>
 
-                        <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i><?=$usuario['telefone']?>
-                        </li>
-
-                        <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="<?=$cliente['site']?>" target="_blank"><?=$usuario['email']?></a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <!-- Teste -->
-                    <div class="x_content" style="display: block;">
-
-                      <div class="container">
-                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
-                        <a  class="btn btn-primary" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Prospeccão</a>
-                        <a  class="btn btn-warning" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Apresentação</a>
-                        <a  class="btn btn-danger" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Oportunidade</a>
-                      </div>
-                      <br />
+                            ?>
+                            <td align="center"><a href="feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-success btn-xs">Realizado</button></a></td>  
+                          
+                          <?php
+                              }else{
+                          ?>
+                            <td align="center"><a href="form-feedback.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs">Adicione</button></a></td>
+                          <?php
+                              }
+                            }
+                          }
+                          ?>
+                          </tr>
+                      </tbody>
+                    </table>
+                    <div class="ln_solid"></div>                      
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
-        <div class="clearfix"></div>
-        <!-- /page content -->
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            PROJEK
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+        </div>
+        <div class="clearfix"></div>       
       </div>
     </div>
     <!-- jQuery -->
-    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <script src="../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
-    <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../../../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
+    <script src="../build/js/custom.min.js"></script>
+    <script src="js/datatable.js"></script>  
   </body>
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      PROJEK
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
 </html>

@@ -1,6 +1,6 @@
-<?php include "banco-contrato.php";?>
-<?php include "conecta.php";?>
-<?php include "banco-clientes.php";?>
+<?php include "../bancos/conecta.php";?>
+<?php include "../bancos/banco-contrato.php";?>
+<?php include "../bancos/banco-market.php";?>
 
 <?php
 $id = $_GET['id'];
@@ -13,8 +13,8 @@ $cliente= buscaCliente($conexao, $contrato['id_clientes']);
 <head>
     <meta charset='utf-8'>
     <title>Contrato</title>
-    <script src='js/pdfmake.min.js'></script>
-    <script src='js/vfs_fonts.js'></script>
+    <script src='../../js/pdfmake.min.js'></script>
+    <script src='../../js/vfs_fonts.js'></script>
 </head>
 <body>
                          <span class="section"><center>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</center> 
