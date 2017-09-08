@@ -1,4 +1,5 @@
 <?php include ("../bancos/conecta.php");?>
+<?php include "../bancos/banco-cidade.php";?>
 
 <?php
     $email = $_POST["email"];
@@ -11,9 +12,10 @@
     $id_profissao = $_POST["profissao"];
     $telefone = $_POST["telefone"];
 
+    $nome_cidade = buscaCidade($conexao, $cidade);
 
 
-    $query = "insert into usuarios (senha, nome, sobrenome, email, sexo, estado, cidade, id_profissao, telefone) values ('{$senha}','{$nome}', '{$sobrenome}', '{$email}' ,'{$sexo}','{$estado}','{$cidade}', {$id_profissao} ,'{$telefone}'   )";
+    $query = "insert into usuarios (senha, nome, sobrenome, email, sexo, estado, cidade, id_profissao, telefone) values ('{$senha}','{$nome}', '{$sobrenome}', '{$email}' ,'{$sexo}','{$estado}','{$nome_cidade['CT_NOME']}', {$id_profissao} ,'{$telefone}'   )";
 
     if(mysqli_query($conexao, $query)){
         mysqli_close($conexao);

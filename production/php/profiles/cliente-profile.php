@@ -10,6 +10,7 @@ $id = $_GET['id'];
 $cliente = buscaCliente($conexao, $id);
 $prospeccao = buscaLeads($conexao, $id);
 $apresentacoes = buscaClientesApresentacao($conexao, $id);
+$prospects = buscaProspects($conexao, $id);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,9 @@ $apresentacoes = buscaClientesApresentacao($conexao, $id);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PROJEK</title>
+  <title>PROJEK | Perfil da Empresa</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -46,35 +49,29 @@ $apresentacoes = buscaClientesApresentacao($conexao, $id);
                 <h2>Fabio</h2>
               </div>
             </div>
-            <br />
+            <br />            
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Geral</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-desktop"></i>LISTAR<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="usuarios.php">USUÁRIOS</a></li>
-                      <li><a href="produtos.php">PRODUTOS</a></li>
-                      <li><a href="usuarios-consultores.php">CONSULTORES</a></li>
-                      <li><a href="clientes.php">CLIENTES</a></li>
+                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
+                      <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
+                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
+                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="clientes-mercado.php">MERCADO</a></li>
-                      <li><a href="clientes-prospeccao.php">PROSPECÇÃO</a></li>
-                      <li><a href="clientes-apresentacao.php">APRESENTAÇÃO</a></li>
-                      <li><a href="clientes-oportunidade.php">OPORTUNIDADE</a></li>
-                      <li><a>CONTRATO<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                          <li><a href="contrato-mapeamento.php">MAPEAMENTO DE PROCESSOS</a></li>
-                          <li><a href="contrato-auditoria.php">AUDITORIA DE PROCESSOS</a></li>
-                          <li><a href="contrato-gestao.php">GESTÃO DE CONHECIMENTO</a></li>
-                        </ul>
-                      </li>
-                      <li><a>PÓS-VENDA<span class="fa fa-chevron-down"></span></a> 
-                      </ul>
-                    </li>
+                      <li><a href="../empresas/market.php">MARKET</a></li>
+                      <li><a href="../empresas/leads.php">LEADS</a></li>
+                      <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
+                      <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
+                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
+                    </ul>
+                  </li>
                     <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="contrato-mapeamento.php">MAPEAMENTO DE PROCESSOS</a></li>
@@ -111,12 +108,10 @@ $apresentacoes = buscaClientesApresentacao($conexao, $id);
                         <li><a href="fixed_footer.html">DEMISSÃO</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-file-text-o"></i> RELATÓRIOS <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                      </ul>
                     </ul>
-                  </div>
-                </div>
+                    </div>
+                    </div>               
+                </ul>
               </div>
             </div>
           </div>
@@ -242,9 +237,9 @@ $apresentacoes = buscaClientesApresentacao($conexao, $id);
                               </a>
                               <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
                                 <div class="panel-body">
-<?php
-foreach ($prospeccao as $prosp){
-?>
+                                <?php
+                                foreach ($prospeccao as $prosp){
+                                ?>
                                     <table class="table table-bordered">
 
                                       <thead>
@@ -270,9 +265,9 @@ foreach ($prospeccao as $prosp){
                                           </td>
                                         </tr>
                                       </tbody>
-<?php
-}
-?>
+                                    <?php
+                                      }
+                                    ?>
                                   </table>
                                 </div>
                               </div>
@@ -283,11 +278,10 @@ foreach ($prospeccao as $prosp){
                               </a>
                               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
                                 <div class="panel-body">
-<?php
-foreach ($apresentacoes as $apresentacao){
-?>
+                                <?php
+                                  foreach ($apresentacoes as $apresentacao){
+                                ?>
                                     <table class="table table-bordered">
-
                                       <thead>
                                         <tr>
                                           <th>Contato</th>
@@ -311,9 +305,9 @@ foreach ($apresentacoes as $apresentacao){
                                           </td>
                                         </tr>
                                       </tbody>
-<?php
-}
-?>
+                                    <?php
+                                      }
+                                    ?>
                                   </table>
                                 </div>
                               </div>
@@ -324,9 +318,33 @@ foreach ($apresentacoes as $apresentacao){
                               </a>
                               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
                                 <div class="panel-body">
-                                  <p><strong>Collapsible Item 3 data</strong>
-                                  </p>
-                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                                  <?php
+                                    foreach ($prospects as $prospect){
+                                  ?>
+                                      <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Valor</th>
+                                            <th>Recebimento</th>
+                                            <th>Fechamento</th>
+                                            <th>Ações</th>                                        
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><?=$prospect['valor_est']?></td>
+                                            <td><?=$prospect['recebimento']?></td>
+                                            <td><?=$prospect['fechamento']?></td>                                          
+                                            <td>
+                                              <a href="remove-cliente-apresentacao.php?id=<?=$apresentacao['id']?>"><button class="btn btn-danger btn-xs">Remover</button></a>
+                                              <a href="form-altera-cliente-apresentacao.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs">Editar</button></a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      <?php
+                                        }
+                                      ?>
+                                    </table>
                                 </div>
                               </div>
                             </div>
@@ -379,23 +397,23 @@ foreach ($apresentacoes as $apresentacao){
         <!-- bootstrap-wysiwyg -->
         <script src="../../../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
         <script src="../../../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-        <script src="../../../../../vendors/google-code-prettify/src/prettify.js"></script>
+        <script src="../../../vendors/google-code-prettify/src/prettify.js"></script>
         <!-- jQuery Tags Input -->
         <script src="../../../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
         <!-- Switchery -->
         <script src="../../../vendors/switchery/dist/switchery.min.js"></script>
         <!-- Select2 -->
-        <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+        <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
         <!-- Parsley -->
-        <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+        <script src="../../../vendors/parsleyjs/dist/parsley.min.js"></script>
         <!-- Autosize -->
-        <script src="../vendors/autosize/dist/autosize.min.js"></script>
+        <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
         <!-- jQuery autocomplete -->
-        <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+        <script src="../../../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
         <!-- starrr -->
-        <script src="../vendors/starrr/dist/starrr.js"></script>
+        <script src="../../../vendors/starrr/dist/starrr.js"></script>
         <!-- Custom Theme Scripts -->
-        <script src="../build/js/custom.min.js"></script>
+        <script src="../../../build/js/custom.min.js"></script>
         <!-- Cidades e Estados -->
         <script src="js/cidades-estados-utf8.js"></script>
         <script language="JavaScript" type="text/javascript" charset="utf-8">

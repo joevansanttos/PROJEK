@@ -194,7 +194,7 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Cargo</th>
-                                <th>Prospect</th>                              
+                                <th>Suspect</th>                              
                                 <th>Ações</th>
                               </tr>
                             </thead>
@@ -214,8 +214,8 @@
                                     <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button class="btn btn-warning btn-xs">Novo Suspect</button></a>
                                   </td> 
                                   <td align="center">
-                                    <a href="../profiles/cliente-profile.php?id=<?=$market['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="../remove/remove-lead.php?id=<?=$lead['id_leads']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                    <a href="../profiles/cliente-profile.php?id=<?=$market['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i> Ver</button></a>
+                                    <a href="../remove/remove-lead.php?id=<?=$lead['id_leads']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>               
                                   </td>
                                 </tr>
                               <?php                                
@@ -224,7 +224,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-primary" style="" href="../empresas/market.php?">Market</a>
+                      <a class="btn btn-round btn-default" style="" href="../empresas/market.php?">Market</a>
                     </div>
                   </div>
                 </div>

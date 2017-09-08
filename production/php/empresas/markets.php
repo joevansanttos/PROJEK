@@ -195,7 +195,6 @@
                                 <th>Estado</th>
                                 <th>Bairro</th>
                                 <th>Segmento</th>
-                                <th>Status</th>
                                 <th>Ações</th>
                               </tr>
                             </thead>
@@ -212,10 +211,9 @@
                                   <td><?=$cliente['estado']?></td>
                                   <td><?=$cliente['bairro']?></td>
                                   <td><?=$cliente['segmento']?></td>
-                                  <td><?=$type['descricao']?></td>
                                   <td align="center">
-                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-folder"></i> Ver</button></a>
+                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>               
                                   </td>
                                 </tr>
                               <?php
@@ -224,7 +222,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-primary" style="" href="../forms/form-market.php?">Novo Market</a>
+                      <a class="btn btn-round btn-default" style="" href="../forms/form-market.php?">Novo Market</a>
                     </div>
                   </div>
                 </div>

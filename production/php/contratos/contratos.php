@@ -58,9 +58,9 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-desktop"></i> LISTAR <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="usuarios.php">USUÁRIOS</a></li>
+                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="consultores.php">CONSULTORES</a></li>
+                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
                       <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
@@ -70,7 +70,7 @@
                       <li><a href="../empresas/leads.php">LEADS</a></li>
                       <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
                       <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
-                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
+                      <li><a href="contratos.php">CONTRATOS</a></li>                     
                       <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
                     </ul>
                   </li>
@@ -116,7 +116,6 @@
           </div>
         </div>      
         <!-- Col-->
-
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
@@ -127,7 +126,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img2.jpg" alt="">Fabio
+                    <img src="../../images/img2.jpg" alt="">Fabio
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -149,7 +148,6 @@
           </div>
         </div>
         <!-- /top navigation --> 
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -172,7 +170,7 @@
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+                <div class="x_panel">                  
                   <div class="x_title">
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -189,6 +187,7 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
+
                     <table id="tabela" class="table table-bordered">
                       <thead>
                         <tr>
@@ -215,9 +214,9 @@
                             <td><?=$usuario['nome']?></td>
                             <td><?=$contrato['status']?></td>
                             <td align="center">                                 
-                              <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-print"></i></button></a>
-                              <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>                
-                              <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                              <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-print"></i> Print</button></a>
+                              <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-folder"></i> Ver</button></a>                
+                              <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"> Delete</i></button></a>
 
                             </td>
                           </tr>

@@ -1,5 +1,6 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-cidade.php";?>
+<?php include "../bancos/banco-market.php";?>
 
 <?php
     $razao = $_POST["razao"];
@@ -18,9 +19,17 @@
 
     $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel, comentario, bairro, id_type) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$nome_cidade['CT_NOME']}', '{$segmento}','{$tel}' ,'{$comentario}',  '{$bairro}', 1 )";
 
+
     if(mysqli_query($conexao, $query)){
-        mysqli_close($conexao);
-        header("Location: ../empresas/market.php");
+        $market = buscaMarketCnpj($conexao, $cnpj);
+        $id_consultor = $_POST['id_consultor'];
+        $today = date("d.m.y");
+        $query = "insert into consultores_market (id_consultor, id_market, data) values ({$id_consultor}, {$market['id']},'{$today}')";
+        if(mysqli_query($conexao, $query)){
+            mysqli_close($conexao);
+            header("Location: ../empresas/market.php");
+
+        }        
     }else{
     }
 

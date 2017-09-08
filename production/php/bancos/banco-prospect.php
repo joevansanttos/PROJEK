@@ -11,8 +11,8 @@ function buscaOportunidade($conexao, $id){
     return $clientes;
 }
 
-function buscaClientesOportunidade($conexao, $id){
-  $clientes = array();
+function buscaProspects($conexao, $id){
+    $clientes = array();
     $query = "select  * from prospects where id_clientes = {$id}";
     $resultado = mysqli_query($conexao, $query);
     while ($cliente= mysqli_fetch_assoc($resultado)) {

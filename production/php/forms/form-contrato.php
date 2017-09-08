@@ -253,7 +253,7 @@
                        if($usuario["id_profissao"] == '1'){
                          ?>
 
-                         <option value="" ><?=$usuario['nome']?></option>
+                         <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
                          <?php
                        }
                      }
@@ -276,7 +276,6 @@
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                       <button type="button" class="btn btn-primary">Cancelar</button>
                       <button type="submit" class="btn btn-success">Cadastrar</button>
-                      <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
                       <input type="hidden" name="id_cliente" id="id_cliente" value="<?=$cliente['id']?>" />
                       <input type="hidden" name="nome" id="nome" value="<?=$cliente['nome']?>" />
                       <input type="hidden" name="id_produto" id="id_produto" value="<?=$produto['id_produto']?>" />

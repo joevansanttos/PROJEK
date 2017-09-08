@@ -16,9 +16,7 @@
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
+    <!-- NProgress -->   
     <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -211,8 +209,9 @@
                                   <td><?=$usuario['email']?></td>
                                   <td><?=$usuario['estado']?></td>
                                   <td><?=$usuario['telefone']?></td>
-                                  <td align="center">                                
-                                    <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <td align="center">
+                                    <a href="../usuarios/usuarios.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-folder"></i> Ver</button></a>                    
+                                    <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>
                                   </td>
                                 </tr>
                               <?php
@@ -221,7 +220,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-primary" style="" href="../forms/form-usuario.php?">Novo Usuário</a>
+                      <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?">Novo Usuário</a>
                     </div>
                   </div>
                 </div>
@@ -245,12 +244,8 @@
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -263,9 +258,9 @@
     <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-
+    <script src="../../js/datatable.js"></script> 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
+     
   </body>
 </html>

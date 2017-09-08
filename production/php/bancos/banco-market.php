@@ -6,6 +6,12 @@ function buscaCliente($conexao, $id){
 	return mysqli_fetch_assoc($resultado);
 }
 
+function buscaMarketCnpj($conexao, $cnpj){
+  $query = "select * from market where cnpj = '{$cnpj}'";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}
+
 
 function listaClientes($conexao){
   $clientes = array();

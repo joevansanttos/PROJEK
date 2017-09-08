@@ -216,8 +216,8 @@
                                     <a href="../forms/form-lead.php?id=<?=$cliente['id']?>"><button class="btn btn-warning btn-xs">Novo Lead</button></a>
                                   </td>                              
                                   <td align="center">
-                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i> Ver</button></a>
+                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>
                                                     
                                   </td>
                                 </tr>
@@ -228,7 +228,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-primary" style="" href="../forms/form-market.php?">Novo Market</a>
+                      <a class="btn btn-round btn-default" style="" href="../forms/form-market.php?">Novo Market</a>
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,8 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../bancos/banco-feedback.php";?>
-
+<?php include "../bancos/banco-market.php";?>
+<?php include "../bancos/banco-consultores-market.php";?>
 
 <?php
   $id = $_GET['id'];
@@ -34,8 +35,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK</title>
+    <title>PROJEK | Perfil do Consultor</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -44,7 +46,6 @@
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">    
-
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -231,7 +232,7 @@
                         </li>
                       </ul>
 
-                      <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                      <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar</a>
                       <br />
 
                       <!-- start skills -->
@@ -288,7 +289,9 @@
                           </li>
                           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projetos</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Perfil</a>
+                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Market</a>
+                          </li>
+                          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Leads</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
@@ -365,7 +368,62 @@
 
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                            <p>Consultora, trabalha na Projek </p>
+                            
+                                <table  class="table table-bordered">
+                                
+                                  <tr>
+                                    <thead>
+                                      <th>Empresa</th>
+                                      <th>Consultor</th>
+                                      <td>Data</td>
+                                    </thead>
+                                  </tr>
+                                  <?php 
+                                  $markets = buscaMarketConsultores($conexao , $id);
+                                  foreach ($markets as  $market) {
+                                    $empresa = buscaCliente($conexao, $market['id_market']);
+                                ?>
+                                  <tr>
+                                    <tbody>
+                                      <td><?=$empresa['nome']?></td>
+                                      <td><?=$usuario['nome']?></td>
+                                      <td><?=$market['data']?></td>
+                                  </tbody>
+                                  </tr>
+                                 <?php
+                                  }
+                                  ?>
+                                </table>
+                            
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+                            
+                                <table  class="table table-bordered">
+                                
+                                  <tr>
+                                    <thead>
+                                      <th>Empresa</th>
+                                      <th>Consultor</th>
+                                      <td>Data</td>
+                                    </thead>
+                                  </tr>
+                                  <?php 
+                                  $markets = buscaMarketConsultores($conexao , $id);
+                                  foreach ($markets as  $market) {
+                                    $empresa = buscaCliente($conexao, $market['id_market']);
+                                ?>
+                                  <tr>
+                                    <tbody>
+                                      <td><?=$empresa['nome']?></td>
+                                      <td><?=$usuario['nome']?></td>
+                                      <td><?=$market['data']?></td>
+                                  </tbody>
+                                  </tr>
+                                 <?php
+                                  }
+                                  ?>
+                                </table>
+                            
                           </div>
                         </div>
                       </div>
@@ -397,9 +455,27 @@
     <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
-
+    <!-- morris.js -->
+    <script src="../../../vendors/raphael/raphael.min.js"></script>
+    <script src="../../../vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Datatables -->
+    <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../../../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../../../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../../../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../../../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../../js/datatable.js"></script> 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
   </body>

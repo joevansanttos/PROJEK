@@ -194,7 +194,7 @@
                           <th>Descrição</th>
                           <th>Beneficios</th>
                           <th>Entregas</th>
-                          <th>Ações</th>
+                          <th class="col-md-2">Ações</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -208,9 +208,9 @@
                             <td><?=$produto['descricao']?></td>
                             <td><?=$produto['beneficios']?></td>
                             <td><?=$produto['entregas']?></td>
-                            <td align="center">                                  
-                              <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button></a>
-                              <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                            <td align="center" >                                  
+                              <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-edit"></i>Alterar</button></a>
+                              <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>Delete</button></a>
                             </td>
                           </tr>
                           <?php
@@ -219,7 +219,7 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                    <a class="btn btn-round btn-primary" style="" href="../forms/form-produto.php?">Novo Produto</a>
+                    <a class="btn btn-round btn-default" style="" href="../forms/form-produto.php?">Novo Produto</a>
                   </div>
                 </div>
               </div>

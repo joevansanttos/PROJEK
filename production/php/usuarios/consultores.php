@@ -9,7 +9,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK</title>
+    <title>PROJEK | Consultores</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
 
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,8 +19,6 @@
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -189,35 +189,37 @@
                       <thead>
                         <tr>
                           <th>Nome</th>
-                          <th>Profissão</th>
                           <th>Email</th>
                           <th>Estado</th>
                           <th>Telefone</th>
+                          <th>Profissão</th>
                           <th>Ações</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <?php
+                        $usuarios = listaUsuarios($conexao);
+                          foreach ($usuarios as $usuario) {
+                            if($usuario['id_profissao'] == 1 || $usuario['id_profissao'] == 3 ){
+                              $profissao = buscaProfissao($conexao , $usuario['id_profissao'] );                   
+                        ?>
                         <tr>
-                          <?php
-                          $usuarios = listaUsuarios($conexao);
-                          foreach ($usuarios as $usuario) { 
-                            $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
-                            if($profissao['descricao'] == 'Consultor'){                                 
-                          ?>
+                          
                               <td><?=$usuario['nome']?></td>                              
-                              <td><?=$profissao['descricao']?></td>
                               <td><?=$usuario['email']?></td>
                               <td><?=$usuario['estado']?></td>
                               <td><?=$usuario['telefone']?></td>
+                              <th><?=$profissao['descricao']?></th>
                               <td align="center">                                  
-                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i> Ver</button></a>
+                                <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>
                               </td>
-                          <?php
-                            }
-                          }
-                          ?>                                   
-                        </tr>                  
+                                                          
+                        </tr>  
+                        <?php
+                          }                          
+                        }
+                        ?>                   
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
@@ -248,8 +250,6 @@
     <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -262,9 +262,9 @@
     <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../../js/datatable.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
   </body>
 </html>
