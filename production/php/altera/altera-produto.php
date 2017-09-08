@@ -1,5 +1,5 @@
-<?php include ("conecta.php");?>
-<?php include ("banco-produto.php");?>
+<?php include "../bancos/conecta.php";?>
+<?php include "../bancos/banco-produto.php";?>
 
 <?php
     $nome = $_GET["nome"];
@@ -13,7 +13,7 @@
 
     if(mysqli_query($conexao, $query)){
       mysqli_close($conexao);
-      header("Location: produtos.php");
+      header("Location: ../produtos/produtos.php");
     }else{
     }
 

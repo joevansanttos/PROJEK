@@ -12,6 +12,7 @@
 
     <title>Projek | Gestão da Qualidade Total</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"/>
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

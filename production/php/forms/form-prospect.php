@@ -18,7 +18,9 @@ $produtos = listaProdutos($conexao);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PROJEK</title>
+  <title>Projek | Novo Prospect</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -27,6 +29,14 @@ $produtos = listaProdutos($conexao);
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
+  <script >
+    function calcula(){
+      var prob = document.getElementById('prob').value;
+      var divide = prob/100;
+      var valor_op = document.getElementById('valor_op').value; 
+      document.getElementById('valor_est').value = parseFloat(divide)*parseFloat(valor_op);
+    }
+  </script>
 </head>
 <body class="nav-md">
   <div class="container body">
@@ -153,7 +163,7 @@ $produtos = listaProdutos($conexao);
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
@@ -164,7 +174,14 @@ $produtos = listaProdutos($conexao);
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form action="../adiciona/adiciona-prospect.php" method="get" class="form-horizontal form-label-left" novalidate> 
+              <form action="../adiciona/adiciona-prospect.php" method="post" class="form-horizontal form-label-left" novalidate> 
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Empresa<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$cliente['nome']?>">
+                  </div>
+                </div>
                 <div class="item form-group">
                   <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Produto <span class="required">*</span></label>
                   <div class="col-sm-6 col-xs-12 col-md-3">
@@ -276,6 +293,8 @@ $produtos = listaProdutos($conexao);
     estado: document.getElementById('estado1')
   })
 </script>
-<script src="js/teste.js"></script>
+<script src="../../js/calcula.js">
+  
+</script>
 </body>
 </html>

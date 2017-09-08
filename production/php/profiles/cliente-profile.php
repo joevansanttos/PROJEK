@@ -8,7 +8,7 @@
 <?php
 $id = $_GET['id'];
 $cliente = buscaCliente($conexao, $id);
-$prospeccao = buscaClientesProspeccao($conexao, $id);
+$prospeccao = buscaLeads($conexao, $id);
 $apresentacoes = buscaClientesApresentacao($conexao, $id);
 ?>
 

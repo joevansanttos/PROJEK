@@ -9,8 +9,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK</title>
+    <title>PROJEK | Leads</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -156,7 +157,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                       </span>
@@ -188,41 +189,42 @@
                     <table id="tabela" class="table table-bordered">
                             <thead>
                               <tr>
+                                <th>Empresa</th>
                                 <th>Nome</th>
+                                <th>Email</th>
                                 <th>Telefone</th>
-                                <th>Cidade</th>
-                                <th>Estado</th>
-                                <th>Bairro</th>
-                                <th>Segmento</th>
+                                <th>Cargo</th>
+                                <th>Prospect</th>                              
                                 <th>Ações</th>
                               </tr>
                             </thead>
                             <tbody>
                               <?php
-                                $clientes = listaClientes($conexao);
-                                foreach ($clientes as $cliente){
-                                  if($cliente['id_type'] == '1'){   
+                                $leads = listaLeads($conexao);
+                                foreach ($leads as $lead){
+                                  $market = buscaCliente($conexao, $lead['id_clientes']);                                
                                ?>
                                 <tr>
-                                  <td><?=$cliente['nome']?></td>
-                                  <td><?=$cliente['tel']?></td>
-                                  <td><?=$cliente['cidade']?></td>
-                                  <td><?=$cliente['estado']?></td>
-                                  <td><?=$cliente['bairro']?></td>
-                                  <td><?=$cliente['segmento']?></td>                              
+                                  <td><?=$market['nome']?></td>
+                                  <td><?=$lead['nome']?></td>
+                                  <td><?=$lead['email']?></td>
+                                  <td><?=$lead['tel']?></td>
+                                  <td><?=$lead['cargo']?></td>
                                   <td align="center">
-                                    <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                    <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button class="btn btn-warning btn-xs">Novo Suspect</button></a>
+                                  </td> 
+                                  <td align="center">
+                                    <a href="../profiles/cliente-profile.php?id=<?=$market['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                                    <a href="../remove/remove-lead.php?id=<?=$lead['id_leads']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
                                   </td>
                                 </tr>
-                              <?php
-                                  }
+                              <?php                                
                                 }
                               ?>
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-market.php?">Novo Market</a>
+                      <a class="btn btn-round btn-primary" style="" href="../empresas/market.php?">Market</a>
                     </div>
                   </div>
                 </div>

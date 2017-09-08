@@ -4,25 +4,27 @@
 
 
 <?php
-$id = $_GET['id'];
-$usuario = buscaUsuario($conexao, $id);
-$feedbacks = listaConsultorFeedback($conexao, $id);
-$size = count($feedbacks);
-$pontual = 0;
-$assiduo = 0;
-$conhecimento = 0;
-$empatia = 0;
-foreach ($feedbacks as $feedback) {
-  $pontual = $pontual + $feedback['pontual'] + 25;
-  $assiduo = $assiduo + $feedback['assiduo'] + 25;
-  $conhecimento = $pontual + $feedback['conhecimento'] + 25;
-  $empatia = $pontual + $feedback['empatia'] + 25;
-}
-
-$pontual = $pontual/$size;
-$assiduo = $assiduo/$size;
-$conhecimento = $conhecimento/$size;
-$empatia = $empatia/$size;
+  $id = $_GET['id'];
+  $usuario = buscaUsuario($conexao, $id);
+  $feedbacks = listaConsultorFeedback($conexao, $id);
+  $size = count($feedbacks);
+  $pontual = 0;
+  $assiduo = 0;
+  $conhecimento = 0;
+  $empatia = 0;
+  if($size > 0){    
+    foreach ($feedbacks as $feedback) {
+      $pontual = $pontual + $feedback['pontual'] + 25;
+      $assiduo = $assiduo + $feedback['assiduo'] + 25;
+      $conhecimento = $pontual + $feedback['conhecimento'] + 25;
+      $empatia = $pontual + $feedback['empatia'] + 25;
+    }
+    $pontual = $pontual/$size;
+    $assiduo = $assiduo/$size;
+    $conhecimento = $conhecimento/$size;
+    $empatia = $empatia/$size;
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -41,14 +43,7 @@ $empatia = $empatia/$size;
     <!-- NProgress -->
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <!-- Datatables -->
+    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">    
 
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
@@ -217,7 +212,7 @@ $empatia = $empatia/$size;
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/user.png" alt="Avatar" title="Change the avatar">
+                          <img class="img-responsive avatar-view" src="../../images/user.png" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
                       <h3><?=$usuario['nome']?></h3>
@@ -227,7 +222,7 @@ $empatia = $empatia/$size;
                         </li>
 
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> <?=$usuario['profissao']?>
+                          <i class="fa fa-briefcase user-profile-icon"></i> <?=$usuario['telefone']?>
                         </li>
 
                         <li class="m-top-xs">
@@ -404,21 +399,8 @@ $empatia = $empatia/$size;
     <script src="../../../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="../../../vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../../../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
   </body>
 </html>

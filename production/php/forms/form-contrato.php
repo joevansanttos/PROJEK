@@ -12,6 +12,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projek | Novo Contrato</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -146,7 +148,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
@@ -157,7 +159,7 @@
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form action="../adiciona/adiciona-contrato.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form action="../adiciona/adiciona-contrato.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                 <?php
                 $produtos = listaProdutos($conexao);
                 $clientes = listaClientes($conexao);              
@@ -166,7 +168,7 @@
                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nº Contrato <span class="required">*</span>
                  </label>
                  <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="n_contrato" name="n_contrato" required="required" class="form-control" data-inputmask="'mask' : '****-****-****-****-****-***'">
+                   <input type="text" id="n_contrato" name="n_contrato" required="required" class="form-control" data-inputmask="'mask' : '****-****-****-****'">
                  </div>
                 </div>                    
                 <div class="item form-group">
@@ -186,7 +188,7 @@
                  </div>
                 </div>
                  <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome Fantasia <span class="required">*</span>
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Razão Social <span class="required">*</span>
                  </label>
                  <div class="col-md-6 col-sm-6 col-xs-12">
                    <input type="text" id="fantasia" name="fantasia" required="required" class="form-control col-md-7 col-xs-12">
@@ -215,7 +217,7 @@
                 <div class="item form-group">
                  <label for="cpf" class="control-label col-md-3 col-sm-3 col-xs-12">CPF do Administrador <span class="required">*</span></label>
                  <div class="col-sm-6 col-xs-12 col-md-2">
-                   <input id="cpf" type="text" name="cpf" data-validate-linked="cpf" class="form-control col-md-2 col-xs-12" required="required">
+                   <input id="cpf" type="text" name="cpf" data-validate-linked="cpf" data-inputmask="'mask' : '***-***-***-**'" class="form-control col-md-2 col-xs-12" required="required">
                  </div>
                 </div>
                 <div class="item form-group">
@@ -273,7 +275,7 @@
                 <div class="form-group">
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                       <button type="button" class="btn btn-primary">Cancelar</button>
-                      <button type="submit" class="btn btn-success">Enviar</button>
+                      <button type="submit" class="btn btn-success">Cadastrar</button>
                       <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
                       <input type="hidden" name="id_cliente" id="id_cliente" value="<?=$cliente['id']?>" />
                       <input type="hidden" name="nome" id="nome" value="<?=$cliente['nome']?>" />
@@ -314,6 +316,9 @@
 <script src="../../../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
 <script src="../../../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
 <script src="../../../vendors/google-code-prettify/src/prettify.js"></script>
+
+<script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- jQuery Tags Input -->
 <script src="../../../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
 <!-- Switchery -->

@@ -1,8 +1,8 @@
 <?php
 
-function buscaProspeccao($conexao, $id){
+function buscaLeads($conexao, $id){
   $clientes = array();
-    $query = "select  * from leads where id = {$id}";
+    $query = "select  * from leads where id_clientes = {$id}";
     $resultado = mysqli_query($conexao, $query);
     while ($cliente= mysqli_fetch_assoc($resultado)) {
       array_push($clientes, $cliente);
@@ -11,7 +11,7 @@ function buscaProspeccao($conexao, $id){
     return $clientes;
 }
 
-function buscaClientesProspeccao($conexao, $id){
+function buscaClientesLeads($conexao, $id){
   $clientes = array();
     $query = "select  * from leads where id_clientes = {$id}";
     $resultado = mysqli_query($conexao, $query);
@@ -23,7 +23,7 @@ function buscaClientesProspeccao($conexao, $id){
 }
 
 
-function listaClientesProspeccao($conexao){
+function listaLeads($conexao){
   $prospeccoes = array();
     $query = "select  * from leads";
     $resultado = mysqli_query($conexao, $query);

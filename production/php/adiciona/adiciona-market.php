@@ -1,29 +1,30 @@
 <?php include "../bancos/conecta.php";?>
+<?php include "../bancos/banco-cidade.php";?>
 
 <?php
-    $razao = $_GET["razao"];
-    $nome = $_GET["nome"];
-    $fantasia = $_GET["fantasia"];
-    $cnpj = $_GET["cnpj"];
-    $site = $_GET["site"];
-    $endereco = $_GET["endereco"];
-    $estado = $_GET["estado1"];
-    $cidade = $_GET["cidade1"];
-    $segmento = $_GET["segmento"];
-    $tel = $_GET["tel"];
-    $bairro = $_GET["bairro"];
-    $comentario = $_GET["comentario"];
+    $razao = $_POST["razao"];
+    $nome = $_POST["nome"];
+    $cnpj = $_POST["cnpj"];
+    $site = $_POST["site"];
+    $endereco = $_POST["endereco"];
+    $estado = $_POST["estado1"];
+    $cidade = $_POST["cidade1"];
+    $segmento = $_POST["segmento"];
+    $tel = $_POST["tel"];
+    $bairro = $_POST["bairro"];
+    $comentario = $_POST["comentario"];
 
+    $nome_cidade = buscaCidade($conexao, $cidade);
 
-    $query = "insert into market (razao, nome,fantasia, cnpj, site, endereco, estado, cidade, segmento, tel, comentario, bairro, id_type) values ('{$razao}','{$nome}','{$fantasia}','{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$comentario}',  '{$bairro}', 1 )";
+    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel, comentario, bairro, id_type) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$nome_cidade['CT_NOME']}', '{$segmento}','{$tel}' ,'{$comentario}',  '{$bairro}', 1 )";
 
     if(mysqli_query($conexao, $query)){
+        mysqli_close($conexao);
         header("Location: ../empresas/market.php");
     }else{
     }
 
 
-    mysqli_close($conexao);
+    
 ?>
 
-<?php include "footer.php"?>

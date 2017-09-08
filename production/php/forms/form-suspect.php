@@ -14,7 +14,9 @@ $cliente = buscaCliente($conexao, $id);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PROJEK</title>
+  <title>Projek | Novo Suspect</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -149,7 +151,7 @@ $cliente = buscaCliente($conexao, $id);
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
@@ -160,7 +162,14 @@ $cliente = buscaCliente($conexao, $id);
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form action="../adiciona/adiciona-suspect.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form action="../adiciona/adiciona-suspect.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Empresa<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$cliente['nome']?>">
+                  </div>
+                </div>
                 <div class="item form-group">
                   <label for="contato" class="control-label col-md-3 col-sm-3 col-xs-12">Contato <span class="required">*</span></label>
                   <div class="col-sm-6 col-xs-12 col-md-3">

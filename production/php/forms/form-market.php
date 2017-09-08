@@ -9,7 +9,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PROJEK</title>
+ <title>Projek | Novo Market</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -139,12 +141,12 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Adicione Market</h3>
+                <h3>Novo Market</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
@@ -155,28 +157,14 @@
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form action="../adiciona/adiciona-market.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form action="../adiciona/adiciona-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Empresa<span class="required">*</span>
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
                  </label>
                  <div class="col-md-6 col-sm-6 col-xs-12">
                    <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                  </div>
-               </div>
-               <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fantasia">Nome Fantasia<span class="required">*</span>
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="fantasia" name="fantasia" required="required" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
-
-               <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">CNPJ<span class="required">*</span></label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="cnpj" name="cnpj" required="required" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
+               </div>  
 
                <div class="item form-group">
                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
@@ -185,6 +173,15 @@
                    <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="razao" required="required" type="text">
                  </div>
                </div>
+
+               <div class="form-group">
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">CNPJ<span class="required">*</span></label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="cnpj" name="cnpj" data-inputmask="'mask' : '**.***.***/****-**'" required="required" class="form-control col-md-7 col-xs-12">
+                 </div>
+               </div>
+
+               
 
                <div class="form-group">
                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Site<span class="required">*</span></label>
@@ -208,7 +205,7 @@
                </div>
 
                <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro<span class="required">*</span>
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro
                  </label>
                  <div class="col-md-6 col-sm-6 col-xs-12">
                    <input type="text" id="bairro" name="bairro" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
@@ -216,7 +213,7 @@
                </div>
 
                <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço <span class="required">*</span>
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço
                  </label>
                  <div class="col-md-6 col-sm-6 col-xs-12">
                    <input type="text" id="endereco" name="endereco" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
@@ -236,7 +233,7 @@
                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>
                  </label>
                  <div class="col-sm-6 col-xs-12 col-md-2">
-                   <input type="tel" id="tel" name="tel" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                   <input type="tel" id="tel" name="tel" data-inputmask="'mask' : '(99) 99999-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                  </div> 
                </div>
 
@@ -303,6 +300,9 @@
 <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
 <!-- Parsley -->
 <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+
+<script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- Autosize -->
 <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
 <!-- jQuery autocomplete -->
@@ -316,9 +316,10 @@
 <script language="JavaScript" type="text/javascript" charset="utf-8">
   new dgCidadesEstados({
     cidade: document.getElementById('cidade1'),
-    estado: document.getElementById('estado1')
+    estado: document.getElementById('estado1'),
+    estadoVal: 'BA',
+    cidadeVal: 'Salvador'
   })
 </script>
-<script src="js/teste.js"></script>
 </body>
 </html>

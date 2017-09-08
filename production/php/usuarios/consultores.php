@@ -210,8 +210,8 @@
                               <td><?=$usuario['estado']?></td>
                               <td><?=$usuario['telefone']?></td>
                               <td align="center">                                  
-                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                                <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                               </td>
                           <?php
                             }
@@ -221,7 +221,6 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?">Novo Usuário</a>
                     </div>
                   </div>
                 </div>

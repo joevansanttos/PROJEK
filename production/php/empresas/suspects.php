@@ -9,7 +9,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK</title>
+    <title>PROJEK | Suspects</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
 
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -156,7 +158,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                       </span>
@@ -193,6 +195,7 @@
                             <th>Data</th>
                             <th>Horário</th>
                             <th>Consultor</th>
+                            <th>Prospect</th>
                             <th>Ações</th>
                           </tr>
                         </thead>
@@ -209,6 +212,9 @@
                               <td><?=$apresentacao['hora']?></td>
                               <td><?=$apresentacao['consultor']?></td>
                               <td align="center">
+                                <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs">Novo Prospect</button></a>
+                              </td>
+                              <td align="center">
                                 <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
                                 <a href="remove-cliente-apresentacao.php?id=<?=$apresentacao['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
                               </td>                              
@@ -219,7 +225,7 @@
                         </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="form-usuario.php?">Novo Cliente</a>
+                      <a class="btn btn-round btn-primary" style="" href="../empresas/market.php?">Market</a>
                     </div>
                   </div>
                 </div>

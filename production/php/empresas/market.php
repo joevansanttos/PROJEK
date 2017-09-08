@@ -9,8 +9,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK</title>
+    <title>PROJEK | Market</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -156,7 +157,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                       </span>
@@ -194,6 +195,7 @@
                                 <th>Estado</th>
                                 <th>Bairro</th>
                                 <th>Segmento</th>
+                                <th>Lead</th>
                                 <th>Ações</th>
                               </tr>
                             </thead>
@@ -209,10 +211,14 @@
                                   <td><?=$cliente['cidade']?></td>
                                   <td><?=$cliente['estado']?></td>
                                   <td><?=$cliente['bairro']?></td>
-                                  <td><?=$cliente['segmento']?></td>                              
+                                  <td><?=$cliente['segmento']?></td>
                                   <td align="center">
-                                    <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
-                                    <a href="remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                    <a href="../forms/form-lead.php?id=<?=$cliente['id']?>"><button class="btn btn-warning btn-xs">Novo Lead</button></a>
+                                  </td>                              
+                                  <td align="center">
+                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                                    
                                   </td>
                                 </tr>
                               <?php
@@ -222,7 +228,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-market.php?">Novo Market</a>
+                      <a class="btn btn-round btn-primary" style="" href="../forms/form-market.php?">Novo Market</a>
                     </div>
                   </div>
                 </div>

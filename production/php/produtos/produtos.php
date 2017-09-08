@@ -204,7 +204,7 @@
                           ?>
                           <tr>
                             <td><?=$produto['nome']?></td>
-                            <td step="0.01"><?=$produto['preco']?></td>
+                            <td><?=$produto['preco']?></td>
                             <td><?=$produto['descricao']?></td>
                             <td><?=$produto['beneficios']?></td>
                             <td><?=$produto['entregas']?></td>
@@ -219,7 +219,7 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                    <a class="btn btn-round btn-default" style="" href="../forms/form-produto.php?">Novo Produto</a>
+                    <a class="btn btn-round btn-primary" style="" href="../forms/form-produto.php?">Novo Produto</a>
                   </div>
                 </div>
               </div>

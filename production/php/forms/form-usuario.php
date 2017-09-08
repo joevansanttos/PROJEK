@@ -9,7 +9,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Projek | Novo Usuário</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
@@ -144,7 +147,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
@@ -155,16 +158,23 @@
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form action="../adiciona/adiciona-usuario.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form id="form" action="../adiciona/adiciona-usuario.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha">Email<span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobrenome">Sobrenome <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="email" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
                   </div>
@@ -174,26 +184,26 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="password" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
                   </div>
-                </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telefone">Telefone<span class="required">*</span></label>
-                  <div class="col-sm-12 col-xs-16 col-md-6">
-                    <input type="text" id="telefone" name="telefone" required="required" class="form-control col-md-8 col-xs-12">
+                </div>           
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Telefone<span class="required">*</span></label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-8" type="text" id="telefone" data-inputmask="'mask' : '(99) 99999-9999'" name="telefone" required="required"> 
                   </div>
                 </div>
-                <div class="item form-group">
+                <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo<span class="required">*</span>
                   </label>
-                  <div class="col-sm-8 col-xs-12 col-md-2">
-                    <select id="sexo" name="sexo" required class="form-control col-md-8 col-xs-12">
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <select class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
                       <option value="feminino">Feminino</option>
                       <option value="masculino">Masculino</option>
                       <option value="nada">Não Opinar</option>
-                    </select>
+                    </select>  
                   </div>
-                </div>                 
+                </div>                   
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Profissão<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="profissao">Profissão<span class="required">*</span>
                   </label>
                   <div class="col-sm-8 col-xs-12 col-md-6">
                     <select id="profissao" name="profissao" required class="form-control col-md-8 col-xs-12">
@@ -214,11 +224,11 @@
                   <div class="col-sm-6 col-xs-12 col-md-2">
                     <select id="estado1" name="estado1" class="optional form-control col-md-7 col-xs-12"></select>
                   </div>
-
                   <label for="cidade1" class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
                   </label>
                   <div class="col-sm-6 col-xs-12 col-md-3">
-                    <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required></select>
+                    <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required>
+                    </select>
                   </div>
                 </div>
                 <div class="ln_solid"></div>
@@ -243,8 +253,9 @@
       <!-- /footer content -->
     </div>
   </div>
-<script src="../../../vendors/jquery/dist/jquery.min.js"></script>
 
+<!-- jQuery -->
+<script src="../../../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -269,11 +280,14 @@
 <!-- Select2 -->
 <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
 <!-- Parsley -->
-<script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+<script src="../../../vendors/parsleyjs/dist/parsley.min.js"></script>
 <!-- Autosize -->
 <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
 <!-- jQuery autocomplete -->
 <script src="../../../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+
+<script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- starrr -->
 <script src="../../../vendors/starrr/dist/starrr.js"></script>
 <!-- Custom Theme Scripts -->
@@ -286,6 +300,16 @@
     estado: document.getElementById('estado1')
   })
 </script>
-<script src="js/teste.js"></script>
+<script src="js/teste.js">
+  
+</script>
+<script>
+  $('#form').parsley();
+</script>
+<script type="text/javascript">
+  window.ParsleyValidator.setLocale('pt-br');
+</script>
+<script src="../../../vendors/parsleyjs/dist/parsley-pt.js"></script>
+
 </body>
 </html>
