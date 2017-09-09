@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Projek | Nossos Produtos</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -58,7 +59,6 @@
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -209,8 +209,8 @@
                             <td><?=$produto['beneficios']?></td>
                             <td><?=$produto['entregas']?></td>
                             <td align="center" >                                  
-                              <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-edit"></i>Alterar</button></a>
-                              <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i>Delete</button></a>
+                              <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                              <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                             </td>
                           </tr>
                           <?php
@@ -219,7 +219,7 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                    <a class="btn btn-round btn-default" style="" href="../forms/form-produto.php?">Novo Produto</a>
+                    <a class="btn btn-round btn-default" style="" href="../forms/form-produto.php?"><i class="fa fa-plus"></i></a>
                   </div>
                 </div>
               </div>

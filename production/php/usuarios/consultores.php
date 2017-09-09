@@ -59,7 +59,6 @@
                       <li><a href="usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -211,8 +210,8 @@
                               <td><?=$usuario['telefone']?></td>
                               <th><?=$profissao['descricao']?></th>
                               <td align="center">                                  
-                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i> Ver</button></a>
-                                <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</button></a>
+                                <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                               </td>
                                                           
                         </tr>  
@@ -223,6 +222,7 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
+                      <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>

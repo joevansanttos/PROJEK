@@ -1,7 +1,7 @@
 <?php
 
 function buscaCliente($conexao, $id){
-	$query = "select * from market where id = {$id}";
+	$query = "select * from market where id_market = {$id}";
 	$resultado = mysqli_query($conexao, $query);
 	return mysqli_fetch_assoc($resultado);
 }

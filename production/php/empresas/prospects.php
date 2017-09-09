@@ -195,8 +195,8 @@
                         <th>Empresa</th>
                         <th>Produto</th>                             
                         <th>Valor Estimado</th>
-                        <th>Recebimento</th>
-                        <th>Fechamento</th>
+                        <th>Previsão de Recebimento</th>
+                        <th>Previsão de Fechamento</th>
                         <th>Contrato</th> 
                         <th>Ações</th>                             
                       </tr>
@@ -211,14 +211,14 @@
                         <tr>
                           <td><?=$cliente['nome']?></td>
                           <td><?=$produto['nome']?></td>
-                          <td><?=$oportunidade['valor_est']?></td>                            
+                          <td>R$ <?=$oportunidade['valor_est']?></td>                            
                           <td><?=$oportunidade['fechamento']?></td>
                           <td><?=$oportunidade['recebimento']?></td>
                           <td align="center">
-                            <a href="../forms/form-contrato.php?id=<?=$oportunidade['id']?>"><button class="btn btn-warning btn-xs">Gerar Contrato</button></a>
+                            <a href="../forms/form-contrato.php?id=<?=$oportunidade['id']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                           </td>
                           <td align="center">
-                            <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                            <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                             <a href="remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                                 
                           </td>
                         </tr>
@@ -228,7 +228,7 @@
                     </tbody>
                   </table>
                   <div class="ln_solid"></div>
-                  <a class="btn btn-round btn-default" style="" href="form-usuario.php?">Novo Cliente</a>
+                  <a class="btn btn btn-default" style="" href="form-usuario.php?"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
             </div>

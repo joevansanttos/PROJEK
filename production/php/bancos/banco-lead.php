@@ -33,3 +33,9 @@ function listaLeads($conexao){
     
     return $prospeccoes;
 }
+
+function buscaLead($conexao, $id, $nome, $email, $tel, $cargo, $comentario){
+  $query = "select * from leads where id_clientes = {$id} and nome = '{$nome}' and email = '{$email}'";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

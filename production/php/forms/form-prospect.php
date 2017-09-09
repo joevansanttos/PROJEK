@@ -29,14 +29,6 @@ $produtos = listaProdutos($conexao);
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
-  <script >
-    function calcula(){
-      var prob = document.getElementById('prob').value;
-      var divide = prob/100;
-      var valor_op = document.getElementById('valor_op').value; 
-      document.getElementById('valor_est').value = parseFloat(divide)*parseFloat(valor_op);
-    }
-  </script>
 </head>
 <body class="nav-md">
   <div class="container body">
@@ -65,7 +57,6 @@ $produtos = listaProdutos($conexao);
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -158,7 +149,7 @@ $produtos = listaProdutos($conexao);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Adicione Market</h3>
+                <h3>Prospect</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -221,11 +212,11 @@ $produtos = listaProdutos($conexao);
                   </div>
                 </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="recebimento">Recebimento<span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="recebimento">Previsão de Recebimento<span class="required">*</span></label>
                   <div class="col-sm-2 col-xs-12 col-md-2">
                     <input type="date" id=recebimento" name="recebimento" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                   </div>
-                  <label class="control-label col-md-2 col-sm-3 col-xs-12" for="fechamento"> Fechamento <span class="required">*</span></label>
+                  <label class="control-label col-md-2 col-sm-3 col-xs-12" for="fechamento">Previsão de Fechamento</label>
                   <div class="col-sm-2 col-xs-12 col-md-2">
                     <input type="date" id=fechamento" name="fechamento" required="required" data-validate-length-range="6,20" class="form-control col-md-7 col-xs-12">
                   </div>
@@ -233,7 +224,7 @@ $produtos = listaProdutos($conexao);
                 <div class="col-md-6 col-md-offset-3">
                   <button type="submit" class="btn btn-primary">Cancelar</button>
                   <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
-                  <input type="hidden" name="id" id="id" value="<?=$cliente['id']?>" />
+                  <input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
                 </div>
               </form> 
             </div>

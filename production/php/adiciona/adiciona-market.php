@@ -24,7 +24,7 @@
         $market = buscaMarketCnpj($conexao, $cnpj);
         $id_consultor = $_POST['id_consultor'];
         $today = date("d.m.y");
-        $query = "insert into consultores_market (id_consultor, id_market, data) values ({$id_consultor}, {$market['id']},'{$today}')";
+        $query = "insert into consultores_market (id_consultor, id_market, data) values ({$id_consultor}, {$market['id_market']},'{$today}')";
         if(mysqli_query($conexao, $query)){
             mysqli_close($conexao);
             header("Location: ../empresas/market.php");

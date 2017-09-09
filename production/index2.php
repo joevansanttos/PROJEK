@@ -56,7 +56,6 @@
                       <li><a href="php/usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="php/produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="php/usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="php/empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>

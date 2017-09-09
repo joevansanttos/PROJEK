@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Set-2017 às 16:15
+-- Generation Time: 09-Set-2017 às 16:17
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -5651,6 +5651,14 @@ CREATE TABLE `consultores_lead` (
   `data` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `consultores_lead`
+--
+
+INSERT INTO `consultores_lead` (`id_consultor`, `id_lead`, `data`) VALUES
+(10, 27, '09.09.17'),
+(10, 9, '09.09.17');
+
 -- --------------------------------------------------------
 
 --
@@ -5669,7 +5677,12 @@ CREATE TABLE `consultores_market` (
 --
 
 INSERT INTO `consultores_market` (`id_consultor`, `id_market`, `data`, `id_c_market`) VALUES
-(14, 22, '08.09.17', 1);
+(10, 23, '09.09.17', 2),
+(10, 23, '09.09.17', 3),
+(10, 26, '09.09.17', 4),
+(10, 23, '09.09.17', 5),
+(14, 26, '09.09.17', 6),
+(10, 29, '09.09.17', 7);
 
 -- --------------------------------------------------------
 
@@ -5695,6 +5708,13 @@ CREATE TABLE `consultores_suspect` (
   `data` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `consultores_suspect`
+--
+
+INSERT INTO `consultores_suspect` (`id_consultor`, `id_suspect`, `data`) VALUES
+(10, 7, '09.09.17');
+
 -- --------------------------------------------------------
 
 --
@@ -5718,13 +5738,6 @@ CREATE TABLE `contratos` (
   `fantasia` varchar(255) DEFAULT NULL,
   `cnpj` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `contratos`
---
-
-INSERT INTO `contratos` (`administrador`, `cpf`, `residencia`, `id_clientes`, `id_produto`, `id_contrato`, `status`, `id_consultor`, `data_inicio`, `data_fim`, `n_contrato`, `empresa`, `sede`, `fantasia`, `cnpj`) VALUES
-('José da Silva', '222-222-222-22', 'Residência Qualquer Braskem', 4, 7, 1, 'andamento', 10, '3222-02-23', '2221-03-23', '2222-2222-2222-2222-2222-222', 'Braskem', 'Av. Prof. Magalhães Neto, 1856 - Pituba, Salvador - BA, 41810-012', 'BRASKEM S.A', '32.343.444/3333-44');
 
 -- --------------------------------------------------------
 
@@ -5787,12 +5800,17 @@ CREATE TABLE `feedback` (
   `empatia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `feedback`
+-- Estrutura da tabela `historico`
 --
 
-INSERT INTO `feedback` (`id_feedback`, `id_consultor`, `id_contrato`, `pontual`, `conhecimento`, `assiduo`, `empatia`) VALUES
-(1, 10, 1, 4, 4, 4, 1);
+CREATE TABLE `historico` (
+  `id_market` int(11) DEFAULT NULL,
+  `comentario` varchar(1000) DEFAULT NULL,
+  `id_consultor` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -5815,7 +5833,10 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`nome`, `email`, `tel`, `cargo`, `comentario`, `id_lead`, `id_clientes`) VALUES
-('jose Braskem', 'jose@hotmail.com', '(34) 44444-4444', 'Almoxarife', 'dsdsdsdsdsds', 3, 4);
+('Joevan Santos de Oliveira', 'joevansantos@hotmail.com', '(43) 33333-3333', 'Faturamento', 'eeeeeeeeeee', 6, 26),
+('eeeeeeeeee', 'juliana@projek.com', '(33) 33333-3333', 'Faturamento', 'eweew', 7, 27),
+('jose', 'joevansantos@hotmail.com', '(33) 33333-3333', 'Faturamento', 'ewewewe', 8, 28),
+('44444444', 'joaobb@gmail.com', '(33) 33333-3333', 'Faturamento', 'e34343', 9, 29);
 
 -- --------------------------------------------------------
 
@@ -5824,7 +5845,7 @@ INSERT INTO `leads` (`nome`, `email`, `tel`, `cargo`, `comentario`, `id_lead`, `
 --
 
 CREATE TABLE `market` (
-  `id` int(11) NOT NULL,
+  `id_market` int(11) NOT NULL,
   `razao` varchar(255) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
   `cnpj` varchar(20) DEFAULT NULL,
@@ -5843,9 +5864,13 @@ CREATE TABLE `market` (
 -- Extraindo dados da tabela `market`
 --
 
-INSERT INTO `market` (`id`, `razao`, `nome`, `cnpj`, `site`, `endereco`, `estado`, `cidade`, `tel`, `comentario`, `id_type`, `segmento`, `bairro`) VALUES
-(4, 'BRASKEM S.A.', 'Braskem', '32.343.444/3333-44', 'braskem.com.br', 'Av. Prof. Magalhães Neto, 1856 - Pituba, Salvador - BA, 41810-012', 'BA', '2927408', '(71) 98233-2232', 'Braskem Empresa ', 2, 'industrial', 'Pituba'),
-(22, 'Nestle SA', 'Nestle', '22.222.222/2222-22', 'www.nestle.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Anguera', '(33) 33333-3333', 'Empresa de Lacticinios', 1, 'comercial', 'Pituba');
+INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, `estado`, `cidade`, `tel`, `comentario`, `id_type`, `segmento`, `bairro`) VALUES
+(23, 'Petrobras SA', 'Petrobras', '33.333.333/3333-33', 'petrobras.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Angical', '(34) 33333-3333', 'DDDDDDDDDDDSD', 2, 'comercial', 'Pituba'),
+(25, 'Nestle SA', 'Nestle', '33.333.333/3333-33', 'www.nestle.com.br', 'Edifício Odebrecht - Av. Luís Viana, 2841 - Paralela, Salvador - BA, 41730-900', 'BA', 'Angical', '(33) 33333-3333', 'ddddddddd', 2, 'industrial', 'wweee'),
+(26, 'Petrobras SA', 'Petrobras', '44.444.444/4444-44', 'petrobras.com.br', 'ruaddd', 'BA', 'Anguera', '(71) 33333-3333', 'eweewe', 2, 'comercial', 'dddddddddd'),
+(27, '23232', 'Petrobras', '33.333.333/3333-33', 'odebretch.com.br', 'ssssssss', 'BA', 'Anguera', '(33) 33333-3333', 'ewewew', 2, 'comercial', 'sasa'),
+(28, 'Nestle SA', 'Nestle', '44.444.444/4444-44', 'petrobras.com.br', 'fffffffffffff', 'BA', 'Anguera', '(44) 44444-4444', '454545', 2, 'comercial', 'ddddddddd'),
+(29, 'Nestle SA', 'Nestle', '44.444.444/4444-__', 'odebretch.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Antas', '(55) 55555-5555', '4343', 2, 'comercial', '55555555');
 
 -- --------------------------------------------------------
 
@@ -5887,9 +5912,9 @@ CREATE TABLE `profissao` (
 --
 
 INSERT INTO `profissao` (`id_profissao`, `descricao`) VALUES
-(1, 'Consultor'),
+(1, 'Consultor de Negócios'),
 (2, 'Analista TI'),
-(3, 'Consultor de Vendas');
+(3, 'Consultor de Projetos');
 
 -- --------------------------------------------------------
 
@@ -5898,7 +5923,7 @@ INSERT INTO `profissao` (`id_profissao`, `descricao`) VALUES
 --
 
 CREATE TABLE `prospects` (
-  `id` int(11) NOT NULL,
+  `id_prospect` int(11) NOT NULL,
   `id_clientes` int(11) DEFAULT NULL,
   `prob` decimal(9,2) DEFAULT NULL,
   `valor_op` decimal(9,2) DEFAULT NULL,
@@ -5912,8 +5937,8 @@ CREATE TABLE `prospects` (
 -- Extraindo dados da tabela `prospects`
 --
 
-INSERT INTO `prospects` (`id`, `id_clientes`, `prob`, `valor_op`, `valor_est`, `recebimento`, `fechamento`, `id_produto`) VALUES
-(1, 4, '75.00', '10000.00', '7500.00', '2322-03-12', '4000-07-31', 5);
+INSERT INTO `prospects` (`id_prospect`, `id_clientes`, `prob`, `valor_op`, `valor_est`, `recebimento`, `fechamento`, `id_produto`) VALUES
+(2, 23, '50.00', '10000.00', '5000.00', '2322-03-02', '3223-02-10', 5);
 
 -- --------------------------------------------------------
 
@@ -5927,17 +5952,22 @@ CREATE TABLE `suspects` (
   `status` varchar(30) DEFAULT NULL,
   `hora` varchar(10) DEFAULT NULL,
   `comentario` varchar(255) DEFAULT NULL,
-  `consultor` varchar(255) DEFAULT NULL,
-  `id` int(11) NOT NULL,
-  `id_clientes` int(11) DEFAULT NULL
+  `id_consultor` int(10) DEFAULT NULL,
+  `id_suspect` int(11) NOT NULL,
+  `id_clientes` int(11) DEFAULT NULL,
+  `tel` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `suspects`
 --
 
-INSERT INTO `suspects` (`contato`, `data`, `status`, `hora`, `comentario`, `consultor`, `id`, `id_clientes`) VALUES
-('João Braskem', '3232-02-07', 'Agendado', '23:32', 'Marcado', 'Fabio', 1, 4);
+INSERT INTO `suspects` (`contato`, `data`, `status`, `hora`, `comentario`, `id_consultor`, `id_suspect`, `id_clientes`, `tel`, `email`) VALUES
+('José Petroleiro', '09.09.17', 'Agendado', '03:34', 'ewewe', 0, 5, 23, '(34) 44444-4444', 'joevansantos@hotmail.com'),
+('Maria', '09.09.17', 'Realizado', '09:59', 'hjhjhjhjh', 0, 6, 28, '(55) 55555-5555', 'joevansantos@hotmail.com'),
+('José Petroleiro', '09.09.17', 'Agendado', '04:54', '545454', 14, 7, 28, '(45) 55555-5___', 'juliana@projek.com'),
+('José Petroleiro', '09.09.17', 'Realizado', '03:02', '323232', 10, 8, 28, '(23) 33333-3333', 'joevansantos@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -6027,7 +6057,7 @@ ALTER TABLE `leads`
 -- Indexes for table `market`
 --
 ALTER TABLE `market`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_market`);
 
 --
 -- Indexes for table `produtos`
@@ -6045,13 +6075,13 @@ ALTER TABLE `profissao`
 -- Indexes for table `prospects`
 --
 ALTER TABLE `prospects`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_prospect`);
 
 --
 -- Indexes for table `suspects`
 --
 ALTER TABLE `suspects`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_suspect`);
 
 --
 -- Indexes for table `type`
@@ -6078,7 +6108,7 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `contratos`
 --
@@ -6093,12 +6123,12 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
@@ -6113,12 +6143,12 @@ ALTER TABLE `profissao`
 -- AUTO_INCREMENT for table `prospects`
 --
 ALTER TABLE `prospects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `suspects`
 --
 ALTER TABLE `suspects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `type`
 --

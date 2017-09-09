@@ -1,5 +1,7 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-market.php";?>
+<?php include "../bancos/banco-usuario.php";?>
+
 
 <?php
 $id = $_GET['id'];
@@ -52,7 +54,6 @@ $cliente = buscaCliente($conexao, $id);
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -145,7 +146,7 @@ $cliente = buscaCliente($conexao, $id);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Novo Lead</h3>
+                <h3>Lead</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -205,7 +206,25 @@ $cliente = buscaCliente($conexao, $id);
                     </select>
                   </div>
                 </div>
+                <div class="item form-group">
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="consultor">Consultor<span class="required">*</span>
+                 </label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                   <select name="id_consultor" class="form-control col-md-7 col-xs-12">
+                     <?php
+                     $usuarios = listaUsuarios($conexao);
+                     foreach ($usuarios as $usuario){ 
+                       if($usuario["id_profissao"] == '1'){
+                         ?>
 
+                         <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                         <?php
+                       }
+                     }
+                     ?>  
+                   </select>
+                 </div>
+                </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Comentário <span class="required">*</span>
                   </label>
@@ -221,7 +240,7 @@ $cliente = buscaCliente($conexao, $id);
                   <div class="col-md-6 col-md-offset-3">
                     <button type="submit" class="btn btn-primary">Cancelar</button>
                     <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
-                    <input type="hidden" name="id" id="id" value="<?=$cliente['id']?>" />
+                    <input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
                   </div>
                 </div>                     
               </form>

@@ -1,6 +1,8 @@
 <?php include "../bancos/conecta.php";?>
 <?php include ("../bancos/banco-market.php");?>
 <?php include ("../bancos/banco-suspect.php");?>
+<?php include "../bancos/banco-usuario.php";?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +63,6 @@
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -193,8 +194,10 @@
                             <th>Empresa</th>
                             <th>Contato</th>
                             <th>Data</th>
+                            <th>Tel</th>
+                            <th>Email</th>
                             <th>Horário</th>
-                            <th>Consultor</th>
+                            <th>Consultor</th>                            
                             <th>Prospect</th>
                             <th>Ações</th>
                           </tr>
@@ -204,18 +207,22 @@
                             $apresentacoes = listaClientesApresentacao($conexao);
                             foreach ($apresentacoes as $apresentacao){
                               $cliente = buscaCliente($conexao, $apresentacao['id_clientes']);
+                              $consultor = buscaUsuario($conexao, $apresentacao['id_consultor']);
                           ?>
                             <tr>
                               <td><?=$cliente['nome']?></td>
                               <td><?=$apresentacao['contato']?></td>
                               <td><?=$apresentacao['data']?></td>
+                              <td><?=$apresentacao['tel']?></td>
+                              <td><?=$apresentacao['email']?></td>
                               <td><?=$apresentacao['hora']?></td>
-                              <td><?=$apresentacao['consultor']?></td>
+                              <td><?=$consultor['nome']?></td>
                               <td align="center">
-                                <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs">Novo Prospect</button></a>
+                                <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                               </td>
                               <td align="center">
-                                <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-user"></i></button></a>
+                                <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                                 <a href="remove-cliente-apresentacao.php?id=<?=$apresentacao['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
                               </td>                              
                             </tr>
@@ -225,7 +232,7 @@
                         </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-primary" style="" href="../empresas/market.php?">Market</a>
+                      <a class="btn btn-round btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>

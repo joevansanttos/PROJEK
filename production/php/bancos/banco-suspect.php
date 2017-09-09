@@ -34,3 +34,8 @@ function listaClientesApresentacao($conexao){
     return $apresentacoes;
 }
 
+function buscaSuspect($conexao, $id, $contato, $data, $tel, $email){
+  $query = "select * from suspects where id_clientes = {$id} and contato = '{$contato}' and data = '{$data}'";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

@@ -146,7 +146,7 @@ $cliente = buscaCliente($conexao, $id);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Novo Suspect</h3>
+                <h3>Suspect</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -182,6 +182,17 @@ $cliente = buscaCliente($conexao, $id);
                   </div>
                 </div>
                 <div class="item form-group">
+                  <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span></label>
+                  <div class="col-sm-6 col-xs-12 col-md-3">
+                    <input id="email" type="email" name="email" data-validate-linked="email" class="form-control col-md-2 col-xs-12" required="required">
+                   </div>
+                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Tel <span class="required">*</span>
+                  </label>
+                  <div class="col-sm-8 col-xs-12 col-md-2">
+                   <input type="text" id="tel" name="tel" required="required" data-inputmask="'mask' : '(99) 99999-9999'" class="form-control col-md-8 col-xs-12">
+                  </div>
+                </div>               
+                <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
                   </label>
                   <div class="col-sm-6 col-xs-12 col-md-6">
@@ -191,7 +202,7 @@ $cliente = buscaCliente($conexao, $id);
                     foreach ($usuarios as $usuario){
                       if($usuario["id_profissao"] == '1'){
                         ?>
-                        <option><?=$usuario['nome']?></option> 
+                        <option value="<?=$usuario['id_usuario']?>"><?=$usuario['nome']?></option> 
                         <?php
                       }
                     }                     
@@ -225,7 +236,7 @@ $cliente = buscaCliente($conexao, $id);
                 <div class="col-md-6 col-md-offset-3">
                   <button type="submit" class="btn btn-primary">Cancelar</button>
                   <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
-                  <input type="hidden" name="id" id="id" value="<?=$cliente['id']?>" />
+                  <input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
                 </div>
               </form>  
            </div>
@@ -269,6 +280,9 @@ $cliente = buscaCliente($conexao, $id);
 <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
 <!-- Parsley -->
 <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+
+<script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
 <!-- Autosize -->
 <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
 <!-- jQuery autocomplete -->
