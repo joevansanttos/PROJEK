@@ -24,3 +24,9 @@ function listaContratos($conexao){
     
     return $contratos;
 }
+
+function buscaContratoNumero($conexao, $n_contrato){
+  $query = "select * from contratos where n_contrato = '{$n_contrato}'";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Set-2017 às 16:17
+-- Generation Time: 11-Set-2017 às 04:09
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -5722,22 +5722,88 @@ INSERT INTO `consultores_suspect` (`id_consultor`, `id_suspect`, `data`) VALUES
 --
 
 CREATE TABLE `contratos` (
-  `administrador` varchar(255) DEFAULT NULL,
-  `cpf` varchar(60) DEFAULT NULL,
-  `residencia` varchar(255) DEFAULT NULL,
   `id_clientes` int(11) DEFAULT NULL,
   `id_produto` int(11) DEFAULT NULL,
   `id_contrato` int(11) NOT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `id_contrato_status` int(10) DEFAULT NULL,
   `id_consultor` int(11) DEFAULT NULL,
   `data_inicio` varchar(20) DEFAULT NULL,
   `data_fim` varchar(20) DEFAULT NULL,
   `n_contrato` varchar(100) DEFAULT NULL,
-  `empresa` varchar(255) DEFAULT NULL,
   `sede` varchar(255) DEFAULT NULL,
-  `fantasia` varchar(255) DEFAULT NULL,
+  `razao` varchar(255) DEFAULT NULL,
   `cnpj` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `contratos`
+--
+
+INSERT INTO `contratos` (`id_clientes`, `id_produto`, `id_contrato`, `id_contrato_status`, `id_consultor`, `data_inicio`, `data_fim`, `n_contrato`, `sede`, `razao`, `cnpj`) VALUES
+(23, 5, 1, 2, 14, '02.02.1222', '02.02.3223', '111111111', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'Petrobras SA', '44.444.444/4444-__');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `contrato_status`
+--
+
+CREATE TABLE `contrato_status` (
+  `id_contrato_status` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `contrato_status`
+--
+
+INSERT INTO `contrato_status` (`id_contrato_status`, `descricao`) VALUES
+(1, 'inicial'),
+(2, 'andamento'),
+(3, 'finalizado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `id_departamento` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamento`, `descricao`) VALUES
+(1, 'SUPORTE'),
+(2, 'IMPLANTAÇÃO');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `departamentos_contratos`
+--
+
+CREATE TABLE `departamentos_contratos` (
+  `id_departamento` int(11) DEFAULT NULL,
+  `id_contrato` int(11) DEFAULT NULL,
+  `id_departamento_contrato` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `departamentos_contratos`
+--
+
+INSERT INTO `departamentos_contratos` (`id_departamento`, `id_contrato`, `id_departamento_contrato`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(1, 2, 3),
+(2, 2, 4),
+(1, 1, 5),
+(2, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -5793,12 +5859,20 @@ INSERT INTO `estados` (`cod_estados`, `sigla`, `nome`) VALUES
 CREATE TABLE `feedback` (
   `id_feedback` int(11) NOT NULL,
   `id_consultor` int(11) DEFAULT NULL,
-  `id_contrato` int(11) DEFAULT NULL,
+  `id_clientes` int(11) DEFAULT NULL,
   `pontual` int(11) DEFAULT NULL,
   `conhecimento` int(11) DEFAULT NULL,
   `assiduo` int(11) DEFAULT NULL,
-  `empatia` int(11) DEFAULT NULL
+  `empatia` int(11) DEFAULT NULL,
+  `id_contrato` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `feedback`
+--
+
+INSERT INTO `feedback` (`id_feedback`, `id_consultor`, `id_clientes`, `pontual`, `conhecimento`, `assiduo`, `empatia`, `id_contrato`) VALUES
+(3, 14, 23, 1, 2, 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -5875,6 +5949,26 @@ INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, 
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `pos_venda`
+--
+
+CREATE TABLE `pos_venda` (
+  `id_pos_venda` int(11) NOT NULL,
+  `id_clientes` int(11) DEFAULT NULL,
+  `id_feedback` int(11) DEFAULT NULL,
+  `id_contrato` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pos_venda`
+--
+
+INSERT INTO `pos_venda` (`id_pos_venda`, `id_clientes`, `id_feedback`, `id_contrato`) VALUES
+(2, 23, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produtos`
 --
 
@@ -5938,7 +6032,33 @@ CREATE TABLE `prospects` (
 --
 
 INSERT INTO `prospects` (`id_prospect`, `id_clientes`, `prob`, `valor_op`, `valor_est`, `recebimento`, `fechamento`, `id_produto`) VALUES
-(2, 23, '50.00', '10000.00', '5000.00', '2322-03-02', '3223-02-10', 5);
+(1, 28, '25.00', '10000.00', '2500.00', '02.12.3222', '09.09.2013', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `socios`
+--
+
+CREATE TABLE `socios` (
+  `id_socio` int(11) NOT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `cpf` varchar(255) DEFAULT NULL,
+  `residencia` varchar(255) DEFAULT NULL,
+  `nacionalidade` varchar(255) DEFAULT NULL,
+  `profissao` varchar(255) DEFAULT NULL,
+  `civil` varchar(255) DEFAULT NULL,
+  `id_contrato` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `socios`
+--
+
+INSERT INTO `socios` (`id_socio`, `nome`, `cpf`, `residencia`, `nacionalidade`, `profissao`, `civil`, `id_contrato`) VALUES
+(1, 'Jose maria', '333-333-333-33', 'rua petrobras', 'brasileiro', 'empresario', 'solteiro', 1),
+(2, 'Nestle Novo', '083-333-333-33', 'rua petrobras', 'brasileiro', 'empresario', 'Solteiro', 2),
+(3, 'Jose maria', '333-333-333-33', 'rua petrobras', 'brasileiro', '3333333333', 'solteiro', 1);
 
 -- --------------------------------------------------------
 
@@ -6042,6 +6162,24 @@ ALTER TABLE `contratos`
   ADD PRIMARY KEY (`id_contrato`);
 
 --
+-- Indexes for table `contrato_status`
+--
+ALTER TABLE `contrato_status`
+  ADD PRIMARY KEY (`id_contrato_status`);
+
+--
+-- Indexes for table `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id_departamento`);
+
+--
+-- Indexes for table `departamentos_contratos`
+--
+ALTER TABLE `departamentos_contratos`
+  ADD PRIMARY KEY (`id_departamento_contrato`);
+
+--
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -6060,6 +6198,12 @@ ALTER TABLE `market`
   ADD PRIMARY KEY (`id_market`);
 
 --
+-- Indexes for table `pos_venda`
+--
+ALTER TABLE `pos_venda`
+  ADD PRIMARY KEY (`id_pos_venda`);
+
+--
 -- Indexes for table `produtos`
 --
 ALTER TABLE `produtos`
@@ -6076,6 +6220,12 @@ ALTER TABLE `profissao`
 --
 ALTER TABLE `prospects`
   ADD PRIMARY KEY (`id_prospect`);
+
+--
+-- Indexes for table `socios`
+--
+ALTER TABLE `socios`
+  ADD PRIMARY KEY (`id_socio`);
 
 --
 -- Indexes for table `suspects`
@@ -6115,10 +6265,25 @@ ALTER TABLE `consultores_market`
 ALTER TABLE `contratos`
   MODIFY `id_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `contrato_status`
+--
+ALTER TABLE `contrato_status`
+  MODIFY `id_contrato_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `departamentos_contratos`
+--
+ALTER TABLE `departamentos_contratos`
+  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `leads`
 --
@@ -6129,6 +6294,11 @@ ALTER TABLE `leads`
 --
 ALTER TABLE `market`
   MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `pos_venda`
+--
+ALTER TABLE `pos_venda`
+  MODIFY `id_pos_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
@@ -6143,7 +6313,12 @@ ALTER TABLE `profissao`
 -- AUTO_INCREMENT for table `prospects`
 --
 ALTER TABLE `prospects`
-  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `socios`
+--
+ALTER TABLE `socios`
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `suspects`
 --

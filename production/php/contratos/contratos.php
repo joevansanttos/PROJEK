@@ -1,6 +1,8 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-contrato.php";?>
 <?php include "../bancos/banco-usuario.php";?>
+<?php include "../bancos/banco-market.php";?>
+<?php include "../bancos/banco-contrato_status.php";?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +63,6 @@
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -205,18 +206,20 @@
                           $contratos = listaContratos($conexao);
                           foreach ($contratos as $contrato) {
                             $usuario = buscaUsuario($conexao, $contrato['id_consultor']);
+                            $cliente = buscaMarket($conexao, $contrato['id_clientes']);
+                            $status = buscaStatus($conexao, $contrato['id_contrato_status']);
                         ?>
                           <tr>
                             <td><?=$contrato['data_inicio']?></td>
                             <td><?=$contrato['data_fim']?></td>
                             <td><?=$contrato['n_contrato']?></td>
-                            <td><?=$contrato['empresa']?></td>
+                            <td><?=$cliente['nome']?></td>
                             <td><?=$usuario['nome']?></td>
-                            <td><?=$contrato['status']?></td>
+                            <td><?=$status['descricao']?></td>
                             <td align="center">                                 
-                              <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-print"></i> Print</button></a>
-                              <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-folder"></i> Ver</button></a>                
-                              <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"> Delete</i></button></a>
+                              <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-print"></i></button></a>
+                              <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>                
+                              <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
 
                             </td>
                           </tr>

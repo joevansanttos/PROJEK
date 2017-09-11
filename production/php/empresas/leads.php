@@ -185,7 +185,7 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-bordered">
+                    <table id="tabela" class="table table-striped">
                             <thead>
                               <tr>
                                 <th>Empresa</th>
@@ -197,11 +197,22 @@
                                 <th>Ações</th>
                               </tr>
                             </thead>
+                            <tfoot>
+                              <tr>
+                                <th>Empresa</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Cargo</th> 
+                                <th></th>  
+                                <th></th>                           
+                              </tr>
+                            </tfoot>
                             <tbody>
                               <?php
                                 $leads = listaLeads($conexao);
                                 foreach ($leads as $lead){
-                                  $market = buscaCliente($conexao, $lead['id_clientes']);                                
+                                  $market = buscaMarket($conexao, $lead['id_clientes']);                                
                                ?>
                                 <tr>
                                   <td><?=$market['nome']?></td>
@@ -221,10 +232,10 @@
                               <?php                                
                                 }
                               ?>
-                            </tbody>
+                            </tbody>                        
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
+                      <a class="btn  btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>
@@ -269,6 +280,35 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
+    <script src="../../js/datatable.js">
+    </script> 
+    <script type="text/javascript">
+      $(document).ready(function() {
+          // Setup - add a text input to each footer cell
+          $('#tabela tfoot th').each( function () {
+              var title = $(this).text();
+              if(title != ''){
+                $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
+              }
+              
+          } );
+       
+          // DataTable
+          var table = $('#tabela').DataTable();
+       
+          // Apply the search
+          table.columns().every( function () {
+              var that = this;
+       
+              $( 'input', this.footer() ).on( 'keyup change', function () {
+                  if ( that.search() !== this.value ) {
+                      that
+                          .search( this.value )
+                          .draw();
+                  }
+              } );
+          } );
+      } );
+    </script>
   </body>
 </html>

@@ -1,5 +1,13 @@
 <?php
 
+function buscaFeedback($conexao , $id){
+    $query = "select  * from feedback where id_feedback = {$id}";
+    $resultado = mysqli_query($conexao, $query);
+    $feedback = mysqli_fetch_assoc($resultado);
+    return $feedback;
+
+}
+
 function buscaContratoFeedback($conexao , $id_contrato){
     $query = "select  * from feedback where id_contrato = {$id_contrato}";
     $resultado = mysqli_query($conexao, $query);

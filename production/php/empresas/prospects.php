@@ -63,7 +63,6 @@
                     <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                     <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                     <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                    <li><a href="markets.php">MARKET</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -205,7 +204,7 @@
                       <?php
                       $oportunidades = listaClientesOportunidades($conexao);
                       foreach ($oportunidades as $oportunidade){
-                        $cliente = buscaCliente($conexao, $oportunidade['id_clientes']);
+                        $cliente = buscaMarket($conexao, $oportunidade['id_clientes']);
                         $produto = buscaProduto($conexao, $oportunidade['id_produto']);
                         ?>
                         <tr>
@@ -215,7 +214,7 @@
                           <td><?=$oportunidade['fechamento']?></td>
                           <td><?=$oportunidade['recebimento']?></td>
                           <td align="center">
-                            <a href="../forms/form-contrato.php?id=<?=$oportunidade['id']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                            <a href="../forms/form-contrato.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                           </td>
                           <td align="center">
                             <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>

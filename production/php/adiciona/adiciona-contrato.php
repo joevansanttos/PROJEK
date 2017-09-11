@@ -1,31 +1,67 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-contrato.php";?>
+<?php include "../bancos/banco-socio.php";?>
+<?php include "../bancos/banco-departamentos.php";?>
 
 <?php 
    
-   $n_contrato = $_POST['n_contrato'];
-   $empresa = $_POST['nome'];
-   $fantasia = $_POST['fantasia'];
-   $cnpj = $_POST['cnpj'];
-   $sede = $_POST['sede'];  
-   $administrador = $_POST['administrador'];
-   $cpf = $_POST['cpf'];
-   $residencia = $_POST['residencia'];   
-   $data_inicio = $_POST['data_inicio'];
-   $data_fim = $_POST['data_fim'];
-   $id_consultor = $_POST['id_consultor'];
-   $id_cliente = $_POST['id_cliente'];
-   $id_produto = $_POST['id_produto'];
+   $n_contrato = $_GET['n_contrato'];
+   $id_cliente = $_GET['id_cliente'];
+   $razao = $_GET['razao'];
+   $cnpj = $_GET['cnpj'];   
+   $sede = $_GET['sede'];  
+   $id_produto = $_GET['id_produto'];
+   $id_consultor = $_GET['id_consultor'];
+   $data_inicio = $_GET['data_inicio'];
+   $date = new DateTime($data_inicio);
+   $data_inicio = $date->format('d.m.Y');
+
+   $data_fim = $_GET['data_fim'];
+   $date = new DateTime($data_fim);
+   $data_fim = $date->format('d.m.Y');
+
+   $socios = $_GET['multiple'];
+   $cpfs = $_GET['cpf'];
+   $residencias = $_GET['residencia'];
+   $nacionalidades = $_GET['nacionalidade'];
+   $profissoes = $_GET['profissao'];
+   $civis = $_GET['civil'];
+
+   $departamentos = $_GET['my-select']; 
    
-   $query = "insert into contratos (n_contrato, empresa, fantasia, cnpj, administrador, cpf, residencia, sede, data_inicio, data_fim, id_consultor, id_clientes, id_produto, status) values ('{$n_contrato}','{$empresa}','{$fantasia}' ,'{$cnpj}' ,'{$administrador}', '{$cpf}'  ,'{$residencia}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor, $id_cliente, $id_produto, 'inicial')";
+   
+
+   $query = "insert into contratos (n_contrato, id_clientes, razao,  cnpj, sede, data_inicio, data_fim, id_consultor, id_produto, id_contrato_status) values ('{$n_contrato}', $id_cliente, '{$razao}', '{$cnpj}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor,  $id_produto, 1)";
 
    if(mysqli_query($conexao, $query)){
-      mysqli_close($conexao);
+      $contrato = buscaContratoNumero($conexao, $n_contrato);
+      $id_contrato = $contrato['id_contrato'];
+      $i = 0;
+      $size = count($departamentos);
+      while ($i < $size) {
+         $query = "insert into departamentos_contratos (id_departamento, id_contrato) values ($departamentos[$i], $id_contrato 
+         )" ;
+         mysqli_query($conexao, $query);
+         $i++;
+      }
 
-      header("Location: ../contratos/contratos.php");
+      $i = 0;
+      $size = count($socios);
+      while ($i < $size) {
+         $query = "insert into socios (nome, cpf, residencia, nacionalidade, profissao, civil, id_contrato ) values ('$socios[$i]', '$cpfs[$i]', '$residencias[$i]', '$nacionalidades[$i]', '$profissoes[$i]', '$civis[$i]', $id_contrato 
+         )" ;
+         if(mysqli_query($conexao, $query)){
+            
+         }else{
+            echo mysqli_error($conexao);
+         }
+         $i++;
+      }
+      header("Location: ../contratos/contratos.php"); 
    }else{
       echo mysqli_error($conexao);
       echo "nao foi adicionado";
    }
    exit;
+
  ?>   

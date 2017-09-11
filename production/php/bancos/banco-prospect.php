@@ -33,3 +33,9 @@ function listaClientesOportunidades($conexao){
     
     return $oportunidades;
 }
+
+function buscaProspect($conexao, $id, $prod, $valor_op){
+  $query = "select * from prospects where id_clientes = {$id} and id_produto = {$prod} and valor_op = {$valor_op}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

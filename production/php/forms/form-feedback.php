@@ -274,10 +274,12 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
                       <div class="ln_solid"></div>
                       <div class=" form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <input type="hidden" name="id_contrato" id="id_contrato" value="<?=$contrato['id_contrato']?>" />
+                          <input type="hidden" name="id_clientes" id="id_clientes" value="<?=$contrato['id_clientes']?>" />
+                          <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$consultor['id_usuario']?>" />
+
                           <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-                          <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button> 
-                          <input type="hidden" name="id_contrato" id="id_contrato" value="<?=$contrato['id_contrato']?>"/>
-                          <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$consultor['id_usuario']?>" />                         
+                          <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
                         </div>
                       </div>
                     </form>                  

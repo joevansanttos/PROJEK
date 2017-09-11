@@ -200,7 +200,7 @@
                             </thead>
                             <tbody>
                               <?php
-                                $clientes = listaClientes($conexao);
+                                $clientes = listaMarkets($conexao);
                                 foreach ($clientes as $cliente){
                                   if($cliente['id_type'] == '1'){   
                                ?>

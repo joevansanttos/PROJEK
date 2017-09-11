@@ -1,6 +1,6 @@
 <?php
 
-function buscaCliente($conexao, $id){
+function buscaMarket($conexao, $id){
 	$query = "select * from market where id_market = {$id}";
 	$resultado = mysqli_query($conexao, $query);
 	return mysqli_fetch_assoc($resultado);
@@ -13,7 +13,7 @@ function buscaMarketCnpj($conexao, $cnpj){
 }
 
 
-function listaClientes($conexao){
+function listaMarkets($conexao){
   $clientes = array();
     $query = "select  * from market";
     $resultado = mysqli_query($conexao, $query);

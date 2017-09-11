@@ -13,7 +13,8 @@ $id_consultor = $_POST["consultor"];
 $comentario = $_POST["comentario"];
 $tel = $_POST["tel"];
 $email = $_POST["email"];
-$data = date("d.m.y");
+$date = new DateTime($data);
+$data = $date->format('d.m.Y');
 $today = date("d.m.y");
 
 $query = "insert into suspects (id_clientes, contato, data, status, hora, comentario, id_consultor, tel, email) values ('$id','{$contato}' ,'{$data}' ,'{$status}' ,'{$hora}' ,'{$comentario}', {$id_consultor} , '{$tel}', '{$email}')";

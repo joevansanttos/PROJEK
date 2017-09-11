@@ -221,6 +221,24 @@ $produtos = listaProdutos($conexao);
                     <input type="date" id=fechamento" name="fechamento" required="required" data-validate-length-range="6,20" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
+                  </label>
+                  <div class="col-sm-6 col-xs-12 col-md-6">
+                    <select id="consultor" name="consultor" class="optional form-control col-md-7 col-xs-12">
+                    <?php
+                    $usuarios = listaUsuarios($conexao);
+                    foreach ($usuarios as $usuario){
+                      if($usuario["id_profissao"] == '1'){
+                        ?>
+                        <option value="<?=$usuario['id_usuario']?>"><?=$usuario['nome']?></option> 
+                        <?php
+                      }
+                    }                     
+                    ?>
+                    </select> 
+                  </div>
+                </div>
                 <div class="col-md-6 col-md-offset-3">
                   <button type="submit" class="btn btn-primary">Cancelar</button>
                   <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
