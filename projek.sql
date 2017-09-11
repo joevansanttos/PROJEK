@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Set-2017 às 04:09
+-- Generation Time: 11-Set-2017 às 16:30
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -5682,7 +5682,8 @@ INSERT INTO `consultores_market` (`id_consultor`, `id_market`, `data`, `id_c_mar
 (10, 26, '09.09.17', 4),
 (10, 23, '09.09.17', 5),
 (14, 26, '09.09.17', 6),
-(10, 29, '09.09.17', 7);
+(10, 29, '09.09.17', 7),
+(14, 30, '11.09.17', 8);
 
 -- --------------------------------------------------------
 
@@ -5944,7 +5945,8 @@ INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, 
 (26, 'Petrobras SA', 'Petrobras', '44.444.444/4444-44', 'petrobras.com.br', 'ruaddd', 'BA', 'Anguera', '(71) 33333-3333', 'eweewe', 2, 'comercial', 'dddddddddd'),
 (27, '23232', 'Petrobras', '33.333.333/3333-33', 'odebretch.com.br', 'ssssssss', 'BA', 'Anguera', '(33) 33333-3333', 'ewewew', 2, 'comercial', 'sasa'),
 (28, 'Nestle SA', 'Nestle', '44.444.444/4444-44', 'petrobras.com.br', 'fffffffffffff', 'BA', 'Anguera', '(44) 44444-4444', '454545', 2, 'comercial', 'ddddddddd'),
-(29, 'Nestle SA', 'Nestle', '44.444.444/4444-__', 'odebretch.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Antas', '(55) 55555-5555', '4343', 2, 'comercial', '55555555');
+(29, 'Nestle SA', 'Nestle', '44.444.444/4444-__', 'odebretch.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Antas', '(55) 55555-5555', '4343', 2, 'comercial', '55555555'),
+(30, 'Bradesco SA', 'Bradesco', '22.222.222/2222-22', 'bancodobrasil.com.br', 'Av. Prof. Magalhães Neto, 1856 - Pituba, Salvador - BA, 41810-012', 'PB', 'Aroeiras', '(33) 33333-3333', 'SASAS', 1, 'industrial', 'Pituba');
 
 -- --------------------------------------------------------
 
@@ -6258,7 +6260,7 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `contratos`
 --
@@ -6293,7 +6295,7 @@ ALTER TABLE `leads`
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `pos_venda`
 --

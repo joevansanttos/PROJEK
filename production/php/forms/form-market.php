@@ -22,6 +22,7 @@
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
+
 </head>
 <body class="nav-md">
   <div class="container body">
@@ -197,7 +198,7 @@
                  <div class="col-sm-6 col-xs-12 col-md-2">
                    <select id="estado1" name="estado1" class="optional form-control col-md-7 col-xs-12"></select>
                  </div>
-                 <label for="cidade1"class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
+                 <label for="cidade1" class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
                  </label>
                  <div class="col-sm-6 col-xs-12 col-md-3">
                    <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required></select>
@@ -292,7 +293,7 @@
     </div>
   </div>
 <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="../../js/cidades-estados2-utf8.js"></script>
 <!-- Bootstrap -->
 <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -330,13 +331,11 @@
 <!-- Custom Theme Scripts -->
 <script src="../../../build/js/custom.min.js"></script>
 <!-- Cidades e Estados -->
-<script src="../../js/cidades-estados-utf8.js"></script>
 <script language="JavaScript" type="text/javascript" charset="utf-8">
   new dgCidadesEstados({
     cidade: document.getElementById('cidade1'),
-    estado: document.getElementById('estado1'),
-    estadoVal: 'BA',
-    cidadeVal: 'Salvador'
+    estado: document.getElementById('estado1')
+   
   })
 </script>
 </body>

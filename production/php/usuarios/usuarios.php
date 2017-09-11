@@ -183,7 +183,7 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-bordered">
+                    <table id="tabela" class="table table-striped">
                             <thead>
                               <tr>
                                 <th>Nome</th>
@@ -194,6 +194,16 @@
                                 <th>Ações</th>
                               </tr>
                             </thead>
+                            <tfoot>
+                              <tr>
+                                <th>Nome</th>
+                                <th>Profissão</th>
+                                <th>Email</th>
+                                <th>Estado</th>
+                                <th>Telefone</th>
+                                <th></th>
+                              </tr>
+                            </tfoot>
                             <tbody>
                               <?php
                                 $usuarios = listaUsuarios($conexao);
@@ -209,7 +219,8 @@
                                   <td><?=$usuario['estado']?></td>
                                   <td><?=$usuario['telefone']?></td>
                                   <td align="center">
-                                    <a href="../usuarios/usuarios.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                    
+                                    <a href="../usuarios/usuarios.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
                                     <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>
                                 </tr>
@@ -219,7 +230,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
+                      <a class="btn btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>
@@ -260,6 +271,33 @@
     <script src="../../js/datatable.js"></script> 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-     
+    <script type="text/javascript">
+      $(document).ready(function() {
+          // Setup - add a text input to each footer cell
+          $('#tabela tfoot th').each( function () {
+              var title = $(this).text();
+              if(title != ''){
+                $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
+              }
+              
+          } );
+       
+          // DataTable
+          var table = $('#tabela').DataTable();
+       
+          // Apply the search
+          table.columns().every( function () {
+              var that = this;
+       
+              $( 'input', this.footer() ).on( 'keyup change', function () {
+                  if ( that.search() !== this.value ) {
+                      that
+                          .search( this.value )
+                          .draw();
+                  }
+              } );
+          } );
+      } );
+    </script>  
   </body>
 </html>

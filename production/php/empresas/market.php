@@ -185,7 +185,7 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-bordered">
+                    <table id="tabela" class="table table-striped">
                             <thead>
                               <tr>
                                 <th>Nome</th>
@@ -194,10 +194,20 @@
                                 <th>Estado</th>
                                 <th>Bairro</th>
                                 <th>Segmento</th>
-                                <th>Lead</th>
                                 <th>Ações</th>
                               </tr>
                             </thead>
+                            <tfoot>
+                              <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>Bairro</th>
+                                <th>Segmento</th>
+                                <th></th>                                                        
+                              </tr>
+                            </tfoot>
                             <tbody>
                               <?php
                                 $clientes = listaMarkets($conexao);
@@ -210,12 +220,12 @@
                                   <td><?=$cliente['cidade']?></td>
                                   <td><?=$cliente['estado']?></td>
                                   <td><?=$cliente['bairro']?></td>
-                                  <td><?=$cliente['segmento']?></td>
-                                  <td align="center">
-                                    <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                  <td><?=$cliente['segmento']?></td>                                    
                                   </td>                              
                                   <td align="center">
+                                    <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                     <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>  
                                     <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                                     <a href="../remove/remove-cliente.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                     
@@ -228,7 +238,7 @@
                             </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
+                      <a class="btn btn-default" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>
@@ -273,6 +283,34 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>  
+    <script src="../../js/datatable.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          // Setup - add a text input to each footer cell
+          $('#tabela tfoot th').each( function () {
+              var title = $(this).text();
+              if(title != ''){
+                $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
+              }
+              
+          } );
+       
+          // DataTable
+          var table = $('#tabela').DataTable();
+       
+          // Apply the search
+          table.columns().every( function () {
+              var that = this;
+       
+              $( 'input', this.footer() ).on( 'keyup change', function () {
+                  if ( that.search() !== this.value ) {
+                      that
+                          .search( this.value )
+                          .draw();
+                  }
+              } );
+          } );
+      } );
+    </script>  
   </body>
 </html>

@@ -188,7 +188,7 @@
                 </div>
                 <div class="clearfix"></div>                
                 <div class="x_content">
-                  <table id="tabela" class="table table-bordered">
+                  <table id="tabela" class="table table-striped">
                     <thead>
                       <tr>
                         <th>Empresa</th>
@@ -200,6 +200,17 @@
                         <th>Ações</th>                             
                       </tr>
                     </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Empresa</th>
+                        <th>Produto</th>                             
+                        <th>Valor Estimado</th>
+                        <th>Previsão de Recebimento</th>
+                        <th>Previsão de Fechamento</th>
+                        <th></th> 
+                        <th></th>                             
+                      </tr>
+                    </tfoot>
                     <tbody>
                       <?php
                       $oportunidades = listaClientesOportunidades($conexao);
@@ -271,6 +282,34 @@
 
 <!-- Custom Theme Scripts -->
 <script src="../../../build/js/custom.min.js"></script>
-<script src="../../js/datatable.js"></script>  
+<script src="../../js/datatable.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      // Setup - add a text input to each footer cell
+      $('#tabela tfoot th').each( function () {
+          var title = $(this).text();
+          if(title != ''){
+            $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
+          }
+          
+      } );
+   
+      // DataTable
+      var table = $('#tabela').DataTable();
+   
+      // Apply the search
+      table.columns().every( function () {
+          var that = this;
+   
+          $( 'input', this.footer() ).on( 'keyup change', function () {
+              if ( that.search() !== this.value ) {
+                  that
+                      .search( this.value )
+                      .draw();
+              }
+          } );
+      } );
+  } );
+</script>  
 </body>
 </html>

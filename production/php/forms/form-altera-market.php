@@ -5,9 +5,8 @@
 <?php include "../bancos/banco-departamentos.php";?>
 
 <?php
-  $produtos = listaProdutos($conexao);
-  $clientes = listaMarkets($conexao);
-  $departamentos = listaDepartamentos($conexao);              
+  $id_market = $_GET['id'];
+  $market = buscaMarket($conexao, $id_market);
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projek | Novo Contrato</title>
+    <title>Projek | Alterar Market</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -141,7 +140,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Novo Contrato</h3>
+                <h3>Alterar Market</h3>
               </div>            
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -159,145 +158,82 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_content">
                   <br />
-                  <form action="../adiciona/adiciona-contrato.php" method="get" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                  
-                    <div class="item form-group">
-                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nº Contrato <span class="required">*</span>
-                     </label>
-                     <div class="col-md-6 col-sm-6 col-xs-12">
-                       <input type="text" id="n_contrato" name="n_contrato" required="required" class="form-control" >
-                     </div>
-                    </div>
-                    <div class="item form-group">
-                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_cliente">Nome Fantasia<span class="required">*</span>
-                     </label>
-                     <div class="col-md-6 col-sm-6 col-xs-12">                         
-                       <select name="id_cliente" class="form-control col-md-7 col-xs-12">
-                         <?php
-                         foreach ($clientes as $cliente){  
-                           ?>
-                           <option value="<?=$cliente['id_market']?>"><?=$cliente['nome']?></option>
-                           <?php
-                         }
-                         ?>
-                       </select>
-                     </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
-                     </label>
-                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="razao" name="razao" required="required" class="form-control col-md-7 col-xs-12">
-                     </div>
-                    </div>
-                    <div class="item form-group">
-                      <label for="cnpj" class="control-label col-md-3 col-sm-3 col-xs-12">CNPJ <span class="required">*</span></label>
-                     <div class="col-sm-6 col-xs-12 col-md-6">
-                      <input id="cnpj" value="<?=$cliente['cnpj']?>" type="text" name="cnpj" data-validate-linked="cnpj" class="form-control col-md-2 col-xs-12" required="required">
-                     </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Sede <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="sede" name="sede" value="<?=$cliente['endereco']?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                     </div>
-                    </div>
-                    <div class="item form-group ">
-                      <div class="form-group">
-                        <label for="socio" class="control-label col-md-3 col-sm-3 col-xs-12">Sócio <span class="required">*</span></label>                      
-                        <div class=" col-sm-6 col-xs-12 col-md-6">
-                          <div class="form-group">
-                            <input type="text" placeholder="Nome" name="multiple[]" class="form-control">
-                          </div>
-                          <div class="form-group">
-                            <input id="cpf" placeholder="CPF" type="text" name="cpf[]" data-validate-linked="cpf" data-inputmask="'mask' : '***-***-***-**'" class="form-control col-md-6 col-xs-12" required="required">
-                          </div>
-                          <div class="form-group">
-                            <input type="text" placeholder="Endereço" id="residencia" name="residencia[]" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                          <div class="form-group">
-                            <input type="text" placeholder="Nacionalidade" id="nacionalidade" name="nacionalidade[]" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                          <div class="form-group">
-                            <input type="text" placeholder="Profissão" id="profissao" name="profissao[]" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                          <div class="form-group">
-                            <input type="text" placeholder="Estado Civil" id="civil" name="civil[]" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>    
-                          <span class="input-group-btn "><button type="button" class=" btn btn-default btn-add">+
-                          </button></span>                       
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_produto">Produto<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id_produto" class="form-control col-md-7 col-xs-12">
-                         <?php
-                         foreach ($produtos as $produto){  
-                           ?>
-                           <option value="<?=$produto['id_produto']?>" ><?=$produto['nome']?></option>
-                           <?php
-                         }
-                         ?>  
-                        </select>
-                      </div>
-                    </div>
-                    <div class="item form-group ">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Departamentos<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                      
-                        <select multiple="multiple" id="my-select" name="my-select[]">
-                      <?php
-                        foreach ($departamentos as  $departamento) {
-                      ?>
-                              <option value='<?=$departamento['id_departamento']?>'>
-                                <?=$departamento['descricao']?>                                
-                              </option>
-                      <?php
-                        }
-                      ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_consultor">Consultor<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id_consultor" class="form-control col-md-7 col-xs-12">
-                         <?php
-                         $usuarios = listaUsuarios($conexao);
-                         foreach ($usuarios as $usuario){ 
-                           if($usuario["id_profissao"] == '1'){
-                             ?>
-
-                             <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
-                             <?php
-                           }
-                         }
-                         ?>  
-                        </select>
-                      </div>
-                    </div>              
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="data_inicio">Inicio<span class="required">*</span></label>
-                      <div class="col-sm-2 col-xs-12 col-md-2">
-                        <input type="date" id="data_inicio" name="data_inicio" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-3 col-xs-12" for="data_fim">Fim<span class="required">*</span></label>
-                      <div class="col-sm-2 col-xs-12 col-md-2">
-                        <input type="date" id="data_fim" name="data_fim" required="required" data-validate-length-range="6,20" class="form-control col-md-7 col-xs-12">
-                       </div>
-                    </div>
-                    <div class="ln_solid"></div>
+                  <form action="../altera/altera-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                     <div class="form-group">
-                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                        <button type="button" class="btn btn-primary">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" value="<?=$market['nome']?>" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>  
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="<?=$market['razao']?>" name="razao" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">CNPJ<span class="required">*</span></label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="cnpj" name="cnpj" data-inputmask="'mask' : '**.***.***/****-**'" required="required" value="<?=$market['cnpj']?>" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Site<span class="required">*</span></label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" value="<?=$market['site']?>" id="site" name="site" required="required" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estado1">Estado <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-6 col-xs-12 col-md-2">
+                        <select id="estado1" name="estado1" value="<?=$market['estado']?>" class="optional form-control col-md-7 col-xs-12"></select>
+                      </div>
+                      <label for="cidade1" class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-6 col-xs-12 col-md-3">
+                        <select id="cidade1" name="cidade1" value="<?=$market['cidade']?>"  class="form-control col-md-7 col-xs-12" required></select>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" value="<?=$market['bairro']?>" id="bairro" name="bairro" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" value="<?=$market['endereco']?>" id="endereco" name="endereco" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="segmento">Segmento<span class="required">*</span>
+                      </label>
+                      <div class="col-sm-8 col-xs-12 col-md-2">
+                        <select id="sexo" value="<?=$market['segmento']?>" name="segmento" required class="form-control col-md-8 col-xs-12">
+                          <option value="comercial">Comercial</option>
+                          <option value="industrial">Industrial</option>
+                          <option value="servicos">Prestação de Serviços</option>
+                        </select>
+                      </div>
+                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-6 col-xs-12 col-md-2">
+                        <input type="tel" value="<?=$market['tel']?>" id="tel" name="tel" data-inputmask="'mask' : '(99) 99999-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                      </div> 
+                    </div>                                                                     
+                    <div class="ln_solid"></div>
+                    <div class=" form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
+                        <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
+                      </div>
+                    </div>
                   </form>
                 </div> 
               </div>
@@ -356,7 +292,7 @@
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <!-- Cidades e Estados -->
-    <script src="../../js/cidades-estados-utf8.js"></script>
+    <script src="../../js/cidades-estados2-utf8.js"></script>
     <script language="JavaScript" type="text/javascript" charset="utf-8">
       new dgCidadesEstados({
         cidade: document.getElementById('cidade1'),
@@ -416,5 +352,6 @@
 
           });
     </script>
+    
   </body>
 </html>
