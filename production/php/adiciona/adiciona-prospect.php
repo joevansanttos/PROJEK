@@ -18,7 +18,7 @@ $fechamento = $date->format('d.m.Y');
 $id_consultor = $_POST["id_consultor"];
 $today = date("d.m.y");
 
-$query = "insert into prospects (id_clientes, prob, id_produto, valor_op, valor_est, recebimento, fechamento) values ($id,	$prob ,	$prod ,	$valor_op ,	$valor_est ,'{$recebimento}', '{$fechamento}')";
+$query = "insert into prospects (id_clientes, prob, id_produto, valor_op, valor_est, recebimento, fechamento, id_consultor) values ($id,	$prob ,	$prod ,	$valor_op ,	$valor_est ,'{$recebimento}', '{$fechamento}' ,	$id_consultor)";
 
 if(mysqli_query($conexao, $query)){
     $prospect = buscaProspect($conexao, $id, $prod, $valor_op);

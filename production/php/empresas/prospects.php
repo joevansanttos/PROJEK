@@ -193,10 +193,10 @@
                       <tr>
                         <th>Empresa</th>
                         <th>Produto</th>                             
-                        <th>Valor Estimado</th>
+                        <th>Valor</th>
+                        <th>Prob</th>
                         <th>Previsão de Recebimento</th>
                         <th>Previsão de Fechamento</th>
-                        <th>Contrato</th> 
                         <th>Ações</th>                             
                       </tr>
                     </thead>
@@ -204,10 +204,10 @@
                       <tr>
                         <th>Empresa</th>
                         <th>Produto</th>                             
-                        <th>Valor Estimado</th>
+                        <th>Valor</th>
+                        <th>Prob</th>
                         <th>Previsão de Recebimento</th>
                         <th>Previsão de Fechamento</th>
-                        <th></th> 
                         <th></th>                             
                       </tr>
                     </tfoot>
@@ -221,15 +221,17 @@
                         <tr>
                           <td><?=$cliente['nome']?></td>
                           <td><?=$produto['nome']?></td>
-                          <td>R$ <?=$oportunidade['valor_est']?></td>                            
+                          <td>R$ <?=$oportunidade['valor_est']?></td>
+                          <td><?=$oportunidade['prob']?>%</td>                            
                           <td><?=$oportunidade['fechamento']?></td>
-                          <td><?=$oportunidade['recebimento']?></td>
+                          <td><?=$oportunidade['recebimento']?></td>                         
                           <td align="center">
                             <a href="../forms/form-contrato.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                          </td>
-                          <td align="center">
                             <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                            <a href="remove-cliente.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                                 
+                            
+                            <a href="../forms/form-altera-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                            <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                            <a href="../remove/remove-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                                 
                           </td>
                         </tr>
                         <?php

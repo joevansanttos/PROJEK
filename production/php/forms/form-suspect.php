@@ -4,7 +4,7 @@
 
 <?php
 $id = $_GET['id'];
-$cliente = buscaCliente($conexao, $id);
+$cliente = buscaMarket($conexao, $id);
 ?>
 
 <!DOCTYPE html>

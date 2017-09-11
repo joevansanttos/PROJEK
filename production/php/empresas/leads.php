@@ -225,8 +225,9 @@
                                   </td> 
                                   <td align="center">
                                     <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
                                     <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="../remove/remove-lead.php?id=<?=$lead['id_leads']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                    <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
                                   </td>
                                 </tr>
                               <?php                                

@@ -6,7 +6,7 @@
 
 <?php
 $id = $_GET['id'];
-$cliente = buscaCliente($conexao, $id);
+$cliente = buscaMarket($conexao, $id);
 $produtos = listaProdutos($conexao);
 ?>
 
@@ -225,7 +225,7 @@ $produtos = listaProdutos($conexao);
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
                   </label>
                   <div class="col-sm-6 col-xs-12 col-md-6">
-                    <select id="consultor" name="consultor" class="optional form-control col-md-7 col-xs-12">
+                    <select id="id_consultor" name="id_consultor" class="optional form-control col-md-7 col-xs-12">
                     <?php
                     $usuarios = listaUsuarios($conexao);
                     foreach ($usuarios as $usuario){

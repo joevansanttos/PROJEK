@@ -5,7 +5,7 @@
 <?php
 $id = $_GET['id'];
 $contrato = buscaContrato($conexao , $id);
-$cliente= buscaCliente($conexao, $contrato['id_clientes']);
+$cliente= buscaMarket($conexao, $contrato['id_clientes']);
 ?>
 
 <!DOCTYPE html>

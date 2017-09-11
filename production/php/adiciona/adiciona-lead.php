@@ -18,7 +18,7 @@ if(mysqli_query($conexao, $query)){
 	$lead = buscaLead($conexao, $id, $nome, $email, $tel, $cargo, $comentario);
 	$query = "insert into consultores_lead (id_consultor, id_lead, data) values ({$id_consultor}, {$lead['id_lead']},'{$today}')";
 	mysqli_query($conexao, $query);
-    $cliente = buscaCliente($conexao, $id);
+    $cliente = buscaMarket($conexao, $id);
     $query = "update market set id_type= 2 where id_market=$id";
     if(mysqli_query($conexao, $query)){
     	mysqli_close($conexao);

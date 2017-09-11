@@ -39,3 +39,9 @@ function buscaSuspect($conexao, $id, $contato, $data, $tel, $email){
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
 }
+
+function buscaSuspectId($conexao, $id){
+  $query = "select * from suspects where id_suspect = {$id}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

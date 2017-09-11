@@ -5,7 +5,7 @@
 
 <?php
 $id = $_GET['id'];
-$cliente = buscaCliente($conexao, $id);
+$cliente = buscaMarket($conexao, $id);
 ?>
 
 <!DOCTYPE html>
@@ -202,7 +202,8 @@ $cliente = buscaCliente($conexao, $id);
                       <option value="Coordenador">Coordenador</option>
                       <option value="Gerente">Gerente</option>
                       <option value="Gestor">Gestor</option>
-                      <option value="Comercial">Representante Comercial</option>
+                      
+                      <option value="Diretor">Diretor</option>
                     </select>
                   </div>
                 </div>

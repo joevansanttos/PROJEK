@@ -39,3 +39,9 @@ function buscaProspect($conexao, $id, $prod, $valor_op){
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
 }
+
+function buscaProspectId($conexao, $id){
+  $query = "select * from prospects where id_prospect = {$id}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}
