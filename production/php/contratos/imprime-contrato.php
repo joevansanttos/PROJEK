@@ -13,24 +13,28 @@ $cliente= buscaMarket($conexao, $contrato['id_clientes']);
 <head>
     <meta charset='utf-8'>
     <title>Contrato</title>
-    <script src='../../js/pdfmake.min.js'></script>
-    <script src='../../js/vfs_fonts.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+    <script src='.../../../vendors/jsPDF-1.3.2/dist/jspdf.min.js'></script>
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <style type="text/css">
+       body{
+         font-size: 16pt;
+         margin: 40px;
+       }
+    </style>
 </head>
 <body>
-                         <span class="section"><center>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</center> 
-                         
+   <span class="section"><center>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</center>           
    <br>
    <center>
    <?=$contrato['data_inicio']?>
    </center>
-   <br>
-   Contrato de prestação de serviços para oferta de treinamento e consultoria de extensão em gestão organizacional, processos gerenciais e planejamento estratégico que entre si celebram PROJEK CONSULTORIA E TREINAMENTO doravante CONTRATADA e <?=$cliente['nome']?>, Nome Fantasia <?=$cliente['fantasia']?>, pessoa jurídica de direito privado, inscrita no Cadastro Nacional de Pessoas Jurídicas sob nº CNPJ Nº <?=$cliente['cnpj']?>, com sede na <?=$cliente['endereco']?>, neste ato representada pelo seu administrador, <?=$contrato['administrador']?>, brasileiro, empresário, casado CPF nº <?=$contrato['cpf']?>,  residente em <?=$contrato['residencia']?> denominada CONTRATANTE.
-
-   Por este instrumento particular, as Partes adiante identificadas e qualificadas, a saber:
+   <br> 
+   Por este instrumento particular, as Partes adiante identificadas e qualificadas, a saber:<br><br>
 
    CONTRATADA: PROJEK CONSULTORIA , inscrita no Cadastro Nacional de Pessoas Jurídicas sob o nº 23.913.067/0001-12, com sede RUA ALCEU AMOROSO LIMA Nº786, SALA 312, EDF. TANCREDO NEVES TRADE CENTER,  SALVADOR – BA. Tel: 71 3039-9780, neste ato representada pelo seu administrador, Sr. Fábio Martins da Silva, RG: 4978785-34, residente na Rua Salgueiro, 455, Apto. 2101, Condomínio ATMOS – Greenville, Torre Átria, Patamares, Salvador – Ba.
 
-   CONTRATANTE: ___________________, Nome Fantasia ________, pessoa jurídica de direito privado, inscrita no Cadastro Nacional de Pessoas Jurídicas sob nº CNPJ Nº _____________________, com sede na ____________________________________, neste ato representada pelo seu administrador, ________________________________, brasileiro, empresário, casado CPF nº ___________________,  residente em ___________________________.
+   CONTRATANTE: <?=$cliente['razao']?> , Nome Fantasia <?=$cliente['nome']?>, pessoa jurídica de direito privado, inscrita no Cadastro Nacional de Pessoas Jurídicas sob nº CNPJ Nº <?=$cliente['cnpj']?>, com sede na <?=$cliente['sede']?>, neste ato representada pelo seu administrador, ________________________________, brasileiro, empresário, casado CPF nº ___________________,  residente em ___________________________.
 
    Considerando que a Contratada está disposta a prestar os serviços a seguir enumerados e definidos à Contratante, e que esta está disposta a remunerar tais serviços de acordo com as condições também a seguir estipuladas, 
 
@@ -138,10 +142,9 @@ $cliente= buscaMarket($conexao, $contrato['id_clientes']);
    <br>a) .................................. 
    <br>
    <br>b) ..................................
-                         </span>
+   </span>
+   <script src="../../../vendors/jquery/dist/jquery.min.js"></script>                      
    <script type="text/javascript">
-       var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-        pdfMake.createPdf(docDefinition).open();
    </script>
 </body>
 </html>

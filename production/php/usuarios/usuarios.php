@@ -219,7 +219,7 @@
                                   <td><?=$usuario['estado']?></td>
                                   <td><?=$usuario['telefone']?></td>
                                   <td align="center">
-                                    <a href="../usuarios/usuarios.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                     <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
                                     <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>

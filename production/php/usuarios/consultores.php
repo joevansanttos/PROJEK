@@ -211,6 +211,7 @@
                               <th><?=$profissao['descricao']?></th>
                               <td align="center">                                  
                                 <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>   
                                 <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                               </td>
                                                           
@@ -222,7 +223,7 @@
                       </tbody>
                     </table>
                     <div class="ln_solid"></div>
-                      <a class="btn btn-round btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
+                      <a class="btn btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                 </div>

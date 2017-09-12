@@ -61,10 +61,9 @@ $usuario = buscaUsuario($conexao, $id);
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="usuarios.php">USUÁRIOS</a></li>
+                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
+                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -199,14 +198,13 @@ $usuario = buscaUsuario($conexao, $id);
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/user.png" alt="Avatar" title="Change the avatar">
+                          <img class="img-responsive avatar-view" src="../../images/user.png" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
                       <h3><?=$usuario['nome']?></h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i><?=$usuario['profissao']?>
-                        </li>
+                       
 
                         <li>
                           <i class="fa fa-briefcase user-profile-icon"></i><?=$usuario['telefone']?>
@@ -222,12 +220,7 @@ $usuario = buscaUsuario($conexao, $id);
                     <!-- Teste -->
                     <div class="x_content" style="display: block;">
 
-                      <div class="container">
-                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
-                        <a  class="btn btn-primary" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Prospeccão</a>
-                        <a  class="btn btn-warning" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Apresentação</a>
-                        <a  class="btn btn-danger" href="form-cliente-prospeccao.php?id=<?=$cliente['id']?>">Oportunidade</a>
-                      </div>
+                     
                       <br />
                     </div>
                   </div>
