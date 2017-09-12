@@ -233,6 +233,11 @@ $clientes = listaClientes($conexao);
                           ?>
                             <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-thumbs-down"></i></button></a></td>
                           <?php    
+                            }else{
+                          ?>
+                            <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button></a></td>
+                          <?php
+                              
                             }
                           ?>
 

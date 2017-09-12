@@ -3,14 +3,16 @@
 <?php include ("../bancos/banco-lead.php");?>
 <?php include ("../bancos/banco-suspect.php");?>
 <?php include ("../bancos/banco-prospect.php");?>
+<?php include ("../bancos/banco-historico.php");?>
 
 
 <?php
 $id = $_GET['id'];
-$cliente = buscaCliente($conexao, $id);
+$cliente = buscaMarket($conexao, $id);
 $prospeccao = buscaLeads($conexao, $id);
 $apresentacoes = buscaClientesApresentacao($conexao, $id);
 $prospects = buscaProspects($conexao, $id);
+$historicos =  buscaHistoricos($conexao, $id);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +40,7 @@ $prospects = buscaProspects($conexao, $id);
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+            <a href="../../index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
@@ -59,7 +61,6 @@ $prospects = buscaProspects($conexao, $id);
                       <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
                       <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -231,6 +232,32 @@ $prospects = buscaProspects($conexao, $id);
 
                           <!-- start accordion -->
                           <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel">
+                              <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseOne">
+                                <h4 class="panel-title">Histórico</h4>
+                              </a>
+                              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                                <div class="panel-body">
+                                <?php
+                                  foreach ($historicos as $historico) {
+                                    # code...
+                                ?>
+                                    <table class="table table-bordered">
+                                      <thead>
+                                        <th>Data</th>
+                                        <th>Comentário</th>
+                                      </thead>
+                                      <tbody>
+                                        <td><?=$historico['data']?></td>
+                                        <td><?=$historico['comentario']?></td>
+                                      </tbody>
+                                    </table>
+                                <?php
+                                   }
+                                ?>
+                                </div>
+                              </div>
+                            </div>
                             <div class="panel">
                               <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 <h4 class="panel-title">Leads</h4>

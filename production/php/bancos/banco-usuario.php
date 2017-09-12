@@ -19,3 +19,10 @@ function listaUsuarios($conexao){
     return $usuarios;
 }
 
+function buscaUsuarioLogar($conexao , $email){
+    $query = "select  * from usuarios where email = '{$email}'";
+    $resultado = mysqli_query($conexao, $query);
+    $usuario = mysqli_fetch_assoc($resultado);
+    return $usuario;
+
+}
