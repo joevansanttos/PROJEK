@@ -13,18 +13,11 @@ $cliente= buscaMarket($conexao, $contrato['id_clientes']);
 <head>
     <meta charset='utf-8'>
     <title>Contrato</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
-    <script src='.../../../vendors/jsPDF-1.3.2/dist/jspdf.min.js'></script>
-    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
-    <style type="text/css">
-       body{
-         font-size: 16pt;
-         margin: 40px;
-       }
-    </style>
+    <script src='../../js/pdfmake.min.js'></script>
+    <script src='../../js/vfs_fonts.js'></script>
 </head>
 <body>
-   <span class="section"><center>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</center>           
+    <span class="section"><center>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</center>                
    <br>
    <center>
    <?=$contrato['data_inicio']?>
@@ -142,9 +135,34 @@ $cliente= buscaMarket($conexao, $contrato['id_clientes']);
    <br>a) .................................. 
    <br>
    <br>b) ..................................
-   </span>
-   <script src="../../../vendors/jquery/dist/jquery.min.js"></script>                      
+                         </span>
    <script type="text/javascript">
+    var docDefinition = {
+       content: [
+          
+          {
+              image: '/projek.png',
+          },
+          { text: 'CONTRATO DE PRESTAÇÃO DE SERVIÇOS', style: 'header',margin: [0, 0, 0, 8] },          
+         { text: 'CONTRATADA: PROJEK CONSULTORIA , inscrita no Cadastro Nacional de Pessoas Jurídicas sob o nº 20.959.483/0001-63, com sede RUA ALCEU AMOROSO LIMA Nº786, SALA 312, EDF. TANCREDO NEVES TRADE CENTER,  SALVADOR – BA. Tel: 71 3039-9780, neste ato representada pelo seu administrador, Sr. Fábio Martins da Silva, RG: 4978785-34, residente na Rua Salgueiro, 455, Apto. 2101, Condomínio ATMOS – Greenville, Torre Átria, Patamares, Salvador – Ba.',fontSize: 11,alignment: 'justify'}
+       ],
+
+       styles: {
+         header: {
+           fontSize: 14,
+           bold: true,
+           alignment: 'center'
+         },
+         anotherStyle: {
+           fontSize: 11
+         }
+       }
+
+     };
+
+    pdfMake.createPdf(docDefinition).open();
+
+       
    </script>
 </body>
 </html>
