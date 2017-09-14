@@ -4,6 +4,7 @@
 <?php include "../bancos/banco-feedback.php";?>
 <?php include "../bancos/banco-pos_venda.php";?>
 <?php include "../bancos/banco-market.php";?>
+<?php include "../bancos/banco-contato.php";?>
 
 <?php
 $clientes = listaClientes($conexao);
@@ -198,12 +199,15 @@ $clientes = listaClientes($conexao);
                     <table id="tabela" class="table table-bordered table-striped">
                       <thead>
                         <tr role="row">
-                          <th>Inicio</th>
-                          <th>Fim</th>
-                          <th>Nº Contrato</th>
                           <th>Empresa</th>
+                          <th>Nº Contrato</th>
+                          <th>Inicio</th>
+                          <th>Fim</th>                         
                           <th>Consultor</th> 
-                          <th>Feedback</th>                    
+                          <th>Feedback</th>
+                          <th>Último Contato</th>
+                          <th>Próximo Contato</th>
+                          <th>Ações</th>                    
                         </tr>
                       </thead>
                       <tbody>
@@ -214,10 +218,10 @@ $clientes = listaClientes($conexao);
                          $consultor = buscaUsuario($conexao, $contrato['id_consultor']);
                       ?>
                           <tr>
-                            <td><?=$contrato['data_inicio']?></td>
-                            <td><?=$contrato['data_fim']?></td>
-                            <td><?=$contrato['n_contrato']?></td>
                             <td><?=$market['nome']?></td>
+                            <td><?=$contrato['n_contrato']?></td>                           
+                            <td><?=$contrato['data_inicio']?></td>
+                            <td><?=$contrato['data_fim']?></td>                        
                             <td><?=$consultor['nome']?></td>
                         <?php
                           if($cliente['id_feedback'] == null ){
@@ -243,8 +247,47 @@ $clientes = listaClientes($conexao);
 
                         <?php
                         }
-                        ?>                       
-                          </tr>
+                        ?>
+
+                        <?php
+                          $contatos = buscaContato($conexao, $cliente['id_pos_venda']);
+                          $size = count($contatos);
+                          if($size == 0){
+                        ?>
+                            <td></td>
+                            <td></td>
+                            <td align="center">
+                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                            </td>
+
+                        <?php    
+                          }else if($size == 1){
+                        ?>
+
+                            <td align="center"><?=$contatos[0]['data_contato']?></td>
+                            <td></td>
+                            <td align="center">
+                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                            </td>
+                   
+
+                        <?php
+                          }else{
+                            $contatos_sequencia = ordenaContatos($contatos);
+                        ?>
+                            <td><?=$contatos_sequencia[0]?></td>
+                            <td><?=$contatos_sequencia[1]?></td>
+                            <td align="center">
+                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                            </td>
+                        <?php
+                          }
+                        ?>
+                         </tr>
+
                     <?php
                       }
                     ?>    

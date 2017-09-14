@@ -19,3 +19,9 @@ function listaClientes($conexao){
     
     return $usuarios;
 }
+
+function buscaPosVenda($conexao, $id){
+  $query = "select * from pos_venda where id_pos_venda = {$id}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

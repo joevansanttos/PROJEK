@@ -214,61 +214,61 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
                       <div class="item form-group">
                          <h2>Pontualidade</h2>
                         <label class="radio-inline">
-                          <input type="radio" value="1" name="pontual">Nada Pontual
+                          <input type="radio" value="25" name="pontual">Nada Pontual
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="2" name="pontual">Pouco Pontual
+                          <input type="radio" value="50" name="pontual">Pouco Pontual
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="3" name="pontual">Pontual
+                          <input type="radio" value="75" name="pontual">Pontual
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="4" name="pontual">Muito Pontual
+                          <input type="radio" value="100" name="pontual">Muito Pontual
                         </label>
                       </div>
                       <div class="item form-group">
                          <h2>Assiduidade</h2>
                         <label class="radio-inline">
-                          <input type="radio" value="1" name="assiduo">Nada Assíduo
+                          <input type="radio" value="25" name="assiduo">Nada Assíduo
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="2" name="assiduo">Pouco Assíduo
+                          <input type="radio" value="50" name="assiduo">Pouco Assíduo
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="3" name="assiduo">Assíduo
+                          <input type="radio" value="75" name="assiduo">Assíduo
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="4" name="assiduo">Muito Assíduo
+                          <input type="radio" value="100" name="assiduo">Muito Assíduo
                         </label>
                       </div>
                       <div class="item form-group">
                          <h2>Conhecimento</h2>
                         <label class="radio-inline">
-                          <input type="radio" value="1" name="conhecimento">Nenhum Conhecimento
+                          <input type="radio" value="25" name="conhecimento">Nenhum Conhecimento
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="2" name="conhecimento">Pouco Conhecimento
+                          <input type="radio" value="50" name="conhecimento">Pouco Conhecimento
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="3" name="conhecimento">Tem Conhecimento
+                          <input type="radio" value="75" name="conhecimento">Tem Conhecimento
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="4" name="conhecimento">Muito Conhecimento
+                          <input type="radio" value="100" name="conhecimento">Muito Conhecimento
                         </label>
                       </div>
                       <div class="item form-group">
                          <h2>Empatia</h2>
                         <label class="radio-inline">
-                          <input type="radio" value="1" name="empatia">Nenhuma Empatia
+                          <input type="radio" value="25" name="empatia">Nenhuma Empatia
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="2" name="empatia">Pouca Empatia
+                          <input type="radio" value="50" name="empatia">Pouca Empatia
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="3" name="empatia">Tem Empatia
+                          <input type="radio" value="75" name="empatia">Tem Empatia
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" value="4" name="empatia">Muito Empatia
+                          <input type="radio" value="100" name="empatia">Muito Empatia
                         </label>
                       </div>
                       <div class="ln_solid"></div>

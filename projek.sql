@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Set-2017 às 21:32
+-- Generation Time: 14-Set-2017 às 21:32
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -5659,7 +5659,8 @@ INSERT INTO `consultores_lead` (`id_consultor`, `id_lead`, `data`) VALUES
 (10, 27, '09.09.17'),
 (10, 9, '09.09.17'),
 (10, 11, '11.09.17'),
-(10, 11, '11.09.17');
+(10, 11, '11.09.17'),
+(10, 12, '13.09.17');
 
 -- --------------------------------------------------------
 
@@ -5686,7 +5687,10 @@ INSERT INTO `consultores_market` (`id_consultor`, `id_market`, `data`, `id_c_mar
 (14, 26, '09.09.17', 6),
 (10, 29, '09.09.17', 7),
 (14, 30, '11.09.17', 8),
-(10, 31, '11.09.17', 9);
+(10, 31, '11.09.17', 9),
+(10, 23, '13.09.17', 10),
+(10, 23, '13.09.17', 11),
+(10, 34, '13.09.17', 12);
 
 -- --------------------------------------------------------
 
@@ -5708,7 +5712,8 @@ INSERT INTO `consultores_prospect` (`id_consultor`, `id_prospect`, `data`) VALUE
 (14, 2, '11.09.17'),
 (14, 3, '11.09.17'),
 (14, 3, '11.09.17'),
-(10, 5, '11.09.17');
+(10, 5, '11.09.17'),
+(10, 6, '13.09.17');
 
 -- --------------------------------------------------------
 
@@ -5728,7 +5733,33 @@ CREATE TABLE `consultores_suspect` (
 
 INSERT INTO `consultores_suspect` (`id_consultor`, `id_suspect`, `data`) VALUES
 (10, 7, '09.09.17'),
-(10, 9, '11.09.17');
+(10, 9, '11.09.17'),
+(10, 10, '13.09.17');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `contato`
+--
+
+CREATE TABLE `contato` (
+  `id_contato` int(11) NOT NULL,
+  `id_pos_venda` int(11) DEFAULT NULL,
+  `id_consultor` int(11) DEFAULT NULL,
+  `data_contato` varchar(20) DEFAULT NULL,
+  `comentario` varchar(255) DEFAULT NULL,
+  `id_status_contato` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `contato`
+--
+
+INSERT INTO `contato` (`id_contato`, `id_pos_venda`, `id_consultor`, `data_contato`, `comentario`, `id_status_contato`) VALUES
+(3, 4, 10, '01.01.2017', 'sassasa', 1),
+(4, 4, 10, '02.02.2017', 'xsxsdsdsds', 1),
+(5, 4, 10, '23.01.2016', 'xzxzxsds', 1),
+(6, 4, 10, '02.03.2017', 'sdsdsds', 1);
 
 -- --------------------------------------------------------
 
@@ -5756,7 +5787,9 @@ CREATE TABLE `contratos` (
 
 INSERT INTO `contratos` (`id_clientes`, `id_produto`, `id_contrato`, `id_contrato_status`, `id_consultor`, `data_inicio`, `data_fim`, `n_contrato`, `sede`, `razao`, `cnpj`) VALUES
 (23, 5, 1, 2, 14, '02.02.1222', '02.02.3223', '111111111', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'Petrobras SA', '44.444.444/4444-__'),
-(31, 5, 2, 2, 10, '01.10.2017', '01.12.2017', '01', 'Rua Thomaz Gonzaga SN', 'Plataforma Transportes SPE', '21.120.716/0001-00');
+(31, 5, 2, 2, 10, '01.10.2017', '01.12.2017', '01', 'Rua Thomaz Gonzaga SN', 'Plataforma Transportes SPE', '21.120.716/0001-00'),
+(23, 5, 3, 1, 10, '01.01.3233', '01.01.3234', '111111111', 'wqwqw3', '23232', '11.111.111/1111-11'),
+(34, 7, 4, 1, 10, '02.02.2017', '02.02.2018', '233333333333', 'wqwqw', '434343', '11.111.111/1111-11');
 
 -- --------------------------------------------------------
 
@@ -5818,10 +5851,12 @@ INSERT INTO `departamentos_contratos` (`id_departamento`, `id_contrato`, `id_dep
 (2, 1, 2),
 (1, 2, 3),
 (2, 2, 4),
-(1, 1, 5),
-(2, 1, 6),
 (1, 2, 7),
-(2, 2, 8);
+(2, 2, 8),
+(1, 1, 9),
+(2, 1, 10),
+(1, 4, 11),
+(2, 4, 12);
 
 -- --------------------------------------------------------
 
@@ -5890,8 +5925,8 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`id_feedback`, `id_consultor`, `id_clientes`, `pontual`, `conhecimento`, `assiduo`, `empatia`, `id_contrato`) VALUES
-(3, 14, 23, 1, 2, 2, 2, 1),
-(4, 14, 23, 4, 4, 4, 4, 1),
+(3, 14, 23, 25, 50, 50, 50, 1),
+(4, 14, 23, 100, 100, 100, 100, 1),
 (5, 10, 31, 4, 4, 4, 4, 2);
 
 -- --------------------------------------------------------
@@ -5939,7 +5974,8 @@ CREATE TABLE `leads` (
 INSERT INTO `leads` (`nome`, `email`, `tel`, `cargo`, `comentario`, `id_lead`, `id_clientes`) VALUES
 ('jose Teste', 'joevansantos@hotmail.com', '(33) 33333-3333', 'Financeiro', 'xhange', 8, 28),
 ('44444444', 'joaobb@gmail.com', '(33) 33333-3333', 'Faturamento', 'e34343', 9, 29),
-('Lucas Carvalho', 'lucas.carvalho@gevan.com.br', '(71) 99889-9774', 'Diretor', 'O contato de Lucas foi adquirido por indicação.', 11, 31);
+('Lucas Carvalho', 'lucas.carvalho@gevan.com.br', '(71) 99889-9774', 'Diretor', 'O contato de Lucas foi adquirido por indicação.', 11, 31),
+('teste', 'teste@com', '(34) 44444-4444', 'Financeiro', 'ewewe', 12, 34);
 
 -- --------------------------------------------------------
 
@@ -5969,13 +6005,15 @@ CREATE TABLE `market` (
 
 INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, `estado`, `cidade`, `tel`, `comentario`, `id_type`, `segmento`, `bairro`) VALUES
 (23, 'Petrobras SA', 'Petrobras', '33.333.333/3333-33', 'petrobras.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Angical', '(34) 33333-3333', 'DDDDDDDDDDDSD', 2, 'comercial', 'Pituba'),
-(25, 'Nestle SA', 'Nestle', '33.333.333/3333-33', 'www.nestle.com.br', 'Edifício Odebrecht - Av. Luís Viana, 2841 - Paralela, Salvador - BA, 41730-900', 'BA', 'Angical', '(33) 33333-3333', 'ddddddddd', 2, 'industrial', 'wweee'),
 (26, 'Petrobras SA', 'Petrobras', '44.444.444/4444-44', 'petrobras.com.br', 'ruaddd', 'BA', 'Anguera', '(71) 33333-3333', 'eweewe', 2, 'comercial', 'dddddddddd'),
 (27, '23232', 'Petrobras', '33.333.333/3333-33', 'odebretch.com.br', 'ssssssss', 'BA', 'Anguera', '(33) 33333-3333', 'ewewew', 2, 'comercial', 'sasa'),
 (28, 'Nestle SA', 'Nestle', '44.444.444/4444-44', 'petrobras.com.br', 'fffffffffffff', 'BA', 'Anguera', '(44) 44444-4444', '454545', 2, 'comercial', 'ddddddddd'),
 (29, 'Nestle SA', 'Nestle', '44.444.444/4444-__', 'odebretch.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Antas', '(55) 55555-5555', '4343', 2, 'comercial', '55555555'),
 (30, 'Bradesco SA', 'Bradesco', '22.222.222/2222-22', 'bancodobrasil.com.br', 'Av. Prof. Magalhães Neto, 1856 - Pituba, Salvador - BA, 41810-012', 'PB', 'Aroeiras', '(33) 33333-3333', 'SASAS', 1, 'industrial', 'Pituba'),
-(31, 'Plataforma Transportes SPE', 'Gevan', '21.120.716/0001-00', 'www.gevan.com.br', 'Rua Thomaz Gonzaga SN', 'BA', 'Salvador', '(71) 35211-344_', 'Empresa indicada.', 2, 'servicos', 'Pernambués');
+(31, 'Plataforma Transportes SPE', 'Gevan', '21.120.716/0001-00', 'www.gevan.com.br', 'Rua Thomaz Gonzaga SN', 'BA', 'Salvador', '(71) 35211-344_', 'Empresa indicada.', 2, 'servicos', 'Pernambués'),
+(32, 'Plataforma Transportes SPE', 'Projek', '33.333.333/3333-33', 'www.jhkk.com', 'Piaui 10 sdsds', 'AP', 'Itaubal', '4434434', 'sasasa', 1, 'industrial', 'Petropolis'),
+(33, 'Plataforma Transportes SPE', 'Projek', '33.333.333/3333-33', 'www.jhkk.com', 'Piaui 10 sdsds', 'AP', 'Itaubal', '4434434', 'sasasa', 1, 'industrial', 'Petropolis'),
+(34, 'teste sa', 'teste', '11.111.111/1111-11', 'bancodobrasil.com.br', 'wqwqw', 'PI', 'Assunção do Piauí', '2323232', 'sasasa', 2, 'comercial', 'qwqwq');
 
 -- --------------------------------------------------------
 
@@ -5996,7 +6034,6 @@ CREATE TABLE `pos_venda` (
 
 INSERT INTO `pos_venda` (`id_pos_venda`, `id_clientes`, `id_feedback`, `id_contrato`) VALUES
 (2, 23, 3, 1),
-(3, 23, 3, 1),
 (4, 31, 5, 2);
 
 -- --------------------------------------------------------
@@ -6067,7 +6104,8 @@ CREATE TABLE `prospects` (
 
 INSERT INTO `prospects` (`id_prospect`, `id_clientes`, `prob`, `valor_op`, `valor_est`, `recebimento`, `fechamento`, `id_produto`, `id_consultor`) VALUES
 (3, 28, '100.00', '10000.00', '10000.00', '01.01.3323', '01.01.3322', 5, 10),
-(5, 31, '75.00', '1874.00', '1405.50', '22.09.2017', '25.09.2017', 5, 10);
+(5, 31, '75.00', '1874.00', '1405.50', '22.09.2017', '25.09.2017', 5, 10),
+(6, 34, '50.00', '1000.00', '500.00', '01.01.2323', '01.01.3232', 6, 10);
 
 -- --------------------------------------------------------
 
@@ -6093,8 +6131,30 @@ CREATE TABLE `socios` (
 INSERT INTO `socios` (`id_socio`, `nome`, `cpf`, `residencia`, `nacionalidade`, `profissao`, `civil`, `id_contrato`) VALUES
 (1, 'Jose maria', '333-333-333-33', 'rua petrobras', 'brasileiro', 'empresario', 'solteiro', 1),
 (2, 'Nestle Novo', '083-333-333-33', 'rua petrobras', 'brasileiro', 'empresario', 'Solteiro', 2),
-(3, 'Jose maria', '333-333-333-33', 'rua petrobras', 'brasileiro', '3333333333', 'solteiro', 1),
-(4, 'Lucas Carvalho', '0350795636', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', 2);
+(4, 'Lucas Carvalho', '0350795636', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', 2),
+(5, 'Jose 1', '222-222-222-22', '3232', '3232', '3232', '323232', 1),
+(6, 'Jose 2', '222222222', 'eeeeeeeee', 'erere', 'rere', 'rere', 1),
+(7, 'Jose 1', '222-222-222-22', 'ssdsd', 'dsds', 'dsds', 'dsds', 4),
+(8, 'Jose 2', '2222222222', 'sdsd', 'dsds', 'dsdsd', 'dsds', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `status_contato`
+--
+
+CREATE TABLE `status_contato` (
+  `id_status_contato` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `status_contato`
+--
+
+INSERT INTO `status_contato` (`id_status_contato`, `descricao`) VALUES
+(1, 'Agendado'),
+(2, 'Finalizado');
 
 -- --------------------------------------------------------
 
@@ -6122,7 +6182,8 @@ CREATE TABLE `suspects` (
 INSERT INTO `suspects` (`contato`, `data`, `status`, `hora`, `comentario`, `id_consultor`, `id_suspect`, `id_clientes`, `tel`, `email`) VALUES
 ('José Petroleiro', '09.09.17', 'Agendado', '04:54', '545454', 14, 7, 28, '(45) 55555-5___', 'juliana@projek.com'),
 ('José Petroleiro', '09.09.17', 'Realizado', '03:02', '323232', 10, 8, 28, '(23) 33333-3333', 'joevansantos@hotmail.com'),
-('Lucas Carvalho', '15.09.2017', 'Agendado', '14:00', 'A apresentação foi marcada na Garagem da Praia Grande para apresentar os serviços da Projek.', 10, 9, 31, '(71) 99989-9874', 'lucas.carvalho@gevan.com.br');
+('Lucas Carvalho', '15.09.2017', 'Agendado', '14:00', 'A apresentação foi marcada na Garagem da Praia Grande para apresentar os serviços da Projek.', 10, 9, 31, '(71) 99989-9874', 'lucas.carvalho@gevan.com.br'),
+('3434343', '02.02.2323', 'Agendado', '23:23', '3232', 10, 10, 34, '(34) 33333-3333', 'teste@com');
 
 -- --------------------------------------------------------
 
@@ -6189,6 +6250,12 @@ ALTER TABLE `cidade`
 --
 ALTER TABLE `consultores_market`
   ADD PRIMARY KEY (`id_c_market`);
+
+--
+-- Indexes for table `contato`
+--
+ALTER TABLE `contato`
+  ADD PRIMARY KEY (`id_contato`);
 
 --
 -- Indexes for table `contratos`
@@ -6269,6 +6336,12 @@ ALTER TABLE `socios`
   ADD PRIMARY KEY (`id_socio`);
 
 --
+-- Indexes for table `status_contato`
+--
+ALTER TABLE `status_contato`
+  ADD PRIMARY KEY (`id_status_contato`);
+
+--
 -- Indexes for table `suspects`
 --
 ALTER TABLE `suspects`
@@ -6299,12 +6372,17 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `contato`
+--
+ALTER TABLE `contato`
+  MODIFY `id_contato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `id_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `contrato_status`
 --
@@ -6319,7 +6397,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT for table `departamentos_contratos`
 --
 ALTER TABLE `departamentos_contratos`
-  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `feedback`
 --
@@ -6334,12 +6412,12 @@ ALTER TABLE `historico`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `pos_venda`
 --
@@ -6359,17 +6437,22 @@ ALTER TABLE `profissao`
 -- AUTO_INCREMENT for table `prospects`
 --
 ALTER TABLE `prospects`
-  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `status_contato`
+--
+ALTER TABLE `status_contato`
+  MODIFY `id_status_contato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `suspects`
 --
 ALTER TABLE `suspects`
-  MODIFY `id_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `type`
 --

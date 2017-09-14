@@ -3,12 +3,21 @@
 <?php include "../bancos/banco-feedback.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-lead.php";?>
-
 <?php include "../bancos/banco-consultores-market.php";?>
 
 <?php
   $id = $_GET['id'];
   $usuario = buscaUsuario($conexao, $id);
+
+  $n_markets = buscaMarketConsultores($conexao , $usuario['id_usuario']);
+  $n_market = count($n_markets);
+  $n_leads = buscaLeadsConsultores($conexao , $usuario['id_usuario']);
+  $n_lead = count($n_leads);
+  $n_suspects = buscaSuspectConsultores($conexao , $usuario['id_usuario']);
+  $n_suspect = count($n_suspects);
+  $n_prospects = buscaProspectConsultores($conexao , $usuario['id_usuario']);
+  $n_prospect = count($n_prospects);
+
   $feedbacks = listaConsultorFeedback($conexao, $id);
   $size = count($feedbacks);
   $pontual = 0;
@@ -17,19 +26,18 @@
   $empatia = 0;
   if($size > 0){    
     foreach ($feedbacks as $feedback) {
-      $pontual = $pontual + $feedback['pontual'] + 25;
-      $assiduo = $assiduo + $feedback['assiduo'] + 25;
-      $conhecimento = $pontual + $feedback['conhecimento'] + 25;
-      $empatia = $pontual + $feedback['empatia'] + 25;
+      $pontual = $pontual + $feedback['pontual'];
+      $assiduo = $assiduo + $feedback['assiduo'];
+      $conhecimento = $conhecimento + $feedback['conhecimento'];
+      $empatia = $empatia + $feedback['empatia'];
     }
     $pontual = $pontual/$size;
     $assiduo = $assiduo/$size;
     $conhecimento = $conhecimento/$size;
     $empatia = $empatia/$size;
-  }else{
-
   }
-  
+
+
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +60,7 @@
     <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">    
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <script src="../../../vendors/Chart.js/dist/Chart.js"></script>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -229,25 +238,25 @@
                         <li>
                           <p>Pontualidade</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$usuario['pontual']?>"></div>
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$pontual?>"></div>
                           </div>
                         </li>
                         <li>
                           <p>Assiduidade</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$usuario['assiduo']?>"></div>
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$assiduo?>"></div>
                           </div>
                         </li>
                         <li>
                           <p>Conhecimento</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$usuario['conhecimento']?>"></div>
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$conhecimento?>"></div>
                           </div>
                         </li>
                         <li>
                           <p>Empatia</p>
                           <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$usuario['nome']?>"></div>
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?=$empatia?>"></div>
                           </div>
                         </li>
                       </ul>
@@ -263,8 +272,9 @@
                           </div>
                         </div>
                       </div>
-                      <!-- start of user-activity-graph -->
-                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <!-- start of user-activity-graph -->                      
+
+                      <canvas id="myChart" style="width:100%; height:280px;"></canvas>
                       <!-- end of user-activity-graph -->
 
                       <!-- Start Tab Panel -->
@@ -311,6 +321,7 @@
                                   $empresa = buscaMarket($conexao, $market['id_market']);
                               ?>
                                 <tr>
+                                  
                                   <td><?=$empresa['nome']?></td>
                                   <td><?=$usuario['nome']?></td>
                                   <td><?=$market['data']?></td>
@@ -389,6 +400,7 @@
     <!-- bootstrap-daterangepicker -->
     <script src="../../../vendors/moment/min/moment.min.js"></script>
     <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../../../vendors/Chart.js/dist/Chart.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -404,5 +416,49 @@
     <script src="../../js/datatable.js"></script> 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
+    <script>
+
+      $(document).ready(function(){
+         var ctx = document.getElementById("myChart");
+         var myChart = new Chart(ctx, {
+             type: 'bar',
+             data: {
+                 labels: ["Market", "Leads", "Suspects", "Prospects"],
+                 datasets: [{
+                     label: '# of Votes',
+                     data: [<?=$n_market?>, <?=$n_lead?>, <?=$n_suspect?>, <?=$n_prospect?>],
+                     backgroundColor: [
+                         'rgba(255, 99, 132, 0.2)',
+                         'rgba(54, 162, 235, 0.2)',
+                         'rgba(255, 206, 86, 0.2)',
+                         'rgba(75, 192, 192, 0.2)',
+                         'rgba(153, 102, 255, 0.2)',
+                         'rgba(255, 159, 64, 0.2)'
+                     ],
+                     borderColor: [
+                         'rgba(255,99,132,1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(75, 192, 192, 1)',
+                         'rgba(153, 102, 255, 1)',
+                         'rgba(255, 159, 64, 1)'
+                     ],
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 scales: {
+                     yAxes: [{
+                         ticks: {
+                             beginAtZero:true
+                         }
+                     }]
+                 }
+             }
+         });
+      });
+    
+   
+    </script>
   </body>
 </html>

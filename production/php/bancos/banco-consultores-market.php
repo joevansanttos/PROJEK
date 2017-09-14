@@ -21,3 +21,26 @@ function buscaLeadsConsultores($conexao , $id){
     
     return $clientes;
 }
+
+function buscaSuspectConsultores($conexao , $id){
+  $clientes = array();
+    $query = "select  * from consultores_suspect where id_consultor = '{$id}'";
+    $resultado = mysqli_query($conexao, $query);
+    while ($cliente= mysqli_fetch_assoc($resultado)) {
+      array_push($clientes, $cliente);
+    }
+    
+    return $clientes;
+}
+
+function buscaProspectConsultores($conexao , $id){
+  $clientes = array();
+    $query = "select  * from consultores_prospect where id_consultor = '{$id}'";
+    $resultado = mysqli_query($conexao, $query);
+    while ($cliente= mysqli_fetch_assoc($resultado)) {
+      array_push($clientes, $cliente);
+    }
+    
+    return $clientes;
+}
+

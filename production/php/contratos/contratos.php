@@ -227,14 +227,30 @@
                             <td><?=$cliente['nome']?></td>
                             <td><?=$usuario['nome']?></td>
                             <td><?=$status['descricao']?></td>
-                            <td align="center">
-                              <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
-                              <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                              <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
-                              <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>                
-                              <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-
-                            </td>
+                          <?php
+                            if($contrato['id_contrato_status'] == 1){
+                          ?>
+                              <td align="center">
+                                <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
+                                <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>                
+                                <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                              </td>
+                          <?php    
+                            }else{
+                          ?>
+                              <td align="center">
+                                <button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
+                                <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>                
+                                <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                              </td>
+                          <?php   
+                            }
+                          ?>
+                            
                           </tr>
                         <?php
                           }
