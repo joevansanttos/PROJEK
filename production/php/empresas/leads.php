@@ -193,7 +193,6 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Cargo</th>
-                                <th>Suspect</th>                              
                                 <th>Ações</th>
                               </tr>
                             </thead>
@@ -204,7 +203,6 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Cargo</th> 
-                                <th></th>  
                                 <th></th>                           
                               </tr>
                             </tfoot>
@@ -219,11 +217,10 @@
                                   <td><?=$lead['nome']?></td>
                                   <td><?=$lead['email']?></td>
                                   <td><?=$lead['tel']?></td>
-                                  <td><?=$lead['cargo']?></td>
+                                  <td><?=$lead['cargo']?></td>                                 
                                   <td align="center">
+                                    <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                     <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  </td> 
-                                  <td align="center">
                                     <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                     <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
                                     <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>

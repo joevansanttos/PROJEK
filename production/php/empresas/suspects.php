@@ -198,7 +198,6 @@
                             <th>Email</th>
                             <th>Horário</th>
                             <th>Consultor</th>                            
-                            <th>Prospect</th>
                             <th>Ações</th>
                           </tr>
                         </thead>
@@ -210,8 +209,7 @@
                             <th>Tel</th>
                             <th>Email</th>
                             <th>Horário</th>
-                            <th>Consultor</th>                            
-                            <th></th>
+                            <th>Consultor</th> 
                             <th></th>
                           </tr>
                         </tfoot>
@@ -229,11 +227,10 @@
                               <td><?=$apresentacao['tel']?></td>
                               <td><?=$apresentacao['email']?></td>
                               <td><?=$apresentacao['hora']?></td>
-                              <td><?=$consultor['nome']?></td>
+                              <td><?=$consultor['nome']?></td>                              
                               <td align="center">
+                                <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                 <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                              </td>
-                              <td align="center">
                                 <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                 <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
                                 <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
