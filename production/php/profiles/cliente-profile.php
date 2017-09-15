@@ -275,7 +275,6 @@ $historicos =  buscaHistoricos($conexao, $id);
                                           <th>Email</th>
                                           <th>Telefone</th>
                                           <th>Cargo</th>
-                                          <th>Comentário</th>
                                           <th>Ações</th>
                                         </tr>
                                       </thead>
@@ -285,7 +284,6 @@ $historicos =  buscaHistoricos($conexao, $id);
                                           <td><?=$prosp['email']?></td>
                                           <td><?=$prosp['tel']?></td>
                                           <td><?=$prosp['cargo']?></td>
-                                          <td><?=$prosp['comentario']?></td>
                                           <td>
                                             <a href="remove-cliente-prospeccao.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs">Remover</button></a>
                                             <a href="form-altera-cliente-prospeccao.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs">Editar</button></a>

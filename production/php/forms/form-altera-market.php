@@ -158,7 +158,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_content">
                   <br />
-                  <form action="../altera/altera-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <form action="../altera/altera-market.php?" method="get" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
                       </label>
@@ -232,6 +232,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
                         <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
+                        <input type="hidden" name="id_market" id="id_market" value="<?=$market['id_market']?>" />
                       </div>
                     </div>
                   </form>
