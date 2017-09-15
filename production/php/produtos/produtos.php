@@ -50,6 +50,7 @@
               </div>
             </div>
             <br />
+            <!-- Sidebar Menu-->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Geral</h3>
@@ -108,8 +109,24 @@
                       </ul>
                     </li>               
                 </ul>
-              </div>
-            </div>         
+              </div>            
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div>  
+            </div>
+            <!-- end Sidebar-->         
           </div>
         </div>      
         <!-- Col-->
@@ -186,41 +203,45 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  <table id="datatable" class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Nome</th>
-                          <th>Preço</th>
-                          <th>Descrição</th>
-                          <th>Beneficios</th>
-                          <th>Entregas</th>
-                          <th class="col-md-2">Ações</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $produtos = listaProdutos($conexao);
-                        foreach ($produtos as $produto) {
-                          ?>
-                          <tr>
-                            <td><?=$produto['nome']?></td>
-                            <td><?=$produto['preco']?></td>
-                            <td><?=$produto['descricao']?></td>
-                            <td><?=$produto['beneficios']?></td>
-                            <td><?=$produto['entregas']?></td>
-                            <td align="center" >
-                              <a href="../profiles/produto-profile.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>              
-                              <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>
-                              <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                            </td>
-                          </tr>
-                          <?php
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <div class="ln_solid"></div>
-                    <a class="btn  btn-default" style="" href="../forms/form-produto.php?"><i class="fa fa-plus"></i></a>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="datatable" class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Nome</th>
+                              <th>Preço</th>
+                              <th>Descrição</th>
+                              <th>Beneficios</th>
+                              <th>Entregas</th>
+                              <th class="col-md-2">Ações</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $produtos = listaProdutos($conexao);
+                            foreach ($produtos as $produto) {
+                              ?>
+                              <tr>
+                                <td><?=$produto['nome']?></td>
+                                <td><?=$produto['preco']?></td>
+                                <td><?=$produto['descricao']?></td>
+                                <td><?=$produto['beneficios']?></td>
+                                <td><?=$produto['entregas']?></td>
+                                <td align="center" >
+                                  <a href="../profiles/produto-profile.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>              
+                                  <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>
+                                  <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                </td>
+                              </tr>
+                              <?php
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                        <div class="ln_solid"></div>
+                        <a class="btn btn-round btn-success" style="" href="../forms/form-produto.php?"><i class="fa fa-plus"></i></a>
+                      </div>
+                    </div>    
                   </div>
                 </div>
               </div>

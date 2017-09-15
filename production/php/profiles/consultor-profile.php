@@ -88,10 +88,9 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="usuarios.php">USUÁRIOS</a></li>
+                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
                       <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
+                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
@@ -423,7 +422,7 @@
          var myChart = new Chart(ctx, {
              type: 'bar',
              data: {
-                 labels: ["Market", "Leads", "Suspects", "Prospects"],
+                 labels: ["Market",  "Leads", "Suspects", "Prospects"],
                  datasets: [{
                      label: '# of Votes',
                      data: [<?=$n_market?>, <?=$n_lead?>, <?=$n_suspect?>, <?=$n_prospect?>],

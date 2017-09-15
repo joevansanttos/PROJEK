@@ -101,6 +101,21 @@
                   </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
             </div>
           </div>
         </div> 
@@ -227,9 +242,9 @@
                  </label>
                  <div class="col-sm-8 col-xs-12 col-md-2">
                    <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
-                     <option value="comercial">Comercial</option>
-                     <option value="industrial">Industrial</option>
-                     <option value="servicos">Prestação de Serviços</option>
+                     <option value="Comercial">Comercial</option>
+                     <option value="Industrial">Industrial</option>
+                     <option value="Servicos">Prestação de Serviços</option>
                    </select>
                  </div>
                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>

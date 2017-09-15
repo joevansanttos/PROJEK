@@ -4,6 +4,7 @@
 <?php include "../bancos/banco-usuario.php";?>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,9 +30,13 @@
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
-
+    <link rel="stylesheet" type="text/css" href="../../../vendors/bootstrap-notify-3.1.3/dist/bootstrap-notify.js">
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+      
+
+    </style>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -53,6 +58,8 @@
               </div>
             </div>
             <br />
+
+            <!-- Sidebar Menu-->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Geral</h3>
@@ -112,7 +119,27 @@
                     </li>               
                 </ul>
               </div>
-            </div>      
+
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
+              <!-- end footer menu-->
+
+            </div>
+            <!-- End Sidebar Menu-->
+
           </div>
         </div>      
         <!-- Col-->
@@ -148,13 +175,12 @@
           </div>
         </div>
         <!-- /top navigation --> 
+
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>Market</h3>
-              </div>
+              <div class="title_left"><h3>Market</h3></div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -173,8 +199,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
@@ -187,109 +212,111 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>Nome</th>
-                                <th>Telefone</th>
-                                <th>Cidade</th>
-                                <th>Estado</th>
-                                <th>Bairro</th>
-                                <th>Segmento</th>
-                                <th>Ações</th>
-                              </tr>
-                            </thead>
-                            <tfoot>
-                              <tr>
-                                <th>Nome</th>
-                                <th>Telefone</th>
-                                <th>Cidade</th>
-                                <th>Estado</th>
-                                <th>Bairro</th>
-                                <th>Segmento</th>
-                                <th></th>                                                        
-                              </tr>
-                            </tfoot>
-                            <tbody>
-                              <?php
-                                $clientes = listaMarkets($conexao);
-                                foreach ($clientes as $cliente){
-                                  if($cliente['id_type'] == '1'){   
-                               ?>
-                                <tr>
-                                  <td><?=$cliente['nome']?></td>
-                                  <td><?=$cliente['tel']?></td>
-                                  <td><?=$cliente['cidade']?></td>
-                                  <td><?=$cliente['estado']?></td>
-                                  <td><?=$cliente['bairro']?></td>
-                                  <td><?=$cliente['segmento']?></td>                                    
-                                  </td>                              
-                                  <td align="center">
-                                    <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                    <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>
-                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button>
-                                    <div id="myModal" class="modal fade" role="dialog">
-                                      <div class="modal-dialog modal-lg">
-                                        <!-- Modal content-->
-                                        <div class="modal-content" >
-                                        <form  role="form" action="../adiciona/adiciona-historico.php" method="post" >
-                                          <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Novo Histórico</h4>
-                                          </div>
-                                          <div class="modal-body" >
-                                            
-                                              <div class="form-group" style="min-width: 100%;" >
-                                                <textarea style="min-width: 100%;" class="form-control" name="comentario" ></textarea>
-                                              </div>
-                                              <div class="form-group" style="min-width: 100%;">                          
-                                                <div class="" style="min-width: 100%;">
-                                                  <select class="form-control" style="min-width: 100%;" name="id_consultor" class="form-control col-md-7 col-xs-12">
-                                                   <?php
-                                                   $usuarios = listaUsuarios($conexao);
-                                                   foreach ($usuarios as $usuario){ 
-                                                     if($usuario["id_profissao"] == '1'){
-                                                       ?>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="tabela" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th>Bairro</th>
+                                    <th>Segmento</th>
+                                    <th>Ações</th>
+                                  </tr>
+                                </thead>
+                                <tfoot>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th>Bairro</th>
+                                    <th>Segmento</th>
+                                    <th></th>                                                        
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                  <?php
+                                    $clientes = listaMarkets($conexao);
+                                    foreach ($clientes as $cliente){
+                                      if($cliente['id_type'] == '1'){   
+                                   ?>
+                                    <tr>
+                                      <td><?=$cliente['nome']?></td>
+                                      <td><?=$cliente['tel']?></td>
+                                      <td><?=$cliente['cidade']?></td>
+                                      <td><?=$cliente['estado']?></td>
+                                      <td><?=$cliente['bairro']?></td>
+                                      <td><?=$cliente['segmento']?></td>                                    
+                                      </td>                              
+                                      <td align="center">
+                                        <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                        <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                        <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>
+                                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                                        
+                                        <a href="../remove/remove-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>       
+                                      </td>
 
-                                                       <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
-                                                       <?php
-                                                     }
-                                                   }
-                                                   ?>  
-                                                  </select>
-                                                </div>
-                                              </div>
-                                              <div class="item form-group">                                              
-                                                <div class="col-sm-2 col-xs-12 col-md-2">
-                                                  <input type="date" id="data" name="data" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                                                </div>
-                                              </div> 
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            
-                                            <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
-                                            <input type="hidden" name="id_market" id="id_market" value="<?=$cliente['id_market']?>" />
-
-                                          </div>
-                                          </form>  
-                                        </div>
-
-                                      </div>
+                                    </tr>
+                                  <?php
+                                      }
+                                    }
+                                  ?>
+                                </tbody>
+                        </table>
+                        <div id="myModal" class="modal fade" role="dialog" ">
+                          <div class="modal-dialog ">
+                            <!-- Modal content-->
+                            <div class="modal-content" >
+                              <form  role="form" action="../adiciona/adiciona-historico.php" method="post" >
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Novo Histórico</h4>
+                                </div>
+                                <div class="modal-body " style="min-width: 100%" >
+                                  <div class="form-group" >
+                                  <label for="recipient-name" class="control-label">Comentário</label>   
+                                  <textarea class="form-control" name="comentario" ></textarea>
+                                  </div>
+                                  <div class="form-group"> 
+                                  <label for="recipient-name" class="control-label">Consultor</label>
+                                  <select name="id_consultor" class="form-control">
+                                   <?php
+                                   $usuarios = listaUsuarios($conexao);
+                                   foreach ($usuarios as $usuario){ 
+                                     if($usuario["id_profissao"] == '1'){
+                                       ?>
+                                       <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                                       <?php
+                                     }
+                                   }
+                                   ?>  
+                                  </select>        
+                                  </div>
+                                  <div class="form-group"> 
+                                    <label for="recipient-name" class="control-label">Data</label>   
+                                    <div class="">
+                                      <input type="date" id="data" name="data" required="required" data-validate-length-range="8,20" class="form-control">
                                     </div>
-                                    <a href="../remove/remove-cliente.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                                                    
-                                  </td>
-                                </tr>
-                              <?php
-                                  }
-                                }
-                              ?>
-                            </tbody>
-                    </table>
-                    <div class="ln_solid"></div>
-                      <a class="btn btn-default" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
-                    </div>
+
+                                  </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            
+                                <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                                <input type="hidden" name="id_market" id="id_market" value="<?=$cliente['id_market']?>" />
+                                </div>
+                              </form>  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                          <a class="btn btn-success btn-round" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
+                        </div>
+                      </div>
+                    </div>  
                   </div>
                 </div>
               </div>
@@ -330,7 +357,7 @@
     <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-
+    <script src="../../../vendors/bootstrap-notify-3.1.3/dist/bootstrap-notify.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
@@ -361,6 +388,16 @@
               } );
           } );
       } );
-    </script>  
+    </script>
+    <?php
+    if(isset($_GET["market"])){
+    ?>
+      <script type="text/javascript">
+
+      </script>
+    <?php  
+    }
+    ?>
+    
   </body>
 </html>

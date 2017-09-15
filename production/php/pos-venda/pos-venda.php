@@ -119,6 +119,21 @@ $clientes = listaClientes($conexao);
                   </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
             </div>          
           </div>
         </div>      
@@ -196,104 +211,107 @@ $clientes = listaClientes($conexao);
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-bordered table-striped">
-                      <thead>
-                        <tr role="row">
-                          <th>Empresa</th>
-                          <th>Nº Contrato</th>
-                          <th>Inicio</th>
-                          <th>Fim</th>                         
-                          <th>Consultor</th> 
-                          <th>Feedback</th>
-                          <th>Último Contato</th>
-                          <th>Próximo Contato</th>
-                          <th>Ações</th>                    
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-                        foreach ($clientes as $cliente) {
-                         $contrato = buscaContrato($conexao, $cliente['id_contrato']);
-                         $market = buscaMarket($conexao, $contrato['id_clientes']);
-                         $consultor = buscaUsuario($conexao, $contrato['id_consultor']);
-                      ?>
-                          <tr>
-                            <td><?=$market['nome']?></td>
-                            <td><?=$contrato['n_contrato']?></td>                           
-                            <td><?=$contrato['data_inicio']?></td>
-                            <td><?=$contrato['data_fim']?></td>                        
-                            <td><?=$consultor['nome']?></td>
-                        <?php
-                          if($cliente['id_feedback'] == null ){
-                        ?>
-                            <td align="center"><a href="../forms/form-feedback.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button></a></td>
-                            
-                        <?php  
-                          }else{
-                            $feedback = buscaFeedback($conexao, $cliente['id_feedback']);
-                        ?>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="tabela" class="table table-striped">
+                          <thead>
+                            <tr role="row">
+                              <th>Empresa</th>
+                              <th>Nº Contrato</th>
+                              <th>Inicio</th>
+                              <th>Fim</th>                         
+                              <th>Consultor</th> 
+                              <th>Feedback</th>
+                              <th>Último Contato</th>
+                              <th>Próximo Contato</th>
+                              <th>Ações</th>                    
+                            </tr>
+                          </thead>
+                          <tbody>
                           <?php
-                            if($feedback['pontual']  < 4 || $feedback['conhecimento']  < 4 || $feedback['assiduo']  < 4 || $feedback['empatia']  < 4 ){
+                            foreach ($clientes as $cliente) {
+                             $contrato = buscaContrato($conexao, $cliente['id_contrato']);
+                             $market = buscaMarket($conexao, $contrato['id_clientes']);
+                             $consultor = buscaUsuario($conexao, $contrato['id_consultor']);
                           ?>
-                            <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-thumbs-down"></i></button></a></td>
-                          <?php    
-                            }else{
-                          ?>
-                            <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button></a></td>
-                          <?php
-                              
+                              <tr>
+                                <td><?=$market['nome']?></td>
+                                <td><?=$contrato['n_contrato']?></td>                           
+                                <td><?=$contrato['data_inicio']?></td>
+                                <td><?=$contrato['data_fim']?></td>                        
+                                <td><?=$consultor['nome']?></td>
+                            <?php
+                              if($cliente['id_feedback'] == null ){
+                            ?>
+                                <td align="center"><a href="../forms/form-feedback.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button></a></td>
+                                
+                            <?php  
+                              }else{
+                                $feedback = buscaFeedback($conexao, $cliente['id_feedback']);
+                            ?>
+                              <?php
+                                if($feedback['pontual']  < 4 || $feedback['conhecimento']  < 4 || $feedback['assiduo']  < 4 || $feedback['empatia']  < 4 ){
+                              ?>
+                                <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-thumbs-down"></i></button></a></td>
+                              <?php    
+                                }else{
+                              ?>
+                                <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button></a></td>
+                              <?php
+                                  
+                                }
+                              ?>
+
+                            <?php
                             }
-                          ?>
+                            ?>
 
-                        <?php
-                        }
-                        ?>
+                            <?php
+                              $contatos = buscaContato($conexao, $cliente['id_pos_venda']);
+                              $size = count($contatos);
+                              if($size == 0){
+                            ?>
+                                <td></td>
+                                <td></td>
+                                <td class="col-md-2" align="center">
+                                  <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                </td>
 
-                        <?php
-                          $contatos = buscaContato($conexao, $cliente['id_pos_venda']);
-                          $size = count($contatos);
-                          if($size == 0){
-                        ?>
-                            <td></td>
-                            <td></td>
-                            <td align="center">
-                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                            </td>
+                            <?php    
+                              }else if($size == 1){
+                            ?>
 
-                        <?php    
-                          }else if($size == 1){
-                        ?>
+                                <td align="center"><?=$contatos[0]['data_contato']?></td>
+                                <td></td>
+                                <td class="col-md-2" align="center">
+                                  <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                </td>
+                        
 
-                            <td align="center"><?=$contatos[0]['data_contato']?></td>
-                            <td></td>
-                            <td align="center">
-                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                            </td>
-                   
+                            <?php
+                              }else{
+                                $contatos_sequencia = ordenaContatos($contatos);
+                            ?>
+                                <td><?=$contatos_sequencia[0]?></td>
+                                <td><?=$contatos_sequencia[1]?></td>
+                                <td class="col-md-2" align="center">
+                                  <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                </td>
+                            <?php
+                              }
+                            ?>
+                             </tr>
 
-                        <?php
-                          }else{
-                            $contatos_sequencia = ordenaContatos($contatos);
-                        ?>
-                            <td><?=$contatos_sequencia[0]?></td>
-                            <td><?=$contatos_sequencia[1]?></td>
-                            <td align="center">
-                              <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                              <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                            </td>
-                        <?php
-                          }
-                        ?>
-                         </tr>
-
-                    <?php
-                      }
-                    ?>    
-                      </tbody>
-                    </table>
-                    <div class="ln_solid"></div>                    
+                          <?php
+                            }
+                          ?>    
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>    
                   </div>
                 </div>
               </div>

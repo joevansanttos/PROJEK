@@ -29,6 +29,8 @@ $produtos = listaProdutos($conexao);
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
+ 
+
 </head>
 <body class="nav-md">
   <div class="container body">
@@ -107,6 +109,21 @@ $produtos = listaProdutos($conexao);
                   </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
             </div>
           </div>
         </div> 
@@ -201,9 +218,10 @@ $produtos = listaProdutos($conexao);
                   </div>
                 </div>
                 <div class="item form-group">
+                  
                   <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Valor Oportunidade <span class="required">*</span></label>
                   <div class="col-sm-6 col-xs-12 col-md-2">
-                    <input type="text" id="valor_op" name="valor_op" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" onblur="calcula()" required>
+                    <input type="number" step="" id="valor_op" name="valor_op" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" onblur="calcula()" onkeydown="convert()" required>
                   </div>
                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="valor_est">Valor Estimado <span class="required">*</span>
                   </label>
@@ -303,6 +321,29 @@ $produtos = listaProdutos($conexao);
 </script>
 <script src="../../js/calcula.js">
   
+</script>
+<script type="text/javascript">
+  function moneyFormat(value){
+    if (isNaN(Number(value)){return "0.00";}
+    return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
+</script>
+<script type="text/javascript">
+  function convert() {
+      var valor_op = document.getElementById('valor_op').value;
+      document.getElementById('valor_op').value = valor_op;
+
+  function calcula(){
+    var prob = document.getElementById('prob').value;
+    var divide = prob/100;
+    var valor_op = document.getElementById('valor_op').value;
+    document.getElementById('valor_est').value = parseFloat(divide)*parseFloat(valor_op);
+  }
+      
+
+
+
+  }
 </script>
 </body>
 </html>

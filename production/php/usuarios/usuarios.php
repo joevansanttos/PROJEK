@@ -24,6 +24,7 @@
     <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    
     <!-- Datatables -->
 
     <!-- Custom Theme Style -->
@@ -108,6 +109,21 @@
                     </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
             </div>         
           </div>
         </div>      
@@ -183,55 +199,59 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
-                    <table id="tabela" class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>Nome</th>
-                                <th>Profissão</th>
-                                <th>Email</th>
-                                <th>Estado</th>
-                                <th>Telefone</th>
-                                <th>Ações</th>
-                              </tr>
-                            </thead>
-                            <tfoot>
-                              <tr>
-                                <th>Nome</th>
-                                <th>Profissão</th>
-                                <th>Email</th>
-                                <th>Estado</th>
-                                <th>Telefone</th>
-                                <th></th>
-                              </tr>
-                            </tfoot>
-                            <tbody>
-                              <?php
-                                $usuarios = listaUsuarios($conexao);
-                                foreach ($usuarios as $usuario) {                                  
-                              ?>
-                                <tr>
-                                  <td><?=$usuario['nome']?></td>
-                                <?php
-                                  $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
-                                ?>  
-                                  <td><?=$profissao['descricao']?></td>
-                                  <td><?=$usuario['email']?></td>
-                                  <td><?=$usuario['estado']?></td>
-                                  <td><?=$usuario['telefone']?></td>
-                                  <td align="center">
-                                    <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                    <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
-                                    <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                                  </td>
-                                </tr>
-                              <?php
-                                }
-                              ?>
-                            </tbody>
-                    </table>
-                    <div class="ln_solid"></div>
-                      <a class="btn btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
-                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="tabela" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Profissão</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Telefone</th>
+                                    <th>Ações</th>
+                                  </tr>
+                                </thead>
+                                <tfoot>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Profissão</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Telefone</th>
+                                    <th></th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                  <?php
+                                    $usuarios = listaUsuarios($conexao);
+                                    foreach ($usuarios as $usuario) {                                  
+                                  ?>
+                                    <tr>
+                                      <td><?=$usuario['nome']?></td>
+                                    <?php
+                                      $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
+                                    ?>  
+                                      <td><?=$profissao['descricao']?></td>
+                                      <td><?=$usuario['email']?></td>
+                                      <td><?=$usuario['estado']?></td>
+                                      <td><?=$usuario['telefone']?></td>
+                                      <td align="center">
+                                        <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                        <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
+                                        <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                      </td>
+                                    </tr>
+                                  <?php
+                                    }
+                                  ?>
+                                </tbody>
+                        </table>
+                        <div class="ln_solid"></div>
+                          <a class="btn btn-success btn-round" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
+                        </div>
+                      </div>
+                    </div>                     
                   </div>
                 </div>
               </div>

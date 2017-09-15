@@ -113,6 +113,22 @@
                   </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
+              <!-- end footer menu-->
             </div>          
           </div>
         </div>      
@@ -188,77 +204,126 @@
                   </div>
                   <div class="clearfix"></div>                
                   <div class="x_content">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="tabela" class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Inicio</th>
+                              <th>Fim</th>
+                              <th>Nº Contrato</th>
+                              <th>Empresa</th>
+                              <th>Consultor</th>
+                              <th>Status</th>
+                              <th>Ações</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+                            <tr>
+                              <th>Inicio</th>
+                              <th>Fim</th>
+                              <th>Nº Contrato</th>
+                              <th>Empresa</th>
+                              <th>Consultor</th>
+                              <th>Status</th>
+                              <th></th>
+                            </tr>
+                          </tfoot>
+                          <tbody>
+                            <?php
+                              $contratos = listaContratos($conexao);
+                              foreach ($contratos as $contrato) {
+                                $usuario = buscaUsuario($conexao, $contrato['id_consultor']);
+                                $cliente = buscaMarket($conexao, $contrato['id_clientes']);
+                                $status = buscaStatus($conexao, $contrato['id_contrato_status']);
+                            ?>
+                              <tr>
+                                <td><?=$contrato['data_inicio']?></td>
+                                <td><?=$contrato['data_fim']?></td>
+                                <td><?=$contrato['n_contrato']?></td>
+                                <td><?=$cliente['nome']?></td>
+                                <td><?=$usuario['nome']?></td>
+                                <td><?=$status['descricao']?></td>
+                              <?php
+                                if($contrato['id_contrato_status'] == 1){
+                              ?>
+                                  <td align="center">
+                                    <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
+                                    <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>             
+                                    <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  </td>
+                              <?php    
+                                }else{
+                              ?>
+                                  <td align="center">
+                                    <button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
+                                    <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                 
+                                    <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  </td>
+                              <?php   
+                                }
+                              ?>
+                                
+                              </tr>
+                            <?php
+                              }
+                            ?>
+                          </tbody>
+                        </table>
+                        <div id="myModal" class="modal fade" role="dialog" ">
+                          <div class="modal-dialog ">
+                            <!-- Modal content-->
+                            <div class="modal-content" >
+                              <form  role="form" action="../adiciona/adiciona-historico.php" method="post" >
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Novo Histórico</h4>
+                                </div>
+                                <div class="modal-body " style="min-width: 100%" >
+                                  <div class="form-group" >
+                                  <label for="recipient-name" class="control-label">Comentário</label>   
+                                  <textarea class="form-control" name="comentario" ></textarea>
+                                  </div>
+                                  <div class="form-group"> 
+                                  <label for="recipient-name" class="control-label">Consultor</label>
+                                  <select name="id_consultor" class="form-control">
+                                   <?php
+                                   $usuarios = listaUsuarios($conexao);
+                                   foreach ($usuarios as $usuario){ 
+                                     if($usuario["id_profissao"] == '1'){
+                                       ?>
+                                       <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                                       <?php
+                                     }
+                                   }
+                                   ?>  
+                                  </select>        
+                                  </div>
+                                  <div class="form-group"> 
+                                    <label for="recipient-name" class="control-label">Data</label>   
+                                    <div class="">
+                                      <input type="date" id="data" name="data" required="required" data-validate-length-range="8,20" class="form-control">
+                                    </div>
 
-                    <table id="tabela" class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Inicio</th>
-                          <th>Fim</th>
-                          <th>Nº Contrato</th>
-                          <th>Empresa</th>
-                          <th>Consultor</th>
-                          <th>Status</th>
-                          <th>Ações</th>
-                        </tr>
-                      </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Inicio</th>
-                          <th>Fim</th>
-                          <th>Nº Contrato</th>
-                          <th>Empresa</th>
-                          <th>Consultor</th>
-                          <th>Status</th>
-                          <th></th>
-                        </tr>
-                      </tfoot>
-                      <tbody>
-                        <?php
-                          $contratos = listaContratos($conexao);
-                          foreach ($contratos as $contrato) {
-                            $usuario = buscaUsuario($conexao, $contrato['id_consultor']);
-                            $cliente = buscaMarket($conexao, $contrato['id_clientes']);
-                            $status = buscaStatus($conexao, $contrato['id_contrato_status']);
-                        ?>
-                          <tr>
-                            <td><?=$contrato['data_inicio']?></td>
-                            <td><?=$contrato['data_fim']?></td>
-                            <td><?=$contrato['n_contrato']?></td>
-                            <td><?=$cliente['nome']?></td>
-                            <td><?=$usuario['nome']?></td>
-                            <td><?=$status['descricao']?></td>
-                          <?php
-                            if($contrato['id_contrato_status'] == 1){
-                          ?>
-                              <td align="center">
-                                <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
-                                <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
-                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>                
-                                <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                              </td>
-                          <?php    
-                            }else{
-                          ?>
-                              <td align="center">
-                                <button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
-                                <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
-                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>                
-                                <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
-                              </td>
-                          <?php   
-                            }
-                          ?>
-                            
-                          </tr>
-                        <?php
-                          }
-                        ?>
-                      </tbody>
-                    </table>
-                    <div class="ln_solid"></div>
-                    <a class="btn btn-default" style="" href="../forms/form-contrato.php?"><i class="fa fa-plus"></i></a>
+                                  </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            
+                                <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                                <input type="hidden" name="id_market" id="id_market" value="<?=$cliente['id_market']?>" />
+                                </div>
+                              </form>  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <a class="btn btn-success btn-round" style="" href="../forms/form-contrato.php?"><i class="fa fa-plus"></i></a>
+                       </div>
+                    </div>   
                   </div>
                 </div>
               </div>

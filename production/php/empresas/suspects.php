@@ -113,6 +113,22 @@
                     </li>               
                 </ul>
               </div>
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div> 
+              <!-- end footer menu-->
             </div>         
           </div>
         </div>      
@@ -186,65 +202,115 @@
                       <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
                   </div>
-                  <div class="clearfix"></div>                
+                  <div class="clearfix"></div>               
                   <div class="x_content">
-                    <table id="tabela" class="table table-striped">
-                        <thead>
-                          <tr>                            
-                            <th>Empresa</th>
-                            <th>Contato</th>
-                            <th>Data</th>
-                            <th>Tel</th>
-                            <th>Email</th>
-                            <th>Horário</th>
-                            <th>Consultor</th>                            
-                            <th>Ações</th>
-                          </tr>
-                        </thead>
-                        <tfoot>
-                          <tr>                            
-                            <th>Empresa</th>
-                            <th>Contato</th>
-                            <th>Data</th>
-                            <th>Tel</th>
-                            <th>Email</th>
-                            <th>Horário</th>
-                            <th>Consultor</th> 
-                            <th></th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                          <?php
-                            $apresentacoes = listaClientesApresentacao($conexao);
-                            foreach ($apresentacoes as $apresentacao){
-                              $cliente = buscaMarket($conexao, $apresentacao['id_clientes']);
-                              $consultor = buscaUsuario($conexao, $apresentacao['id_consultor']);
-                          ?>
-                            <tr>
-                              <td><?=$cliente['nome']?></td>
-                              <td><?=$apresentacao['contato']?></td>
-                              <td><?=$apresentacao['data']?></td>
-                              <td><?=$apresentacao['tel']?></td>
-                              <td><?=$apresentacao['email']?></td>
-                              <td><?=$apresentacao['hora']?></td>
-                              <td><?=$consultor['nome']?></td>                              
-                              <td align="center">
-                                <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
-                                <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
-                                <a href="../forms/form-historico.php?id=<?=$cliente['id_market']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
-                              </td>                              
-                            </tr>
-                          <?php
-                            }
-                          ?>
-                        </tbody>
-                    </table>
-                    <div class="ln_solid"></div>
-                      <a class="btn btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
-                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="tabela" class="table table-striped">
+                            <thead>
+                              <tr>                            
+                                <th>Empresa</th>
+                                <th>Contato</th>
+                                <th>Data</th>
+                                <th>Tel</th>
+                                <th>Email</th>
+                                <th>Horário</th>
+                                <th>Consultor</th>                            
+                                <th>Ações</th>
+                              </tr>
+                            </thead>
+                            <tfoot>
+                              <tr>                            
+                                <th>Empresa</th>
+                                <th>Contato</th>
+                                <th>Data</th>
+                                <th>Tel</th>
+                                <th>Email</th>
+                                <th>Horário</th>
+                                <th>Consultor</th> 
+                                <th></th>
+                              </tr>
+                            </tfoot>
+                            <tbody>
+                              <?php
+                                $apresentacoes = listaClientesApresentacao($conexao);
+                                foreach ($apresentacoes as $apresentacao){
+                                  $cliente = buscaMarket($conexao, $apresentacao['id_clientes']);
+                                  $consultor = buscaUsuario($conexao, $apresentacao['id_consultor']);
+                              ?>
+                                <tr>
+                                  <td><?=$cliente['nome']?></td>
+                                  <td><?=$apresentacao['contato']?></td>
+                                  <td><?=$apresentacao['data']?></td>
+                                  <td><?=$apresentacao['tel']?></td>
+                                  <td><?=$apresentacao['email']?></td>
+                                  <td><?=$apresentacao['hora']?></td>
+                                  <td><?=$consultor['nome']?></td>                              
+                                  <td align="center">
+                                    <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
+                                    <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                    <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                    <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
+                                  </td>                              
+                                </tr>
+                              <?php
+                                }
+                              ?>
+                            </tbody>
+                        </table>
+                        <div id="myModal" class="modal fade" role="dialog" ">
+                          <div class="modal-dialog ">
+                            <!-- Modal content-->
+                            <div class="modal-content" >
+                              <form  role="form" action="../adiciona/adiciona-historico.php" method="post" >
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Novo Histórico</h4>
+                                </div>
+                                <div class="modal-body " style="min-width: 100%" >
+                                  <div class="form-group" >
+                                  <label for="recipient-name" class="control-label">Comentário</label>   
+                                  <textarea class="form-control" name="comentario" ></textarea>
+                                  </div>
+                                  <div class="form-group"> 
+                                  <label for="recipient-name" class="control-label">Consultor</label>
+                                  <select name="id_consultor" class="form-control">
+                                   <?php
+                                   $usuarios = listaUsuarios($conexao);
+                                   foreach ($usuarios as $usuario){ 
+                                     if($usuario["id_profissao"] == '1'){
+                                       ?>
+                                       <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                                       <?php
+                                     }
+                                   }
+                                   ?>  
+                                  </select>        
+                                  </div>
+                                  <div class="form-group"> 
+                                    <label for="recipient-name" class="control-label">Data</label>   
+                                    <div class="">
+                                      <input type="date" id="data" name="data" required="required" data-validate-length-range="8,20" class="form-control">
+                                    </div>
+
+                                  </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            
+                                <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                                <input type="hidden" name="id_market" id="id_market" value="<?=$cliente['id_market']?>" />
+                                </div>
+                              </form>  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                          <a class="btn btn-success btn-round" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
+                        </div>
+                      </div>
+                    </div>  
                   </div>
                 </div>
               </div>
