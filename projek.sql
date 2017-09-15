@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Set-2017 às 21:32
--- Versão do servidor: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: 15-Set-2017 às 16:53
+-- Versão do servidor: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -5690,7 +5690,10 @@ INSERT INTO `consultores_market` (`id_consultor`, `id_market`, `data`, `id_c_mar
 (10, 31, '11.09.17', 9),
 (10, 23, '13.09.17', 10),
 (10, 23, '13.09.17', 11),
-(10, 34, '13.09.17', 12);
+(10, 34, '13.09.17', 12),
+(10, 35, '14.09.17', 13),
+(14, 26, '15.09.17', 14),
+(10, 35, '15.09.17', 15);
 
 -- --------------------------------------------------------
 
@@ -6011,9 +6014,30 @@ INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, 
 (29, 'Nestle SA', 'Nestle', '44.444.444/4444-__', 'odebretch.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'BA', 'Antas', '(55) 55555-5555', '4343', 2, 'comercial', '55555555'),
 (30, 'Bradesco SA', 'Bradesco', '22.222.222/2222-22', 'bancodobrasil.com.br', 'Av. Prof. Magalhães Neto, 1856 - Pituba, Salvador - BA, 41810-012', 'PB', 'Aroeiras', '(33) 33333-3333', 'SASAS', 1, 'industrial', 'Pituba'),
 (31, 'Plataforma Transportes SPE', 'Gevan', '21.120.716/0001-00', 'www.gevan.com.br', 'Rua Thomaz Gonzaga SN', 'BA', 'Salvador', '(71) 35211-344_', 'Empresa indicada.', 2, 'servicos', 'Pernambués'),
-(32, 'Plataforma Transportes SPE', 'Projek', '33.333.333/3333-33', 'www.jhkk.com', 'Piaui 10 sdsds', 'AP', 'Itaubal', '4434434', 'sasasa', 1, 'industrial', 'Petropolis'),
-(33, 'Plataforma Transportes SPE', 'Projek', '33.333.333/3333-33', 'www.jhkk.com', 'Piaui 10 sdsds', 'AP', 'Itaubal', '4434434', 'sasasa', 1, 'industrial', 'Petropolis'),
-(34, 'teste sa', 'teste', '11.111.111/1111-11', 'bancodobrasil.com.br', 'wqwqw', 'PI', 'Assunção do Piauí', '2323232', 'sasasa', 2, 'comercial', 'qwqwq');
+(34, 'teste sa', 'teste', '11.111.111/1111-11', 'bancodobrasil.com.br', 'wqwqw', 'PI', 'Assunção do Piauí', '2323232', 'sasasa', 2, 'comercial', 'qwqwq'),
+(35, 'Padaria Sa', 'Padaria', '33.333.333/3333-3_', 'petrobras.com.br', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'PE', 'Belém de Maria', '22333', 'sasa', 1, 'comercial', 'Pituba'),
+(36, '23232', 'jose', '44.444.444/4444-44', 'petrobras.com.br', 'rerer', 'PR', 'Apucarana', '3', 'ewew', 1, 'comercial', 'rer'),
+(37, 'ddsdsd', 'Petrobras', '33.333.333/3333-3_', 'ewwew', 'ewew', 'PR', 'Apucarana', '333333', 'dsdsds', 1, 'comercial', 'ewewe');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `porte`
+--
+
+CREATE TABLE `porte` (
+  `id_porte` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `porte`
+--
+
+INSERT INTO `porte` (`id_porte`, `descricao`) VALUES
+(1, 'Micro'),
+(2, 'Pequena'),
+(3, 'Média/Grande');
 
 -- --------------------------------------------------------
 
@@ -6306,6 +6330,12 @@ ALTER TABLE `market`
   ADD PRIMARY KEY (`id_market`);
 
 --
+-- Indexes for table `porte`
+--
+ALTER TABLE `porte`
+  ADD PRIMARY KEY (`id_porte`);
+
+--
 -- Indexes for table `pos_venda`
 --
 ALTER TABLE `pos_venda`
@@ -6372,7 +6402,7 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `contato`
 --
@@ -6417,7 +6447,12 @@ ALTER TABLE `leads`
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `porte`
+--
+ALTER TABLE `porte`
+  MODIFY `id_porte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pos_venda`
 --
