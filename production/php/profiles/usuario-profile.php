@@ -15,6 +15,7 @@ $usuario = buscaUsuario($conexao, $id);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PROJEK</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
 
     <!-- Bootstrap -->
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +54,7 @@ $usuario = buscaUsuario($conexao, $id);
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../../index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+              <a href="../index/index2.php" class="site_title"><img src="../../images/botao.png" width="40" right="40" ><span>PROJEK</span></a>
             </div>
             <div class="clearfix"></div>
             <div class="profile clearfix">

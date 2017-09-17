@@ -1,3 +1,6 @@
+<?php header('Content-Type: text/html; charset=utf-8'); ?>
+<?php error_reporting(E_ALL ^ E_NOTICE); ?>
+
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-contrato.php";?>
 <?php include "../bancos/banco-usuario.php";?>
@@ -5,6 +8,15 @@
 <?php include "../bancos/banco-pos_venda.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-contato.php";?>
+<?php include "../logica/logica-usuario.php";?>
+<?php include "../alerta/mostra-alerta.php";?>
+
+<?php
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
+?>
 
 <?php
 $clientes = listaClientes($conexao);
@@ -47,16 +59,21 @@ $clientes = listaClientes($conexao);
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../../index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+              <a href="../index/index2.php" class="site_title"><img src="../../images/botao.png" width="40" right="40" ><span>PROJEK</span></a>
             </div>
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <?php                  
+                    $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                    $sth = $conexao->query($sql);
+                    $result=mysqli_fetch_array($sth);                            
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  ?>
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
-                <h2>Fabio</h2>
+                <h2><?=$usuario['nome']?></h2>
               </div>
             </div>
             <br />
@@ -149,7 +166,7 @@ $clientes = listaClientes($conexao);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img2.jpg" alt="">Fabio
+                    <?=$usuario['nome']?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

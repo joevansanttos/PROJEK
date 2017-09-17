@@ -1,28 +1,21 @@
-<?php
-error_reporting(E_ALL ^ E_NOTICE);
-?>
-
+<?php header('Content-Type: text/html; charset=utf-8'); ?>
+<?php error_reporting(E_ALL ^ E_NOTICE); ?>
 <?php include "php/logica/logica-usuario.php";?>
 <?php include "php/alerta/mostra-alerta.php";?>
-
 <?php
  if(usuarioEstaLogado()) {
     header("Location: php/index/index2.php");
   }
 ?>
-
 <?php
 mostraAlerta('success');
 mostraAlerta('danger');
 ?>
 
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"/>
@@ -53,16 +46,16 @@ mostraAlerta('danger');
               </form>
               <hr>
             </div>
-          </div> <!-- /.col-xs-12 -->
-        </div> <!-- /.row -->
-      </div> <!-- /.container -->
+          </div> 
+        </div> 
+      </div>
     </section>
   </body>
   <footer id="footer">
       <div class="container">
           <div class="row">
               <div class="col-xs-12">
-                  <p><img src="images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></p>
+                  <p><img src="images/botao.png" width="40" right="40" ><span>PROJEK</span></p>
               </div>
           </div>
       </div>
