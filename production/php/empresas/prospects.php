@@ -208,7 +208,7 @@
                 <div class="x_content">
                   <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                      <table id="tabela" class="table table-striped">
+                      <table id="tabela" class="table table-hover">
                         <thead>
                           <tr>
                             <th>Empresa</th>
@@ -245,8 +245,8 @@
                               <td><?=$oportunidade['prob']?>%</td>                            
                               <td><?=$oportunidade['fechamento']?></td>
                               <td><?=$oportunidade['recebimento']?></td>                         
-                              <td align="center">
-                                <a href="../forms/form-contrato.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                              <td align="center">                              
+                                <a href="../forms/form-contrato.php?id_prospect=<?=$oportunidade['id_prospect']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                 <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                                
                                 <a href="../forms/form-altera-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
                                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 

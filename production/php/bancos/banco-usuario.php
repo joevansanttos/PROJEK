@@ -19,10 +19,27 @@ function listaUsuarios($conexao){
     return $usuarios;
 }
 
-function buscaUsuarioLogar($conexao , $email){
+function buscaUsuarioLogar($conexao , $email, $senha){
+    $senha = md5($senha);
+    echo $senha;
+    $query = "select  * from usuarios where email = '{$email}' and senha= '{$senha}'";
+    $resultado = mysqli_query($conexao, $query);
+    $usuario = mysqli_fetch_assoc($resultado);
+    return $usuario;
+
+}
+
+function buscaUsuarioEmail($conexao , $email){
     $query = "select  * from usuarios where email = '{$email}'";
     $resultado = mysqli_query($conexao, $query);
     $usuario = mysqli_fetch_assoc($resultado);
     return $usuario;
 
+}
+
+function buscaImagem($conexao, $id){
+    $query = "select  * from profileimg where id_usuario = {$id}";
+    $resultado = mysqli_query($conexao, $query);
+    $usuario = mysqli_fetch_assoc($resultado);
+    return $usuario;
 }

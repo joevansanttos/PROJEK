@@ -1,6 +1,12 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../bancos/banco-profissao.php";?>
+<?php include "../logica/logica-usuario.php";?>
+
+
+<?php
+  verificaUsuario();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +23,8 @@
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
   <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+  <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>  
+  <link href="../../../vendors/kartik-v-bootstrap-fileinput-5911e2c/js/fileinput.js" rel="stylesheet"/>
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../../../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/teste.css">
@@ -172,7 +179,7 @@
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
-              <form id="form" action="../adiciona/adiciona-usuario.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+              <form id="form" action="../adiciona/adiciona-usuario.php" method="post"  enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
                   </label>
@@ -243,6 +250,12 @@
                   <div class="col-sm-6 col-xs-12 col-md-3">
                     <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required>
                     </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Imagem<span class="required">*</span></label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="file" name="image">
                   </div>
                 </div>
                 <div class="ln_solid"></div>
@@ -324,6 +337,64 @@
   window.ParsleyValidator.setLocale('pt-br');
 </script>
 <script src="../../../vendors/parsleyjs/dist/parsley-pt.js"></script>
+<script type="text/javascript">
+  $(document).on('click', '#close-preview', function(){ 
+      $('.image-preview').popover('hide');
+      // Hover befor close the preview
+      $('.image-preview').hover(
+          function () {
+             $('.image-preview').popover('show');
+          }, 
+           function () {
+             $('.image-preview').popover('hide');
+          }
+      );    
+  });
 
+  $(function() {
+      // Create the close button
+      var closebtn = $('<button/>', {
+          type:"button",
+          text: 'x',
+          id: 'close-preview',
+          style: 'font-size: initial;',
+      });
+      closebtn.attr("class","close pull-right");
+      // Set the popover default content
+      $('.image-preview').popover({
+          trigger:'manual',
+          html:true,
+          title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+          content: "There's no image",
+          placement:'bottom'
+      });
+      // Clear event
+      $('.image-preview-clear').click(function(){
+          $('.image-preview').attr("data-content","").popover('hide');
+          $('.image-preview-filename').val("");
+          $('.image-preview-clear').hide();
+          $('.image-preview-input input:file').val("");
+          $(".image-preview-input-title").text("Browse"); 
+      }); 
+      // Create the preview image
+      $(".image-preview-input input:file").change(function (){     
+          var img = $('<img/>', {
+              id: 'dynamic',
+              width:250,
+              height:200
+          });      
+          var file = this.files[0];
+          var reader = new FileReader();
+          // Set preview image into the popover data-content
+          reader.onload = function (e) {
+              $(".image-preview-input-title").text("Change");
+              $(".image-preview-clear").show();
+              $(".image-preview-filename").val(file.name);            
+              img.attr('src', e.target.result);
+              $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+          }        
+          reader.readAsDataURL(file);
+      });  
+</script>
 </body>
 </html>

@@ -6,18 +6,18 @@
 <?php include "../bancos/banco-departamentos.php";?>
 
 <?php
-$id = $_GET['id'];
+$n_contrato = $_GET['n_contrato'];
 $today = date("d.m.Y");
 $todayPieces = explode(".", $today);
-$contrato = buscaContrato($conexao , $id);
+$contrato = buscaContrato($conexao , $n_contrato);
 $departamentos =[];
-$departamentosContrato = buscaDepartamentosContrato($conexao, $contrato['id_contrato']);
+$departamentosContrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
 foreach ($departamentosContrato as  $dep) {
   $departamento = buscaDepartamento($conexao, $dep['id_departamento']);
   array_push($departamentos, $departamento[0]['descricao'] );
 }
 $cliente= buscaMarket($conexao, $contrato['id_clientes']);
-$socios = buscaSociosContrato($conexao, $contrato['id_contrato']);
+$socios = buscaSociosContrato($conexao, $contrato['n_contrato']);
 
 
 $inicio = $contrato['data_inicio'];

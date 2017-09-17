@@ -1,6 +1,7 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-type.php";?>
+<?php include "../bancos/banco-lead.php";?>
 <?php include "../bancos/banco-usuario.php";?>
 
 
@@ -214,7 +215,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table-hover">
                                 <thead>
                                   <tr>
                                     <th>Nome</th>
@@ -241,7 +242,8 @@
                                   <?php
                                     $clientes = listaMarkets($conexao);
                                     foreach ($clientes as $cliente){
-                                      if($cliente['id_type'] == '1'){   
+                                      $leads = buscaLeads($conexao, $cliente['id_market']);
+                                      if(count($leads) < 1){   
                                    ?>
                                     <tr>
                                       <td><?=$cliente['nome']?></td>

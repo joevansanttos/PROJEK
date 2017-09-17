@@ -9,7 +9,7 @@
 <?php
 $id = $_GET['id'];
 $pos_venda = buscaPosVenda($conexao, $id);
-$contrato = buscaContrato($conexao, $pos_venda['id_contrato']);
+$contrato = buscaContrato($conexao, $pos_venda['n_contrato']);
  
 ?>
 

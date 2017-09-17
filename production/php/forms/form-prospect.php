@@ -207,7 +207,7 @@ $produtos = listaProdutos($conexao);
                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="prob">Probabilidade <span class="required">*</span>
                   </label>
                   <div class="col-sm-2 col-xs-12 col-md-1">
-                    <select id="prob" name="prob" required data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                    <select id="prob" name="prob" onblur="calcula()" required data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                         <option>%</option>
                           <option value="0">0%</option>
                           <option value="25">25%</option>
@@ -221,7 +221,7 @@ $produtos = listaProdutos($conexao);
                   
                   <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Valor Oportunidade <span class="required">*</span></label>
                   <div class="col-sm-6 col-xs-12 col-md-2">
-                    <input type="number" step="" id="valor_op" name="valor_op" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" onblur="calcula()" onkeydown="convert()" required>
+                    <input type="number" value="<?=$produto['preco']?>" step="" id="valor_op" name="valor_op" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" required>
                   </div>
                   <label class="control-label col-md-2 col-sm-3 col-xs-12" for="valor_est">Valor Estimado <span class="required">*</span>
                   </label>
@@ -329,21 +329,15 @@ $produtos = listaProdutos($conexao);
   }
 </script>
 <script type="text/javascript">
-  function convert() {
-      var valor_op = document.getElementById('valor_op').value;
-      document.getElementById('valor_op').value = valor_op;
 
   function calcula(){
     var prob = document.getElementById('prob').value;
     var divide = prob/100;
     var valor_op = document.getElementById('valor_op').value;
-    document.getElementById('valor_est').value = parseFloat(divide)*parseFloat(valor_op);
+    var result=  parseFloat(divide)*parseFloat(valor_op);
+    document.getElementById('valor_est').value = parseFloat(Math.round(result * 100) / 100).toFixed(2);
   }
       
-
-
-
-  }
 </script>
 </body>
 </html>

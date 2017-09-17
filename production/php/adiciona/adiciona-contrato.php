@@ -5,6 +5,7 @@
 
 <?php 
    
+   $id_prospect = $_GET['id_prospect'];
    $n_contrato = $_GET['n_contrato'];
    $id_cliente = $_GET['id_cliente'];
    $razao = $_GET['razao'];
@@ -31,16 +32,15 @@
    
    
 
-   $query = "insert into contratos (n_contrato, id_clientes, razao,  cnpj, sede, data_inicio, data_fim, id_consultor, id_produto, id_contrato_status) values ('{$n_contrato}', $id_cliente, '{$razao}', '{$cnpj}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor,  $id_produto, 1)";
+   $query = "insert into contratos (n_contrato, id_clientes, razao,  cnpj, sede, data_inicio, data_fim, id_consultor, id_produto, id_contrato_status, id_prospect) values ('{$n_contrato}', $id_cliente, '{$razao}', '{$cnpj}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor,  $id_produto, 1, $id_prospect)";
 
    if(mysqli_query($conexao, $query)){
       $contrato = buscaContratoNumero($conexao, $n_contrato);
-      $id_contrato = $contrato['id_contrato'];
+      $n_contrato = $contrato['n_contrato'];
       $i = 0;
       $size = count($departamentos);
       while ($i < $size) {
-         $query = "insert into departamentos_contratos (id_departamento, id_contrato) values ($departamentos[$i], $id_contrato 
-         )" ;
+         $query = "insert into departamentos_contratos (id_departamento, n_contrato) values ($departamentos[$i], '{$n_contrato}')" ;
          mysqli_query($conexao, $query);
          $i++;
       }
@@ -48,7 +48,7 @@
       $i = 0;
       $size = count($socios);
       while ($i < $size) {
-         $query = "insert into socios (nome, cpf, residencia, nacionalidade, profissao, civil, id_contrato ) values ('$socios[$i]', '$cpfs[$i]', '$residencias[$i]', '$nacionalidades[$i]', '$profissoes[$i]', '$civis[$i]', $id_contrato 
+         $query = "insert into socios (nome, cpf, residencia, nacionalidade, profissao, civil, n_contrato ) values ('$socios[$i]', '$cpfs[$i]', '$residencias[$i]', '$nacionalidades[$i]', '$profissoes[$i]', '$civis[$i]', '{$n_contrato}' 
          )" ;
          if(mysqli_query($conexao, $query)){
             

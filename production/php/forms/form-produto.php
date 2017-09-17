@@ -181,24 +181,24 @@
                  <div class="form-group">
                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição do Produto<span class="required">*</span></label>
                    <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="descricao" name="descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                     <textarea id="descricao" rows=3 name="descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficios">Benefícios do Produto<span class="required">*</span></label>
                    <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="beneficios" name="beneficios" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                     <textarea id="beneficios" rows=3 name="beneficios" required="required" class="form-control col-md-7 col-xs-12"></textarea>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Entregas do Produto<span class="required">*</span></label>
                    <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="entregas" name="entregas" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                     <textarea id="entregas" rows=3 name="entregas" required="required" class="form-control col-md-7 col-xs-12"></textarea>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço do Produto<span class="required">*</span></label>
-                   <div class="col-md-1 col-sm-6 col-xs-12">
+                   <div class="col-md-5 col-sm-6 col-xs-12">
                      <input type="text" id="preco" name="preco" required="required" class="form-control col-md-7 col-xs-12">
                    </div>
                  </div>

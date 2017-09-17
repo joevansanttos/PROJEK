@@ -206,7 +206,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table-hover">
                           <thead>
                             <tr>
                               <th>Inicio</th>
@@ -248,21 +248,21 @@
                                 if($contrato['id_contrato_status'] == 1){
                               ?>
                                   <td align="center">
-                                    <a href="finaliza-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
-                                    <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <a href="finaliza-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
+                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
                                     <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>             
-                                    <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>
                               <?php    
                                 }else{
                               ?>
                                   <td align="center">
                                     <button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
-                                    <a href="imprime-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
                                     <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                 
-                                    <a href="remove-contrato.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>
                               <?php   
                                 }

@@ -8,8 +8,8 @@ function buscaFeedback($conexao , $id){
 
 }
 
-function buscaContratoFeedback($conexao , $id_contrato){
-    $query = "select  * from feedback where id_contrato = {$id_contrato}";
+function buscaContratoFeedback($conexao , $n_contrato){
+    $query = "select  * from feedback where n_contrato = '{$n_contrato}'";
     $resultado = mysqli_query($conexao, $query);
     $feedback = mysqli_fetch_assoc($resultado);
     return $feedback;

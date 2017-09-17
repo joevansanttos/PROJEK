@@ -4,8 +4,10 @@
 
 <?php
     $id = $_GET["id"];
-    $query = "delete from leads where id_lead = $id";
+    $query = "delete from leads where id_lead = $id";   
     if(mysqli_query($conexao, $query)){
+    	$query = "delete from consultores_lead where id_lead = $id";
+    	mysqli_query($conexao, $query);
         mysqli_close($conexao);
         header("Location: ../empresas/leads.php");
     }else{

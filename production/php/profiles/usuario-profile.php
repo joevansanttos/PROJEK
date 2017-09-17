@@ -10,7 +10,7 @@ $usuario = buscaUsuario($conexao, $id);
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;image/jpg; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +34,17 @@ $usuario = buscaUsuario($conexao, $id);
 
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+      .profile-userpic img {
+          float: none;
+          margin: 0 auto;
+          width: 20%;
+          height: 20%;
+          -webkit-border-radius: 50%!important;
+          -moz-border-radius: 50%!important;
+          border-radius: 50%!important
+      }
+    </style>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -197,8 +208,17 @@ $usuario = buscaUsuario($conexao, $id);
                     <div class="col-md-12 col-sm-3 col-xs-12 profile_left " >
                       <div class="profile_img">
                         <div id="crop-avatar">
-                          <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="../../images/user.png" alt="Avatar" title="Change the avatar">
+                          <div class="profile-userpic">
+                            <?php
+                              $sql = "SELECT * FROM profileimg WHERE id_usuario = $id";
+                              $sth = $conexao->query($sql);
+                              $result=mysqli_fetch_array($sth);                            
+                              echo '<img class="img-responsive" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                            ?>
+                          </div>
+                         
+                          <!-- Current avatar -->                          
+                          <img >
                         </div>
                       </div>
                       <h3><?=$usuario['nome']?></h3>

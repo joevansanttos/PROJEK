@@ -3,8 +3,8 @@
 <?php include "../bancos/banco-usuario.php";?>
 
 <?php
-$id = $_GET['id'];
-$contrato = buscaContrato($conexao , $id);
+$n_contrato = $_GET['n_contrato'];
+$contrato = buscaContrato($conexao , $n_contrato);
 $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
 ?>
 
@@ -289,7 +289,7 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
                       <div class="ln_solid"></div>
                       <div class=" form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <input type="hidden" name="id_contrato" id="id_contrato" value="<?=$contrato['id_contrato']?>" />
+                          <input type="hidden" name="n_contrato" id="n_contrato" value="<?=$contrato['n_contrato']?>" />
                           <input type="hidden" name="id_clientes" id="id_clientes" value="<?=$contrato['id_clientes']?>" />
                           <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$consultor['id_usuario']?>" />
 

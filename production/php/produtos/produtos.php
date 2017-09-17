@@ -205,14 +205,11 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-striped">
-                          <thead>
+                        <table id="datatable" class="table table-hover">
+                          <thead >
                             <tr>
                               <th>Nome</th>
-                              <th>Preço</th>
-                              <th>Descrição</th>
-                              <th>Beneficios</th>
-                              <th>Entregas</th>
+                              <th>Preço</th>                            
                               <th class="col-md-2">Ações</th>
                             </tr>
                           </thead>
@@ -223,10 +220,7 @@
                               ?>
                               <tr>
                                 <td><?=$produto['nome']?></td>
-                                <td><?=$produto['preco']?></td>
-                                <td><?=$produto['descricao']?></td>
-                                <td><?=$produto['beneficios']?></td>
-                                <td><?=$produto['entregas']?></td>
+                                <td><?=$produto['preco']?></td> 
                                 <td align="center" >
                                   <a href="../profiles/produto-profile.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>              
                                   <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>

@@ -213,7 +213,7 @@ $clientes = listaClientes($conexao);
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table-hover">
                           <thead>
                             <tr role="row">
                               <th>Empresa</th>
@@ -230,7 +230,7 @@ $clientes = listaClientes($conexao);
                           <tbody>
                           <?php
                             foreach ($clientes as $cliente) {
-                             $contrato = buscaContrato($conexao, $cliente['id_contrato']);
+                             $contrato = buscaContrato($conexao, $cliente['n_contrato']);
                              $market = buscaMarket($conexao, $contrato['id_clientes']);
                              $consultor = buscaUsuario($conexao, $contrato['id_consultor']);
                           ?>
@@ -243,14 +243,14 @@ $clientes = listaClientes($conexao);
                             <?php
                               if($cliente['id_feedback'] == null ){
                             ?>
-                                <td align="center"><a href="../forms/form-feedback.php?id=<?=$contrato['id_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button></a></td>
+                                <td align="center"><a href="../forms/form-feedback.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></button></a></td>
                                 
                             <?php  
                               }else{
                                 $feedback = buscaFeedback($conexao, $cliente['id_feedback']);
                             ?>
                               <?php
-                                if($feedback['pontual']  < 4 || $feedback['conhecimento']  < 4 || $feedback['assiduo']  < 4 || $feedback['empatia']  < 4 ){
+                                if($feedback['pontual']  < 100 || $feedback['conhecimento']  < 100 || $feedback['assiduo']  < 100 || $feedback['empatia']  < 100 ){
                               ?>
                                 <td align="center"><a href="../profile/feedback-profile.php?id=<?=$feedback['id_feedback']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-thumbs-down"></i></button></a></td>
                               <?php    

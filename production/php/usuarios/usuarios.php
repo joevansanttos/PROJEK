@@ -24,7 +24,6 @@
     <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    
     <!-- Datatables -->
 
     <!-- Custom Theme Style -->
@@ -201,7 +200,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table-hover">
                                 <thead>
                                   <tr>
                                     <th>Nome</th>

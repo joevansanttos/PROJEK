@@ -1,7 +1,7 @@
 <?php
 
-function buscaContrato($conexao , $id){
-    $query = "select  * from contratos where id_contrato = '{$id}'";
+function buscaContrato($conexao , $n_contrato){
+    $query = "select  * from contratos where n_contrato = '{$n_contrato}'";
     $resultado = mysqli_query($conexao, $query);
     $usuario = mysqli_fetch_assoc($resultado);
     return $usuario;

@@ -1,8 +1,8 @@
 <?php
 
-	function buscaSociosContrato($conexao, $id_contrato){
+	function buscaSociosContrato($conexao, $n_contrato){
 	  $clientes = array();
-	    $query = "select  * from socios where id_contrato = {$id_contrato}";
+	    $query = "select  * from socios where n_contrato = '{$n_contrato}'";
 	    $resultado = mysqli_query($conexao, $query);
 	    while ($cliente= mysqli_fetch_assoc($resultado)) {
 	      array_push($clientes, $cliente);

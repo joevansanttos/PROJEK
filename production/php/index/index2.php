@@ -1,5 +1,10 @@
-<?php include ("php/bancos/conecta.php");?>
-<?php include "php/bancos/banco-usuario.php";?>
+<?php include ("../bancos/conecta.php");?>
+<?php include "../bancos/banco-usuario.php";?>
+<?php include "../logica/logica-usuario.php";?>
+
+<?php
+  verificaUsuario();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,20 +17,20 @@
 
     <title>Projek | Gestão da Qualidade Total</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- FullCalendar -->
-    <link href="../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-    <link href="../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
-    <link href='../vendors/fullcalendar/lang-all.js'>
+    <link href="../../../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+    <link href='../../../vendors/fullcalendar/lang-all.js'>
 
     <!-- Custom styling plus plugins -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -34,12 +39,12 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index2.php" class="site_title"><img src="images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
+              <a href="index2.php" class="site_title"><img src="../../images/botão copiar.png" width="40" right="40" ><span>PROJEK</span></a>
             </div>
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
+                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -53,19 +58,19 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="php/usuarios/usuarios.php">USUÁRIOS</a></li>
-                      <li><a href="php/produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="php/usuarios/consultores.php">CONSULTORES</a></li>
+                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
+                      <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
+                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="php/empresas/market.php">MARKET</a></li>
-                      <li><a href="php/empresas/leads.php">LEADS</a></li>
-                      <li><a href="php/empresas/suspects.php">SUSPECTS</a></li>
-                      <li><a href="php/empresas/prospects.php">PROSPECTS</a></li>
-                      <li><a href="php/contratos/contratos.php">CONTRATOS</a></li>                     
-                      <li><a href="php/pos-venda/pos-venda.php">PÓS-VENDA</a></li>
+                      <li><a href="../empresas/market.php">MARKET</a></li>
+                      <li><a href="../empresas/leads.php">LEADS</a></li>
+                      <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
+                      <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
+                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
                     </ul>
                   </li>
                     <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
@@ -120,7 +125,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img2.jpg" alt="">Fabio
+                    <img src="../../images/img2.jpg" alt="">Fabio
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -131,7 +136,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -282,22 +287,22 @@
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
     
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="../../../vendors/nprogress/nprogress.js"></script>
     <!-- FullCalendar -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src='../vendors/fullcalendar/dist/lang/pt-br.js'></script>
+    <script src="../../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src='../../../vendors/fullcalendar/dist/lang/pt-br.js'></script>
     <script>
      
     </script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="../../../build/js/custom.min.js"></script>
   </body>
 </html>

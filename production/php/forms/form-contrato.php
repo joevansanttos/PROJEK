@@ -3,11 +3,16 @@
 <?php include "../bancos/banco-produto.php";?>
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../bancos/banco-departamentos.php";?>
+<?php include "../bancos/banco-prospect.php";?>
 
 <?php
   $produtos = listaProdutos($conexao);
   $clientes = listaMarkets($conexao);
-  $departamentos = listaDepartamentos($conexao);              
+  $departamentos = listaDepartamentos($conexao);
+  $id_prospect = $_GET['id_prospect'];
+  $prospect = buscaProspectId($conexao, $id_prospect);
+  $market = buscaMarket($conexao, $prospect['id_clientes']); 
+  $produtoprospect = buscaProduto($conexao, $prospect['id_produto']);             
 ?>
 
 <!DOCTYPE html>
@@ -185,36 +190,28 @@
                     <div class="item form-group">
                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_cliente">Nome Fantasia<span class="required">*</span>
                      </label>
-                     <div class="col-md-6 col-sm-6 col-xs-12">                         
-                       <select name="id_cliente" class="form-control col-md-7 col-xs-12">
-                         <?php
-                         foreach ($clientes as $cliente){  
-                           ?>
-                           <option value="<?=$cliente['id_market']?>"><?=$cliente['nome']?></option>
-                           <?php
-                         }
-                         ?>
-                       </select>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input type="text" value="<?=$market['nome']?>" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                      </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
                      </label>
                      <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="razao" name="razao" required="required" class="form-control col-md-7 col-xs-12">
+                       <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="<?=$market['razao']?>" name="razao" required="required" type="text">
                      </div>
                     </div>
                     <div class="item form-group">
                       <label for="cnpj" class="control-label col-md-3 col-sm-3 col-xs-12">CNPJ <span class="required">*</span></label>
                      <div class="col-sm-6 col-xs-12 col-md-6">
-                      <input id="cnpj" value="<?=$cliente['cnpj']?>" type="text" name="cnpj" data-validate-linked="cnpj" class="form-control col-md-2 col-xs-12" required="required">
+                      <input id="cnpj" value="<?=$market['cnpj']?>" type="text" name="cnpj" data-validate-linked="cnpj" class="form-control col-md-2 col-xs-12" required="required">
                      </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Sede <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="sede" name="sede" value="<?=$cliente['endereco']?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="sede" name="sede" value="<?=$market['endereco']?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
                      </div>
                     </div>
                     <div class="item form-group ">
@@ -250,9 +247,9 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="id_produto" class="form-control col-md-7 col-xs-12">
                          <?php
-                         foreach ($produtos as $produto){  
+                         foreach ($produtos as $produto){                            
                            ?>
-                           <option value="<?=$produto['id_produto']?>" ><?=$produto['nome']?></option>
+                           <option selected="<?=$produtoprospect['id_produto']?>" value="<?=$produto['id_produto']?>" ><?=$produto['nome']?></option>
                            <?php
                          }
                          ?>  
@@ -311,6 +308,7 @@
                       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                         <button type="button" class="btn btn-primary">Cancelar</button>
                         <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <input type="hidden" name="id_prospect" id="id_prospect" value="<?=$prospect['id_prospect']?>" />
                       </div>
                     </div>  
                   </form>
@@ -431,5 +429,8 @@
 
           });
     </script>
+    <script type="text/javascript">
+      document.getElementById('id_produto').value = '<?=$produtoprospect['id_produto']?>';
+    </script>   
   </body>
 </html>

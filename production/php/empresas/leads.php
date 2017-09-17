@@ -204,7 +204,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table-hover">
                                 <thead>
                                   <tr>
                                     <th>Empresa</th>

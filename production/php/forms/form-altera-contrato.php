@@ -5,7 +5,7 @@
 <?php include "../bancos/banco-contrato.php";?>
 
 <?php
-$id = $_GET['id'];
+$n_contrato = $_GET['n_contrato'];
 $contrato = buscaContrato($conexao , $id);
 $prospect = buscaProspectId($conexao, $id);
 $produtos = listaProdutos($conexao);
