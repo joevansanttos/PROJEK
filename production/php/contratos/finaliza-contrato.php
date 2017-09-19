@@ -9,7 +9,9 @@
 	if(mysqli_query($conexao, $query)){
 		$query = "insert into pos_venda (n_contrato, id_clientes) values ('{$n_contrato}', $id_clientes )";
 		mysqli_query($conexao, $query);
-		header("Location: ../pos-venda/pos-venda.php");
+		$query = "insert into projetos (n_contrato) values ('{$n_contrato}')";
+		mysqli_query($conexao, $query);
+		header("Location: ../consultoria/projetos.php");
 	}else{
 	}
 

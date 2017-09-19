@@ -2,12 +2,15 @@
 <?php include "../bancos/banco-contrato.php";?>
 <?php include "../bancos/banco-socio.php";?>
 <?php include "../bancos/banco-departamentos.php";?>
+<?php include "../bancos/banco-prospect.php";?>
 
 <?php 
    
    $id_prospect = $_GET['id_prospect'];
+   $prospect = buscaProspectId($conexao, $id_prospect);
+   $id_clientes = $prospect['id_clientes'];
    $n_contrato = $_GET['n_contrato'];
-   $id_cliente = $_GET['id_cliente'];
+   $id_cliente = $_GET['id_market'];
    $razao = $_GET['razao'];
    $cnpj = $_GET['cnpj'];   
    $sede = $_GET['sede'];  
@@ -32,7 +35,7 @@
    
    
 
-   $query = "insert into contratos (n_contrato, id_clientes, razao,  cnpj, sede, data_inicio, data_fim, id_consultor, id_produto, id_contrato_status, id_prospect) values ('{$n_contrato}', $id_cliente, '{$razao}', '{$cnpj}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor,  $id_produto, 1, $id_prospect)";
+   $query = "insert into contratos (n_contrato, id_clientes, razao,  cnpj, sede, data_inicio, data_fim, id_consultor, id_produto, id_contrato_status, id_prospect) values ('{$n_contrato}', $id_clientes, '{$razao}', '{$cnpj}','{$sede}', '{$data_inicio}','{$data_fim}' ,$id_consultor,  $id_produto, 1, $id_prospect)";
 
    if(mysqli_query($conexao, $query)){
       $contrato = buscaContratoNumero($conexao, $n_contrato);

@@ -86,9 +86,7 @@
                   </li>
                     <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="contrato-mapeamento.php">MAPEAMENTO DE PROCESSOS</a></li>
-                        <li><a href="contrato-auditoria.php">AUDITORIA DE PROCESSOS</a></li>
-                        <li><a href="contrato-gestao.php">GESTÃO DE CONHECIMENTO</a></li>
+                        <li><a href="../consultoria/projetos.php">PROJETOS</a></li>                     
                       </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
