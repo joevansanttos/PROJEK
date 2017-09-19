@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Set-2017 às 20:55
+-- Generation Time: 19-Set-2017 às 21:38
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -35,7 +35,9 @@ CREATE TABLE `atividades` (
   `horas` decimal(10,0) DEFAULT NULL,
   `descricao` varchar(1000) DEFAULT NULL,
   `id_departamento_contrato` int(11) DEFAULT NULL,
-  `id_status_atividade` int(11) DEFAULT NULL
+  `id_status_atividade` int(11) DEFAULT NULL,
+  `data_inicio` varchar(50) DEFAULT NULL,
+  `data_fim` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -6175,6 +6177,21 @@ INSERT INTO `prospects` (`id_prospect`, `id_clientes`, `prob`, `valor_op`, `valo
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `responsaveis`
+--
+
+CREATE TABLE `responsaveis` (
+  `id_responsavel` int(11) NOT NULL,
+  `id_atividade` int(11) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `cargo` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `tel` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `socios`
 --
 
@@ -6456,6 +6473,12 @@ ALTER TABLE `prospects`
   ADD PRIMARY KEY (`id_prospect`);
 
 --
+-- Indexes for table `responsaveis`
+--
+ALTER TABLE `responsaveis`
+  ADD PRIMARY KEY (`id_responsavel`);
+
+--
 -- Indexes for table `socios`
 --
 ALTER TABLE `socios`
@@ -6599,6 +6622,11 @@ ALTER TABLE `projetos`
 --
 ALTER TABLE `prospects`
   MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `responsaveis`
+--
+ALTER TABLE `responsaveis`
+  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `socios`
 --
