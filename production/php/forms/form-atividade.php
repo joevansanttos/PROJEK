@@ -275,6 +275,7 @@ $departamentos = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
                     <div class="col-md-6 col-md-offset-3">
                       <button type="submit" class="btn btn-primary">Cancelar</button>
                       <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
+                      <input type="hidden" name="id_projeto" id="id_projeto" value="<?=$projeto['id_projeto']?>" />
                     </div>
                   </form> 
                 </div>

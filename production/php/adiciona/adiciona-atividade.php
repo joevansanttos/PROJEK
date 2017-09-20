@@ -1,7 +1,7 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-atividade.php";?>
 <?php
-	$n_contrato = $_GET['n_contrato'];
+	$id_projeto = $_GET['id_projeto'];
 	$id_departamento = $_GET['departamento'];
 	$id_consultor = $_GET['id_consultor'];
 	$horas = $_GET['horas'];
@@ -17,8 +17,8 @@
 	$cargo = $_GET['cargo'];
 	$email = $_GET['email'];
 	$tel = $_GET['tel'];
-	$query = "insert into atividades (n_contrato, id_departamento, id_consultor, horas, descricao, data_inicio, data_fim) values ('{$n_contrato}', $id_departamento, $id_consultor, $horas, '{$descricao}' , '{$data_inicio}' , '{$data_fim}' )";
-	$atividade = buscaAtividadeContrato($conexao, $n_contrato, $id_departamento);
+	$query = "insert into atividades (id_projeto, id_departamento_contrato, id_consultor, horas, descricao, data_inicio, data_fim) values ({$id_projeto}, $id_departamento, $id_consultor, $horas, '{$descricao}' , '{$data_inicio}' , '{$data_fim}' )";
+	$atividade = buscaAtividadeProjeto($conexao, $id_projeto, $id_departamento);
 	if(mysqli_query($conexao, $query)){
 		$id_atividade = $atividade['id_atividade'];
 		$query = "insert into responsaveis (id_atividade, nome, cargo, email, tel) values ($id_atividade , '{$nome}', '{$cargo}', '{$email}','{$tel}'   )";

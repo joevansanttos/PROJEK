@@ -28,7 +28,7 @@ $projetos = listaProjetos($conexao);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK | Pós-Venda</title>
+    <title>PROJEK | Projetos</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
@@ -272,7 +272,7 @@ $projetos = listaProjetos($conexao);
                               </td>
                               <td>
                                 <a href="../forms/form-atividade.php?id_projeto=<?=$projeto['id_projeto']?>" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></a>
-                                <a href="#" class="btn btn-success btn-xs"><i class="fa fa-search"></i></a>
+                                <a href="../profiles/projeto-profile.php?id_projeto=<?=$projeto['id_projeto']?>" class="btn btn-success btn-xs"><i class="fa fa-search"></i></a>
                                 <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                               </td>

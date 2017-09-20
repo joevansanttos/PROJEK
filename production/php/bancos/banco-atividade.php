@@ -1,6 +1,6 @@
 <?php
-function buscaAtividadeContrato($conexao, $n_contrato, $id_departamento){
-	$query = "select * from atividades where id_departamento = {$id_departamento} and $n_contrato = '{$n_contrato}'";
+function buscaAtividadeProjeto($conexao, $id_projeto, $id_departamento){
+	$query = "select * from atividades where id_departamento = {$id_departamento} and $id_projeto = {$id_projeto}";
 	$resultado = mysqli_query($conexao, $query);
 	return mysqli_fetch_assoc($resultado);
 }
