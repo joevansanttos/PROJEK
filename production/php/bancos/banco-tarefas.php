@@ -21,3 +21,10 @@ function buscaTarefaId($conexao, $id_tarefa){
 	    
 	    return $clientes;
 }
+
+function buscaTarefaNome($conexao, $id_tarefa){
+	    $query = "select  * from tarefas where id_tarefa = {$id_tarefa}";
+	    $resultado = mysqli_query($conexao, $query);
+	    $cliente= mysqli_fetch_assoc($resultado);    
+	    return $cliente;
+}

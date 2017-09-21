@@ -237,58 +237,33 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table tbl-accordion  table-bordered">
-                          <thead>
-                            <tr>                              
-                              <th>Departamento</th>
-                              <th>Duração</th>
-                              <th>Iniciado em</th>
-                              <th>Finalizado em</th>
-                            </tr>
-                          </thead>                            
-                          <tbody>                          
+                      <?php
+                      foreach ($departamentos_contrato as  $d_contrato) { 
+                        $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
+                      ?> 
+                       <table class="table table-bordered tbl-accordion-nested">
+                         <thead>
+                           <tr>
+                             <td colspan="4" class="tbl-accordion-section"><?=$nome_departamento['descricao']?></td>
+                           </tr>
+                         <thead>
+                         <tbody>
                             <tr>
-                              <td colspan="4">
-                                <table class="table table-bordered tbl-accordion-nested">
-                                  <thead>
-                                    <tr>
-                                      <td colspan="4" class="tbl-accordion-section">Nome do Departamento</td>
-                                    </tr>
-                                  <thead>
-                                  <tbody>
-                                     <tr>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                     </tr>       
-                                  </tbody>  
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="4">
-                                <table class="table table-bordered tbl-accordion-nested">
-                                  <thead>
-                                    <tr>
-                                      <td colspan="4" class="tbl-accordion-section">Nome do Departamento</td>
-                                    </tr>
-                                  <thead>
-                                  <tbody>
-                                     <tr>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                     </tr>       
-                                  </tbody>  
-                                </table>
-                              </td>
-                            </tr>                             
-                                                        
-                          </tbody>       
-                        </table>
-
+                            <?php
+                             $tarefas_contrato = listaTarefasContrato($conexao, $d_contrato['id_departamento_contrato'] );
+                             foreach ($tarefas_contrato as $t_contrato) {
+                              $tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
+                            ?>  
+                              <td><?=$tarefa['nome']?></td>                             
+                            </tr> 
+                            <?php
+                              }
+                            ?>      
+                         </tbody>  
+                       </table>
+                      <?php
+                        }
+                      ?>
                       </div>  
                     </div>    
                   </div>
