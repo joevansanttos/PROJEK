@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 20-Set-2017 às 21:46
+-- Generation Time: 21-Set-2017 às 21:53
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -5808,7 +5808,8 @@ CREATE TABLE `contratos` (
 --
 
 INSERT INTO `contratos` (`id_clientes`, `id_produto`, `id_contrato_status`, `id_consultor`, `data_inicio`, `data_fim`, `n_contrato`, `sede`, `razao`, `cnpj`, `id_prospect`) VALUES
-(40, 7, 2, 10, '01.09.2017', '20.09.2017', '44444444', 'RUA SÉRGIO CARDOSO, No. 20, SALA 08, CEP: 44.245-000, CENTRO - CONCEIÇÃO DO JACUÍPE – BAHIA', 'P7GO TECNOLOGIA', '26.792.567/0001-31', 10);
+(40, 7, 2, 10, '01.09.2017', '20.09.2017', '44444444', 'RUA SÉRGIO CARDOSO, No. 20, SALA 08, CEP: 44.245-000, CENTRO - CONCEIÇÃO DO JACUÍPE – BAHIA', 'P7GO TECNOLOGIA', '26.792.567/0001-31', 10),
+(39, 7, 2, 10, '09.09.2017', '09.09.2018', '8787', 'R General Venâncio Flores, 481 - lj-c, Leblon - Rio de Janeiro, RJ', 'Petrobras SA', '22.222.222/2222-22', 7);
 
 -- --------------------------------------------------------
 
@@ -5875,7 +5876,15 @@ INSERT INTO `departamentos_contratos` (`id_departamento`, `n_contrato`, `id_depa
 (1, '44444444', 1),
 (2, '44444444', 2),
 (3, '44444444', 3),
-(4, '44444444', 4);
+(4, '44444444', 4),
+(1, '8787', 5),
+(2, '8787', 6),
+(3, '8787', 7),
+(4, '8787', 8),
+(5, '8787', 9),
+(6, '8787', 10),
+(7, '8787', 11),
+(8, '8787', 12);
 
 -- --------------------------------------------------------
 
@@ -6053,7 +6062,8 @@ CREATE TABLE `pos_venda` (
 --
 
 INSERT INTO `pos_venda` (`id_pos_venda`, `id_clientes`, `id_feedback`, `n_contrato`) VALUES
-(9, 40, NULL, '44444444');
+(9, 40, NULL, '44444444'),
+(10, 39, NULL, '8787');
 
 -- --------------------------------------------------------
 
@@ -6135,7 +6145,8 @@ CREATE TABLE `projetos` (
 --
 
 INSERT INTO `projetos` (`id_projeto`, `n_contrato`, `horas`) VALUES
-(3, '44444444', NULL);
+(3, '44444444', NULL),
+(4, '8787', NULL);
 
 -- --------------------------------------------------------
 
@@ -6204,7 +6215,8 @@ INSERT INTO `socios` (`id_socio`, `nome`, `cpf`, `residencia`, `nacionalidade`, 
 (1, 'jjjjjjjjjjjjj', '111-111-111-11', 'rua petrobras', 'brasileiro', 'empresario', 'solteiro', '6666666666'),
 (2, 'Lucas Carvalho', '444-444-444-44', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '233333333333'),
 (3, 'WENDERSON MARTINS DE ALMEIDA', 'n92-866-409-51', 'Rua Juracy Magalhães, No. 403, Edf. Falcão, apto.401. Feira de Santana – Bahia', 'brasileiro', 'empresário', 'solteiro', '123456'),
-(4, 'Lucas Carvalho', '098-888-888-88', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '44444444');
+(4, 'Lucas Carvalho', '098-888-888-88', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '44444444'),
+(5, 'jhhjhjhj', '090-909-987-77', 'uhbhnhn', 'hnhn', 'hnhnhn', 'hnhnh', '8787');
 
 -- --------------------------------------------------------
 
@@ -6347,7 +6359,71 @@ INSERT INTO `tarefas_contrato` (`id_tarefas_contrato`, `id_departamento_contrato
 (29, 4, NULL, NULL, 5),
 (30, 4, NULL, NULL, 6),
 (31, 4, NULL, NULL, 7),
-(32, 4, NULL, NULL, 8);
+(32, 4, NULL, NULL, 8),
+(33, 5, NULL, NULL, 1),
+(34, 5, NULL, NULL, 2),
+(35, 5, NULL, NULL, 3),
+(36, 5, NULL, NULL, 4),
+(37, 5, NULL, NULL, 5),
+(38, 5, NULL, NULL, 6),
+(39, 5, NULL, NULL, 7),
+(40, 5, NULL, NULL, 8),
+(41, 6, NULL, NULL, 1),
+(42, 6, NULL, NULL, 2),
+(43, 6, NULL, NULL, 3),
+(44, 6, NULL, NULL, 4),
+(45, 6, NULL, NULL, 5),
+(46, 6, NULL, NULL, 6),
+(47, 6, NULL, NULL, 7),
+(48, 6, NULL, NULL, 8),
+(49, 7, NULL, NULL, 1),
+(50, 7, NULL, NULL, 2),
+(51, 7, NULL, NULL, 3),
+(52, 7, NULL, NULL, 4),
+(53, 7, NULL, NULL, 5),
+(54, 7, NULL, NULL, 6),
+(55, 7, NULL, NULL, 7),
+(56, 7, NULL, NULL, 8),
+(57, 8, NULL, NULL, 1),
+(58, 8, NULL, NULL, 2),
+(59, 8, NULL, NULL, 3),
+(60, 8, NULL, NULL, 4),
+(61, 8, NULL, NULL, 5),
+(62, 8, NULL, NULL, 6),
+(63, 8, NULL, NULL, 7),
+(64, 8, NULL, NULL, 8),
+(65, 9, NULL, NULL, 1),
+(66, 9, NULL, NULL, 2),
+(67, 9, NULL, NULL, 3),
+(68, 9, NULL, NULL, 4),
+(69, 9, NULL, NULL, 5),
+(70, 9, NULL, NULL, 6),
+(71, 9, NULL, NULL, 7),
+(72, 9, NULL, NULL, 8),
+(73, 10, NULL, NULL, 1),
+(74, 10, NULL, NULL, 2),
+(75, 10, NULL, NULL, 3),
+(76, 10, NULL, NULL, 4),
+(77, 10, NULL, NULL, 5),
+(78, 10, NULL, NULL, 6),
+(79, 10, NULL, NULL, 7),
+(80, 10, NULL, NULL, 8),
+(81, 11, NULL, NULL, 1),
+(82, 11, NULL, NULL, 2),
+(83, 11, NULL, NULL, 3),
+(84, 11, NULL, NULL, 4),
+(85, 11, NULL, NULL, 5),
+(86, 11, NULL, NULL, 6),
+(87, 11, NULL, NULL, 7),
+(88, 11, NULL, NULL, 8),
+(89, 12, NULL, NULL, 1),
+(90, 12, NULL, NULL, 2),
+(91, 12, NULL, NULL, 3),
+(92, 12, NULL, NULL, 4),
+(93, 12, NULL, NULL, 5),
+(94, 12, NULL, NULL, 6),
+(95, 12, NULL, NULL, 7),
+(96, 12, NULL, NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -6646,12 +6722,12 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT for table `departamentos_contratos`
 --
 ALTER TABLE `departamentos_contratos`
-  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `historico`
 --
@@ -6676,7 +6752,7 @@ ALTER TABLE `porte`
 -- AUTO_INCREMENT for table `pos_venda`
 --
 ALTER TABLE `pos_venda`
-  MODIFY `id_pos_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pos_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
@@ -6696,7 +6772,7 @@ ALTER TABLE `profissao`
 -- AUTO_INCREMENT for table `projetos`
 --
 ALTER TABLE `projetos`
-  MODIFY `id_projeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_projeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `prospects`
 --
@@ -6711,7 +6787,7 @@ ALTER TABLE `responsaveis`
 -- AUTO_INCREMENT for table `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `status_contato`
 --
@@ -6731,7 +6807,7 @@ ALTER TABLE `tarefas`
 -- AUTO_INCREMENT for table `tarefas_contrato`
 --
 ALTER TABLE `tarefas_contrato`
-  MODIFY `id_tarefas_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_tarefas_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- AUTO_INCREMENT for table `type`
 --

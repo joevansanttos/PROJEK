@@ -237,67 +237,74 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table tbl-accordion  table-bordered">
-                          <thead>
-                            <tr>                              
-                              <th>Departamento</th>
-                              <th>Duração</th>
-                              <th>Iniciado em</th>
-                              <th>Finalizado em</th>
-                            </tr>
-                          </thead>                            
-                          <tbody>                          
-                            <tr>
-                              <td colspan="4">
-                                <table class="table table-bordered tbl-accordion-nested">
-                                  <thead>
-                                    <tr>
-                                      <td colspan="4" class="tbl-accordion-section">Nome do Departamento</td>
-                                    </tr>
-                                  <thead>
-                                  <tbody>
-                                     <tr>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                     </tr>       
-                                  </tbody>  
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="4">
-                                <table class="table table-bordered tbl-accordion-nested">
-                                  <thead>
-                                    <tr>
-                                      <td colspan="4" class="tbl-accordion-section">Nome do Departamento</td>
-                                    </tr>
-                                  <thead>
-                                  <tbody>
-                                     <tr>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                       <td>dddd</td>
-                                     </tr>       
-                                  </tbody>  
-                                </table>
-                              </td>
-                            </tr>                             
-                                                        
-                          </tbody>       
-                        </table>
-
-                      </div>  
+                        <div class="panel-group" id="accordion">
+                        <?php
+                          $d = 0;                         
+                          foreach ($departamentos_contrato as  $d_contrato) { 
+                            $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
+                            $string = (string)$d;
+                            $panel = 'panel_' . $string;
+                            $idpanel = '#'.$panel;
+                            $d = $d + 1;
+                            $accordion = 'accordion_'. $panel;
+                            $idaccordion = '#'. $accordion;            
+                        ?>
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">                               
+                                <a data-toggle="collapse" data-parent="#accordion" href="<?=$idpanel?>">
+                                <?=$nome_departamento['descricao']?></a>
+                                <div class="clearfix"></div>
+                              </h4>
+                            </div>                            
+                            <div id="<?=$panel?>" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                <div class="panel-group" id="accordion2">
+                                <?php
+                                  $tarefas_contrato = listaTarefasContrato($conexao, $d_contrato['id_departamento_contrato'] );
+                                  $t = 0;
+                                  foreach ($tarefas_contrato as $t_contrato) {
+                                      $tarefa = buscaTarefaId($conexao, $t_contrato['id_tarefa']);
+                                      $string2 = (string)$t;
+                                      $panel2 = 'panel2_' . $string. '_' . $string2;
+                                      $idpanel2 = '#'.$panel2;
+                                      $t = $t + 1;
+                                      $accordion2 = 'accordion2_'. $panel2;
+                                      $idaccordion2 = '#'. $accordion2;  
+                                ?>
+                                  <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                      <a data-toggle="collapse" data-parent="<?=$idaccordion?>" href="<?=$idpanel2?>">
+                                        <?=$tarefa['nome']?>
+                                      </a>
+                                      </h4>
+                                    </div>
+                                    <div id="<?=$panel2?>" class="panel-collapse collapse">
+                                      <div class="panel-body">
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                <?php
+                                  }
+                                ?>
+                                </div> 
+                              </div>
+                            </div>
+                          </div>
+                      <?php
+                        }
+                      ?>
+                        </div>                
+                      </div>
                     </div>    
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        
+        </div>        
         <div class="clearfix"></div>
         <!-- /page content -->
 
@@ -338,18 +345,7 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>
-    <script type="text/javascript">       
-     $('.tbl-accordion-nested').each(function(){
-       var thead = $(this).find('thead');
-       var tbody = $(this).find('tbody');
-       
-       tbody.hide();
-       thead.click(function(){
-         tbody. slideToggle();
-       })
-     })
-    </script>  
+    <script src="../../js/datatable.js"></script>  
   </body>
 </html>
 
