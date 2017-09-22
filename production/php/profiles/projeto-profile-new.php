@@ -24,11 +24,9 @@
 ?>
 <?php
 $id_projeto = $_GET['id_projeto'];
-
 $projeto = buscaProjeto($conexao, $id_projeto);
 $contrato = buscaContrato($conexao, $projeto['n_contrato']);
 $market = buscaMarket($conexao, $contrato['id_clientes']);
-$n_contrato = $projeto['n_contrato'];
 $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
 ?>
 
@@ -59,7 +57,7 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
-    <script type="text/javascript"></script>
+
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -239,41 +237,44 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <?php
-                        foreach ($departamentos_contrato as  $d_contrato) { 
-                          $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
-                        ?> 
-                        <table  id="editable_table" class="table table-bordered">
-                          <thead>
+                      <?php
+                      foreach ($departamentos_contrato as  $d_contrato) { 
+                        $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
+                      ?> 
+                       <table class="table table-bordered tbl-accordion-nested">
+                         <thead>
+                           <tr>
+                             <td colspan="5" class="tbl-accordion-section"><?=$nome_departamento['descricao']?></td>
+                           </tr>
+                         <thead>
+                         <tbody>
                             <tr>
-                              <th colspan="3">Departamento</th>
-                            </tr>                            
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th colspan="3">ffffffffffff</th>
+                              <td>Tarefa</td>
+                              <td>Data</td>
+                              <td>Horas</td>
+                              <td>Entrega</td>
+                              <td>Ações</td>
                             </tr>
-                          <?php
-                          $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
-                          $query = "select * from tarefas_contrato where id_departamento_contrato= {$id_departamento_contrato}";
-                          $result = mysqli_query($conexao,$query );
-                          while ($row = mysqli_fetch_array($result)) {
-                           echo'
                             <tr>
-                              <td>'.$row["id_tarefas_contrato"].'</td>
-                              <td>'.$row["data_inicio"].'</td>
-                              <td>'.$row["data_fim"].'</td>
-                            </tr>
-
-                           ';
-                          }
-                          ?>
-                            
-                          </tbody>
-                        </table>  
-                        <?php
-                          }
-                        ?>
+                            <?php
+                             $tarefas_contrato = listaTarefasContrato($conexao, $d_contrato['id_departamento_contrato'] );
+                             foreach ($tarefas_contrato as $t_contrato) {
+                              $tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
+                            ?>  
+                              <td><?=$tarefa['nome']?></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>                         
+                            </tr> 
+                            <?php
+                              }
+                            ?>      
+                         </tbody>  
+                       </table>
+                      <?php
+                        }
+                      ?>
                       </div>  
                     </div>    
                   </div>
@@ -334,24 +335,6 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
          tbody. slideToggle();
        })
      })
-    </script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $('#editable_table').Tabledit({
-          url: 'action.php',
-          columns : {
-            identifier:[0, "id_tarefas_contrato"],
-            editable :[[1,'data_inicio'],[2,'data_fim']]
-          },
-          restoreButton:false,
-          onSuccess: function (data, textStatus, jqXHR){
-            if(data.action == 'delete'){
-              $('#'+data.id).remove();
-
-            }
-          }
-        });
-      });
     </script>  
   </body>
 </html>
