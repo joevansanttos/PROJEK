@@ -67,60 +67,53 @@
               <div class="menu_section">
                 <h3>Geral</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
-                      <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
+                      <li><a href="index2.php">Dashboard</a></li>
+                    </ul>
+                    
+                  </li>
+                  <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
+                      <li><a href="../produtos/produtos.php">Produtos</a></li>
+                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../empresas/market.php">MARKET</a></li>
-                      <li><a href="../empresas/leads.php">LEADS</a></li>
-                      <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
-                      <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
-                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
-                      <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
+                      <li><a href="../empresas/market.php">Market</a></li>
+                      <li><a href="../empresas/leads.php">Leads</a></li>
+                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
-                    <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="../consultoria/projetos.php">PROJETOS</a></li>                     
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="chartjs.html">CONTAS A PAGAR</a></li>
-                        <li><a href="chartjs2.html">CONTAS A RECEBER</a></li>
-                        <li><a href="morisjs.html">CONCILIAÇÃO</a></li>
-                        <li><a href="echarts.html">FLUXO DE CAIXA</a></li>
-                        <li><a href="other_charts.html">COBRANÇA</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-cart-plus"></i> COMPRAS <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="index2.html">SOLICITAÇÃO DE COMPRAS</a></li>
-                        <li><a href="form_advanced.html">ORÇAMENTO</a></li>
-                        <li><a href="form_validation.html">ORDEM DE COMPRA</a></li>
-                        <li><a href="form_wizards.html">ACOMPANHAMENTO DE ENTREGA</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-group"></i>RECURSOS HUMANOS <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="fixed_sidebar.html">SOLICITAÇÃO COLABORADOR</a></li>
-                        <li><a href="fixed_footer.html">SELEÇÃO</a></li>
-                        <li><a href="fixed_footer.html">RECRUTAMENTO</a></li>
-                        <li><a href="fixed_footer.html">ADMISSÃO</a></li>
-                        <li><a href="fixed_footer.html">AVALIAÇÃO DE DESEMPENHO</a></li>
-                        <li><a href="fixed_footer.html">FÉRIAS</a></li>
-                        <li><a href="fixed_footer.html">DESENVOLVIMENTO HUMANO</a></li>
-                        <li><a href="fixed_footer.html">DEMISSÃO</a></li>
-                      </ul>
-                    </li>               
+                  <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                    </ul>
+                  </li>
                 </ul>
               </div>
-            </div>         
+            </div>
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+            </div>          
           </div>
         </div>      
         <!-- Col-->
@@ -181,25 +174,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Eventos do Calendário</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
+                  
                   <div class="x_content">
 
                     <div id='calendar'></div>
