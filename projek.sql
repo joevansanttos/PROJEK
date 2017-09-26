@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25-Set-2017 às 20:38
+-- Generation Time: 26-Set-2017 às 22:13
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -5975,6 +5975,31 @@ INSERT INTO `historico` (`id_market`, `comentario`, `id_consultor`, `id_historic
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `information`
+--
+
+CREATE TABLE `information` (
+  `id` int(11) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `details` varchar(32) NOT NULL,
+  `status` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `information`
+--
+
+INSERT INTO `information` (`id`, `name`, `details`, `status`) VALUES
+(1, 'JAP', 'Tech Blog', 'Active'),
+(2, 'HTML', 'Markup Language', 'Active'),
+(3, 'jQuery', 'Javascript library ', 'Active'),
+(4, 'AJAX', 'Asynchronous JavaScript and XML', 'Active'),
+(5, 'PHP', ' Hypertext Preprocessor', 'Active'),
+(6, 'Ruby on Rails', '', 'Inactive');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `leads`
 --
 
@@ -6328,7 +6353,7 @@ CREATE TABLE `tarefas_contrato` (
 --
 
 INSERT INTO `tarefas_contrato` (`id_tarefas_contrato`, `id_departamento_contrato`, `data_inicio`, `data_fim`, `id_tarefa`) VALUES
-(1, 1, NULL, NULL, 1),
+(1, 1, '20/10/2017', '', 1),
 (2, 1, NULL, NULL, 2),
 (3, 1, NULL, NULL, 3),
 (4, 1, NULL, NULL, 4),
@@ -6424,6 +6449,37 @@ INSERT INTO `tarefas_contrato` (`id_tarefas_contrato`, `id_departamento_contrato
 (94, 12, NULL, NULL, 6),
 (95, 12, NULL, NULL, 7),
 (96, 12, NULL, NULL, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tbl_user`
+--
+
+CREATE TABLE `tbl_user` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(250) NOT NULL,
+  `last_name` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`id`, `first_name`, `last_name`) VALUES
+(2, 'John', 'Smith'),
+(3, 'Carol', 'Ferrari'),
+(4, 'Darrell', 'Mitten'),
+(5, 'Elizbeth', 'Noyes'),
+(6, 'Edna', 'William'),
+(7, 'Roy', 'Hise'),
+(8, 'Sheila', 'Aguinaldo'),
+(9, 'Peter', 'Goad'),
+(10, 'Kenneth', 'Simons'),
+(11, 'Dona', 'Huber'),
+(12, 'William', 'Soliz'),
+(13, 'Nelson', 'Dismuke'),
+(14, 'Joevan', 'Thomas');
 
 -- --------------------------------------------------------
 
@@ -6563,6 +6619,12 @@ ALTER TABLE `historico`
   ADD PRIMARY KEY (`id_historico`);
 
 --
+-- Indexes for table `information`
+--
+ALTER TABLE `information`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `leads`
 --
 ALTER TABLE `leads`
@@ -6653,6 +6715,12 @@ ALTER TABLE `tarefas_contrato`
   ADD PRIMARY KEY (`id_tarefas_contrato`);
 
 --
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `type`
 --
 ALTER TABLE `type`
@@ -6734,6 +6802,11 @@ ALTER TABLE `feedback`
 ALTER TABLE `historico`
   MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
+-- AUTO_INCREMENT for table `information`
+--
+ALTER TABLE `information`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
@@ -6808,6 +6881,11 @@ ALTER TABLE `tarefas`
 --
 ALTER TABLE `tarefas_contrato`
   MODIFY `id_tarefas_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `type`
 --

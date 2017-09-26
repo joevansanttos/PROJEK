@@ -1,6 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-contrato.php";?>
 <?php include "../bancos/banco-usuario.php";?>
@@ -31,6 +30,7 @@ $market = buscaMarket($conexao, $contrato['id_clientes']);
 $n_contrato = $projeto['n_contrato'];
 $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -206,32 +206,31 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                         <?php
                         foreach ($departamentos_contrato as  $d_contrato) { 
                           $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
-                        ?>   
-                        <table id="example" class="table table-bordered">
-                          <thead>
-                             <th colspan="4"><?=$nome_departamento['descricao']?></th>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Tarefa</td>
-                              <td>Data de Inicio</td>
-                              <td>Data do Fim</td>
-                            </tr>                            
-                            <?php
-                             $tarefas_contrato = listaTarefasContrato($conexao, $d_contrato['id_departamento_contrato']);
-                             foreach ($tarefas_contrato as $t_contrato) {
-                              $tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
-                            ?> 
-                              <tr>
-                                <td><?=$tarefa['nome']?></td>
-                                <td><?=$t_contrato['data_inicio']?></td>
-                                <td><?=$t_contrato['data_fim']?></td>            
-                              </tr>
-                            <?php
-                              }
-                            ?>
-                          </tbody>
-                        </table> 
+                          $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
+                          $query = "select  * from tarefas_contrato where id_departamento_contrato = {$id_departamento_contrato}";
+                          $result = mysqli_query($conexao, $query);
+                        ?>
+                        <table id="editable_table" class="table table-bordered table-striped">
+                         <thead>
+                          <th><?=$nome_departamento['descricao']?></th>
+                          <th>Data de Inicio</th>
+                          <th>Data de Fim</th>
+                         </thead>
+                         <tbody>
+                         <?php
+                         while($row = mysqli_fetch_array($result))
+                         {
+                          echo '
+                          <tr>
+                           <td>'.$row["id_tarefas_contrato"].'</td>
+                           <td>'.$row["data_inicio"].'</td>
+                           <td>'.$row["data_fim"].'</td>
+                          </tr>
+                          ';
+                         }
+                         ?>
+                         </tbody>
+                        </table>                        
                         <?php
                           }
                         ?>                            
@@ -298,57 +297,24 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
      })
     </script>
     <script type="text/javascript">
-      var editor; // use a global for the submit and return data rendering in the examples
+      $(document).ready(function(){  
+           $('#editable_table').Tabledit({
+            url:'action.php',
+            columns:{
+             identifier:[0, "id_tarefas_contrato"],
+             editable:[[1, 'data_inicio'], [2, 'data_fim']]
+            },
+            restoreButton:false,
+            onSuccess:function(data, textStatus, jqXHR)
+            {
+             if(data.action == 'delete')
+             {
+              $('#'+data.id).remove();
+             }
+            }
+           });
        
-      $(document).ready(function() {
-          editor = new $.fn.dataTable.Editor( {
-              ajax: "action.php",
-              table: "#example",
-              fields: [ {
-                      label: "Nome:",
-                      name: "nome"
-                  }, {
-                      label: "Data de Inicio:",
-                      name: "data_inicio"
-                  }, {
-                      label: "Data de Fim:",
-                      name: "data_fim"
-                  }
-              ]
-          } );
-       
-          // Activate an inline edit on click of a table cell
-          $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-              editor.inline( this );
-          } );
-       
-          $('#example').DataTable( {
-              dom: "Bfrtip",
-              ajax: "action.php",
-              order: [[ 1, 'asc' ]],
-              columns: [
-                  {
-                      data: null,
-                      defaultContent: '',
-                      className: 'select-checkbox',
-                      orderable: false
-                  },
-                  { data: "nome" },
-                  { data: "data_inicio" },
-                  { data: "data_fim" }
-              ],
-              select: {
-                  style:    'os',
-                  selector: 'td:first-child'
-              },
-              buttons: [
-                  { extend: "create", editor: editor },
-                  { extend: "edit",   editor: editor },
-                  { extend: "remove", editor: editor }
-              ]
-          } );
-      } );
-
+      });  
     </script>
   </body>
 </html>

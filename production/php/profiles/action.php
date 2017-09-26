@@ -1,11 +1,27 @@
 <?php include "../bancos/conecta.php";?>
-<?php
-header('Content-Type: application/json');
+
+<?php  
+//action.php
 
 $input = filter_input_array(INPUT_POST);
-$first_name = mysqli_real_escape_string($connect, $input["first_name"]);
-$last_name = mysqli_real_escape_string($connect, $input["last_name"]);
-if($input['action'] === 'edit'){
-	$query = "update tarefas_contrato set data_inicio = '{$data_inicio}' where id_tarefas_contrato = $id_tarefas_contrato";
-	mysqli_query($conexao, $query);
+
+$data_inicio= mysqli_real_escape_string($conexao, $input["data_inicio"]);
+$data_fim = mysqli_real_escape_string($conexao, $input["data_fim"]);
+
+if($input["action"] === 'edit')
+{
+ $query = "
+ UPDATE tarefas_contrato 
+ SET data_inicio = '".$data_inicio."', 
+ data_fim = '".$data_fim."' 
+ WHERE id_tarefas_contrato = '".$input["id_tarefas_contrato"]."'
+ ";
+
+ mysqli_query($conexao, $query);
+
 }
+
+
+echo json_encode($input);
+
+?>
