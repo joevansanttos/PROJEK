@@ -1,6 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../bancos/banco-profissao.php";?>

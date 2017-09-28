@@ -63,6 +63,14 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
+    <style type="text/css">
+      .hide{
+
+      visibility: hidden
+
+      }
+    </style>
+
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -203,37 +211,47 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
+
                         <?php
+                        $i = 1;
                         foreach ($departamentos_contrato as  $d_contrato) { 
                           $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
                           $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
-                          $query = "select  * from tarefas_contrato where id_departamento_contrato = {$id_departamento_contrato}";
-                          $result = mysqli_query($conexao, $query);
+                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);                     
+                          $string_i = (string)$i;
+                          $id = 'editable_table' . $string_i; 
+                          $i++;                   
                         ?>
-                        <table id="editable_table" class="table table-bordered table-striped">
+
+                        <table id="<?=$id?>" class="table table-bordered table-striped datatable">
                          <thead>
                           <th><?=$nome_departamento['descricao']?></th>
-                          <th>Data de Inicio</th>
-                          <th>Data de Fim</th>
+                          <th class="col-md-2">Data de Inicio</th>
+                          <th class="col-md-2">Data de Fim</th>
                          </thead>
                          <tbody>
+
                          <?php
-                         while($row = mysqli_fetch_array($result))
-                         {
-                          echo '
-                          <tr>
-                           <td>'.$row["id_tarefas_contrato"].'</td>
-                           <td>'.$row["data_inicio"].'</td>
-                           <td>'.$row["data_fim"].'</td>
-                          </tr>
-                          ';
-                         }
+                          foreach ($tarefas_contrato as $t_contrato) {
+                            $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
+                            echo '
+                            <tr>
+                             <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td> 
+                             <td>'.$nome_tarefa["nome"].'</td>
+                             <td>'.$t_contrato["data_inicio"].'</td>
+                             <td>'.$t_contrato["data_fim"].'</td>
+                            </tr>
+                            ';
+                          }
                          ?>
+
                          </tbody>
-                        </table>                        
+                        </table>
+
                         <?php
                           }
-                        ?>                            
+                        ?>
+
                       </div>  
                     </div>    
                   </div>
@@ -286,35 +304,31 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <script src="../../js/datatable.js"></script>
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
     <script type="text/javascript">       
-     $('.tbl-accordion-nested').each(function(){
-       var thead = $(this).find('thead');
-       var tbody = $(this).find('tbody');
-       
-       tbody.hide();
-       thead.click(function(){
-         tbody. slideToggle();
-       })
-     })
+   
     </script>
     <script type="text/javascript">
-      $(document).ready(function(){  
-           $('#editable_table').Tabledit({
-            url:'action.php',
-            columns:{
-             identifier:[0, "id_tarefas_contrato"],
-             editable:[[1, 'data_inicio'], [2, 'data_fim']]
-            },
-            restoreButton:false,
-            onSuccess:function(data, textStatus, jqXHR)
-            {
-             if(data.action == 'delete')
-             {
-              $('#'+data.id).remove();
-             }
-            }
-           });
-       
-      });  
+      
+    </script>
+    <script>
+      $(".datatable").each( function() {
+        var id = this.id;        
+      
+        $('#'+ id).Tabledit({
+         url:'action.php',
+         columns:{
+          identifier:[0, "id_tarefas_contrato"],
+          editable:[[2, 'data_inicio'], [3, 'data_fim']]
+         },
+         restoreButton:false,
+         onSuccess:function(data, textStatus, jqXHR)
+         {
+          if(data.action == 'delete')
+          {
+           $('#'+data.id).remove();
+          }
+         }
+        });
+       });
     </script>
   </body>
 </html>
