@@ -226,8 +226,8 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                         <table id="<?=$id?>" class="table table-bordered table-striped datatable">
                          <thead>
                           <th><?=$nome_departamento['descricao']?></th>
-                          <th class="col-md-2">Data de Inicio</th>
-                          <th class="col-md-2">Data de Fim</th>
+                          <th class="col-md-2">Inicio</th>
+                          <th class="col-md-2">Fim</th>                         
                          </thead>
                          <tbody>
 
@@ -238,8 +238,8 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                             <tr>
                              <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td> 
                              <td>'.$nome_tarefa["nome"].'</td>
-                             <td>'.$t_contrato["data_inicio"].'</td>
-                             <td>'.$t_contrato["data_fim"].'</td>
+                             <td >'.$t_contrato["data_inicio"].'</td>
+                             <td>'.$t_contrato["data_fim"].'</td>                           
                             </tr>
                             ';
                           }
@@ -318,14 +318,12 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
          columns:{
           identifier:[0, "id_tarefas_contrato"],
           editable:[[2, 'data_inicio'], [3, 'data_fim']]
+
          },
+         inputClass: 'form-control input-sm',
+         deleteButton: false,
          restoreButton:false,
-         onSuccess:function(data, textStatus, jqXHR)
-         {
-          if(data.action == 'delete')
-          {
-           $('#'+data.id).remove();
-          }
+         onSuccess:function(data, textStatus, jqXHR){    
          }
         });
        });

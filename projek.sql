@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Set-2017 às 22:13
+-- Generation Time: 28-Set-2017 às 21:47
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -5970,7 +5970,8 @@ INSERT INTO `historico` (`id_market`, `comentario`, `id_consultor`, `id_historic
 (39, 'sasasasa', 10, 3, '16.09.17'),
 (39, '323233232', 10, 4, '16.09.17'),
 (40, 'sasasa', 10, 5, '19.09.17'),
-(40, 'Marquei consulta com wenderson', 10, 6, '19.09.17');
+(40, 'Marquei consulta com wenderson', 10, 6, '19.09.17'),
+(39, 'ok', 10, 7, '28.09.17');
 
 -- --------------------------------------------------------
 
@@ -6755,7 +6756,7 @@ ALTER TABLE `consultores_lead`
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `consultores_prospect`
 --
@@ -6800,7 +6801,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `information`
 --
@@ -6815,7 +6816,7 @@ ALTER TABLE `leads`
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `porte`
 --
@@ -6885,7 +6886,7 @@ ALTER TABLE `tarefas_contrato`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `type`
 --

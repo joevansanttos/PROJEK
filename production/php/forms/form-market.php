@@ -217,15 +217,21 @@
                  </label>
                  <div class="col-sm-8 col-xs-12 col-md-2">
                    <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
-                     <option value="Comercial">Comercial</option>
-                     <option value="Industrial">Industrial</option>
-                     <option value="Servicos">Prestação de Serviços</option>
+                     <option value="Restaurante">Restaurante</option>
+                     <option value="Supermercado">Supermercado</option>
+                     <option value="Atacado">Atacado</option>
+                     <option value="Varejo">Varejo</option>
+                     <option value="Vestuário">Vestuário</option>
+                     <option value="Serviços">Serviços</option>
+                     <option value="Calçado">Calçado</option>
+                     <option value="Gráfica">Gráfica</option>
+                     <option value="Bebidas">Bebidas</option>
                    </select>
                  </div>
                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>
                  </label>
                  <div class="col-sm-6 col-xs-12 col-md-2">
-                   <input type="tel" id="tel" name="tel"  required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                   <input type="tel" id="tel" name="tel" data-inputmask="'mask' : '(99) 9999[9]-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                  </div> 
                </div>
 
@@ -240,7 +246,7 @@
                        if($usuario["id_profissao"] == '1'){
                          ?>
 
-                         <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                         <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?> </option>
                          <?php
                        }
                      }

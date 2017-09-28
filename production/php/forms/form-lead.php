@@ -1,8 +1,6 @@
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-usuario.php";?>
-
-
 <?php
 $id = $_GET['id'];
 $cliente = buscaMarket($conexao, $id);
@@ -157,7 +155,7 @@ $cliente = buscaMarket($conexao, $id);
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Empresa<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$cliente['nome']?>">
+                    <input type="text" id="name" name="name" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12" value="<?=$cliente['nome']?>">
                   </div>
                 </div>
 
@@ -179,21 +177,20 @@ $cliente = buscaMarket($conexao, $id);
                 <div class="item form-group">
                   <label for="tel" class="control-label col-md-3 col-sm-3 col-xs-12">Telefone <span class="required">*</span></label>
                   <div class="col-sm-6 col-xs-12 col-md-2">
-                    <input id="tel" data-inputmask="'mask' : '(99) 99999-9999'" type="text" name="tel" data-validate-linked="tel" class="form-control col-md-2 col-xs-12" required="required">
+                    <input id="tel" data-inputmask="'mask' : '(99) 9999[9]-9999'" type="text" name="tel" data-validate-linked="tel" class="form-control col-md-2 col-xs-12" required="required">
                   </div>
                   <label class="control-label col-md-1 col-sm-3 col-xs-12" for="mail">Cargo <span class="required">*</span>
                   </label>
                   <div class="col-sm-8 col-xs-12 col-md-3">
                     <select id="cargo" name="cargo" required class="form-control col-md-8 col-xs-12">
-                      <option value="">Selecione...</option>
-                      <option value="Almoxarife">Almoxarife</option>
+                      <option value="">Selecione...</option>                      
                       <option value="Faturamento">Colaborador Faturamento</option>
                       <option value="Financeiro">Colaborador Financeiro</option>
                       <option value="Coordenador">Coordenador</option>
+                      <option value="Diretor">Diretor</option>
                       <option value="Gerente">Gerente</option>
                       <option value="Gestor">Gestor</option>
-                      
-                      <option value="Diretor">Diretor</option>
+                      <option value="Socio">Sócio Proprietário</option>                      
                     </select>
                   </div>
                 </div>

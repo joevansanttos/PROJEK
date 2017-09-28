@@ -1,21 +1,19 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-type.php";?>
 <?php include "../bancos/banco-lead.php";?>
 <?php include "../bancos/banco-usuario.php";?>
+<?php include "../bancos/banco-cidade.php";?>
 <?php include "../logica/logica-usuario.php";?>
 <?php include "../alerta/mostra-alerta.php";?>
-
 <?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -230,12 +228,13 @@
                                     $clientes = listaMarkets($conexao);
                                     foreach ($clientes as $cliente){
                                       $leads = buscaLeads($conexao, $cliente['id_market']);
-                                      if(count($leads) < 1){   
+                                      if(count($leads) < 1){
+                                        $nomeCidade = buscaCidade($conexao , $cliente['cidade']);   
                                    ?>
                                     <tr>
                                       <td><?=$cliente['nome']?></td>
                                       <td><?=$cliente['tel']?></td>
-                                      <td><?=$cliente['cidade']?></td>
+                                      <td><?=$nomeCidade['CT_NOME']?></td>
                                       <td><?=$cliente['estado']?></td>
                                       <td><?=$cliente['bairro']?></td>
                                       <td><?=$cliente['segmento']?></td>                                    
@@ -284,13 +283,7 @@
                                    ?>  
                                   </select>        
                                   </div>
-                                  <div class="form-group"> 
-                                    <label for="recipient-name" class="control-label">Data</label>   
-                                    <div class="">
-                                      <input type="date" id="data" name="data" required="required" data-validate-length-range="8,20" class="form-control">
-                                    </div>
-
-                                  </div>
+                                  
                                   </div>
                                   <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            

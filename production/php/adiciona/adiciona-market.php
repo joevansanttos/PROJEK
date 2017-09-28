@@ -14,9 +14,7 @@
     $tel = $_POST["tel"];
     $bairro = $_POST["bairro"];
 
-    $nome_cidade = buscaCidade($conexao, $cidade);
-
-    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro, id_type) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$nome_cidade['CT_NOME']}', '{$segmento}','{$tel}' ,'{$bairro}', 1 )";
+    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro, id_type) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$bairro}', 1 )";
 
 
     if(mysqli_query($conexao, $query)){
