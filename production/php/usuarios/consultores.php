@@ -5,7 +5,6 @@
 <?php include "../bancos/banco-profissao.php";?>
 <?php include "../logica/logica-usuario.php";?>
 <?php include "../alerta/mostra-alerta.php";?>
-
 <?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
