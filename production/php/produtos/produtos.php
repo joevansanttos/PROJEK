@@ -1,14 +1,11 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-produto.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-
-
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-produto.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
+  require_once "../bancos/banco-usuario.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -200,12 +197,17 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="datatable" class="table table-hover">
+                        <table id="datatable" class="table">
                           <thead >
                             <tr>
-                              <th>Nome</th>
-                              <th>Preço</th>                            
-                              <th class="col-md-2">Ações</th>
+                              <th>Produto</th>
+                              <th>Micro</th>
+                              <th>Micro/Partner</th>
+                              <th>Pequena</th>
+                              <th>Pequena/Partner</th>
+                              <th>Média</th>
+                              <th>Média/Partner</th>                            
+                              <th>Ações</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -215,11 +217,15 @@
                               ?>
                               <tr>
                                 <td><?=$produto['nome']?></td>
-                                <td><?=$produto['preco']?></td> 
-                                <td align="center" >
-                                  <a href="../profiles/produto-profile.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>              
+                                <td><?=number_format($produto['preco'], 2, '.', '')?></td>
+                                <td><?=number_format($produto['preco'] * 1.5, 2, '.', '')?></td>
+                                <td><?=number_format($produto['preco'] * 1.5, 2, '.', '')?></td>
+                                <td><?=number_format(($produto['preco'] * 1.5) * 1.5, 2, '.', '')?></td>
+                                <td><?=number_format($produto['preco'] * 2, 2, '.', '')?></td>
+                                <td><?=number_format($produto['preco'] * 2 * 1.5, 2, '.', '')?></td> 
+                                <td align="center" >                                            
                                   <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>
-                                  <a href="remove-usuario.php?id=<?=$usuario['id']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <a href="../remove/remove-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                 </td>
                               </tr>
                               <?php

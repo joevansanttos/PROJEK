@@ -1,10 +1,12 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-produto.php";?>
-
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-produto.php";
   $id = $_GET['id_produto'];
   $produto = buscaProduto($conexao, $id);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +15,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projek | Alterando Produto</title>
-  
+  <title>Projek | Alterar Produto</title>
+
   <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -47,63 +49,52 @@
               <div class="menu_section">
                 <h3>Geral</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
-                      <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
-                      <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
-                      <li><a href="../empresas/markets.php">MARKET</a></li>
+                      <li><a href="../index/index2.php">Dashboard</a></li>
+                    </ul>
+                    
+                  </li>
+                  <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
+                      <li><a href="../produtos/produtos.php">Produtos</a></li>
+                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../empresas/market.php">MARKET</a></li>
-                      <li><a href="../empresas/leads.php">LEADS</a></li>
-                      <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
-                      <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
-                      <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
-                      <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
+                      <li><a href="../empresas/market.php">Market</a></li>
+                      <li><a href="../empresas/leads.php">Leads</a></li>
+                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="contrato-mapeamento.php">MAPEAMENTO DE PROCESSOS</a></li>
-                      <li><a href="contrato-auditoria.php">AUDITORIA DE PROCESSOS</a></li>
-                      <li><a href="contrato-gestao.php">GESTÃO DE CONHECIMENTO</a></li>
+                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">CONTAS A PAGAR</a></li>
-                      <li><a href="chartjs2.html">CONTAS A RECEBER</a></li>
-                      <li><a href="morisjs.html">CONCILIAÇÃO</a></li>
-                      <li><a href="echarts.html">FLUXO DE CAIXA</a></li>
-                      <li><a href="other_charts.html">COBRANÇA</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-cart-plus"></i> COMPRAS <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index2.html">SOLICITAÇÃO DE COMPRAS</a></li>
-                      <li><a href="form_advanced.html">ORÇAMENTO</a></li>
-                      <li><a href="form_validation.html">ORDEM DE COMPRA</a></li>
-                      <li><a href="form_wizards.html">ACOMPANHAMENTO DE ENTREGA</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-group"></i>RECURSOS HUMANOS <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">SOLICITAÇÃO COLABORADOR</a></li>
-                      <li><a href="fixed_footer.html">SELEÇÃO</a></li>
-                      <li><a href="fixed_footer.html">RECRUTAMENTO</a></li>
-                      <li><a href="fixed_footer.html">ADMISSÃO</a></li>
-                      <li><a href="fixed_footer.html">AVALIAÇÃO DE DESEMPENHO</a></li>
-                      <li><a href="fixed_footer.html">FÉRIAS</a></li>
-                      <li><a href="fixed_footer.html">DESENVOLVIMENTO HUMANO</a></li>
-                      <li><a href="fixed_footer.html">DEMISSÃO</a></li>
-                    </ul>
-                  </li>               
                 </ul>
               </div>
             </div>
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+            </div>  
           </div>
         </div> 
       </div>
@@ -145,7 +136,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Altere o Produto</h3>
+                <h3>Alterar Produto</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -159,56 +150,56 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="x_content">
-              <br />
-              <form action="../altera/altera-produto.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome do Produto<span class="required">*</span>
-                   </label>
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                     <input type="text" id="nome" value = "<?=$produto['nome']?>" name="nome" required="required" class="form-control col-md-7 col-xs-12">
-                   </div>
-                 </div>
-
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="descricao"  name="descricao" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['descricao']?></textarea>
-                   </div>
-                 </div>
-
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficios">Benefícios do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="beneficios" name="beneficios" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['beneficios']?></textarea>
-                   </div>
-                 </div>
-
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Entregas do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="entregas" name="entregas" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['entregas']?></textarea>
-                   </div>
-                 </div>
-
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço do Produto<span class="required">*</span></label>
-                   <div class="col-md-2 col-sm-6 col-xs-12">
-                     <input type="text" id="preco" name="preco" value="<?=$produto['preco']?>" required="required" class="form-control col-md-7 col-xs-12">
-                   </div>
-                 </div>
-
-
-                 <div class="ln_solid"></div>
-                 <div class=" form-group">
-                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                     <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-                     <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
-                     <input type="hidden" name="id_produto" id="id_produto" value="<?=$produto['id_produto']?>" />
-                   </div>
-                 </div>
-              </form>
-           </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <br />
+                    <form action="../altera/altera-produto.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome do Produto<span class="required">*</span>
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                           <input type="text" value="<?=$produto['nome']?>" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="descricao" rows='6' name="descricao" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['descricao']?></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficios">Benefícios do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="beneficios" rows='6' name="beneficios" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['beneficios']?></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Entregas do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="entregas" rows='6' name="entregas" required="required" class="form-control col-md-7 col-xs-12"><?=$produto['entregas']?></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço do Produto<span class="required">*</span></label>
+                         <div class="col-md-5 col-sm-6 col-xs-12">
+                           <input type="text" value="<?=$produto['preco']?>" id="preco" name="preco" required="required" class="form-control col-md-7 col-xs-12">
+                         </div>
+                       </div>
+                       <div class="ln_solid"></div>
+                       <div class=" form-group">
+                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                           <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
+                           <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
+                           <input type="hidden" name="id_produto" id="id_produto" value="<?=$produto['id_produto']?>" />
+                         </div>
+                       </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
        <!-- /page content -->

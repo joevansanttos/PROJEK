@@ -9,8 +9,8 @@
  	require_once  "../logica/logica-usuario.php";
  	require_once  "../alerta/mostra-alerta.php";
   $id = $_GET['id'];
-  $usuario = buscaUsuario($conexao, $id);
-  $profissao = buscaProfissao($conexao , $usuario['id_profissao']);             
+  $user = buscaUsuario($conexao, $id);
+  $profissao = buscaProfissao($conexao , $user['id_profissao']);             
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -179,32 +179,32 @@
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="text"  value="<?=$usuario['nome']?>" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
+	                		      <input type="text"  value="<?=$user['nome']?>" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobrenome">Sobrenome <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="text" value="<?=$usuario['sobrenome']?>" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
+	                		      <input type="text" value="<?=$user['sobrenome']?>" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="email" value="<?=$usuario['email']?>" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
+	                		      <input type="email" value="<?=$user['email']?>" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha">Senha<span class="required">*</span></label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="password" value="<?=$usuario['senha']?>" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
+	                		      <input type="password" value="<?=$user['senha']?>" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
 	                		    </div>
 	                		  </div>           
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Telefone<span class="required">*</span></label>
 	                		    <div class="col-md-3 col-sm-6 col-xs-12">
-	                		      <input class="form-control col-md-8" value="<?=$usuario['telefone']?>" type="text" id="telefone" data-inputmask="'mask' : '(99) 99999-9999'" name="telefone" required="required"> 
+	                		      <input class="form-control col-md-8" value="<?=$user['telefone']?>" type="text" id="telefone" data-inputmask="'mask' : '(99) 9999[9]-9999'" name="telefone" required="required"> 
 	                		    </div>
 	                		  </div>
 	                		  <div class=" form-group">
@@ -224,7 +224,7 @@
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo<span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-3 col-sm-6 col-xs-12">
-	                		      <select value="<?=$usuario['sexo']?>" class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
+	                		      <select value="<?=$user['sexo']?>" class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
 	                		        <option value="feminino">Feminino</option>
 	                		        <option value="masculino">Masculino</option>
 	                		      </select>  
@@ -239,7 +239,7 @@
 	                		      $profissoes = listaProfissao($conexao);
 	                		      foreach ($profissoes as $profissao) {
 	                		      ?>
-	                		        <option value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
+	                		        <option selected="<?=$user['id_profissao']?>" value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
 	                		      <?php                         
 	                		      }
 	                		      ?>
@@ -251,7 +251,7 @@
 	                		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 	                		      <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		      <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
-	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$usuario['id_usuario']?>" />
+	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$user['id_usuario']?>" />
 	                		    </div>
 	                		  </div>
 	                		</form>

@@ -1,7 +1,5 @@
-<?php include ("conecta.php");?>
-<?php include ("banco-produto.php");?>
-
-<?php
+<?php 
+    require_once "../bancos/conecta.php";
     $nome = $_GET["nome"];
     $descricao = $_GET["descricao"];
     $beneficios = $_GET["beneficios"];
@@ -18,5 +16,5 @@
 
 
     mysqli_close($conexao);
-    header("Location: produtos.php");
+    header("Location: ../produtos/produtos.php");
 ?>

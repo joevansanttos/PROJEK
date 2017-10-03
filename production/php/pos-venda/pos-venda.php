@@ -1,25 +1,20 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-contrato.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-feedback.php";?>
-<?php include "../bancos/banco-pos_venda.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-contato.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-contrato.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-feedback.php";
+  require_once "../bancos/banco-pos_venda.php";
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-contato.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
-?>
-
-<?php
-$clientes = listaClientes($conexao);
+  $clientes = listaClientes($conexao);
 ?>
 
 <!DOCTYPE html>

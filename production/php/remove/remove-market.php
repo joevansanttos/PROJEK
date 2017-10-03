@@ -1,6 +1,4 @@
 <?php include "../bancos/conecta.php";?>
-
-
 <?php
     $id = $_GET["id"];
     $query = "delete from market where id_market = $id";

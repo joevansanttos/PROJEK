@@ -221,7 +221,7 @@
 	                		     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="segmento">Segmento<span class="required">*</span>
 	                		     </label>
 	                		     <div class="col-sm-8 col-xs-12 col-md-2">
-	                		       <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
+	                		       <select id="segmento" name="segmento" required class="form-control col-md-8 col-xs-12">
 	                		         <option value="Atacado">Atacado</option>
 	                		         <option value="Bebidas">Bebidas</option>
 	                		         <option value="Calçado">Calçado</option>
@@ -288,6 +288,9 @@
 		    estadoVal: '<?=$market['estado']?>',
 		    cidadeVal: '<?=$market['cidade']?>'
 		  })
+		</script>
+		<script type="text/javascript">
+		  document.getElementById('segmento').value = '<?=$market['segmento']?>';
 		</script>
 	</body>
 </html>

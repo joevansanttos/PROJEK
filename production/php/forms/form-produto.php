@@ -1,4 +1,14 @@
-<?php include "../bancos/conecta.php";?>
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
+?>
 
 
 <!DOCTYPE html>
@@ -30,11 +40,16 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <?php                  
+                    $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                    $sth = $conexao->query($sql);
+                    $result=mysqli_fetch_array($sth);                            
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  ?>
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
-                <h2>Fabio</h2>
+                <h2><?=$usuario['nome']?></h2>
               </div>
             </div>
             <br />
@@ -101,7 +116,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../../images/img2.jpg" alt="">Fabio
+                  <?=$usuario['nome']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -112,7 +127,7 @@
                     </a>
                   </li>
                   <li><a href="javascript:;">Ajuda</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                  <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                 </ul>
               </li>
 
@@ -143,49 +158,55 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="x_content">
-              <br />
-              <form action="../adiciona/adiciona-produto.php"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome do Produto<span class="required">*</span>
-                   </label>
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                     <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="descricao" rows=3 name="descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficios">Benefícios do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="beneficios" rows=3 name="beneficios" required="required" class="form-control col-md-7 col-xs-12"></textarea>
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Entregas do Produto<span class="required">*</span></label>
-                   <div class="col-md-6 col-sm-6 col-xs-12" >
-                     <textarea id="entregas" rows=3 name="entregas" required="required" class="form-control col-md-7 col-xs-12"></textarea>
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço do Produto<span class="required">*</span></label>
-                   <div class="col-md-5 col-sm-6 col-xs-12">
-                     <input type="text" id="preco" name="preco" required="required" class="form-control col-md-7 col-xs-12">
-                   </div>
-                 </div>
-                 <div class="ln_solid"></div>
-                 <div class=" form-group">
-                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                     <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-                     <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
-                   </div>
-                 </div>
-              </form>
-           </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <br />
+                    <form action="../adiciona/adiciona-produto.php" method="get"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome do Produto<span class="required">*</span>
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                           <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Descrição do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="descricao" rows='6' name="descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficios">Benefícios do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="beneficios" rows='6' name="beneficios" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descricao">Entregas do Produto<span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6 col-xs-12" >
+                           <textarea id="entregas" rows='6' name="entregas" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Preço do Produto<span class="required">*</span></label>
+                         <div class="col-md-5 col-sm-6 col-xs-12">
+                           <input type="text" id="preco" name="preco" data-inputmask="'mask' : '9{1,5}'" required="required" class="form-control col-md-7 col-xs-12">
+                         </div>
+                       </div>
+                       <div class="ln_solid"></div>
+                       <div class=" form-group">
+                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                           <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
+                           <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                         </div>
+                       </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
        <!-- /page content -->
@@ -225,7 +246,8 @@
 <!-- Select2 -->
 <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
 <!-- Parsley -->
-<script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+<script src="../../../vendors/parsleyjs/dist/parsley.min.js"></script>
+<script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <!-- Autosize -->
 <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
 <!-- jQuery autocomplete -->
@@ -243,5 +265,8 @@
   })
 </script>
 <script src="js/teste.js"></script>
+<script type="text/javascript">
+  
+</script>
 </body>
 </html>
