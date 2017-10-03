@@ -233,12 +233,12 @@
                                       <td><?=$lead['tel']?></td>
                                       <td><?=$lead['cargo']?></td>                                 
                                       <td align="center">
-                                        <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
-                                        <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                        <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                        <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
-                                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
-                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                        <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Lead" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
+                                        <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                        <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                        <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                                        <button data-toggle="tooltip" data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
                                       </td>
                                       <div id="myModal" class="modal fade" role="dialog" ">
                                         <div class="modal-dialog ">
@@ -287,7 +287,7 @@
                         </table>
                         
                         <div class="ln_solid"></div>
-                          <a class="btn  btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
+                          <a class="btn  btn-default" data-toggle="tooltip" data-placement="top" title="Market" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
                     </div>                    

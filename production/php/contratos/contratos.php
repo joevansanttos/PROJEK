@@ -1,6 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-contrato.php";?>
 <?php include "../bancos/banco-usuario.php";?>
@@ -8,7 +7,6 @@
 <?php include "../bancos/banco-contrato_status.php";?>
 <?php include "../logica/logica-usuario.php";?>
 <?php include "../alerta/mostra-alerta.php";?>
-
 <?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
@@ -240,21 +238,21 @@
                                 if($contrato['id_contrato_status'] == 1){
                               ?>
                                   <td align="center">
-                                    <a href="finaliza-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
-                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
-                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>             
-                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                    <a href="finaliza-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Finaliza Contrato"  class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
+                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <button data-toggle="tooltip" data-placement="top" title="Novo Histórico"  class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>             
+                                    <a data-toggle="tooltip" data-placement="top" title="Remover Contrato"  href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>
                               <?php    
                                 }else{
                               ?>
                                   <td align="center">
-                                    <button class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
-                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
-                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                 
-                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                    <button data-toggle="tooltip" data-placement="top" title="Avaliação Positiva"  class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
+                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
+                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>                              
+                                    <button data-toggle="tooltip" data-placement="top" title="Novo Histórico"  class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                 
+                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                   </td>
                               <?php   
                                 }

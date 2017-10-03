@@ -240,11 +240,11 @@
                                       <td><?=$cliente['segmento']?></td>                                    
                                       </td>                              
                                       <td align="center">
-                                        <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                        <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                        <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>
-                                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                                        
-                                        <a href="../remove/remove-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>       
+                                        <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Lead" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                        <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                        <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Altera Market" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a>
+                                        <button data-toggle="tooltip" data-placement="top" title="Novo Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                                        
+                                        <a data-toggle="tooltip" data-placement="top" title="Remove Market" href="../remove/remove-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>       
                                       </td>
 
                                     </tr>
@@ -295,7 +295,7 @@
                           </div>
                         </div>
                         <div class="ln_solid"></div>
-                          <a class="btn btn-default" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
+                          <a data-toggle="tooltip" data-placement="top" title="Novo Market" class="btn btn-default" style="" href="../forms/form-market.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
                     </div>  

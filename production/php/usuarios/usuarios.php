@@ -177,7 +177,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-hover">
+                        <table id="tabela" class="table table-striped">
                                 <thead>
                                   <tr>
                                     <th>Nome</th>
@@ -213,9 +213,9 @@
                                       <td><?=$usuario['estado']?></td>
                                       <td><?=$usuario['telefone']?></td>
                                       <td align="center">
-                                        <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                        <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
-                                        <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                        <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Usuário" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                        <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Usuário" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
+                                        <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Usuário" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                       </td>
                                     </tr>
                                   <?php
@@ -224,7 +224,7 @@
                                 </tbody>
                         </table>
                         <div class="ln_solid"></div>
-                          <a class="btn btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
+                          <a data-toggle="tooltip" data-placement="top" title="Novo Usuário"  class="btn btn-default" style="" href="../forms/form-usuario.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
                     </div>                     

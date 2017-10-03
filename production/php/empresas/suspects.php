@@ -1,13 +1,11 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include ("../bancos/banco-market.php");?>
 <?php include ("../bancos/banco-suspect.php");?>
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../logica/logica-usuario.php";?>
 <?php include "../alerta/mostra-alerta.php";?>
-
 <?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
@@ -200,7 +198,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-hover">
+                        <table id="tabela" class="table table-striped">
                             <thead>
                               <tr>                            
                                 <th>Empresa</th>
@@ -241,12 +239,12 @@
                                   <td><?=$apresentacao['hora']?></td>
                                   <td><?=$consultor['nome']?></td>                              
                                   <td class="col-md-3" align="center">
-                                    <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
-                                    <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                    <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                    <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
-                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
-                                    <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
+                                    <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
+                                    <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Prospect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                    <a href="cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                    <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Suspect" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                                    <button data-toggle="tooltip" data-placement="top" title="Novo Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                    <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Suspect" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                     
                                   </td>                              
                                 </tr>
                               <?php
@@ -301,7 +299,7 @@
                           </div>
                         </div>
                         <div class="ln_solid"></div>
-                          <a class="btn btn-default" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
+                          <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Market"  style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
                     </div>  

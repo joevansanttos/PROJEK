@@ -1,8 +1,17 @@
+<?php header('Content-Type: text/html; charset=utf-8'); ?>
+<?php error_reporting(E_ALL ^ E_NOTICE); ?>
 <?php include "../bancos/conecta.php";?>
 <?php include "../bancos/banco-market.php";?>
 <?php include "../bancos/banco-profissao.php";?>
 <?php include "../bancos/banco-usuario.php";?>
-
+<?php include "../logica/logica-usuario.php";?>
+<?php include "../alerta/mostra-alerta.php";?>
+<?php
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,11 +43,19 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <?php                  
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if(count($result) > 0){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }                            
+                  
+                ?>
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
-                <h2>Fabio</h2>
+                <h2><?=$usuario['nome']?></h2>
               </div>
             </div>
             <br />
@@ -105,7 +122,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../../images/img2.jpg" alt="">Fabio
+                  <?=$usuario['nome']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -116,7 +133,7 @@
                     </a>
                   </li>
                   <li><a href="javascript:;">Ajuda</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                  <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                 </ul>
               </li>
 
@@ -217,15 +234,15 @@
                  </label>
                  <div class="col-sm-8 col-xs-12 col-md-2">
                    <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
-                     <option value="Restaurante">Restaurante</option>
-                     <option value="Supermercado">Supermercado</option>
                      <option value="Atacado">Atacado</option>
-                     <option value="Varejo">Varejo</option>
-                     <option value="Vestuário">Vestuário</option>
-                     <option value="Serviços">Serviços</option>
-                     <option value="Calçado">Calçado</option>
-                     <option value="Gráfica">Gráfica</option>
                      <option value="Bebidas">Bebidas</option>
+                     <option value="Calçado">Calçado</option>
+                     <option value="Gráfica">Gráfica</option> 
+                     <option value="Restaurante">Restaurante</option>
+                     <option value="Serviços">Serviços</option>
+                     <option value="Supermercado">Supermercado</option>
+                     <option value="Varejo">Varejo</option>
+                     <option value="Vestuário">Vestuário</option>                  
                    </select>
                  </div>
                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>

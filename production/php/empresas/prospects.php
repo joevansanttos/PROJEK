@@ -1,6 +1,5 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); ?>
-
 <?php include "../bancos/conecta.php";?>
 <?php include ("../bancos/banco-market.php");?>
 <?php include ("../bancos/banco-suspect.php");?>
@@ -9,7 +8,6 @@
 <?php include "../bancos/banco-usuario.php";?>
 <?php include "../logica/logica-usuario.php";?>
 <?php include "../alerta/mostra-alerta.php";?>
-
 <?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
@@ -239,11 +237,11 @@
                               <td><?=$oportunidade['fechamento']?></td>
                               <td><?=$oportunidade['recebimento']?></td>                         
                               <td align="center">                              
-                                <a href="../forms/form-contrato.php?id_prospect=<?=$oportunidade['id_prospect']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                                
-                                <a href="../forms/form-altera-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
-                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
-                                <a href="../remove/remove-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                                 
+                                <a href="../forms/form-contrato.php?id_prospect=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Contrato"  class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
+                                <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market"  class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                                
+                                <a href="../forms/form-altera-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Prospect"  class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                                <button data-toggle="tooltip" data-placement="top" title="Novo Histórico"  class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                <a href="../remove/remove-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Prospect"  class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>                                 
                               </td>
                             </tr>
                             <?php
