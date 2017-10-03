@@ -1,18 +1,18 @@
 <?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-produto.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-departamentos.php";?>
 <?php include "../bancos/banco-prospect.php";?>
+<?php include "../bancos/banco-usuario.php";?>
+<?php include "../bancos/banco-produto.php";?>
+<?php include "../bancos/banco-contrato.php";?>
 
 <?php
-  $produtos = listaProdutos($conexao);
-  $clientes = listaMarkets($conexao);
-  $departamentos = listaDepartamentos($conexao);
-  $id_prospect = $_GET['id_prospect'];
-  $prospect = buscaProspectId($conexao, $id_prospect);
-  $market = buscaMarket($conexao, $prospect['id_clientes']); 
-  $produtoprospect = buscaProduto($conexao, $prospect['id_produto']);             
+$n_contrato = $_GET['n_contrato'];
+$contrato = buscaContrato($conexao , $id);
+$prospect = buscaProspectId($conexao, $id);
+$produtos = listaProdutos($conexao);
+$produtoId = buscaProduto($conexao, $prospect['id_produto']);
+$prospect['prob'] = intval($prospect['prob']);
+$consultor = buscaUsuario($conexao, $prospect['id_consultor']);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projek | Novo Contrato</title>
+    <title>Projek | Alterar Contrato</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -55,52 +55,62 @@
                 <div class="menu_section">
                   <h3>Geral</h3>
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-desktop"></i> LISTAR<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="../index/index2.php">Dashboard</a></li>
-                      </ul>
-                      
-                    </li>
-                    <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="../usuarios/usuarios.php">Usuários</a></li>
-                        <li><a href="../produtos/produtos.php">Produtos</a></li>
-                        <li><a href="../usuarios/consultores.php">Consultores</a></li>
+                        <li><a href="../usuarios/usuarios.php">USUÁRIOS</a></li>
+                        <li><a href="../produtos/produtos.php">PRODUTOS</a></li>
+                        <li><a href="../usuarios/consultores.php">CONSULTORES</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-edit"></i> NEGÓCIOS <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="../empresas/market.php">Market</a></li>
-                        <li><a href="../empresas/leads.php">Leads</a></li>
-                        <li><a href="../empresas/suspects.php">Suspects</a></li>
-                        <li><a href="../empresas/prospects.php">Prospects</a></li>
-                        <li><a href="../contratos/contratos.php">Contratos</a></li>                     
-                        <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+                        <li><a href="../empresas/market.php">MARKET</a></li>
+                        <li><a href="../empresas/leads.php">LEADS</a></li>
+                        <li><a href="../empresas/suspects.php">SUSPECTS</a></li>
+                        <li><a href="../empresas/prospects.php">PROSPECTS</a></li>
+                        <li><a href="../contratos/contratos.php">CONTRATOS</a></li>                     
+                        <li><a href="../pos-venda/pos-venda.php">PÓS-VENDA</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-table"></i> CONSULTORIA <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                        <li><a href="contrato-mapeamento.php">MAPEAMENTO DE PROCESSOS</a></li>
+                        <li><a href="contrato-auditoria.php">AUDITORIA DE PROCESSOS</a></li>
+                        <li><a href="contrato-gestao.php">GESTÃO DE CONHECIMENTO</a></li>
                       </ul>
                     </li>
+                    <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="chartjs.html">CONTAS A PAGAR</a></li>
+                        <li><a href="chartjs2.html">CONTAS A RECEBER</a></li>
+                        <li><a href="morisjs.html">CONCILIAÇÃO</a></li>
+                        <li><a href="echarts.html">FLUXO DE CAIXA</a></li>
+                        <li><a href="other_charts.html">COBRANÇA</a></li>
+                      </ul>
+                    </li>
+                    <li><a><i class="fa fa-cart-plus"></i> COMPRAS <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="index2.html">SOLICITAÇÃO DE COMPRAS</a></li>
+                        <li><a href="form_advanced.html">ORÇAMENTO</a></li>
+                        <li><a href="form_validation.html">ORDEM DE COMPRA</a></li>
+                        <li><a href="form_wizards.html">ACOMPANHAMENTO DE ENTREGA</a></li>
+                      </ul>
+                    </li>
+                    <li><a><i class="fa fa-group"></i>RECURSOS HUMANOS <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="fixed_sidebar.html">SOLICITAÇÃO COLABORADOR</a></li>
+                        <li><a href="fixed_footer.html">SELEÇÃO</a></li>
+                        <li><a href="fixed_footer.html">RECRUTAMENTO</a></li>
+                        <li><a href="fixed_footer.html">ADMISSÃO</a></li>
+                        <li><a href="fixed_footer.html">AVALIAÇÃO DE DESEMPENHO</a></li>
+                        <li><a href="fixed_footer.html">FÉRIAS</a></li>
+                        <li><a href="fixed_footer.html">DESENVOLVIMENTO HUMANO</a></li>
+                        <li><a href="fixed_footer.html">DEMISSÃO</a></li>
+                      </ul>
+                    </li>               
                   </ul>
                 </div>
               </div>
-              <!-- /menu footer buttons -->
-              <div class="sidebar-footer hidden-small">
-                  <a data-toggle="tooltip" data-placement="top" title="Settings">
-                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                  </a>
-                  <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                  </a>
-                  <a data-toggle="tooltip" data-placement="top" title="Lock">
-                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                  </a>
-                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                  </a>
-              </div>  
             </div>
           </div> 
         </div>
@@ -136,7 +146,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Novo Contrato</h3>
+                <h3>Alterar Contrato</h3>
               </div>            
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -165,28 +175,36 @@
                     <div class="item form-group">
                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_cliente">Nome Fantasia<span class="required">*</span>
                      </label>
-                     <div class="col-md-6 col-sm-6 col-xs-12">
-                       <input type="text" value="<?=$market['nome']?>" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                     <div class="col-md-6 col-sm-6 col-xs-12">                         
+                       <select name="id_cliente" class="form-control col-md-7 col-xs-12">
+                         <?php
+                         foreach ($clientes as $cliente){  
+                           ?>
+                           <option value="<?=$cliente['id_market']?>"><?=$cliente['nome']?></option>
+                           <?php
+                         }
+                         ?>
+                       </select>
                      </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
                      </label>
                      <div class="col-md-6 col-sm-6 col-xs-12">
-                       <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="<?=$market['razao']?>" name="razao" required="required" type="text">
+                      <input type="text" id="razao" name="razao" required="required" class="form-control col-md-7 col-xs-12">
                      </div>
                     </div>
                     <div class="item form-group">
                       <label for="cnpj" class="control-label col-md-3 col-sm-3 col-xs-12">CNPJ <span class="required">*</span></label>
                      <div class="col-sm-6 col-xs-12 col-md-6">
-                      <input id="cnpj" value="<?=$market['cnpj']?>" type="text" name="cnpj" data-validate-linked="cnpj" class="form-control col-md-2 col-xs-12" required="required">
+                      <input id="cnpj" value="<?=$cliente['cnpj']?>" type="text" name="cnpj" data-validate-linked="cnpj" class="form-control col-md-2 col-xs-12" required="required">
                      </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Sede <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="sede" name="sede" value="<?=$market['endereco']?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="sede" name="sede" value="<?=$cliente['endereco']?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
                      </div>
                     </div>
                     <div class="item form-group ">
@@ -222,9 +240,9 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="id_produto" class="form-control col-md-7 col-xs-12">
                          <?php
-                         foreach ($produtos as $produto){                            
+                         foreach ($produtos as $produto){  
                            ?>
-                           <option selected="<?=$produtoprospect['id_produto']?>" value="<?=$produto['id_produto']?>" ><?=$produto['nome']?></option>
+                           <option value="<?=$produto['id_produto']?>" ><?=$produto['nome']?></option>
                            <?php
                          }
                          ?>  
@@ -283,7 +301,6 @@
                       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                         <button type="button" class="btn btn-primary">Cancelar</button>
                         <button type="submit" class="btn btn-success">Cadastrar</button>
-                        <input type="hidden" name="id_prospect" id="id_prospect" value="<?=$prospect['id_prospect']?>" />
                       </div>
                     </div>  
                   </form>
@@ -344,7 +361,7 @@
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <!-- Cidades e Estados -->
-    <script src="../../js/cidades-estados-utf8.js"></script>
+    <script src="../../js/cidades-estados2-utf8.js"></script>
     <script language="JavaScript" type="text/javascript" charset="utf-8">
       new dgCidadesEstados({
         cidade: document.getElementById('cidade1'),
@@ -405,7 +422,15 @@
           });
     </script>
     <script type="text/javascript">
-      document.getElementById('id_produto').value = '<?=$produtoprospect['id_produto']?>';
-    </script>   
+      document.getElementById('prod').value = '<?=$produtoId['id_produto']?>';
+    </script>
+    <script type="text/javascript">
+      document.getElementById('prob').value = '<?=$prospect['prob']?>';
+    </script>
+    <script type="text/javascript">
+      document.getElementById('id_consultor').value = '<?=$consultor['id_usuario']?>';
+    </script>
+    <script src="../../js/calcula.js"></script>
+    
   </body>
 </html>

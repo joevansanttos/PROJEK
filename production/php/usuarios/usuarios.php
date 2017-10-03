@@ -1,11 +1,11 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-profissao.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-profissao.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -177,7 +177,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-striped">
+                        <table id="tabela" class="table table">
                                 <thead>
                                   <tr>
                                     <th>Nome</th>
@@ -212,8 +212,7 @@
                                       <td><?=$usuario['email']?></td>
                                       <td><?=$usuario['estado']?></td>
                                       <td><?=$usuario['telefone']?></td>
-                                      <td align="center">
-                                        <a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Usuário" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
+                                      <td align="center">                                        
                                         <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Usuário" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
                                         <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Usuário" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                       </td>

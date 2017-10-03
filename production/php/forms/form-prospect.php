@@ -1,21 +1,19 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-produto.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php
+<?php 
+	header('Content-Type: text/html; charset=utf-8'); 
+	error_reporting(E_ALL ^ E_NOTICE);
+	require_once "../bancos/conecta.php";
+	require_once "../bancos/banco-market.php";
+	require_once "../bancos/banco-usuario.php";
+	require_once "../bancos/banco-produto.php";
+	require_once "../logica/logica-usuario.php";
+	require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
-?>
-<?php
-$id = $_GET['id'];
-$cliente = buscaMarket($conexao, $id);
-$produtos = listaProdutos($conexao);
+	$id = $_GET['id'];
+	$cliente = buscaMarket($conexao, $id);
+	$produtos = listaProdutos($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -184,7 +182,7 @@ $produtos = listaProdutos($conexao);
 	                		    <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Produto <span class="required">*</span></label>
 	                		    <div class="col-sm-6 col-xs-12 col-md-3">
 	                		    
-	                		      <select id="prod" name="prod" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" required>
+	                		      <select id="prod" name="prod" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" required="required">
 	                		      <?php
 	                		      foreach ($produtos as $produto) {                    
 	                		      ?>
@@ -197,7 +195,7 @@ $produtos = listaProdutos($conexao);
 	                		    <label class="control-label col-md-2 col-sm-3 col-xs-12" for="prob">Probabilidade <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-sm-2 col-xs-12 col-md-1">
-	                		      <select id="prob" name="prob" onblur="calcula()" required data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+	                		      <select id="prob" name="prob" onblur="calcula()" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 	                		          <option>%</option>
 	                		            <option value="0">0%</option>
 	                		            <option value="25">25%</option>
@@ -211,12 +209,12 @@ $produtos = listaProdutos($conexao);
 	                		    
 	                		    <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Valor Oportunidade <span class="required">*</span></label>
 	                		    <div class="col-sm-6 col-xs-12 col-md-2">
-	                		      <input type="number" value="<?=$produto['preco']?>" step="" id="valor_op" name="valor_op" data-validate-linked="prod" class="form-control col-md-4 col-xs-12" required>
+	                		      <input type="number" value="<?=$produto['preco']?>" step="" id="valor_op" name="valor_op" data-validate-linked="prod" required="required" class="form-control col-md-4 col-xs-12" required>
 	                		    </div>
 	                		    <label class="control-label col-md-2 col-sm-3 col-xs-12" for="valor_est">Valor Estimado <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-sm-2 col-xs-12 col-md-2">
-	                		      <input type="text" id="valor_est" name="valor_est" required data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+	                		      <input type="text" id="valor_est" name="valor_est" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="item form-group">
@@ -247,10 +245,13 @@ $produtos = listaProdutos($conexao);
 	                		      </select> 
 	                		    </div>
 	                		  </div>
-	                		  <div class="col-md-6 col-md-offset-3">
-	                		    <button type="submit" class="btn btn-primary">Cancelar</button>
-	                		    <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
-	                		    <input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
+	                		  <div class="ln_solid"></div>
+	                		  <div class="form-group">
+	                		  	<div class="col-md-6 col-md-offset-3">
+	                		   		<button type="reset" name="reset" class="btn btn-primary">Resetar</button>
+	                		    	<button id="send" type="submit" class="btn btn-success">Cadastrar</button>
+	                		    	<input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
+	                		  	</div>
 	                		  </div>
 	                		</form> 
 	                	</div>
@@ -297,7 +298,7 @@ $produtos = listaProdutos($conexao);
 	  <!-- Select2 -->
 	  <script src="../../../vendors/select2/dist/js/select2.full.min.js"></script>
 	  <!-- Parsley -->
-	  <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+	  <script src="../../../vendors/parsleyjs/dist/parsley.min.js"></script>
 	  <!-- Autosize -->
 	  <script src="../../../vendors/autosize/dist/autosize.min.js"></script>
 	  <!-- jQuery autocomplete -->

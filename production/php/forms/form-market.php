@@ -1,12 +1,12 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-profissao.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-profissao.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -164,128 +164,133 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="x_content">
-              <br />
-              <form action="../adiciona/adiciona-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-               <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>  
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                   <div class="x_content">
+                     <form action="../adiciona/adiciona-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>  
 
-               <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="razao" required="required" type="text">
-                 </div>
-               </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="razao">Razão Social <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="razao" name="razao" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="razao" required="required" type="text">
+                        </div>
+                      </div>
 
-               <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">CNPJ<span class="required">*</span></label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="cnpj" name="cnpj" data-inputmask="'mask' : '**.***.***/****-**'" required="required" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">CNPJ<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="cnpj" name="cnpj" data-inputmask="'mask' : '**.***.***/****-**'" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 
-               
+                      
 
-               <div class="form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Site<span class="required">*</span></label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="site" name="site" required="required" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="preco">Site<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="site" name="site" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 
-               <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estado1">Estado <span class="required">*</span>
-                 </label>
-                 <div class="col-sm-6 col-xs-12 col-md-2">
-                   <select id="estado1" name="estado1" class="optional form-control col-md-7 col-xs-12"></select>
-                 </div>
-                 <label for="cidade1" class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
-                 </label>
-                 <div class="col-sm-6 col-xs-12 col-md-3">
-                   <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required></select>
-                 </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estado1">Estado <span class="required">*</span>
+                        </label>
+                        <div class="col-sm-6 col-xs-12 col-md-2">
+                          <select id="estado1" name="estado1" class="optional form-control col-md-7 col-xs-12"></select>
+                        </div>
+                        <label for="cidade1" class="control-label col-md-1 col-sm-3 col-xs-12">Cidade <span class="required">*</span>
+                        </label>
+                        <div class="col-sm-6 col-xs-12 col-md-3">
+                          <select id="cidade1" name="cidade1" class="form-control col-md-7 col-xs-12" required></select>
+                        </div>
 
-               </div>
+                      </div>
 
-               <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="bairro" name="bairro" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="bairro" name="bairro" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 
-               <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <input type="text" id="endereco" name="endereco" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                 </div>
-               </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="endereco" name="endereco" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 
-               <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="segmento">Segmento<span class="required">*</span>
-                 </label>
-                 <div class="col-sm-8 col-xs-12 col-md-2">
-                   <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
-                     <option value="Atacado">Atacado</option>
-                     <option value="Bebidas">Bebidas</option>
-                     <option value="Calçado">Calçado</option>
-                     <option value="Gráfica">Gráfica</option> 
-                     <option value="Restaurante">Restaurante</option>
-                     <option value="Serviços">Serviços</option>
-                     <option value="Supermercado">Supermercado</option>
-                     <option value="Varejo">Varejo</option>
-                     <option value="Vestuário">Vestuário</option>                  
-                   </select>
-                 </div>
-                 <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>
-                 </label>
-                 <div class="col-sm-6 col-xs-12 col-md-2">
-                   <input type="tel" id="tel" name="tel" data-inputmask="'mask' : '(99) 9999[9]-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                 </div> 
-               </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="segmento">Segmento<span class="required">*</span>
+                        </label>
+                        <div class="col-sm-8 col-xs-12 col-md-2">
+                          <select id="sexo" name="segmento" required class="form-control col-md-8 col-xs-12">
+                            <option value="Atacado">Atacado</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Calçado">Calçado</option>
+                            <option value="Gráfica">Gráfica</option> 
+                            <option value="Restaurante">Restaurante</option>
+                            <option value="Serviços">Serviços</option>
+                            <option value="Supermercado">Supermercado</option>
+                            <option value="Varejo">Varejo</option>
+                            <option value="Vestuário">Vestuário</option>                  
+                          </select>
+                        </div>
+                        <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Telefone <span class="required">*</span>
+                        </label>
+                        <div class="col-sm-6 col-xs-12 col-md-2">
+                          <input type="tel" id="tel" name="tel" data-inputmask="'mask' : '(99) 9999[9]-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                        </div> 
+                      </div>
 
-                <div class="item form-group">
-                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="consultor">Consultor<span class="required">*</span>
-                 </label>
-                 <div class="col-md-6 col-sm-6 col-xs-12">
-                   <select name="id_consultor" class="form-control col-md-7 col-xs-12">
-                     <?php
-                     $usuarios = listaUsuarios($conexao);
-                     foreach ($usuarios as $usuario){ 
-                       if($usuario["id_profissao"] == '1'){
-                         ?>
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="consultor">Consultor<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="id_consultor" class="form-control col-md-7 col-xs-12">
+                            <?php
+                            $usuarios = listaUsuarios($conexao);
+                            foreach ($usuarios as $usuario){ 
+                              if($usuario["id_profissao"] == '1'){
+                                ?>
 
-                         <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?> </option>
-                         <?php
-                       }
-                     }
-                     ?>  
-                   </select>
-                 </div>
+                                <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?> </option>
+                                <?php
+                              }
+                            }
+                            ?>  
+                          </select>
+                        </div>
+                       </div>
+                                   
+
+
+                   
+
+
+                      <div class="ln_solid"></div>
+                      <div class=" form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
+                          <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                        </div>
+                      </div>
+                     </form>
+                  </div>
                 </div>
-                            
-
-
-            
-
-
-               <div class="ln_solid"></div>
-               <div class=" form-group">
-                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                   <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-                   <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
-                 </div>
-               </div>
-              </form>
-           </div>
+              </div>
+            </div>           
           </div>
       </div>
        <!-- /page content -->

@@ -1,19 +1,16 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-produto.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-profissao.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php
+<?php 
+	header('Content-Type: text/html; charset=utf-8'); 
+ 	error_reporting(E_ALL ^ E_NOTICE); 
+ 	require_once  "../bancos/conecta.php";
+ 	require_once  "../bancos/banco-market.php";
+ 	require_once  "../bancos/banco-produto.php";
+ 	require_once  "../bancos/banco-usuario.php";
+ 	require_once  "../bancos/banco-profissao.php";
+ 	require_once  "../logica/logica-usuario.php";
+ 	require_once  "../alerta/mostra-alerta.php";
   $id = $_GET['id'];
   $usuario = buscaUsuario($conexao, $id);
   $profissao = buscaProfissao($conexao , $usuario['id_profissao']);             
-?>
-
-<?php
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -252,8 +249,8 @@
 	                		  <div class="ln_solid"></div>
 	                		  <div class=" form-group">
 	                		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-	                		      <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-	                		      <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+	                		      <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
+	                		      <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
 	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$usuario['id_usuario']?>" />
 	                		    </div>
 	                		  </div>

@@ -1,7 +1,6 @@
-<?php include "../bancos/conecta.php";?>
-
-<?php
-    $id_market = $_GET["id_market"];
+<?php 
+  require_once "../bancos/conecta.php";
+  $id_market = $_GET["id_market"];
    $razao = $_GET["razao"];
    $nome = $_GET["nome"];
    $cnpj = $_GET["cnpj"];

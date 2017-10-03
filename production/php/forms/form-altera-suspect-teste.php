@@ -1,13 +1,12 @@
 <?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-produto.php";?>
+<?php include "../bancos/banco-suspect.php";?>
 <?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-profissao.php";?>
 
 <?php
-  $id = $_GET['id'];
-  $usuario = buscaUsuario($conexao, $id);
-  $profissao = buscaProfissao($conexao , $usuario['id_profissao']);             
+$id = $_GET['id'];
+$suspect = buscaSuspectId($conexao, $id);
+$consultor = buscaUsuario($conexao, $suspect['id_consultor']);
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projek | Alterar Usuário</title>
+    <title>Projek | Alterar Suspect</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -141,7 +140,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Alterar Usuário</h3>
+                <h3>Alterar Suspect</h3>
               </div>            
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -159,72 +158,56 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_content">
                   <br />
-                  <form id="form" action="../altera/altera-usuario.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text"  value="<?=$usuario['nome']?>" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobrenome">Sobrenome <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" value="<?=$usuario['sobrenome']?>" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="email" value="<?=$usuario['email']?>" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha">Senha<span class="required">*</span></label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" value="<?=$usuario['senha']?>" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
-                      </div>
-                    </div>           
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Telefone<span class="required">*</span></label>
-                      <div class="col-md-3 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-8" value="<?=$usuario['telefone']?>" type="text" id="telefone" data-inputmask="'mask' : '(99) 99999-9999'" name="telefone" required="required"> 
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo<span class="required">*</span>
-                      </label>
-                      <div class="col-md-3 col-sm-6 col-xs-12">
-                        <select value="<?=$usuario['sexo']?>" class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
-                          <option value="feminino">Feminino</option>
-                          <option value="masculino">Masculino</option>
-                          <option value="nada">Não Opinar</option>
-                        </select>  
-                      </div>
-                    </div>                   
+                  <form action="../altera/altera-suspect.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                    
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="profissao">Profissão<span class="required">*</span>
+                      <label for="contato" class="control-label col-md-3 col-sm-3 col-xs-12">Contato <span class="required">*</span></label>
+                      <div class="col-sm-6 col-xs-12 col-md-3">
+                        <input id="contato" value="<?=$suspect['contato']?>" type="text" name="contato" data-validate-linked="contato" class="form-control col-md-2 col-xs-12" required="required">
+                       </div>
+                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="date">Data <span class="required">*</span>
                       </label>
-                      <div class="col-sm-8 col-xs-12 col-md-6">
-                        <select id="profissao" name="profissao" required class="form-control col-md-8 col-xs-12">
-                        <?php
-                        $profissoes = listaProfissao($conexao);
-                        foreach ($profissoes as $profissao) {
-                        ?>
-                          <option value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
-                        <?php                         
-                        }
-                        ?>
+                      <div class="col-sm-8 col-xs-12 col-md-2">
+                       <input  type="text" value="<?=$suspect['data']?>" id="data" name="data" required="required" class="form-control col-md-8 col-xs-12">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span></label>
+                      <div class="col-sm-6 col-xs-12 col-md-3">
+                        <input id="email" value="<?=$suspect['email']?>" type="email" name="email" data-validate-linked="email" class="form-control col-md-2 col-xs-12" required="required">
+                       </div>
+                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Tel <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-8 col-xs-12 col-md-2">
+                       <input type="text" id="tel" value="<?=$suspect['tel']?>" name="tel" required="required" data-inputmask="'mask' : '(99) 99999-9999'" class="form-control col-md-8 col-xs-12">
+                      </div>
+                    </div>             
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-6 col-xs-12 col-md-3">
+                        <select id="status" name="status" class="optional form-control col-md-7 col-xs-12">
+                          <option>Agendado</option>
+                          <option>Realizado</option>
+                          <option>Não Realizado</option>
                         </select>
                       </div>
-                    </div> 
-                    <div class="ln_solid"></div>
-                    <div class=" form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" name="cancelar" class="btn btn-primary">Cancelar</button>
-                        <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+                      <label for="hora" class="control-label col-md-1 col-sm-3 col-xs-12">Hora <span class="required">*</span>
+                      </label>
+                      <div class="col-sm-6 col-xs-12 col-md-2">
+                        <input value="<?=$suspect['hora']?>" type="time" id="hora" name="hora" class="form-control col-md-7 col-xs-12" required></select>                
                       </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Comentário <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea id="comentario" required name="comentario" class="form-control col-md-7 col-xs-12"> <?=$suspect['comentario']?></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3">
+                      <button type="submit" class="btn btn-primary">Cancelar</button>
+                      <button id="send" type="submit" class="btn btn-success">Alterar</button>
+                      <input type="hidden" name="id" id="id" value="<?=$suspect['id_suspect']?>" />
                     </div>
                   </form>
                 </div> 
@@ -284,7 +267,7 @@
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <!-- Cidades e Estados -->
-    <script src="../../js/cidades-estados-utf8.js"></script>
+    <script src="../../js/cidades-estados2-utf8.js"></script>
     <script language="JavaScript" type="text/javascript" charset="utf-8">
       new dgCidadesEstados({
         cidade: document.getElementById('cidade1'),
@@ -345,7 +328,7 @@
           });
     </script>
     <script type="text/javascript">
-      document.getElementById('profissao').value = '<?=$usuario['id_profissao']?>';
-    </script>
+      document.getElementById('status').value = '<?=$suspect['status']?>';
+    </script>    
   </body>
 </html>

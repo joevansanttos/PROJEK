@@ -1,8 +1,7 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-cidade.php";?>
-<?php include "../bancos/banco-market.php";?>
-
-<?php
+<?php 
+    require_once "../bancos/conecta.php";
+    require_once "../bancos/banco-cidade.php";
+    require_once "../bancos/banco-market.php";
     $razao = $_POST["razao"];
     $nome = $_POST["nome"];
     $cnpj = $_POST["cnpj"];
@@ -14,7 +13,7 @@
     $tel = $_POST["tel"];
     $bairro = $_POST["bairro"];
 
-    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro, id_type) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$bairro}', 1 )";
+    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$bairro}' )";
 
 
     if(mysqli_query($conexao, $query)){
@@ -28,6 +27,7 @@
 
         }        
     }else{
+        echo mysqli_error($conexao);
     }
 
 
