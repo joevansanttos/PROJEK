@@ -1,10 +1,16 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-
-
-<?php
-$id = $_GET['id'];
-$usuario = buscaUsuario($conexao, $id);
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
+  require_once "../bancos/banco-cidade.php";
+  require_once "../bancos/banco-profissao.php";
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -59,11 +65,24 @@ $usuario = buscaUsuario($conexao, $id);
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <?php                  
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
+                ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
-                <h2>Fabio</h2>
+                <h2><?=$usuario['nome']?></h2>
               </div>
             </div>
             <br />
@@ -130,7 +149,7 @@ $usuario = buscaUsuario($conexao, $id);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../images/img2.jpg" alt="">Fabio
+                    <?=$usuario['nome']?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -141,7 +160,7 @@ $usuario = buscaUsuario($conexao, $id);
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -176,35 +195,22 @@ $usuario = buscaUsuario($conexao, $id);
             <div class="row" >
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel" >
-                  <div class="x_title">
-                    <h2>Dados do Usuário</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content" align="center">
                     <div class="col-md-12 col-sm-3 col-xs-12 profile_left " >
                       <div class="profile_img">
                         <div id="crop-avatar">
-                          <div class="profile-userpic">
-                            <?php
-                              $sql = "SELECT * FROM profileimg WHERE id_usuario = $id";
+                          <div class="profile-userpic ">
+                            <?php                  
+                              $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                               $sth = $conexao->query($sql);
-                              $result=mysqli_fetch_array($sth);                            
-                              echo '<img class="img-responsive" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                              $result=mysqli_fetch_array($sth);
+                              if($result != null){
+                                echo '<img class="img-responsive  profile_img col-md-5" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                              }else{
+                            ?>
+                            <img class="img-responsive profile_img" src="../../images/user.png">
+                            <?php    
+                              }      
                             ?>
                           </div>
                          
@@ -212,18 +218,42 @@ $usuario = buscaUsuario($conexao, $id);
                           <img >
                         </div>
                       </div>
-                      <h3><?=$usuario['nome']?></h3>
+                      <h3><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></h3>
 
                       <ul class="list-unstyled user_data">
                        
 
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i><?=$usuario['telefone']?>
+                          <i class="fa fa-phone user-profile-icon"></i> <?=$usuario['telefone']?>
                         </li>
 
                         <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="<?=$cliente['site']?>" target="_blank"><?=$usuario['email']?></a>
+                          <i class="fa fa-envelope user-profile-icon"></i>
+                          <?=$usuario['email']?>
+                        </li>
+                        <li class="m-top-xs">
+                          <i class="fa fa-intersex user-profile-icon"></i>
+                           <?=$usuario['sexo']?>
+                        </li>
+                        <li class="m-top-xs">
+                          <i class="fa fa-map user-profile-icon"></i>
+                           <?=$usuario['estado']?>
+                        </li>
+
+                        <?php
+                          $cidade = buscaCidade($conexao, $usuario['cidade']);
+                        ?>
+                        <li class="m-top-xs">
+                          <i class="fa fa-map user-profile-icon"></i>
+                           <?=$cidade['CT_NOME']?>
+                        </li>
+
+                        <?php
+                          $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
+                        ?>
+                        <li class="m-top-xs">
+                          <i class="fa fa-briefcase user-profile-icon"></i>
+                          <?=$profissao['descricao']?>
                         </li>
                       </ul>
                     </div>
@@ -235,11 +265,13 @@ $usuario = buscaUsuario($conexao, $id);
                       <br />
                     </div>
                   </div>
+                  <a data-toggle="tooltip" data-placement="top" title="Novo Usuário"  class="btn btn-primary" style="" href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><i class="fa fa-pencil"></i></a>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
+        </div>
+
         <div class="clearfix"></div>
         <!-- /page content -->
         <!-- footer content -->

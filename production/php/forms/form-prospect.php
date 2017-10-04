@@ -332,6 +332,7 @@
 	      return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 	    }
 	  </script>
+	  
 	  <script type="text/javascript">
 
 	    function calcula(){
@@ -339,9 +340,9 @@
 	      var divide = prob/100;
 	      var valor_op = document.getElementById('valor_op').value;
 	      var result=  parseFloat(divide)*parseFloat(valor_op);
+
 	      document.getElementById('valor_est').value = parseFloat(Math.round(result * 100) / 100).toFixed(2);
 	    }
-	        
 	  </script>
 	</body>
 </html>

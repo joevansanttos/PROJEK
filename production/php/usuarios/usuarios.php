@@ -220,8 +220,8 @@
                                       <td><?=$u['email']?></td>
                                       <td><?=$u['estado']?></td>
                                       <td><?=$u['telefone']?></td>
-                                      <td align="center">                                        
-                                        <a href="../forms/form-altera-usuario.php?id=<?=$u['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Usuário" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>    
+                                      <td align="center">                                      
+                                      
                                         <a href="../remove/remove-usuario.php?id=<?=$u['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Usuário" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                       </td>
                                     </tr>

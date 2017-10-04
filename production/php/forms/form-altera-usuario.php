@@ -178,7 +178,7 @@
 	              <div class="col-md-12 col-sm-12 col-xs-12">
 	                <div class="x_panel">
 	                	<div class="x_content">
-	                		<form id="form" action="../altera/altera-usuario.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+	                		<form id="form" action="../altera/altera-usuario.php" method="post"  id="demo-form2" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left">
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
 	                		    </label>
@@ -249,13 +249,19 @@
 	                		      ?>
 	                		      </select>
 	                		    </div>
+	                		  </div>
+	                		  <div class="form-group">
+	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="image">Imagem</label>
+	                		    <div class="col-md-3 col-sm-6 col-xs-12">
+	                		      <input type="file" name="image">
+	                		    </div>
 	                		  </div> 
 	                		  <div class="ln_solid"></div>
 	                		  <div class=" form-group">
 	                		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 	                		      <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		      <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
-	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$u['id_usuario']?>" />
+	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$usuario['id_usuario']?>" />
 	                		    </div>
 	                		  </div>
 	                		</form>

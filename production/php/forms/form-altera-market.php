@@ -14,6 +14,7 @@
   $id_usuario = $usuario['id_usuario'];
   $id_market = $_GET['id'];
   $market = buscaMarket($conexao, $id_market);
+  $portes = listaPortes($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -246,6 +247,21 @@
 	                		     <div class="col-sm-6 col-xs-12 col-md-2">
 	                		       <input value="<?=$market['tel']?>" type="tel" id="tel" name="tel" data-inputmask="'mask' : '(99) 9999[9]-9999'" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 	                		     </div> 
+	                		   </div>
+	                		   <div class="item form-group">
+	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_porte">Porte da Empresa<span class="required">*</span>
+	                		    </label>
+	                		    <div class="col-md-6 col-sm-6 col-xs-12">
+	                		      <select name="id_porte" class="form-control col-md-7 col-xs-12">
+	                		        <?php                           
+	                		        foreach ($portes as $porte){  
+	                		        ?>       
+	                		        <option selected="<?=$market['id_porte']?>" value="<?=$porte['id_porte']?>"><?=$porte['descricao']?></option>
+	                		        <?php
+	                		        }
+	                		        ?>  
+	                		      </select>
+	                		    </div>
 	                		   </div>                                                        
 	                		   <div class="ln_solid"></div>
 	                		   <div class=" form-group">
@@ -299,6 +315,7 @@
 		</script>
 		<script type="text/javascript">
 		  document.getElementById('segmento').value = '<?=$market['segmento']?>';
+		  document.getElementById('id_porte').value = '<?=$market['id_porte']?>'
 		</script>
 	</body>
 </html>

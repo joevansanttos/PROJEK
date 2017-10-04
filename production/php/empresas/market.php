@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8'); 
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start(); 
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-market.php";
   require_once "../bancos/banco-type.php";
@@ -40,7 +42,6 @@
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
-    <link rel="stylesheet" type="text/css" href="../../../vendors/bootstrap-notify-3.1.3/dist/bootstrap-notify.js">
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -158,7 +159,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -251,7 +252,7 @@
                                         <a href="../forms/form-lead.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Lead" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                         <a href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Altera Market" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                        <button  data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button>                                        
+                                        <button data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-o"></i></button>                                       
                                         <a data-toggle="tooltip" data-placement="top" title="Remove Market" href="../remove/remove-market.php?id=<?=$cliente['id_market']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>       
                                       </td>
                                       <div id="myModal" class="modal fade" role="dialog" ">
@@ -266,7 +267,7 @@
                                               <div class="modal-body ">
                                                 <div class="form-group" >
                                                 <label for="recipient-name" class="control-label">Comentário</label>   
-                                                <textarea class="form-control" name="comentario" ></textarea>
+                                                <textarea rows="6" class="form-control" name="comentario" ></textarea>
                                                 </div>
                                                 <div class="form-group"> 
                                                 <label for="recipient-name" class="control-label">Consultor</label>
@@ -312,7 +313,7 @@
               </div>
             </div>
           </div>
-        </div>        
+        </div>    
         <div class="clearfix"></div>
         <!-- /page content -->
         <!-- footer content -->
@@ -347,10 +348,10 @@
     <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../../../vendors/bootstrap-notify-3.1.3/dist/bootstrap-notify.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
+    <script src="../../js/notify.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
           // Setup - add a text input to each footer cell
@@ -380,14 +381,27 @@
       } );
     </script>
     <?php
-    if(isset($_GET["market"])){
+    if(isset($_SESSION['market_adicionado'])){
     ?>
-      <script type="text/javascript">
-
+      <script>
+        $.notify('<?=$_SESSION['market_adicionado']?>', "success");
       </script>
-    <?php  
+
+    <?php
+      unset($_SESSION['market_adicionado']);
     }
     ?>
     
+    <?php
+    if(isset($_SESSION['market_removido'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['market_removido']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['market_removido']);
+    }
+    ?>
   </body>
 </html>

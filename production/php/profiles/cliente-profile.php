@@ -1,18 +1,25 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include ("../bancos/conecta.php");?>
-<?php include ("../bancos/banco-market.php");?>
-<?php include ("../bancos/banco-lead.php");?>
-<?php include ("../bancos/banco-suspect.php");?>
-<?php include ("../bancos/banco-prospect.php");?>
-<?php include ("../bancos/banco-historico.php");?>
-<?php
-$id = $_GET['id'];
-$cliente = buscaMarket($conexao, $id);
-$prospeccao = buscaLeads($conexao, $id);
-$apresentacoes = buscaClientesApresentacao($conexao, $id);
-$prospects = buscaProspects($conexao, $id);
-$historicos =  buscaHistoricos($conexao, $id);
+<?php 
+  header('Content-Type: text/html; charset=utf-8');
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-lead.php";
+  require_once "../bancos/banco-suspect.php";
+  require_once "../bancos/banco-prospect.php";
+  require_once "../bancos/banco-historico.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
+  $id = $_GET['id'];
+  $cliente = buscaMarket($conexao, $id);
+  $prospeccao = buscaLeads($conexao, $id);
+  $apresentacoes = buscaClientesApresentacao($conexao, $id);
+  $prospects = buscaProspects($conexao, $id);
+  $historicos =  buscaHistoricos($conexao, $id);
 ?>
 
 
@@ -68,10 +75,24 @@ $historicos =  buscaHistoricos($conexao, $id);
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-     
+                <?php                  
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
+                ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
+                <h2><?=$usuario['nome']?></h2>
               </div>
             </div>
             <br />
@@ -150,7 +171,7 @@ $historicos =  buscaHistoricos($conexao, $id);
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -238,11 +259,7 @@ $historicos =  buscaHistoricos($conexao, $id);
                             <div class="x_content" style="display: block;">
 
                               <div class="container">
-                                <a class="btn btn-success"  href="../forms/form-altera-market.php?id=<?=$cliente['id_market']?>">Editar Perfil</a>
-                                <a  class="btn btn-primary" href="../forms/form-lead.php?id=<?=$cliente['id']?>"> Novo Lead</a>
-                                <a  class="btn btn-warning" href="../forms/form-suspect.php?id=<?=$cliente['id']?>">Novo Suspect</a>
-                                <a  class="btn btn-danger" href="../forms/form-prospect.php?id=<?=$cliente['id']?>">Novo Prospect</a>
-                              </div>
+                                
 
                               <br />
 

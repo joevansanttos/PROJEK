@@ -1,7 +1,11 @@
 <?php 
+	ob_start();
+	session_start();
 	error_reporting(E_ALL ^ E_NOTICE); 
 	require_once "../bancos/conecta.php";	
 	require_once "../bancos/banco-usuario.php";
+	require_once "../bancos/banco-imagem.php";
+	require_once "../logica/logica-usuario.php";
 	$id_usuario = $_POST["id_usuario"];
 	$email = $_POST["email"];
 	$senha = $_POST["senha"];
@@ -22,8 +26,39 @@
 	}	
 
 	if(mysqli_query($conexao, $query)){
-		mysqli_close($conexao);
-		header("Location: ../usuarios/usuarios.php"); 
+		$imagem = buscaImagemUsuario($conexao, $id_usuario);
+		if($imagem != null){
+			if(isset($_FILES['image'])){
+				$tmp_name = $_FILES["image"]["tmp_name"];
+				if(!empty($tmp_name)){
+					$check = getimagesize($_FILES["image"]["tmp_name"]);
+					if($check !== false){
+					  $image = $_FILES['image']['tmp_name'];
+					  $imgContent = addslashes(file_get_contents($image));         
+					  $query = "update profileimg set image = '{$imgContent}'where id_usuario= $id_usuario";
+					  mysqli_query($conexao, $query);
+					  
+					}	
+				}
+			}			
+		}else{
+			$check = getimagesize($_FILES["image"]["tmp_name"]);
+			if($check !== false){
+			  $image = $_FILES['image']['tmp_name'];
+			  $imgContent = addslashes(file_get_contents($image));         
+			  $query = "insert into profileimg (image, id_usuario) VALUES ('$imgContent', $id_usuario)";
+			  if(mysqli_query($conexao, $query)){			  	
+
+			  }else{
+			  	echo mysqli_error($conexao);
+			  } 
+			  
+			}	
+		}
+		session_destroy();
+		session_start();
+		logaUsuario($email);	
+		header("Location: ../usuarios/usuarios.php");
 	}else{
 	
 	}

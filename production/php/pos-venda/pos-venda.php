@@ -157,7 +157,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">

@@ -28,3 +28,14 @@ function alteraCliente($conexao, $razao, $nome, $cnpj, $site, $endereco, $estado
   $query = "update  market  set nome ='{$nome}', razao = '{$razao}', cnpj ='{$cnpj}', site = '{$site}', endereco ='{$endereco}',estado ='{$estado}', cidade = '{$cidade}', segmento='{$segmento}', tel = '{$tel}', bairro='{$bairro}'";
   return mysqli_query($conexao, $query);
 }
+
+function listaPortes($conexao){
+  $usuarios = array();
+    $query = "select  * from porte";
+    $resultado = mysqli_query($conexao, $query);
+    while ($usuario = mysqli_fetch_assoc($resultado)) {
+      array_push($usuarios, $usuario);
+    }
+    
+    return $usuarios;
+}

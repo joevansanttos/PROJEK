@@ -1,9 +1,9 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include ("../bancos/conecta.php");?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -165,7 +165,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Pesquise por...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>

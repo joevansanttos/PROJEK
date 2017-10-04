@@ -11,6 +11,7 @@
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
+  $portes = listaPortes($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -279,7 +280,21 @@
                         </div>
                        </div>
                                    
-
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_porte">Porte da Empresa<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="id_porte" class="form-control col-md-7 col-xs-12">
+                            <?php                           
+                            foreach ($portes as $porte){  
+                            ?>       
+                            <option value="<?=$porte['id_porte']?>"><?=$porte['descricao']?></option>
+                            <?php
+                            }
+                            ?>  
+                          </select>
+                        </div>
+                       </div>
 
                    
 

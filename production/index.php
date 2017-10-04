@@ -1,15 +1,13 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "php/logica/logica-usuario.php";?>
-<?php include "php/alerta/mostra-alerta.php";?>
-<?php
- if(usuarioEstaLogado()) {
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "php/logica/logica-usuario.php";
+  require_once "php/alerta/mostra-alerta.php";
+  if(usuarioEstaLogado()) {
     header("Location: php/index/index2.php");
   }
-?>
-<?php
-mostraAlerta('success');
-mostraAlerta('danger');
+  mostraAlerta('success');
+  mostraAlerta('danger');
 ?>
 
 <!DOCTYPE html>

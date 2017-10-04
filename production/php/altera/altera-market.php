@@ -11,8 +11,8 @@
    $segmento = $_GET["segmento"];
    $tel = $_GET["tel"];
    $bairro = $_GET["bairro"];
-
-   $query = "update  market  set nome ='{$nome}', razao = '{$razao}', cnpj ='{$cnpj}', site = '{$site}', endereco ='{$endereco}',estado ='{$estado}', cidade = '{$cidade}', segmento='{$segmento}', tel = '{$tel}', bairro='{$bairro}' where id_market = {$id_market}";
+   $id_porte = $_GET["id_porte"];
+   $query = "update  market  set nome ='{$nome}', razao = '{$razao}', cnpj ='{$cnpj}', site = '{$site}', endereco ='{$endereco}',estado ='{$estado}', cidade = '{$cidade}', segmento='{$segmento}', tel = '{$tel}', bairro='{$bairro}', id_porte = $id_porte where id_market = {$id_market}";
 
    if(mysqli_query($conexao, $query)){
      mysqli_close($conexao);

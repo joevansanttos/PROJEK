@@ -155,7 +155,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -245,7 +245,7 @@
                                         <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                         <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a> 
-                                        <button data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                        <button data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-o"></i></button> 
                                         <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>               
                                       </td>
                                       <div id="myModal" class="modal fade" role="dialog" ">
