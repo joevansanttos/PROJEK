@@ -11,5 +11,10 @@ function buscaHistoricos($conexao, $id){
   return $clientes;
 }
 
+function buscaHistorico($conexao, $id){
+  $query = "select * from historico where id_historico = {$id}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}
 
 ?>

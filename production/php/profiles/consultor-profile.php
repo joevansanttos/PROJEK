@@ -236,7 +236,6 @@
                           <a href="http://www.kimlabs.com/profile/" target="_blank"><?=$usuario['email']?></a>
                         </li>
                       </ul>
-                      <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar</a>
                       <br />
                       <!-- start skills -->
                       <h4>Feedback</h4>

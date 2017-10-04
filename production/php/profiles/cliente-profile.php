@@ -273,16 +273,21 @@
                                     <div class="panel-body">
                                     <?php
                                       foreach ($historicos as $historico) {
-                                        # code...
+                    
                                     ?>
-                                        <table class="table table-bordered">
+                                        <table class="table">
                                           <thead>
-                                            <th>Data</th>
-                                            <th>Comentário</th>
+                                            <th class="col-md-1">Data</th>
+                                            <th>Histórico</th>
+                                            <th class="col-md-2" align="center">Ações</th>
                                           </thead>
                                           <tbody>
                                             <td><?=$historico['data']?></td>
                                             <td><?=$historico['comentario']?></td>
+                                            <td>
+                                              <a href="../forms/form-altera-historico.php?id_historico=<?=$historico['id_historico']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Histórico" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                              <a href="../remove/remove-historico.php?id_historico=<?=$historico['id_historico']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                            </td>
                                           </tbody>
                                         </table>
                                     <?php

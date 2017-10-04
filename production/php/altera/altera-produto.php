@@ -10,6 +10,7 @@
   $query = "update  produtos  set nome ='{$nome}', descricao = '{$descricao}', beneficios ='{$beneficios}', entregas = '{$entregas}', preco ='{$preco}'  where id_produto = {$id_produto}";
   if(mysqli_query($conexao, $query)){
       mysqli_close($conexao);
+      header("Location: ../produtos/produtos.php");
   }else{
     
   }
