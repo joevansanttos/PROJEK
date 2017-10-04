@@ -245,7 +245,7 @@
                                         <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                         <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a> 
-                                        <button data-toggle="tooltip" data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
+                                        <button data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
                                         <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>               
                                       </td>
                                       <div id="myModal" class="modal fade" role="dialog" ">
@@ -260,17 +260,17 @@
                                               <div class="modal-body " style="min-width: 100%" >
                                                 <div class="form-group" >
                                                 <label for="recipient-name" class="control-label">Comentário</label>   
-                                                <textarea class="form-control" name="comentario" ></textarea>
+                                                <textarea rows="6" class="form-control" name="comentario" ></textarea>
                                                 </div>
                                                 <div class="form-group"> 
                                                 <label for="recipient-name" class="control-label">Consultor</label>
                                                 <select name="id_consultor" class="form-control">
                                                  <?php
-                                                 $usuarios = listaUsuarios($conexao);
-                                                 foreach ($usuarios as $usuario){ 
-                                                   if($usuario["id_profissao"] == '1'){
+                                                 $consultores = listaUsuarios($conexao);
+                                                 foreach ($consultores as $consultor){ 
+                                                   if($consultor["id_profissao"] == '1'){
                                                      ?>
-                                                     <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option>
+                                                     <option value="<?=$consultor['id_usuario']?>" ><?=$consultor['nome']?><?=' '?><?=$consultor['sobrenome']?></option>
                                                      <?php
                                                    }
                                                  }
