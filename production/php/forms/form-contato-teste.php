@@ -1,12 +1,16 @@
 <?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-suspect.php";?>
+<?php include "../bancos/banco-market.php";?>
+<?php include "../bancos/banco-produto.php";?>
 <?php include "../bancos/banco-usuario.php";?>
+<?php include "../bancos/banco-lead.php";?>
+<?php include "../bancos/banco-pos_venda.php";?>
+<?php include "../bancos/banco-contrato.php";?>
 
 <?php
 $id = $_GET['id'];
-$suspect = buscaSuspectId($conexao, $id);
-$consultor = buscaUsuario($conexao, $suspect['id_consultor']);
-
+$pos_venda = buscaPosVenda($conexao, $id);
+$contrato = buscaContrato($conexao, $pos_venda['n_contrato']);
+ 
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +20,7 @@ $consultor = buscaUsuario($conexao, $suspect['id_consultor']);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projek | Alterar Suspect</title>
+    <title>Projek | Novo Contato</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -104,6 +108,21 @@ $consultor = buscaUsuario($conexao, $suspect['id_consultor']);
                     </li>               
                   </ul>
                 </div>
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                  <a data-toggle="tooltip" data-placement="top" title="Settings">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="Lock">
+                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                  </a>
+                </div> 
               </div>
             </div>
           </div> 
@@ -140,7 +159,7 @@ $consultor = buscaUsuario($conexao, $suspect['id_consultor']);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Alterar Suspect</h3>
+                <h3>Contato</h3>
               </div>            
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -158,57 +177,55 @@ $consultor = buscaUsuario($conexao, $suspect['id_consultor']);
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_content">
                   <br />
-                  <form action="../altera/altera-suspect.php" method="post"  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                    
+                  <form action="../adiciona/adiciona-contato.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                     <div class="item form-group">
-                      <label for="contato" class="control-label col-md-3 col-sm-3 col-xs-12">Contato <span class="required">*</span></label>
-                      <div class="col-sm-6 col-xs-12 col-md-3">
-                        <input id="contato" value="<?=$suspect['contato']?>" type="text" name="contato" data-validate-linked="contato" class="form-control col-md-2 col-xs-12" required="required">
-                       </div>
-                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="date">Data <span class="required">*</span>
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nº Contrato <span class="required">*</span>
+                     </label>
+                     <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input type="text" value="<?=$contrato['n_contrato']?>" id="n_contrato" name="n_contrato" required="required" class="form-control" >
+                     </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_consultor">Consultor<span class="required">*</span>
                       </label>
-                      <div class="col-sm-8 col-xs-12 col-md-2">
-                       <input  type="text" value="<?=$suspect['data']?>" id="data" name="data" required="required" class="form-control col-md-8 col-xs-12">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="id_consultor" class="form-control col-md-7 col-xs-12">
+                         <?php
+                         $usuarios = listaUsuarios($conexao);
+                         foreach ($usuarios as $usuario){ 
+                           if($usuario["id_profissao"] == '1'){
+                             ?>
+
+                             <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?></option>
+                             <?php
+                           }
+                         }
+                         ?>  
+                        </select>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span></label>
-                      <div class="col-sm-6 col-xs-12 col-md-3">
-                        <input id="email" value="<?=$suspect['email']?>" type="email" name="email" data-validate-linked="email" class="form-control col-md-2 col-xs-12" required="required">
-                       </div>
-                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="tel">Tel <span class="required">*</span>
-                      </label>
-                      <div class="col-sm-8 col-xs-12 col-md-2">
-                       <input type="text" id="tel" value="<?=$suspect['tel']?>" name="tel" required="required" data-inputmask="'mask' : '(99) 99999-9999'" class="form-control col-md-8 col-xs-12">
-                      </div>
-                    </div>             
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
-                      </label>
-                      <div class="col-sm-6 col-xs-12 col-md-3">
-                        <select id="status" name="status" class="optional form-control col-md-7 col-xs-12">
-                          <option>Agendado</option>
-                          <option>Realizado</option>
-                          <option>Não Realizado</option>
-                        </select>
-                      </div>
-                      <label for="hora" class="control-label col-md-1 col-sm-3 col-xs-12">Hora <span class="required">*</span>
-                      </label>
-                      <div class="col-sm-6 col-xs-12 col-md-2">
-                        <input value="<?=$suspect['hora']?>" type="time" id="hora" name="hora" class="form-control col-md-7 col-xs-12" required></select>                
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="data_contato">Data<span class="required">*</span></label>
+                      <div class="col-sm-2 col-xs-12 col-md-2">
+                        <input type="date" id="data_contato" name="data_contato" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Comentário <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea id="comentario" required name="comentario" class="form-control col-md-7 col-xs-12"> <?=$suspect['comentario']?></textarea>
+                        <textarea id="comentario" required name="comentario" class="form-control col-md-7 col-xs-12"></textarea>
                       </div>
-                    </div>
-                    <div class="col-md-6 col-md-offset-3">
-                      <button type="submit" class="btn btn-primary">Cancelar</button>
-                      <button id="send" type="submit" class="btn btn-success">Alterar</button>
-                      <input type="hidden" name="id" id="id" value="<?=$suspect['id_suspect']?>" />
-                    </div>
+                    </div> 
+                    <br>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-3">
+                        <input type="hidden" name="id_pos_venda" id="id_pos_venda" value="<?=$pos_venda['id_pos_venda']?>" />
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button id="send" type="submit" class="btn btn-success">Alterar</button>
+                      </div>
+                    </div>                     
                   </form>
                 </div> 
               </div>
@@ -328,7 +345,7 @@ $consultor = buscaUsuario($conexao, $suspect['id_consultor']);
           });
     </script>
     <script type="text/javascript">
-      document.getElementById('status').value = '<?=$suspect['status']?>';
-    </script>    
+      document.getElementById('cargo').value = '<?=$lead['cargo']?>';
+    </script>
   </body>
 </html>

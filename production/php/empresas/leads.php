@@ -58,9 +58,17 @@
                 <?php                  
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
-                  $result=mysqli_fetch_array($sth);                            
-                  echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
                 ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -236,9 +244,9 @@
                                         <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Lead" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                        <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></button></a> 
+                                        <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a> 
                                         <button data-toggle="tooltip" data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file"></i></button> 
-                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>               
+                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>               
                                       </td>
                                       <div id="myModal" class="modal fade" role="dialog" ">
                                         <div class="modal-dialog ">

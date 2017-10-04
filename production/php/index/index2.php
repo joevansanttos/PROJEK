@@ -50,8 +50,15 @@
                 <?php                  
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
-                  $result=mysqli_fetch_array($sth);                            
-                  echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
+                ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
                 ?>
                 <img src="" alt="..." >
               </div>

@@ -54,9 +54,17 @@
                 <?php                  
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
-                  $result=mysqli_fetch_array($sth);                            
-                  echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
                 ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -201,20 +209,20 @@
                                 <tbody>
                                   <?php
                                     $usuarios = listaUsuarios($conexao);
-                                    foreach ($usuarios as $usuario) {                                  
+                                    foreach ($usuarios as $u) {                                  
                                   ?>
                                     <tr>
-                                      <td><?=$usuario['nome']?></td>
+                                      <td><?=$u['nome']?></td>
                                     <?php
-                                      $profissao = buscaProfissao($conexao, $usuario['id_profissao']);
+                                      $profissao = buscaProfissao($conexao, $u['id_profissao']);
                                     ?>  
                                       <td><?=$profissao['descricao']?></td>
-                                      <td><?=$usuario['email']?></td>
-                                      <td><?=$usuario['estado']?></td>
-                                      <td><?=$usuario['telefone']?></td>
+                                      <td><?=$u['email']?></td>
+                                      <td><?=$u['estado']?></td>
+                                      <td><?=$u['telefone']?></td>
                                       <td align="center">                                        
-                                        <a href="../forms/form-altera-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Usuário" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>    
-                                        <a href="../remove/remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Usuário" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                        <a href="../forms/form-altera-usuario.php?id=<?=$u['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Usuário" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>    
+                                        <a href="../remove/remove-usuario.php?id=<?=$u['id_usuario']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Usuário" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                       </td>
                                     </tr>
                                   <?php

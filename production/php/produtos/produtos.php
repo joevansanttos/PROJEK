@@ -56,9 +56,17 @@
                 <?php                  
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
-                  $result=mysqli_fetch_array($sth);                            
-                  echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
                 ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -224,8 +232,8 @@
                                 <td><?=number_format($produto['preco'] * 2, 2, '.', '')?></td>
                                 <td><?=number_format($produto['preco'] * 2 * 1.5, 2, '.', '')?></td> 
                                 <td align="center" >                                            
-                                  <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button></a>
-                                  <a href="../remove/remove-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                  <a href="../remove/remove-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                 </td>
                               </tr>
                               <?php

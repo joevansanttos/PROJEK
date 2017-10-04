@@ -60,11 +60,19 @@
             <div class="profile clearfix">
               <div class="profile_pic">
                 <?php                  
-                    $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
-                    $sth = $conexao->query($sql);
-                    $result=mysqli_fetch_array($sth);                            
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
                     echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
-                  ?>
+                  }else{
+                ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -264,7 +272,7 @@
                                 <td></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                 </td>
 
                             <?php    
@@ -275,7 +283,7 @@
                                 <td></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                 </td>
                         
 
@@ -287,7 +295,7 @@
                                 <td><?=$contatos_sequencia[1]?></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                 </td>
                             <?php
                               }

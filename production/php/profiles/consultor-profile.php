@@ -1,14 +1,19 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-feedback.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-lead.php";?>
-<?php include "../bancos/banco-consultores-market.php";?>
-
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-feedback.php";
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-lead.php";
+  require_once "../bancos/banco-consultores-market.php";
+  require_once "../logica/logica-usuario.php";
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $u = buscaUsuarioEmail($conexao, $email);
+  $id_u = $u['id_usuario'];
   $id = $_GET['id'];
   $usuario = buscaUsuario($conexao, $id);
-
   $n_markets = buscaMarketConsultores($conexao , $usuario['id_usuario']);
   $n_market = count($n_markets);
   $n_leads = buscaLeadsConsultores($conexao , $usuario['id_usuario']);
@@ -17,7 +22,6 @@
   $n_suspect = count($n_suspects);
   $n_prospects = buscaProspectConsultores($conexao , $usuario['id_usuario']);
   $n_prospect = count($n_prospects);
-
   $feedbacks = listaConsultorFeedback($conexao, $id);
   $size = count($feedbacks);
   $pontual = 0;
@@ -74,11 +78,24 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+                <?php                  
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_u";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
+                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                  }else{
+                ?>
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
+                ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
-                <h2>Fabio</h2>
+                <h2><?=$u['nome']?></h2>
               </div>
             </div>
             <br />
@@ -145,7 +162,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../../images/img2.jpg" alt="">Fabio
+                    <?=$u['nome']?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -156,7 +173,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">

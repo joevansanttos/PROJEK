@@ -9,8 +9,8 @@
  	require_once  "../logica/logica-usuario.php";
  	require_once  "../alerta/mostra-alerta.php";
   $id = $_GET['id'];
-  $user = buscaUsuario($conexao, $id);
-  $profissao = buscaProfissao($conexao , $user['id_profissao']);             
+  $u = buscaUsuario($conexao, $id);
+  $profissao = buscaProfissao($conexao , $u['id_profissao']);             
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -36,7 +36,6 @@
 	  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	  <link href="../../../build/css/custom.min.css" rel="stylesheet">
 	  <link rel="stylesheet" type="text/css" href="css/teste.css">
-	  <link href="../../../vendors/lou-multi-select/css/multi-select.css" media="screen" rel="stylesheet" type="text/css">
 	</head>
 	<body class="nav-md">
 	  <div class="container body">
@@ -52,11 +51,16 @@
 	                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
 	                  $sth = $conexao->query($sql);
 	                  $result=mysqli_fetch_array($sth);
-	                  if(count($result) > 0){
+	                  if($result != null){
 	                    echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+	                  }else{
+	                ?>
+	                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+	                <?php    
 	                  }                            
 	                  
 	                ?>
+	                <img src="" alt="..." >
 	              </div>
 	              <div class="profile_info">
 	                <span>Bem Vindo,</span>
@@ -127,7 +131,7 @@
 	            <ul class="nav navbar-nav navbar-right">
 	              <li class="">
 	                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-	                  <img src="../../images/img2.jpg" alt="">Fabio
+	                  <?=$usuario['nome']?>
 	                  <span class=" fa fa-angle-down"></span>
 	                </a>
 	                <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -138,7 +142,7 @@
 	                    </a>
 	                  </li>
 	                  <li><a href="javascript:;">Ajuda</a></li>
-	                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+	                  <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
 	                </ul>
 	              </li>
 
@@ -179,32 +183,32 @@
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="text"  value="<?=$user['nome']?>" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
+	                		      <input type="text"  value="<?=$u['nome']?>" id="nome" name="nome" data-parsley-maxlength="10" required="required" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sobrenome">Sobrenome <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="text" value="<?=$user['sobrenome']?>" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
+	                		      <input type="text" value="<?=$u['sobrenome']?>" id="sobrenome" name="sobrenome" required="required" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span></label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="email" value="<?=$user['email']?>" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
+	                		      <input type="email" value="<?=$u['email']?>" id="email" name="email" required="required" class="form-control col-md-8 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha">Senha<span class="required">*</span></label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input type="password" value="<?=$user['senha']?>" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
+	                		      <input type="password" value="<?=$u['senha']?>" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
 	                		    </div>
 	                		  </div>           
 	                		  <div class="form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Telefone<span class="required">*</span></label>
 	                		    <div class="col-md-3 col-sm-6 col-xs-12">
-	                		      <input class="form-control col-md-8" value="<?=$user['telefone']?>" type="text" id="telefone" data-inputmask="'mask' : '(99) 9999[9]-9999'" name="telefone" required="required"> 
+	                		      <input class="form-control col-md-8" value="<?=$u['telefone']?>" type="text" id="telefone" data-inputmask="'mask' : '(99) 9999[9]-9999'" name="telefone" required="required"> 
 	                		    </div>
 	                		  </div>
 	                		  <div class=" form-group">
@@ -224,7 +228,7 @@
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo<span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-3 col-sm-6 col-xs-12">
-	                		      <select value="<?=$user['sexo']?>" class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
+	                		      <select class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
 	                		        <option value="feminino">Feminino</option>
 	                		        <option value="masculino">Masculino</option>
 	                		      </select>  
@@ -239,7 +243,7 @@
 	                		      $profissoes = listaProfissao($conexao);
 	                		      foreach ($profissoes as $profissao) {
 	                		      ?>
-	                		        <option selected="<?=$user['id_profissao']?>" value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
+	                		        <option selected="<?=$u['id_profissao']?>" value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
 	                		      <?php                         
 	                		      }
 	                		      ?>
@@ -251,7 +255,7 @@
 	                		    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 	                		      <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		      <button id="send" type="submit" name="enviar" class="btn btn-success">Alterar</button>
-	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$user['id_usuario']?>" />
+	                		      <input type="hidden" name="id_usuario" id="id_usuario" value="<?=$u['id_usuario']?>" />
 	                		    </div>
 	                		  </div>
 	                		</form>
@@ -314,74 +318,16 @@
 	  <script src="../../../build/js/custom.min.js"></script>
 	  <!-- Cidades e Estados -->
 	  <script src="../../js/cidades-estados-utf8.js"></script>
-	  <script language="JavaScript" type="text/javascript" charset="utf-8">
-	    new dgCidadesEstados({
-	      cidade: document.getElementById('cidade1'),
-	      estado: document.getElementById('estado1')
-	    })
-	  </script>
-	  <script src="js/teste.js"></script>
-	  <script src="../../../vendors/lou-multi-select/js/jquery.multi-select.js" type="text/javascript">
-
-	  </script>
 	  <script type="text/javascript">
-	      $('#my-select').multiSelect();
-	  </script>
-	  <script type="text/javascript">
-	    $(function () {
-
-	            var addFormGroup = function (event) {
-	                event.preventDefault();
-
-	                var $formGroup = $(this).closest('.form-group');
-	                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-	                var $formGroupClone = $formGroup.clone();
-
-	                $(this)
-	                    .toggleClass('btn-default btn-add btn-danger btn-remove')
-	                    .html('–');
-
-	                $formGroupClone.find('input').val('');
-	                $formGroupClone.insertAfter($formGroup);
-
-	                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-	                if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
-	                    $lastFormGroupLast.find('.btn-add').attr('disabled', true);
-	                }
-	            };
-
-	            var removeFormGroup = function (event) {
-	                event.preventDefault();
-
-	                var $formGroup = $(this).closest('.form-group');
-	                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-
-	                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
-	                if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
-	                    $lastFormGroupLast.find('.btn-add').attr('disabled', false);
-	                }
-
-	                $formGroup.remove();
-	            };
-
-	            var countFormGroup = function ($form) {
-	                return $form.find('.form-group').length;
-	            };
-
-	            $(document).on('click', '.btn-add', addFormGroup);
-	            $(document).on('click', '.btn-remove', removeFormGroup);
-
-	        });
-	  </script>
-	  <script type="text/javascript">
-	    document.getElementById('profissao').value = '<?=$usuario['id_profissao']?>';
+	    document.getElementById('profissao').value = '<?=$u['id_profissao']?>';
+	    document.getElementById('sexo').value = '<?=$u['sexo']?>';
 	  </script>
 	  <script language="JavaScript" type="text/javascript" charset="utf-8">
 	    new dgCidadesEstados({
 	      cidade: document.getElementById('cidade1'),
 	      estado: document.getElementById('estado1'),
-	      estadoVal: '<?=$usuario['estado']?>',
-	      cidadeVal: '<?=$usuario['cidade']?>'
+	      estadoVal: '<?=$u['estado']?>',
+	      cidadeVal: '<?=$u['cidade']?>'
 	    })
 	  </script>
 	</body>

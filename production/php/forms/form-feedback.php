@@ -1,11 +1,18 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-contrato.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-
-<?php
-$n_contrato = $_GET['n_contrato'];
-$contrato = buscaContrato($conexao , $n_contrato);
-$consultor = buscaUsuario($conexao , $contrato['id_consultor']);
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-contrato.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
+  verificaUsuario();
+  $email = $_SESSION["usuario_logado"];
+  $usuario = buscaUsuarioEmail($conexao, $email);
+  $id_usuario = $usuario['id_usuario'];
+  $n_contrato = $_GET['n_contrato'];
+  $contrato = buscaContrato($conexao , $n_contrato);
+  $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +62,24 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
           <div class="clearfix"></div>
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="../../images/img2.jpg" alt="..." class="img-circle profile_img">
+              <?php                  
+                $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                $sth = $conexao->query($sql);
+                $result=mysqli_fetch_array($sth);
+                if($result != null){
+                  echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
+                }else{
+              ?>
+              <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+              <?php    
+                }                            
+                
+              ?>
+              <img src="" alt="..." >
             </div>
             <div class="profile_info">
               <span>Bem Vindo,</span>
-              <h2>Fabio</h2>
+              <<h2><?=$usuario['nome']?></h2>
             </div>
           </div>
           <br />
@@ -127,7 +147,7 @@ $consultor = buscaUsuario($conexao , $contrato['id_consultor']);
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../../images/img2.jpg" alt="">Fabio
+                  <?=$usuario['nome']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
