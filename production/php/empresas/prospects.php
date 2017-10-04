@@ -246,52 +246,13 @@
                               <td><?=$oportunidade['recebimento']?></td>                         
                               <td align="center">                              
                                 <a href="../forms/form-contrato.php?id_prospect=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Contrato"  class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                <a href="cliente-profile.php?id=<?=$cliente['id']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market"  class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                                
+                                <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market"  class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>                                
                                 <a href="../forms/form-altera-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Prospect"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a> 
-                                <button data-placement="top" title="Adiciona Histórico" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-o"></i></button>   
+                                <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>   
                                 <a href="../remove/remove-prospect.php?id=<?=$oportunidade['id_prospect']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Prospect"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>                                 
                               </td>                              
                             </tr>
-                            <div id="myModal" class="modal fade" role="dialog" ">
-                              <div class="modal-dialog ">
-                                <!-- Modal content-->
-                                <div class="modal-content" >
-                                  <form  role="form" action="../adiciona/adiciona-historico.php" method="post" >
-                                    <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Novo Histórico</h4>
-                                    </div>
-                                    <div class="modal-body ">
-                                      <div class="form-group" >
-                                      <label for="recipient-name" class="control-label">Comentário</label>   
-                                      <textarea rows="6" class="form-control" name="comentario" ></textarea>
-                                      </div>
-                                      <div class="form-group"> 
-                                      <label for="recipient-name" class="control-label">Consultor</label>
-                                      <select name="id_consultor" class="form-control">
-                                       <?php
-                                       $consultores = listaUsuarios($conexao);
-                                       foreach ($consultores as $consultor){ 
-                                         if($consultor["id_profissao"] == '1'){
-                                           ?>
-                                           <option value="<?=$consultor['id_usuario']?>" ><?=$consultor['nome']?></option>
-                                           <?php
-                                         }
-                                       }
-                                       ?>  
-                                      </select>        
-                                      </div>
-                                      
-                                      </div>
-                                      <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                                            
-                                    <button id="send" type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
-                                    <input type="hidden" name="id_market" id="id_market" value="<?=$cliente['id_market']?>" />
-                                    </div>
-                                  </form>  
-                                </div>
-                              </div>
-                            </div>
+                            
                             <?php
                           }
                           ?>

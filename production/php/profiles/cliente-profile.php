@@ -245,12 +245,22 @@
                                 </li>
 
                                 <li>
-                                  <i class="fa fa-briefcase user-profile-icon"></i><?=$cliente['tel']?>
+                                  <i class="fa fa-phone user-profile-icon"></i> <?=$cliente['tel']?>
                                 </li>
 
                                 <li class="m-top-xs">
                                   <i class="fa fa-external-link user-profile-icon"></i>
-                                  <a href="https://www.nestle.com.br/site/home.aspx" target="_blank"><?=$cliente['site']?></a>
+                                    <?=$cliente['site']?>
+                                </li>
+
+                                <li class="m-top-xs">
+                                  <i class="fa fa-industry user-profile-icon"></i>
+                                    <?=$cliente['segmento']?>
+                                </li>
+
+                                <li class="m-top-xs">
+                                  <i class="fa fa-map user-profile-icon"></i>
+                                    <?=$cliente['estado']?> 
                                 </li>
                               </ul>
                             </div>
@@ -286,7 +296,7 @@
                                             <td><?=$historico['comentario']?></td>
                                             <td>
                                               <a href="../forms/form-altera-historico.php?id_historico=<?=$historico['id_historico']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Histórico" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                              <a href="../remove/remove-historico.php?id_historico=<?=$historico['id_historico']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                              <a href="../remove/remove-historico.php?id_historico=<?=$historico['id_historico']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Histórico"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                             </td>
                                           </tbody>
                                         </table>
@@ -305,7 +315,7 @@
                                     <?php
                                     foreach ($prospeccao as $prosp){
                                     ?>
-                                        <table class="table table-bordered">
+                                        <table class="table">
 
                                           <thead>
                                             <tr>
@@ -322,9 +332,9 @@
                                               <td><?=$prosp['email']?></td>
                                               <td><?=$prosp['tel']?></td>
                                               <td><?=$prosp['cargo']?></td>
-                                              <td>
-                                                <a href="remove-cliente-prospeccao.php?id=<?=$cliente['id']?>"><button class="btn btn-danger btn-xs">Remover</button></a>
-                                                <a href="form-altera-cliente-prospeccao.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs">Editar</button></a>
+                                              <td>                                                
+                                                <a href="../forms/form-altera-lead.php?id=<?=$prosp['id_lead']?>"><button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                                <a href="../remove/remove-lead.php?id=<?=$prosp['id_lead']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                               </td>
                                             </tr>
                                           </tbody>
@@ -344,7 +354,7 @@
                                     <?php
                                       foreach ($apresentacoes as $apresentacao){
                                     ?>
-                                        <table class="table table-bordered">
+                                        <table class="table">
                                           <thead>
                                             <tr>
                                               <th>Contato</th>
@@ -362,9 +372,9 @@
                                               <td><?=$apresentacao['status']?></td>
                                               <td><?=$apresentacao['hora']?></td>
                                               <td><?=$apresentacao['consultor']?></td>
-                                              <td>
-                                                <a href="remove-cliente-apresentacao.php?id=<?=$apresentacao['id']?>"><button class="btn btn-danger btn-xs">Remover</button></a>
-                                                <a href="form-altera-cliente-apresentacao.php?id=<?=$cliente['id']?>"><button class="btn btn-success btn-xs">Editar</button></a>
+                                              <td>                                                
+                                                <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                                <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                               </td>
                                             </tr>
                                           </tbody>
