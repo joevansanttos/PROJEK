@@ -95,6 +95,7 @@
                       <li><a href="../usuarios/usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="../usuarios/consultores.php">Consultores</a></li>
+                      <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -341,27 +342,28 @@
           } );
       } );
     </script>
+    </script>
     <?php
-    if(isset($_SESSION['market_adicionado'])){
+    if(isset($_SESSION['success'])){
     ?>
       <script>
-        $.notify('<?=$_SESSION['market_adicionado']?>', "success");
+        $.notify('<?=$_SESSION['success']?>', "success");
       </script>
 
     <?php
-      unset($_SESSION['market_adicionado']);
+      unset($_SESSION['success']);
     }
     ?>
     
     <?php
-    if(isset($_SESSION['market_removido'])){
+    if(isset($_SESSION['error'])){
     ?>
       <script>
-        $.notify('<?=$_SESSION['market_removido']?>', "error");
+        $.notify('<?=$_SESSION['error']?>', "error");
       </script>
 
     <?php
-      unset($_SESSION['market_removido']);
+      unset($_SESSION['error']);
     }
     ?>
   </body>

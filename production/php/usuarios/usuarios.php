@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8'); 
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start();  
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../bancos/banco-profissao.php";
@@ -11,6 +13,7 @@
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +90,7 @@
                       <li><a href="usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="consultores.php">Consultores</a></li>
+                      <li><a href="partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -301,6 +305,28 @@
               } );
           } );
       } );
-    </script>  
+    </script>
+    <script src="../../js/notify.js"></script>
+    <?php
+      if(isset($_SESSION['success'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['success']?>', "success");
+      </script>
+    <?php
+      unset($_SESSION['success']);
+    }
+    ?>
+    <?php
+      if(isset($_SESSION['error'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['error']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['error']);
+    }
+    ?>  
   </body>
 </html>

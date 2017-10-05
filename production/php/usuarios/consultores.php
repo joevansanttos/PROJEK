@@ -88,6 +88,7 @@
                       <li><a href="usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="consultores.php">Consultores</a></li>
+                      <li><a href="partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>

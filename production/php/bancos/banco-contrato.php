@@ -8,6 +8,14 @@ function buscaContrato($conexao , $n_contrato){
 
 }
 
+function buscaContratoProspect($conexao , $id_prospect){
+    $query = "select  * from contratos where id_prospect = $id_prospect";
+    $resultado = mysqli_query($conexao, $query);
+    $usuario = mysqli_fetch_assoc($resultado);
+    return $usuario;
+
+}
+
 
 function insereContrato($conexao,  $empresa, $nome, $cnpj, $sede, $administrador, $cpf, $residencia, $produto){
 	$query = "insert into contratos (empresa, nome, cnpj, sede, administrador, cpf, residencia, produto) values ('{$empresa}','{$nome}','{$cnpj}','{$sede}', '{$administrador}', '{$cpf}', '{$residencia}', '{$produto}')";

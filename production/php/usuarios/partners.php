@@ -2,19 +2,15 @@
   header('Content-Type: text/html; charset=utf-8'); 
   error_reporting(E_ALL ^ E_NOTICE); 
   require_once "../bancos/conecta.php";
-  require_once ("../bancos/banco-market.php");
-  require_once ("../bancos/banco-suspect.php");
   require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-profissao.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
-  ob_start();
-  session_start(); 
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +19,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROJEK | Suspects</title>
+    <title>PROJEK | Partners</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
 
@@ -33,8 +29,6 @@
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -79,7 +73,6 @@
               </div>
             </div>
             <br />
-            <!-- Sidebar Menu-->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Geral</h3>
@@ -92,18 +85,18 @@
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
+                      <li><a href="usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
-                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
-                      <li><a href="../usuarios/partners.php">Partners</a></li>
+                      <li><a href="consultores.php">Consultores</a></li>
+                      <li><a href="partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="market.php">Market</a></li>
-                      <li><a href="leads.php">Leads</a></li>
-                      <li><a href="suspects.php">Suspects</a></li>
-                      <li><a href="prospects.php">Prospects</a></li>
+                      <li><a href="../empresas/market.php">Market</a></li>
+                      <li><a href="../empresas/leads.php">Leads</a></li>
+                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+                      <li><a href="../empresas/prospects.php">Prospects</a></li>
                       <li><a href="../contratos/contratos.php">Contratos</a></li>                     
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
@@ -131,8 +124,7 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div> 
-            <!-- end footer menu-->      
+            </div>              
           </div>
         </div>      
         <!-- Col-->
@@ -150,14 +142,14 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Perfil</a></li>
+                    <li><a href="../profiles/usuario-profile.php?id=<?=$usuario['id_usuario']?>"> Perfil</a></li>
                     <li>
                       <a href="javascript:;">
                         <span>Configurações</span>
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="./../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -173,12 +165,12 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Suspects</h3>
+                <h3>Partners</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Pesquise...">
+                    <input type="text" class="form-control" placeholder="Search for...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                       </span>
@@ -205,79 +197,68 @@
                       <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
                   </div>
-                  <div class="clearfix"></div>               
+                  <div class="clearfix"></div>                
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <table id="tabela" class="table">
-                            <thead>
-                              <tr>                            
-                                <th>Empresa</th>
-                                <th>Contato</th>
-                                <th>Data</th>
-                                <th>Tel</th>
-                                <th>Email</th>
-                                <th>Horário</th>
-                                <th>Consultor</th>
-                                <th>Status</th>                            
-                                <th>Ações</th>
-                              </tr>
-                            </thead>
-                            <tfoot>
-                              <tr>                            
-                                <th>Empresa</th>
-                                <th>Contato</th>
-                                <th>Data</th>
-                                <th>Tel</th>
-                                <th>Email</th>
-                                <th>Horário</th>
-                                <th>Consultor</th>
-                                <th>Status</th>      
-                                <th></th>
-                              </tr>
-                            </tfoot>
-                            <tbody>
-                              <?php
-                                $apresentacoes = listaClientesApresentacao($conexao);
-                                foreach ($apresentacoes as $apresentacao){
-                                  $cliente = buscaMarket($conexao, $apresentacao['id_clientes']);
-                                  $consultor = buscaUsuario($conexao, $apresentacao['id_consultor']);
-                              ?>
-                                <tr>
-                                  <td><?=$cliente['nome']?></td>
-                                  <td><?=$apresentacao['contato']?></td>
-                                  <td><?=$apresentacao['data']?></td>
-                                  <td><?=$apresentacao['tel']?></td>
-                                  <td><?=$apresentacao['email']?></td>
-                                  <td><?=$apresentacao['hora']?></td>
-                                  <td><?=$consultor['nome']?></td>
-                                  <td><?=$apresentacao['status']?></td>                              
-                                  <td class="col-md-3" align="center">
-                                    <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
-                                    <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Prospect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                    <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                    <a href="../forms/form-altera-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Suspect" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a> 
-                                    <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>  
-                                    <a href="../remove/remove-suspect.php?id=<?=$apresentacao['id_suspect']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Suspect" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>                     
-                                  </td>                            
-                                </tr>
-                              <?php
-                                }
-                              ?>
-                            </tbody>
-                        </table>                        
+                          <thead>
+                            <tr>
+                              <th>Nome</th>
+                              <th>Email</th>
+                              <th>Estado</th>
+                              <th>Telefone</th>
+                              <th>Profissão</th>
+                              <th>Ações</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $usuarios = listaUsuarios($conexao);
+                              foreach ($usuarios as $usuario) {
+                                if($usuario['id_profissao'] == 4 ){
+                                  $profissao = buscaProfissao($conexao , $usuario['id_profissao'] );                   
+                            ?>
+                            <tr>
+                              
+                                  <td><?=$usuario['nome']?></td>                              
+                                  <td><?=$usuario['email']?></td>
+                                  <td><?=$usuario['estado']?></td>
+                                  <td><?=$usuario['telefone']?></td>
+                                  <th><?=$profissao['descricao']?></th>
+                                  <td align="center">                             
+                                    
+                                    
+                                    <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                  </td>
+                                                              
+                            </tr>  
+                            <?php
+                              }                          
+                            }
+                            ?>                   
+                          </tbody>
+                        </table>
                         <div class="ln_solid"></div>
-                          <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Market"  style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
-                    </div>  
+                    </div>   
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="clearfix"></div>       
+        </div>        
+        <div class="clearfix"></div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            PROJEK
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
     <!-- jQuery -->
@@ -288,8 +269,6 @@
     <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -302,69 +281,9 @@
     <script src="../../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../../js/datatable.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/datatable.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-          // Setup - add a text input to each footer cell
-          $('#tabela tfoot th').each( function () {
-              var title = $(this).text();
-              if(title != ''){
-                $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
-              }
-              
-          } );
-       
-          // DataTable
-          var table = $('#tabela').DataTable();
-       
-          // Apply the search
-          table.columns().every( function () {
-              var that = this;
-       
-              $( 'input', this.footer() ).on( 'keyup change', function () {
-                  if ( that.search() !== this.value ) {
-                      that
-                          .search( this.value )
-                          .draw();
-                  }
-              } );
-          } );
-      } );
-    </script>
-    <script src="../../js/notify.js"></script>
-    <?php
-    if(isset($_SESSION['success'])){
-    ?>
-      <script>
-        $.notify('<?=$_SESSION['success']?>', "success");
-      </script>
-
-    <?php
-      unset($_SESSION['success']);
-    }
-    ?>
-    
-    <?php
-    if(isset($_SESSION['error'])){
-    ?>
-      <script>
-        $.notify('<?=$_SESSION['error']?>', "error");
-      </script>
-
-    <?php
-      unset($_SESSION['error']);
-    }
-    ?>    
   </body>
-  <!-- footer content -->
-  <footer>
-    <div class="pull-right">
-      PROJEK
-    </div>
-    <div class="clearfix"></div>
-  </footer>
-  <!-- /footer content -->
 </html>

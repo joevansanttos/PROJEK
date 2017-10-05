@@ -5,6 +5,7 @@
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
   verificaUsuario();
+
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
@@ -83,6 +84,7 @@
                       <li><a href="../usuarios/usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="../usuarios/consultores.php">Consultores</a></li>
+                      <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -95,11 +97,18 @@
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
-                    </ul>
-                  </li>
+                  <?php
+                    if($usuario['id_profissao'] != 4){
+                  ?>
+                    <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                      </ul>
+                    </li>
+                  <?php
+                    }
+                  ?>
+                  
                 </ul>
               </div>
             </div>

@@ -75,6 +75,7 @@
 	                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
 	                      <li><a href="../produtos/produtos.php">Produtos</a></li>
 	                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
+	                      <li><a href="../usuarios/partners.php">Partners</a></li>
 	                    </ul>
 	                  </li>
 	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -204,8 +205,7 @@
 	                		    <div class="col-sm-8 col-xs-12 col-md-3">
 	                		      <select id="cargo" name="cargo" required class="form-control col-md-8 col-xs-12">
 	                		        <option value="">Selecione...</option>                      
-	                		        <option value="Faturamento">Colaborador Faturamento</option>
-	                		        <option value="Financeiro">Colaborador Financeiro</option>
+	                		        
 	                		        <option value="Coordenador">Coordenador</option>
 	                		        <option value="Diretor">Diretor</option>
 	                		        <option value="Gerente">Gerente</option>
@@ -222,7 +222,7 @@
 	                		       <?php
 	                		       $usuarios = listaUsuarios($conexao);
 	                		       foreach ($usuarios as $usuario){ 
-	                		         if($usuario["id_profissao"] == '1'){
+	                		         if($usuario["id_profissao"] == '1' || $usuario["id_profissao"] == '4' ){
 	                		           ?>
 
 	                		           <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option>

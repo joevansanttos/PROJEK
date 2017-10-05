@@ -1,6 +1,8 @@
 <?php 
 	require_once "../bancos/conecta.php";
 	require_once "../bancos/banco-suspect.php";
+	ob_start();
+	session_start();
 	$id_suspect = $_POST["id"];
 	$contato = $_POST["contato"];
 	$data = $_POST["data"];
@@ -11,6 +13,7 @@
  	$query = "update  suspects  set contato ='{$contato}', data = '{$data}', tel ='{$tel}', email = '{$email}', status = '{$status}'  where id_suspect = {$id_suspect}";
 	if(mysqli_query($conexao, $query)){   
   	mysqli_close($conexao);
+  	$_SESSION["success"] = "Suspect $contato alterado!";
   	header("Location: ../empresas/suspects.php");  
 	}else{
     echo "nao foi adicionado";

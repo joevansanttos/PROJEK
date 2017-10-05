@@ -7,7 +7,7 @@
   if(mysqli_query($conexao, $query)){
     $query = "delete from consultores_market where id_market = $id";
     mysqli_query($conexao, $query);
-    $_SESSION["market_removido"] = "Market Removido!";
+    $_SESSION["error"] = "Market Removido!";
     mysqli_close($conexao);
     header("Location: ../empresas/market.php");
   }else{

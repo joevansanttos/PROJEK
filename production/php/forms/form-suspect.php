@@ -75,6 +75,7 @@
 	                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
 	                      <li><a href="../produtos/produtos.php">Produtos</a></li>
 	                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
+	                      <li><a href="../usuarios/partners.php">Partners</a></li>
 	                    </ul>
 	                  </li>
 	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -208,7 +209,7 @@
 	                		      <?php
 	                		      $usuarios = listaUsuarios($conexao);
 	                		      foreach ($usuarios as $usuario){
-	                		        if($usuario["id_profissao"] == '1'){
+	                		        if($usuario["id_profissao"] == '1' || $usuario["id_profissao"] == '3'){
 	                		          ?>
 	                		          <option value="<?=$usuario['id_usuario']?>"><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option> 
 	                		          <?php

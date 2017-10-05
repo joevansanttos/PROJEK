@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8'); 
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start(); 
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-market.php";
   require_once "../bancos/banco-lead.php";
@@ -92,6 +94,7 @@
                       <li><a href="../usuarios/usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="../usuarios/consultores.php">Consultores</a></li>
+                      <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -241,7 +244,7 @@
                                       <td><?=$lead['tel']?></td>
                                       <td><?=$lead['cargo']?></td>                                 
                                       <td align="center">
-                                        <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Lead" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
+                                        <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Contato" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                         <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>
@@ -301,6 +304,8 @@
     <script src="../../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 
+    <script src="../../js/notify.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js">
@@ -333,5 +338,29 @@
           } );
       } );
     </script>
+    <?php
+    if(isset($_SESSION['success'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['success']?>', "success");
+      </script>
+
+    <?php
+      unset($_SESSION['success']);
+    }
+    ?>
+
+    <?php
+    if(isset($_SESSION['error'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['error']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['error']);
+    }
+    ?>
+    
   </body>
 </html>

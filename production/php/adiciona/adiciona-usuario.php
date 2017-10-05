@@ -3,6 +3,8 @@
   require_once "../bancos/banco-cidade.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
+  ob_start();
+  session_start();
   verificaUsuario();
   $email = $_POST["email"];
   $senha = $_POST["senha"];
@@ -29,6 +31,7 @@ if(mysqli_query($conexao, $query)){
 
   }
   mysqli_close($conexao);
+  $_SESSION["success"] = "Usuario  $nome adicionado!";
   header("Location: ../usuarios/usuarios.php"); 
 }
 

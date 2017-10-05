@@ -39,3 +39,9 @@ function listaPortes($conexao){
     
     return $usuarios;
 }
+
+function buscaPorte($conexao, $id){
+  $query = "select * from porte where id_porte = {$id}";
+  $resultado = mysqli_query($conexao, $query);
+  return mysqli_fetch_assoc($resultado);
+}

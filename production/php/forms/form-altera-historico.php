@@ -75,6 +75,7 @@
 	                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
 	                      <li><a href="../produtos/produtos.php">Produtos</a></li>
 	                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
+	                      <li><a href="../usuarios/partners.php">Partners</a></li>
 	                    </ul>
 	                  </li>
 	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>

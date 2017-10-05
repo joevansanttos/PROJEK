@@ -250,7 +250,7 @@
                                     <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
                                     <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>                              
                                     <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>  
-                                    <a data-toggle="tooltip" data-placement="top" title="Remover Contrato"  href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Remover Contrato"  href="../remove/remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                   </td>                                
                               <?php    
                                 }else{
@@ -260,7 +260,7 @@
                                     <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
                                     <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>                              
                                     <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>                   
-                                    <a href="remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                    <a href="../remove/remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                   </td>                                  
                               <?php   
                                 }

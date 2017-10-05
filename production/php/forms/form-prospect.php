@@ -4,15 +4,18 @@
 	require_once "../bancos/conecta.php";
 	require_once "../bancos/banco-market.php";
 	require_once "../bancos/banco-usuario.php";
+	require_once "../bancos/banco-profissao.php";
 	require_once "../bancos/banco-produto.php";
 	require_once "../logica/logica-usuario.php";
 	require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
+  $profissao = buscaProfissao($conexao , $usuario['id_profissao']);
   $id_usuario = $usuario['id_usuario'];
 	$id = $_GET['id'];
 	$cliente = buscaMarket($conexao, $id);
+	$porte = buscaPorte($conexao, $cliente['id_porte']);	
 	$produtos = listaProdutos($conexao);
 ?>
 
@@ -83,6 +86,7 @@
 	                      <li><a href="../usuarios/usuarios.php">Usuários</a></li>
 	                      <li><a href="../produtos/produtos.php">Produtos</a></li>
 	                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
+	                      <li><a href="../usuarios/partners.php">Partners</a></li>
 	                    </ul>
 	                  </li>
 	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -187,6 +191,31 @@
 	                		    </div>
 	                		  </div>
 	                		  <div class="item form-group">
+	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Porte<span class="required">*</span>
+	                		    </label>
+	                		    <div class="col-md-6 col-sm-6 col-xs-12">
+	                		      <input readonly="readonly" type="text" id="porte" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$porte['descricao']?>">
+	                		    </div>
+	                		  </div>
+	                		  <div class="item form-group">
+	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
+	                		    </label>
+	                		    <div class="col-sm-6 col-xs-12 col-md-6">
+	                		      <select id="id_consultor" name="id_consultor" class="optional form-control col-md-7 col-xs-12">
+	                		      <?php
+	                		      $consultores = listaUsuarios($conexao);
+	                		      foreach ($consultores as $consultor){
+	                		        if($consultor["id_profissao"] == '1' || $consultor["id_profissao"] == '4' ){
+	                		          ?>
+	                		          <option value="<?=$consultor['id_profissao']?>"><?=$consultor['nome']?><?=' '?><?=$consultor['sobrenome']?></option> 
+	                		          <?php
+	                		        }
+	                		      }                     
+	                		      ?>
+	                		      </select> 
+	                		    </div>
+	                		  </div>
+	                		  <div class="item form-group">
 	                		    <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Produto <span class="required">*</span></label>
 	                		    <div class="col-sm-6 col-xs-12 col-md-3">
 	                		    
@@ -216,13 +245,13 @@
 	                		  <div class="item form-group">
 	                		    
 	                		    <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Valor Oportunidade <span class="required">*</span></label>
-	                		    <div class="col-sm-6 col-xs-12 col-md-2">
-	                		      <input type="number" value="<?=$produto['preco']?>" step="" id="valor_op" name="valor_op" data-validate-linked="prod" required="required" class="form-control col-md-4 col-xs-12" required>
+	                		    <div class="col-sm-6 col-xs-12 col-md-2">	                
+	                		      <input readonly="readonly" type="number"  step="" id="valor_op" name="valor_op" data-validate-linked="prod" required="required" class="form-control col-md-4 col-xs-12" required>
 	                		    </div>
 	                		    <label class="control-label col-md-2 col-sm-3 col-xs-12" for="valor_est">Valor Estimado <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-sm-2 col-xs-12 col-md-2">
-	                		      <input type="text" id="valor_est" name="valor_est" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+	                		      <input readonly="readonly" type="text" id="valor_est" name="valor_est" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 	                		    </div>
 	                		  </div>
 	                		  <div class="item form-group">
@@ -234,25 +263,7 @@
 	                		    <div class="col-sm-2 col-xs-12 col-md-2">
 	                		      <input type="date" id=fechamento" name="fechamento" required="required" data-validate-length-range="6,20" class="form-control col-md-7 col-xs-12">
 	                		    </div>
-	                		  </div>
-	                		  <div class="item form-group">
-	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
-	                		    </label>
-	                		    <div class="col-sm-6 col-xs-12 col-md-6">
-	                		      <select id="id_consultor" name="id_consultor" class="optional form-control col-md-7 col-xs-12">
-	                		      <?php
-	                		      $usuarios = listaUsuarios($conexao);
-	                		      foreach ($usuarios as $usuario){
-	                		        if($usuario["id_profissao"] == '1'){
-	                		          ?>
-	                		          <option value="<?=$usuario['id_usuario']?>"><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option> 
-	                		          <?php
-	                		        }
-	                		      }                     
-	                		      ?>
-	                		      </select> 
-	                		    </div>
-	                		  </div>
+	                		  </div>	                		  
 	                		  <div class="ln_solid"></div>
 	                		  <div class="form-group">
 	                		  	<div class="col-md-6 col-md-offset-3">
@@ -336,9 +347,31 @@
 	  <script type="text/javascript">
 
 	    function calcula(){
+
 	      var prob = document.getElementById('prob').value;
 	      var divide = prob/100;
-	      var valor_op = document.getElementById('valor_op').value;
+	      var id_profissao = document.getElementById('id_consultor').value;
+	      var porte = document.getElementById('porte').value;
+	    	if(id_profissao == 4){	    		
+	    		if(porte == 'Micro'){
+	    			var valor_op = document.getElementById('valor_op').value + 450;
+	    		}else if(porte == 'Pequena'){
+	    			var valor_op = document.getElementById('valor_op').value * 1.5 + 450;
+
+	    		}else{
+	    			var valor_op = document.getElementById('valor_op').value * 2 + 450;
+	    		}
+	    		
+	    	}else{
+	    		if(porte == 'Micro'){
+	    			var valor_op = document.getElementById('valor_op').value;
+	    		}else if(porte == 'Pequena'){
+	    			var valor_op = document.getElementById('valor_op').value * 1.5;
+	    		}else{
+	    			var valor_op = document.getElementById('valor_op').value * 2;
+	    		}
+	    	}
+	    	document.getElementById('valor_op').value = valor_op;
 	      var result=  parseFloat(divide)*parseFloat(valor_op);
 
 	      document.getElementById('valor_est').value = parseFloat(Math.round(result * 100) / 100).toFixed(2);

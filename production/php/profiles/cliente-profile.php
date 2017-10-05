@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8');
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start();  
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-market.php";
   require_once "../bancos/banco-lead.php";
@@ -111,6 +113,7 @@
                       <li><a href="../usuarios/usuarios.php">Usuários</a></li>
                       <li><a href="../produtos/produtos.php">Produtos</a></li>
                       <li><a href="../usuarios/consultores.php">Consultores</a></li>
+                      <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
@@ -210,26 +213,7 @@
                   <div class="x_content">
                     <div class="row" >
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel" >
-                          <div class="x_title">
-                            <h2>Dados do Cliente</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                              </li>
-                              <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                  <li><a href="#">Settings 1</a>
-                                  </li>
-                                  <li><a href="#">Settings 2</a>
-                                  </li>
-                                </ul>
-                              </li>
-                              <li><a class="close-link"><i class="fa fa-close"></i></a>
-                              </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                          </div>
+                        <div class="x_panel" >                        
                           <div class="x_content" align="center">
                             <div class="col-md-12 col-sm-3 col-xs-12 profile_left " >
                               <div class="profile_img">
@@ -486,6 +470,7 @@
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
+    <script src="../../js/notify.js"></script>
     <script type="text/javascript">       
    
     </script>
@@ -511,6 +496,29 @@
         });
        });
     </script>
+    <?php
+    if(isset($_SESSION['success'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['success']?>', "success");
+      </script>
+
+    <?php
+      unset($_SESSION['success']);
+    }
+    ?>
+    
+    <?php
+    if(isset($_SESSION['error'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['error']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['error']);
+    }
+    ?>
   </body>
 </html>
 
