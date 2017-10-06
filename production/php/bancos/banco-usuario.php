@@ -43,3 +43,5 @@ function buscaImagem($conexao, $id){
     return $usuario;
 }
 
+
+

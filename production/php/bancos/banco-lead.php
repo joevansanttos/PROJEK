@@ -45,3 +45,8 @@ function buscaLeadId($conexao, $id){
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
 }
+
+function adicionaLead($conexao, $id_market, $nome, $email, $tel, $cargo){
+  $query = "insert into leads (id_clientes, nome, email, tel, cargo) values ('$id_market','{$nome}' ,'{$email}' ,'{$tel}' ,'{$cargo}')";
+  mysqli_query($conexao, $query);
+}

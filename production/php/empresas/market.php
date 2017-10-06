@@ -9,6 +9,7 @@
   require_once "../bancos/banco-lead.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../bancos/banco-cidade.php";
+  require_once "../bancos/banco-consultores-market.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
@@ -81,9 +82,11 @@
 
             <!-- Sidebar Menu-->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Geral</h3>
+              <div class="menu_section">                
                 <ul class="nav side-menu">
+                  <?php
+                    if($usuario['id_profissao'] != 4){
+                  ?>
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../index/index2.php">Dashboard</a></li>
@@ -98,6 +101,9 @@
                       <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
+                  <?php
+                    }
+                  ?>   
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="market.php">Market</a></li>
@@ -108,11 +114,17 @@
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
+                  <?php
+                    if($usuario['id_profissao'] != 4){
+                  ?>
                   <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
                     </ul>
                   </li>
+                  <?php
+                    }
+                  ?>
                 </ul>
               </div>
             </div> 
@@ -235,9 +247,15 @@
                                 </tfoot>
                                 <tbody>
                                   <?php
-                                    $clientes = listaMarkets($conexao);
-                                    foreach ($clientes as $cliente){
-                                      $leads = buscaLeads($conexao, $cliente['id_market']);
+                                  if($usuario['id_profissao'] != 4){
+                                    $markets= listaMarkets($conexao);
+                                  }else{
+                                    $markets= buscaMarketConsultores($conexao , $id_usuario);
+                                  }
+                                                                     
+                                    foreach ($markets as $market){
+                                      $cliente = buscaMarket($conexao , $market['id_market']);
+                                      $leads = buscaLeads($conexao, $market['id_market']);
                                       if(count($leads) < 1){
                                         $nomeCidade = buscaCidade($conexao , $cliente['cidade']);   
                                    ?>

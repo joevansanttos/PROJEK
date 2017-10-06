@@ -52,7 +52,6 @@
 	                  }                            
 	                  
 	                ?>
-	                <img src="" alt="..." >
 	              </div>
 	              <div class="profile_info">
 	                <span>Bem Vindo,</span>
@@ -60,10 +59,12 @@
 	              </div>
 	            </div>
 	            <br />
+	            <?php
+	              if($usuario['id_profissao'] != 4){
+	            ?>
 	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	              <div class="menu_section">
-	                <h3>Geral</h3>
-	                <ul class="nav side-menu">
+	                <ul class="nav side-menu">	            
 	                  <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="../index/index2.php">Dashboard</a></li>
@@ -77,7 +78,7 @@
 	                      <li><a href="../usuarios/consultores.php">Consultores</a></li>
 	                      <li><a href="../usuarios/partners.php">Partners</a></li>
 	                    </ul>
-	                  </li>
+	                  </li>	                
 	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
 	                      <li><a href="../empresas/market.php">Market</a></li>
@@ -96,6 +97,28 @@
 	                </ul>
 	              </div>
 	            </div>
+	            <?php
+	              }else{
+	            ?>
+	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+	              <div class="menu_section">
+	                <ul class="nav side-menu">            
+	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="../empresas/market.php">Market</a></li>
+	                      <li><a href="../empresas/leads.php">Leads</a></li>
+	                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+	                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+	                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+	                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+	                    </ul>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	            <?php
+	              }
+	            ?>
 	            <!-- /menu footer buttons -->
 	            <div class="sidebar-footer hidden-small">
 	                <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -215,25 +238,6 @@
 	                		    </div>
 	                		  </div>
 	                		  <div class="item form-group">
-	                		   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="consultor">Consultor<span class="required">*</span>
-	                		   </label>
-	                		   <div class="col-md-6 col-sm-6 col-xs-12">
-	                		     <select name="id_consultor" class="form-control col-md-7 col-xs-12">
-	                		       <?php
-	                		       $usuarios = listaUsuarios($conexao);
-	                		       foreach ($usuarios as $usuario){ 
-	                		         if($usuario["id_profissao"] == '1' || $usuario["id_profissao"] == '4' ){
-	                		           ?>
-
-	                		           <option  value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option>
-	                		           <?php
-	                		         }
-	                		       }
-	                		       ?>  
-	                		     </select>
-	                		   </div>
-	                		  </div>
-	                		  <div class="item form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Histórico <span class="required">*</span>
 	                		    </label>
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
@@ -250,6 +254,7 @@
 	                		     	<button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		      <button id="send" type="submit" class="btn btn-success">Cadastrar</button>
 	                		      <input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
+	                		      <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
 	                		    </div>
 	                		  </div>                     
 	                		</form>

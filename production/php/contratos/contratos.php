@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8');
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start();  
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-contrato.php";
   require_once "../bancos/banco-usuario.php";
@@ -77,9 +79,11 @@
               </div>
             </div>
             <br />
+            <?php
+              if($usuario['id_profissao'] != 4){
+            ?>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -112,6 +116,29 @@
                 </ul>
               </div>
             </div>
+            <?php
+              }else{
+            ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Geral</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../empresas/market.php">Market</a></li>
+                      <li><a href="../empresas/leads.php">Leads</a></li>
+                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+                      <li><a href="contratos.php">Contratos</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <?php
+              }
+            ?>  
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
                 <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -211,7 +238,6 @@
                               <th>Fim</th>
                               <th>Nº Contrato</th>
                               <th>Empresa</th>
-                              <th>Consultor</th>
                               <th>Status</th>
                               <th>Ações</th>
                             </tr>
@@ -222,14 +248,18 @@
                               <th>Fim</th>
                               <th>Nº Contrato</th>
                               <th>Empresa</th>
-                              <th>Consultor</th>
                               <th>Status</th>
                               <th></th>
                             </tr>
                           </tfoot>
                           <tbody>
                             <?php
-                              $contratos = listaContratos($conexao);
+                              if($usuario['id_profissao'] != 4){
+                                $contratos = listaContratos($conexao);
+                              }else{
+                                $contratos = buscaContratoUsuario($conexao , $id_usuario);
+                              }
+                              
                               foreach ($contratos as $contrato) {
                                 $usuario = buscaUsuario($conexao, $contrato['id_consultor']);
                                 $cliente = buscaMarket($conexao, $contrato['id_clientes']);
@@ -238,17 +268,15 @@
                               <tr>
                                 <td><?=$contrato['data_inicio']?></td>
                                 <td><?=$contrato['data_fim']?></td>
-                                <td><?=$contrato['n_contrato']?></td>
+                                <td><?=str_pad($contrato['n_contrato'], 3, '0', STR_PAD_LEFT).'.2017'?></td>
                                 <td><?=$cliente['nome']?></td>
-                                <td><?=$usuario['nome']?></td>
                                 <td><?=$status['descricao']?></td>
                               <?php
                                 if($contrato['id_contrato_status'] == 1){
                               ?>
                                   <td align="center">
                                     <a href="finaliza-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Finaliza Contrato"  class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>                       
-                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>                              
+                                    <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>                                                             
                                     <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>  
                                     <a data-toggle="tooltip" data-placement="top" title="Remover Contrato"  href="../remove/remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                   </td>                                
@@ -258,7 +286,7 @@
                                   <td align="center">
                                     <button data-toggle="tooltip" data-placement="top" title="Avaliação Positiva"  class="btn btn-success btn-xs"><i class="fa fa-thumbs-up"></i></button>                       
                                     <a href="imprime-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Imprime Contrato"  class="btn btn-success btn-xs"><i class="fa fa-print"></i></button></a>
-                                    <a href="../forms/form-altera-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Alterar Contrato"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>                              
+                                                                
                                     <a href="../forms/form-historico.php?id_market=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>                   
                                     <a href="../remove/remove-contrato.php?n_contrato=<?=$contrato['n_contrato']?>"><button data-toggle="tooltip" data-placement="top" title="Remove Contrato"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                   </td>                                  
@@ -348,7 +376,30 @@
               } );
           } );
       } );
-    </script>  
+    </script>
+    <?php
+    if(isset($_SESSION['success'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['success']?>', "success");
+      </script>
+
+    <?php
+      unset($_SESSION['success']);
+    }
+    ?>
+
+    <?php
+    if(isset($_SESSION['error'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['error']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['error']);
+    }
+    ?>      
   </body>
 </html>
 

@@ -45,3 +45,8 @@ function buscaSuspectId($conexao, $id){
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
 }
+
+function adicionaSuspect($conexao, $id, $contato, $data, $status, $hora, $id_consultor, $tel, $email){
+  $query = "insert into suspects (id_clientes, contato, data, status, hora,  id_consultor, tel, email) values ('$id','{$contato}' ,'{$data}' ,'{$status}' ,'{$hora}' , {$id_consultor} , '{$tel}', '{$email}')";
+  mysqli_query($conexao, $query);
+}

@@ -2,6 +2,7 @@
     require_once "../bancos/conecta.php";
     require_once "../bancos/banco-cidade.php";
     require_once "../bancos/banco-market.php";
+    require_once "../bancos/banco-consultores-market.php";
     ob_start();
     session_start();
     $razao = $_POST["razao"];
@@ -15,23 +16,21 @@
     $tel = $_POST["tel"];
     $bairro = $_POST["bairro"];
     $id_porte = $_POST["id_porte"];
-    $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro, id_porte) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$bairro}', $id_porte )";
-
-
-    if(mysqli_query($conexao, $query)){
+    $id_consultor = $_POST['id_consultor'];
+    $market = buscaMarketCnpj($conexao, $cnpj);
+    if(empty($market)){
+        adicionaMarket($conexao, $razao, $nome, $cnpj, $site,$endereco,$estado,$cidade,$segmento,$tel,$bairro,$id_porte);
         $market = buscaMarketCnpj($conexao, $cnpj);
-        $id_consultor = $_POST['id_consultor'];
+        $id_market = $market['id_market'];
         $today = date("d.m.y");
-        $query = "insert into consultores_market (id_consultor, id_market, data) values ({$id_consultor}, {$market['id_market']},'{$today}')";
-        if(mysqli_query($conexao, $query)){
-            mysqli_close($conexao);
-            $_SESSION["success"] = "Market $nome adicionado!";
-            header("Location: ../empresas/market.php");
-
-        }        
+        adicionaConsultoresMarket($conexao, $id_consultor, $id_market, $today);        
+        mysqli_close($conexao);
+        $_SESSION["success"] = "Market $nome adicionado!";
+        header("Location: ../empresas/market.php");
     }else{
-        echo mysqli_error($conexao);
-    }
+        $_SESSION["error"] = "Já existe market com esse CNPJ!";
+        header("Location: ../empresas/market.php");
+    }  
 
 
     

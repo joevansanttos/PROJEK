@@ -17,4 +17,9 @@ function buscaHistorico($conexao, $id){
   return mysqli_fetch_assoc($resultado);
 }
 
+function adicionaHistorico($conexao, $id, $id_consultor, $comentario, $today){
+  $query = "insert into historico (id_market, id_consultor, comentario, data) values ($id, {$id_consultor} ,'{$comentario}' ,'{$today}')";
+  mysqli_query($conexao, $query);
+} 
+
 ?>

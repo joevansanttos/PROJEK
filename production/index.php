@@ -1,13 +1,14 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8'); 
-  error_reporting(E_ALL ^ E_NOTICE); 
+  error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start(); 
   require_once "php/logica/logica-usuario.php";
   require_once "php/alerta/mostra-alerta.php";
   if(usuarioEstaLogado()) {
     header("Location: php/index/index2.php");
   }
-  mostraAlerta('success');
-  mostraAlerta('danger');
+  
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +46,32 @@
         </div> 
       </div>
     </section>
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="js/notify.js"></script>
+    <?php
+    if(isset($_SESSION['success'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['success']?>', "success");
+      </script>
+
+    <?php
+      unset($_SESSION['success']);
+    }
+    ?>
+
+    <?php
+    if(isset($_SESSION['error'])){
+    ?>
+      <script>
+        $.notify('<?=$_SESSION['error']?>', "error");
+      </script>
+
+    <?php
+      unset($_SESSION['error']);
+    }
+    ?>
   </body>
   <footer id="footer">
       <div class="container">

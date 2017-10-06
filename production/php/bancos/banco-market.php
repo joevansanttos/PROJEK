@@ -6,6 +6,7 @@ function buscaMarket($conexao, $id){
 	return mysqli_fetch_assoc($resultado);
 }
 
+
 function buscaMarketCnpj($conexao, $cnpj){
   $query = "select * from market where cnpj = '{$cnpj}'";
   $resultado = mysqli_query($conexao, $query);
@@ -23,6 +24,8 @@ function listaMarkets($conexao){
     
     return $clientes;
 }
+
+
 
 function alteraCliente($conexao, $razao, $nome, $cnpj, $site, $endereco, $estado, $cidade, $segmento, $tel, $bairro, $comentario){
   $query = "update  market  set nome ='{$nome}', razao = '{$razao}', cnpj ='{$cnpj}', site = '{$site}', endereco ='{$endereco}',estado ='{$estado}', cidade = '{$cidade}', segmento='{$segmento}', tel = '{$tel}', bairro='{$bairro}'";
@@ -44,4 +47,14 @@ function buscaPorte($conexao, $id){
   $query = "select * from porte where id_porte = {$id}";
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
+}
+
+function removeMarket($conexao, $id_market){
+  $query = "delete from market where id_market = $id_market";
+  $query = "delete from consultores_market where id_market = $id";
+}
+
+function adicionaMarket($conexao, $razao, $nome, $cnpj, $site,$endereco,$estado,$cidade,$segmento,$tel,$bairro,$id_porte){
+  $query = "insert into market (razao, nome, cnpj, site, endereco, estado, cidade, segmento, tel,  bairro, id_porte) values ('{$razao}','{$nome}', '{$cnpj}' ,'{$site}', '{$endereco}'  ,'{$estado}','{$cidade}', '{$segmento}','{$tel}' ,'{$bairro}', $id_porte )";
+  mysqli_query($conexao, $query);
 }

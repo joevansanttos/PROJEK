@@ -2,6 +2,8 @@
 	require_once "../bancos/conecta.php";
 	require_once "../bancos/banco-market.php";
 	require_once "../bancos/banco-suspect.php";
+	require_once "../bancos/banco-historico.php";
+	require_once "../bancos/banco-consultores-market.php";
 	ob_start();
 	session_start();
 	$id = $_POST["id"];
@@ -9,25 +11,19 @@
 	$data = $_POST["data"];
 	$status = $_POST["status"];
 	$hora = $_POST["hora"];
-	$id_consultor = $_POST["consultor"];
+	$id_consultor = $_POST["id_consultor"];
 	$tel = $_POST["tel"];
 	$email = $_POST["email"];
 	$date = new DateTime($data);
 	$data = $date->format('d.m.Y');
 	$today = date("d.m.y");
 	$comentario = $_POST['comentario'];
-	$query = "insert into suspects (id_clientes, contato, data, status, hora,  id_consultor, tel, email) values ('$id','{$contato}' ,'{$data}' ,'{$status}' ,'{$hora}' , {$id_consultor} , '{$tel}', '{$email}')";
-
-	if(mysqli_query($conexao, $query)){
-		$suspect = buscaSuspect($conexao, $id, $contato, $data, $tel, $email);
-		$query = "insert into consultores_suspect (id_consultor, id_suspect, data) values ({$id_consultor}, {$suspect['id_suspect']},'{$today}')";
-		mysqli_query($conexao, $query);
-		$query = "insert into historico (id_market, id_consultor, comentario, data) values ($id, {$id_consultor} ,'{$comentario}' ,'{$today}')";
-		mysqli_query($conexao, $query);
-    mysqli_close($conexao);
-    $_SESSION["success"] = "Suspect $nome adicionado!";
-    header("Location: ../empresas/suspects.php");
-	}else{
-	}
+	adicionaSuspect($conexao, $id, $contato, $data, $status, $hora, $id_consultor, $tel, $email);
+	$suspect = buscaSuspect($conexao, $id, $contato, $data, $tel, $email);
+	$id_suspect = $suspect['id_suspect'];
+	adicionaConsultoresSuspect($conexao, $id_consultor, $id_suspect, $today);
+	adicionaHistorico($conexao, $id, $id_consultor, $comentario, $today);
+	$_SESSION["success"] = "Suspect $nome adicionado!";
+  header("Location: ../empresas/suspects.php");
 ?>
 

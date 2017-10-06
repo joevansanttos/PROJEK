@@ -10,3 +10,8 @@ function buscaDepartamentosContrato($conexao, $n_contrato){
 	    
 	    return $clientes;
 	}
+
+	function adicionaDepartamentoContrato($conexao, $id_departamento, $n_contrato){
+	  $query = "insert into departamentos_contratos (id_departamento, n_contrato) values ($id_departamento, '{$n_contrato}')" ;
+	  mysqli_query($conexao, $query);
+	}

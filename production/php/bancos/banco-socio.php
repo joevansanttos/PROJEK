@@ -10,3 +10,8 @@
 	    
 	    return $clientes;
 	}
+
+	function adicionaSocio($conexao, $socio, $cpf, $residencia, $nacionalidade, $profissao, $civil, $n_contrato){
+	 	$query = "insert into socios (nome, cpf, residencia, nacionalidade, profissao, civil, n_contrato ) values ('$socio', '$cpf', '$residencia', '$nacionalidade', '$profissao', '$civil', '{$n_contrato}' )" ;
+	  mysqli_query($conexao, $query);
+	}

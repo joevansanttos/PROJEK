@@ -10,3 +10,8 @@ function listaTarefasContrato($conexao, $id_departamento_contrato){
 	  
 	  return $clientes;
 }
+
+function adicionaTarefasContrato($conexao, $id_tarefa, $id_departamento_contrato){
+  $query = "insert into tarefas_contrato (id_tarefa, id_departamento_contrato) values ({$id_tarefa}, {$id_departamento_contrato})";
+  mysqli_query($conexao, $query);
+}

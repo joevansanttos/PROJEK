@@ -1,13 +1,7 @@
 <?php 
 	require_once "../bancos/conecta.php";
-  $id = $_GET["id"];
-  $query = "delete from pos_venda where id_pos_venda = $id";
-  if(mysqli_query($conexao, $query)){
-    mysqli_close($conexao);
-    header("Location: ../pos-venda/pos-venda.php");
-  }else{
-
-  }
-   
-    
+	require_once "../bancos/banco-pos_venda.php";
+  $id_pos_venda = $_GET["id"];
+  header("Location: ../pos-venda/pos-venda.php");
+  removePos($conexao, $id_pos_venda);    
 ?>

@@ -71,9 +71,11 @@
 	              </div>
 	            </div>
 	            <br />
+	            <?php
+	              if($usuario['id_profissao'] != 4){
+	            ?>
 	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	              <div class="menu_section">
-	                <h3>Geral</h3>
 	                <ul class="nav side-menu">
 	                  <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
@@ -107,6 +109,28 @@
 	                </ul>
 	              </div>
 	            </div>
+	            <?php
+	              }else{
+	            ?>
+	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+	              <div class="menu_section">
+	                <ul class="nav side-menu">
+	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="../empresas/market.php">Market</a></li>
+	                      <li><a href="../empresas/leads.php">Leads</a></li>
+	                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+	                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+	                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+	                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+	                    </ul>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	            <?php
+	              }
+	            ?> 
 	            <!-- /menu footer buttons -->
 	            <div class="sidebar-footer hidden-small">
 	                <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -189,32 +213,7 @@
 	                		    <div class="col-md-6 col-sm-6 col-xs-12">
 	                		      <input readonly="readonly" type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$cliente['nome']?>">
 	                		    </div>
-	                		  </div>
-	                		  <div class="item form-group">
-	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Porte<span class="required">*</span>
-	                		    </label>
-	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <input readonly="readonly" type="text" id="porte" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?=$porte['descricao']?>">
-	                		    </div>
-	                		  </div>
-	                		  <div class="item form-group">
-	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Consultor <span class="required">*</span>
-	                		    </label>
-	                		    <div class="col-sm-6 col-xs-12 col-md-6">
-	                		      <select id="id_consultor" name="id_consultor" class="optional form-control col-md-7 col-xs-12">
-	                		      <?php
-	                		      $consultores = listaUsuarios($conexao);
-	                		      foreach ($consultores as $consultor){
-	                		        if($consultor["id_profissao"] == '1' || $consultor["id_profissao"] == '4' ){
-	                		          ?>
-	                		          <option value="<?=$consultor['id_profissao']?>"><?=$consultor['nome']?><?=' '?><?=$consultor['sobrenome']?></option> 
-	                		          <?php
-	                		        }
-	                		      }                     
-	                		      ?>
-	                		      </select> 
-	                		    </div>
-	                		  </div>
+	                		  </div>	                		 
 	                		  <div class="item form-group">
 	                		    <label for="prod" class="control-label col-md-3 col-sm-3 col-xs-12">Produto <span class="required">*</span></label>
 	                		    <div class="col-sm-6 col-xs-12 col-md-3">
@@ -270,6 +269,7 @@
 	                		   		<button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		    	<button id="send" type="submit" class="btn btn-success">Cadastrar</button>
 	                		    	<input type="hidden" name="id" id="id" value="<?=$cliente['id_market']?>" />
+	                		    	<input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
 	                		  	</div>
 	                		  </div>
 	                		</form> 
@@ -345,33 +345,31 @@
 	  </script>
 	  
 	  <script type="text/javascript">
-
 	    function calcula(){
-
 	      var prob = document.getElementById('prob').value;
 	      var divide = prob/100;
-	      var id_profissao = document.getElementById('id_consultor').value;
-	      var porte = document.getElementById('porte').value;
+	      var id_profissao = <?=$usuario['id_profissao']?>;
+	      var porte = <?=$porte['id_porte']?>;
 	    	if(id_profissao == 4){	    		
-	    		if(porte == 'Micro'){
-	    			var valor_op = document.getElementById('valor_op').value + 450;
-	    		}else if(porte == 'Pequena'){
-	    			var valor_op = document.getElementById('valor_op').value * 1.5 + 450;
+	    		if(porte == 1){
+	    			var valor_op = 1405;
+	    		}else if(porte == 2){
+	    			var valor_op = 1874;
 
 	    		}else{
-	    			var valor_op = document.getElementById('valor_op').value * 2 + 450;
+	    			var valor_op = 2342;
 	    		}
 	    		
 	    	}else{
-	    		if(porte == 'Micro'){
-	    			var valor_op = document.getElementById('valor_op').value;
-	    		}else if(porte == 'Pequena'){
-	    			var valor_op = document.getElementById('valor_op').value * 1.5;
+	    		if(porte == 1){
+	    			var valor_op = 937;
+	    		}else if(porte == 2){
+	    			var valor_op = 1405;
 	    		}else{
-	    			var valor_op = document.getElementById('valor_op').value * 2;
+	    			var valor_op = 1874;
 	    		}
 	    	}
-	    	document.getElementById('valor_op').value = valor_op;
+	    	document.getElementById('valor_op').value = parseFloat(Math.round(valor_op)).toFixed(2);
 	      var result=  parseFloat(divide)*parseFloat(valor_op);
 
 	      document.getElementById('valor_est').value = parseFloat(Math.round(result * 100) / 100).toFixed(2);

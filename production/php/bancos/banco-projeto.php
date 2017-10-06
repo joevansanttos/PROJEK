@@ -16,3 +16,8 @@ function buscaProjeto($conexao, $id_projeto){
 	$resultado = mysqli_query($conexao, $query);
 	return mysqli_fetch_assoc($resultado);
 }
+
+function adicionaProjeto($conexao, $n_contrato){
+  $query = "insert into projetos (n_contrato) values ('{$n_contrato}')";
+  mysqli_query($conexao, $query);
+}

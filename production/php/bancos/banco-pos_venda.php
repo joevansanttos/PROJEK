@@ -25,3 +25,14 @@ function buscaPosVenda($conexao, $id){
   $resultado = mysqli_query($conexao, $query);
   return mysqli_fetch_assoc($resultado);
 }
+
+function removePos($conexao, $id_pos_venda){
+  $query = "delete from pos_venda where id_pos_venda = $id_pos_venda";
+  mysqli_query($conexao, $query);
+  mysqli_close($conexao);
+}
+
+function adicionaPosVenda($conexao, $n_contrato, $id_clientes){
+  $query = "insert into pos_venda (n_contrato, id_clientes) values ('{$n_contrato}', $id_clientes )";
+  mysqli_query($conexao, $query);
+}

@@ -80,9 +80,11 @@
               </div>
             </div>
             <br />
+            <?php
+              if($usuario['id_profissao'] != 4){
+            ?>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -115,7 +117,28 @@
                 </ul>
               </div>
             </div>
-
+            <?php
+              }else{
+            ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../empresas/market.php">Market</a></li>
+                      <li><a href="../empresas/leads.php">Leads</a></li>
+                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="pos-venda.php">Pós-venda</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <?php
+              }
+            ?>  
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
                 <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -210,7 +233,7 @@
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-                        <table id="tabela" class="table table-hover">
+                        <table id="tabela" class="table">
                           <thead>
                             <tr role="row">
                               <th>Empresa</th>
@@ -233,7 +256,7 @@
                           ?>
                               <tr>
                                 <td><?=$market['nome']?></td>
-                                <td><?=$contrato['n_contrato']?></td>                           
+                                <td><?=str_pad($contrato['n_contrato'], 3, '0', STR_PAD_LEFT).'.2017'?></td>                           
                                 <td><?=$contrato['data_inicio']?></td>
                                 <td><?=$contrato['data_fim']?></td>                        
                                 <td><?=$consultor['nome']?></td>
@@ -272,7 +295,7 @@
                                 <td></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                 
                                 </td>
 
                             <?php    
@@ -283,7 +306,7 @@
                                 <td></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                  
                                 </td>
                         
 
@@ -295,7 +318,7 @@
                                 <td><?=$contatos_sequencia[1]?></td>
                                 <td class="col-md-2" align="center">
                                   <a href="../forms/form-contato.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
-                                  <a href="../remove/remove-pos-venda.php?id=<?=$cliente['id_pos_venda']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                  
                                 </td>
                             <?php
                               }

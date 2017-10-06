@@ -1,34 +1,35 @@
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-contrato.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-socio.php";?>
-<?php include "../bancos/banco-departamentos-contrato.php";?>
-<?php include "../bancos/banco-departamentos.php";?>
+<?php 
+	require_once "../bancos/conecta.php";
+	require_once "../bancos/banco-contrato.php";
+	require_once "../bancos/banco-market.php";
+	require_once "../bancos/banco-socio.php";
+	require_once "../bancos/banco-departamentos-contrato.php";
+	require_once "../bancos/banco-departamentos.php";
+	$n_contrato = $_GET['n_contrato'];
+	$numero = intval($n_contrato);
+	$number =str_pad($numero, 3, '0', STR_PAD_LEFT);
+	$today = date("d.m.Y");
+	$todayPieces = explode(".", $today);
+	$contrato = buscaContrato($conexao , $n_contrato);
+	$departamentos =[];
+	$departamentosContrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
+	foreach ($departamentosContrato as  $dep) {
+  	$departamento = buscaDepartamento($conexao, $dep['id_departamento']);
+  	array_push($departamentos, $departamento[0]['descricao'] );
+	}
+	$cliente= buscaMarket($conexao, $contrato['id_clientes']);
+	$socios = buscaSociosContrato($conexao, $contrato['n_contrato']);
 
-<?php
-$n_contrato = $_GET['n_contrato'];
-$today = date("d.m.Y");
-$todayPieces = explode(".", $today);
-$contrato = buscaContrato($conexao , $n_contrato);
-$departamentos =[];
-$departamentosContrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
-foreach ($departamentosContrato as  $dep) {
-  $departamento = buscaDepartamento($conexao, $dep['id_departamento']);
-  array_push($departamentos, $departamento[0]['descricao'] );
-}
-$cliente= buscaMarket($conexao, $contrato['id_clientes']);
-$socios = buscaSociosContrato($conexao, $contrato['n_contrato']);
 
-
-$inicio = $contrato['data_inicio'];
-$pieces = explode(".", $inicio);
-$fim = $contrato['data_fim'];
-$pieces2 = explode(".", $fim);
-$plano =[];
-$end[0] = intval($pieces2[1]);
-$end[1] = intval($pieces2[2][2].$pieces2[2][3]);
-$begin[0] = intval($pieces[1]);
-$begin[1] = intval($pieces[2][2].$pieces[2][3]);
+	$inicio = $contrato['data_inicio'];
+	$pieces = explode(".", $inicio);
+	$fim = $contrato['data_fim'];
+	$pieces2 = explode(".", $fim);
+	$plano =[];
+	$end[0] = intval($pieces2[1]);
+	$end[1] = intval($pieces2[2][2].$pieces2[2][3]);
+	$begin[0] = intval($pieces[1]);
+	$begin[1] = intval($pieces[2][2].$pieces[2][3]);
 
 while($begin[0] != $end[0] || $begin[1] != $end[1]){
   if($begin[0]== 12){
@@ -166,7 +167,7 @@ while($begin[0] != $end[0] || $begin[1] != $end[1]){
 	    		<button id="button" onclick="window.print()" class="btn btn-default">Baixar</button>    
 	    	  <span class="section"><h1><center><strong>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</strong></center></h1>                
 	    	  <br>
-	    	        <center><h2><strong><?=$contrato['data_inicio']?></strong></h2> </center>
+	    	        <center><h2><strong><?=$number.'.2017'?></strong></h2> </center>
 	    	  <br>
 	    	  <p>Por este instrumento particular, as Partes adiante identificadas e qualificadas, a saber:</p><br><br> 
 

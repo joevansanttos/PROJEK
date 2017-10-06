@@ -9,6 +9,7 @@
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
+  require_once "../bancos/banco-consultores-market.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -79,6 +80,9 @@
             </div>
             <br />
             <!-- Sidebar Menu-->
+            <?php
+              if($usuario['id_profissao'] != 4){
+            ?>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Geral</h3>
@@ -115,7 +119,28 @@
                 </ul>
               </div>
             </div> 
-
+            <?php
+              }else{
+            ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">               
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="market.php">Market</a></li>
+                      <li><a href="leads.php">Leads</a></li>
+                      <li><a href="suspects.php">Suspects</a></li>
+                      <li><a href="prospects.php">Prospects</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div> 
+            <?php
+              }
+            ?>  
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
                 <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -233,8 +258,14 @@
                                 </tfoot>
                                 <tbody>
                                   <?php
-                                    $leads = listaLeads($conexao);
-                                    foreach ($leads as $lead){
+                                    if($usuario['id_profissao'] != 4){
+                                      $leads_consultores = listaLeads($conexao);
+                                    }else{
+                                      $leads_consultores = buscaLeadsConsultores($conexao , $id_usuario);
+                                    }
+                                    
+                                    foreach ($leads_consultores as $l_consultor){
+                                      $lead = buscaLeadId($conexao, $l_consultor['id_lead']);
                                       $market = buscaMarket($conexao, $lead['id_clientes']);                                
                                    ?>
                                     <tr>

@@ -1,6 +1,8 @@
 <?php 
   header('Content-Type: text/html; charset=utf-8'); 
   error_reporting(E_ALL ^ E_NOTICE);
+  ob_start();
+  session_start(); 
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
@@ -71,13 +73,14 @@
             <br />
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
+                  <?php
+                    if($usuario['id_profissao'] != 4){
+                  ?>
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index2.php">Dashboard</a></li>
-                    </ul>
-                    
+                    </ul>                  
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -87,6 +90,9 @@
                       <li><a href="../usuarios/partners.php">Partners</a></li>
                     </ul>
                   </li>
+                  <?php
+                    }
+                  ?>   
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../empresas/market.php">Market</a></li>
@@ -296,11 +302,22 @@
     <script src="../../../vendors/moment/min/moment.min.js"></script>
     <script src="../../../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src='../../../vendors/fullcalendar/dist/lang/pt-br.js'></script>
+    <script src="../../js/notify.js"></script>
     <script>
      
     </script>
 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
+    <?php
+    if(isset($_SESSION['usuario_logado'])){
+    ?>
+      <script>
+        $.notify('Bem Vindo a Projek!', "success");
+      </script>
+
+    <?php
+    }
+    ?>
   </body>
 </html>

@@ -2,11 +2,12 @@
   header('Content-Type: text/html; charset=utf-8'); 
   error_reporting(E_ALL ^ E_NOTICE); 
   require_once "../bancos/conecta.php";
-  require_once ("../bancos/banco-market.php");
-  require_once ("../bancos/banco-suspect.php");
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-suspect.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
+  require_once "../bancos/banco-consultores-market.php";
   verificaUsuario();
   ob_start();
   session_start(); 
@@ -80,9 +81,11 @@
             </div>
             <br />
             <!-- Sidebar Menu-->
+            <?php
+              if($usuario['id_profissao'] != 4){
+            ?>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -116,7 +119,28 @@
                 </ul>
               </div>
             </div>
-
+            <?php
+              }else{
+            ?>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="market.php">Market</a></li>
+                      <li><a href="leads.php">Leads</a></li>
+                      <li><a href="suspects.php">Suspects</a></li>
+                      <li><a href="prospects.php">Prospects</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <?php
+              }
+            ?>  
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
                 <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -218,7 +242,6 @@
                                 <th>Tel</th>
                                 <th>Email</th>
                                 <th>Horário</th>
-                                <th>Consultor</th>
                                 <th>Status</th>                            
                                 <th>Ações</th>
                               </tr>
@@ -231,15 +254,20 @@
                                 <th>Tel</th>
                                 <th>Email</th>
                                 <th>Horário</th>
-                                <th>Consultor</th>
                                 <th>Status</th>      
                                 <th></th>
                               </tr>
                             </tfoot>
                             <tbody>
                               <?php
-                                $apresentacoes = listaClientesApresentacao($conexao);
-                                foreach ($apresentacoes as $apresentacao){
+                                  if($usuario['id_profissao'] != 4){
+                                    $suspects = listaClientesApresentacao($conexao);
+                                  }else{
+                                    $suspects = buscaSuspectConsultores($conexao , $id_usuario);
+                                  }
+                                
+                                foreach ($suspects as $suspect){
+                                  $apresentacao = buscaSuspectId($conexao, $suspect['id_suspect']);
                                   $cliente = buscaMarket($conexao, $apresentacao['id_clientes']);
                                   $consultor = buscaUsuario($conexao, $apresentacao['id_consultor']);
                               ?>
@@ -250,9 +278,8 @@
                                   <td><?=$apresentacao['tel']?></td>
                                   <td><?=$apresentacao['email']?></td>
                                   <td><?=$apresentacao['hora']?></td>
-                                  <td><?=$consultor['nome']?></td>
                                   <td><?=$apresentacao['status']?></td>                              
-                                  <td class="col-md-3" align="center">
+                                  <td class="col-md-2"
                                     <a href="../forms/form-suspect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                     <a href="../forms/form-prospect.php?id=<?=$apresentacao['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Prospect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                     <a href="../profiles/cliente-profile.php?id=<?=$cliente['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>

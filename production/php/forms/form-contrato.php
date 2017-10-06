@@ -5,10 +5,12 @@
 	require_once "../bancos/banco-market.php";
 	require_once "../bancos/banco-produto.php";
 	require_once "../bancos/banco-usuario.php";
+	require_once "../bancos/banco-contrato.php";
 	require_once "../bancos/banco-departamentos.php";
 	require_once "../bancos/banco-prospect.php";
 	require_once "../logica/logica-usuario.php";
 	require_once "../alerta/mostra-alerta.php";
+	require_once "../bancos/banco-consultores-market.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
@@ -18,7 +20,17 @@
   $departamentos = listaDepartamentos($conexao);
   $id_prospect = $_GET['id_prospect'];
   $prospect = buscaProspectId($conexao, $id_prospect);
-  $market = buscaMarket($conexao, $prospect['id_clientes']); 
+  $market = buscaMarket($conexao, $prospect['id_clientes']);
+  $contratos = listaContratos($conexao);
+  $i = 1;
+  $j = 1;
+  while($i == $j){
+  	foreach ($contratos as $contrato) {
+  	 $j = $contrato['n_contrato'];
+  	 $i++;
+  	} 
+  }
+$i = (string)$i;
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +84,11 @@
 	              </div>
 	            </div>
 	            <br />
+	            <?php
+	              if($usuario['id_profissao'] != 4){
+	            ?>
 	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	              <div class="menu_section">
-	                <h3>Geral</h3>
 	                <ul class="nav side-menu">
 	                  <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu">
@@ -107,6 +121,28 @@
 	                </ul>
 	              </div>
 	            </div>
+	            <?php
+	              }else{
+	            ?>
+	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+	              <div class="menu_section">
+	                <ul class="nav side-menu">	                 
+	                  <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
+	                    <ul class="nav child_menu">
+	                      <li><a href="../empresas/market.php">Market</a></li>
+	                      <li><a href="../empresas/leads.php">Leads</a></li>
+	                      <li><a href="../empresas/suspects.php">Suspects</a></li>
+	                      <li><a href="../empresas/prospects.php">Prospects</a></li>
+	                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+	                      <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
+	                    </ul>
+	                  </li>
+	                </ul>
+	              </div>
+	            </div>
+	            <?php
+	              }
+	            ?> 
 	            <!-- /menu footer buttons -->
 	            <div class="sidebar-footer hidden-small">
 	                <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -187,7 +223,7 @@
 	                		   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nº Contrato <span class="required">*</span>
 	                		   </label>
 	                		   <div class="col-md-6 col-sm-6 col-xs-12">
-	                		     <input type="text" id="n_contrato" name="n_contrato" required="required" class="form-control" >
+	                		     <input type="text" readonly="readonly" value="<?=$i?>" id="n_contrato" name="n_contrato" required="required" class="form-control" >
 	                		   </div>
 	                		  </div>
 	                		  <div class="item form-group">
@@ -252,7 +288,7 @@
 	                		       <?php
 	                		       foreach ($produtos as $produto){                            
 	                		         ?>
-	                		         <option selected="<?=$prospect['id_produto']?>" value="<?=$produto['id_produto']?>"><?=$produto['nome']?></option>
+	                		         <option value="<?=$produto['id_produto']?>"><?=$produto['nome']?></option>
 	                		         <?php
 	                		       }
 	                		       ?>  
@@ -277,25 +313,7 @@
 	                		      </select>
 	                		    </div>
 	                		  </div>
-	                		  <div class="item form-group">
-	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_consultor">Consultor<span class="required">*</span>
-	                		    </label>
-	                		    <div class="col-md-6 col-sm-6 col-xs-12">
-	                		      <select name="id_consultor" class="form-control col-md-7 col-xs-12">
-	                		       <?php
-	                		       $usuarios = listaUsuarios($conexao);
-	                		       foreach ($usuarios as $usuario){ 
-	                		         if($usuario["id_profissao"] == '1'){
-	                		           ?>
-
-	                		           <option value="<?=$usuario['id_usuario']?>" ><?=$usuario['nome']?><?=' '?><?=$usuario['sobrenome']?></option>
-	                		           <?php
-	                		         }
-	                		       }
-	                		       ?>  
-	                		      </select>
-	                		    </div>
-	                		  </div>              
+	                		 
 	                		  <div class="item form-group">
 	                		    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="data_inicio">Inicio<span class="required">*</span></label>
 	                		    <div class="col-sm-2 col-xs-12 col-md-2">
@@ -312,6 +330,8 @@
 	                		      <button type="reset" name="reset" class="btn btn-primary">Resetar</button>
 	                		      <button type="submit" class="btn btn-success">Cadastrar</button>
 	                		      <input type="hidden" name="id_prospect" id="id_prospect" value="<?=$prospect['id_prospect']?>" />
+	                		      <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
+	                		      
 	                		    </div>
 	                		  </div>  
 	                		</form>

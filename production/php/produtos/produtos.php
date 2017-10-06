@@ -211,11 +211,11 @@
                             <tr>
                               <th>Produto</th>
                               <th>Micro</th>
-                              <th>Micro/Partner</th>
                               <th>Pequena</th>
-                              <th>Pequena/Partner</th>
-                              <th>Média</th>
-                              <th>Média/Partner</th>                            
+                              <th>Média/Grande</th>
+                              <th>Micro/Partner</th>                              
+                              <th>Pequena/Partner</th>                              
+                              <th>Média/Grande/Partner</th>                            
                               <th>Ações</th>
                             </tr>
                           </thead>
@@ -226,12 +226,12 @@
                               ?>
                               <tr>
                                 <td><?=$produto['nome']?></td>
-                                <td><?=number_format($produto['preco'], 2, '.', '')?></td>
-                                <td><?=number_format($produto['preco'] * 1.5, 2, '.', '')?></td>
-                                <td><?=number_format($produto['preco'] * 1.5, 2, '.', '')?></td>
-                                <td><?=number_format(($produto['preco'] * 1.5) * 1.5, 2, '.', '')?></td>
-                                <td><?=number_format($produto['preco'] * 2, 2, '.', '')?></td>
-                                <td><?=number_format($produto['preco'] * 2 * 1.5, 2, '.', '')?></td> 
+                                <td><?='R$ '.number_format($produto['preco'], 2, '.', '')?></td>
+                                <td><?='R$ '.number_format($produto['preco'] * 1.5, 2, '.', '')?></td>
+                                <td><?='R$ '.number_format($produto['preco'] * 2, 2, '.', '')?></td>
+                                <td><?='R$ '.number_format($produto['preco'] * 1.5, 2,'.','')?></td>
+                                <td><?='R$ '.number_format($produto['preco'] * 2, 2, '.', '')?></td>
+                                <td><?='R$ '.number_format($produto['preco'] * 2.5, 2, '.', '')?></td> 
                                 <td align="center" >                                            
                                   <a href="../forms/form-altera-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                                   <a href="../remove/remove-produto.php?id_produto=<?=$produto['id_produto']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
