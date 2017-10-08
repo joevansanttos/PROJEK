@@ -1,14 +1,13 @@
-<?php 
-  header('Content-Type: text/html; charset=utf-8'); 
+<?php
+  header('Content-Type: text/html; charset=utf-8');
   error_reporting(E_ALL ^ E_NOTICE);
   ob_start();
-  session_start(); 
+  session_start();
   require_once "php/logica/logica-usuario.php";
   require_once "php/alerta/mostra-alerta.php";
   if(usuarioEstaLogado()) {
     header("Location: php/index/index2.php");
-  }
-  
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -29,21 +28,22 @@
     <section id="login">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-md-12">
             <div class="form-wrap">
+              <h1>Entre com o seu email:</h1>
               <form role="form" action="login.php" method="post" id="login-form" autocomplete="off">
                 <div class="form-group">
-                  <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                  <input type="email" name="email" id="email" class="form-control" placeholder="alguem@projek.com">
                 </div>
                 <div class="form-group">
                   <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha">
-                </div>                          
+                </div>
                 <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Entrar">
               </form>
               <hr>
             </div>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
     </section>
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -83,6 +83,3 @@
       </div>
   </footer>
 </html>
-
-
-

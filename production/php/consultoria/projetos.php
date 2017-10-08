@@ -4,18 +4,17 @@
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-contrato.php";
   require_once "../bancos/banco-usuario.php";
-  require_once "../bancos/banco-feedback.php";
-  require_once "../bancos/banco-pos_venda.php";
   require_once "../bancos/banco-market.php";
-  require_once "../bancos/banco-contato.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
   require_once "../bancos/banco-projeto.php";
+  require_once "../bancos/banco-consultores.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
   $projetos = listaProjetos($conexao);
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +83,6 @@
             <br />
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -221,14 +219,12 @@
                             <th style="width: 20%">#Editar</th>
                           </tr>
                           <tbody>
-
                             <?php
                             foreach ($projetos as  $projeto) {
                               $contrato = buscaContrato($conexao, $projeto['n_contrato']);
                               $cliente = buscaMarket($conexao, $contrato['id_clientes']);
-                           
+                              $consultores_p  = buscaConsultoresProjeto($conexao, $projeto['id_projeto']);                           
                             ?>
-
                             <tr>
                               <td>#</td>
                               <td>
@@ -238,9 +234,18 @@
                               </td>
                               <td>
                                 <ul class="list-inline">
+                                  <?php
+                                    foreach ($consultores_p as $consultor_p) { 
+                                      $consultor = buscaUsuario($conexao, $consultor_p['id_consultor']);
+
+                                  ?>
                                   <li>
                                     <img src="../../images/user.png"  class="avatar" alt="Avatar">
+                                    <?=$consultor['nome']?>
                                   </li>
+                                  <?php
+                                    }
+                                  ?>
                                 </ul>
                               </td>
                               <td class="project_progress">
@@ -255,14 +260,13 @@
                               <td>                                
                                 <a href="../profiles/projeto-profile.php?id_projeto=<?=$projeto['id_projeto']?>" class="btn btn-success btn-xs"><i class="fa fa-search"></i></a>
                                 <a href="" class="btn btn-info btn-xs"><i class="fa fa-edit"></i></a>
+                                <a href="../forms/form-consultores-projeto.php?id_projeto=<?=$projeto['id_projeto']?>" class="btn btn-warning btn-xs"><i class="fa fa-users"></i></a>
                                 <a href="../remove/remove-projeto.php?id_projeto=<?=$projeto['id_projeto']?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                               </td>
                             </tr>
                             <?php
                              }  
-                            ?>
-
-                            
+                            ?>                            
                           </tbody>
                         </thead>
                        </table>                     

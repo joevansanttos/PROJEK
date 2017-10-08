@@ -1,13 +1,38 @@
 <?php
-ob_start();
-session_start();	
-function mostraAlerta($tipo){
-  if(isset($_SESSION[$tipo])){
-
+	ob_start();
+	session_start();	
+	function mostraUsuarioLogado($logado){
+		if($logado == 1){
 ?>
-  <p class="alert-<?=$tipo?>"><?=$_SESSION[$tipo]?></p>
+		<script>
+		  $.notify('Bem Vindo a Projek!', "success");
+		</script>
 <?php
-  unset($_SESSION[$tipo]);
-    }
-  }
+		}
+	}
 ?>
+
+
+<?php
+	function mostraSucesso(){
+?>
+	<script>
+	  $.notify('<?=$_SESSION['success']?>', "success");
+	</script>
+
+<?php
+	}
+?>
+
+
+<?php
+	function mostraError(){
+?>
+	<script>
+	  $.notify('<?=$_SESSION['error']?>', "error");
+	</script>
+
+<?php
+	}
+?>
+

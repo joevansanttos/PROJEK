@@ -6,11 +6,12 @@
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
+  require_once "../alerta/mostra-alerta.php";
   verificaUsuario();
-
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
+  $logado = 0;
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +34,6 @@
     <!-- FullCalendar -->
     <link href="../../../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
     <link href="../../../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
-    <link href='../../../vendors/fullcalendar/lang-all.js'>
-
     <!-- Custom styling plus plugins -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -193,12 +192,9 @@
 
             <div class="row">
               <div class="col-md-12">
-                <div class="x_panel">
-                  
+                <div class="x_panel">                  
                   <div class="x_content">
-
-                    <div id='calendar'></div>
-
+                    <div id='calendario'></div>
                   </div>
                 </div>
               </div>
@@ -294,30 +290,33 @@
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
     <!-- FullCalendar -->
     <script src="../../../vendors/moment/min/moment.min.js"></script>
     <script src="../../../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src='../../../vendors/fullcalendar/dist/lang/pt-br.js'></script>
-    <script src="../../js/notify.js"></script>
-    <script>
-     
-    </script>
-
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
+    <!-- Notify -->
+    <script src="../../js/notify.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+          // page is now ready, initialize the calendar...
+
+          $('#calendario').fullCalendar({
+              // put your options and callbacks here
+          })
+
+      });
+    </script>
+    
     <?php
     if(isset($_SESSION['usuario_logado'])){
-    ?>
-      <script>
-        $.notify('Bem Vindo a Projek!', "success");
-      </script>
-
-    <?php
+      $logado++;
+      mostraUsuarioLogado($logado);
     }
     ?>
+
   </body>
 </html>

@@ -1,34 +1,31 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-<?php error_reporting(E_ALL ^ E_NOTICE); ?>
-<?php include "../bancos/conecta.php";?>
-<?php include "../bancos/banco-contrato.php";?>
-<?php include "../bancos/banco-usuario.php";?>
-<?php include "../bancos/banco-feedback.php";?>
-<?php include "../bancos/banco-pos_venda.php";?>
-<?php include "../bancos/banco-market.php";?>
-<?php include "../bancos/banco-contato.php";?>
-<?php include "../logica/logica-usuario.php";?>
-<?php include "../alerta/mostra-alerta.php";?>
-<?php include "../bancos/banco-projeto.php";?>
-<?php include "../bancos/banco-departamentos-contrato.php";?>
-<?php include "../bancos/banco-departamentos.php";?>
-<?php include "../bancos/banco-tarefas-contrato.php";?>
-<?php include "../bancos/banco-tarefas.php";?>
-
-<?php
+<?php 
+  header('Content-Type: text/html; charset=utf-8');
+  error_reporting(E_ALL ^ E_NOTICE);
+  require_once "../bancos/conecta.php";
+  require_once "../bancos/banco-contrato.php";
+  require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-imagem.php";
+  require_once "../bancos/banco-feedback.php";
+  require_once "../bancos/banco-pos_venda.php";
+  require_once "../bancos/banco-market.php";
+  require_once "../bancos/banco-contato.php";
+  require_once "../logica/logica-usuario.php";
+  require_once"../alerta/mostra-alerta.php";
+  require_once "../bancos/banco-projeto.php";
+  require_once "../bancos/banco-departamentos-contrato.php";
+  require_once "../bancos/banco-departamentos.php";
+  require_once "../bancos/banco-tarefas-contrato.php";
+  require_once "../bancos/banco-tarefas.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
-?>
-<?php
-$id_projeto = $_GET['id_projeto'];
-
-$projeto = buscaProjeto($conexao, $id_projeto);
-$contrato = buscaContrato($conexao, $projeto['n_contrato']);
-$market = buscaMarket($conexao, $contrato['id_clientes']);
-$n_contrato = $projeto['n_contrato'];
-$departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
+  $id_projeto = $_GET['id_projeto'];
+  $projeto = buscaProjeto($conexao, $id_projeto);
+  $contrato = buscaContrato($conexao, $projeto['n_contrato']);
+  $market = buscaMarket($conexao, $contrato['id_clientes']);
+  $n_contrato = $projeto['n_contrato'];
+  $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
 ?>
 
 
@@ -50,8 +47,6 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -59,7 +54,6 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
-    <script type="text/javascript"></script>
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
@@ -85,11 +79,15 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
             <div class="profile clearfix">
               <div class="profile_pic">
                 <?php                  
-                    $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
-                    $sth = $conexao->query($sql);
-                    $result=mysqli_fetch_array($sth);                            
+                  $result = buscaImagem($conexao, $id_usuario);
+                  if(!empty($result)){
                     echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
-                  ?>
+                  }else{
+                ?>
+                  <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php                        
+                  }                     
+                ?>
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -212,46 +210,43 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        <?php
+                      <?php
                         $i = 1;
                         foreach ($departamentos_contrato as  $d_contrato) { 
                           $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
                           $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
-                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);                     
+                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);              
                           $string_i = (string)$i;
                           $id = 'editable_table' . $string_i; 
                           $i++;                   
-                        ?>
-
+                      ?>
                         <table id="<?=$id?>" class="table table-bordered table-striped datatable">
                          <thead>
                           <th><?=$nome_departamento['descricao']?></th>
-                          <th class="col-md-2">Inicio</th>
-                          <th class="col-md-2">Fim</th>                         
+                          <th class="col-md-2" >Inicio</th>
+                          <th class="col-md-2">Fim</th>
+                          <th>Consultor</th>                         
                          </thead>
                          <tbody>
-
-                         <?php
+                        <?php
                           foreach ($tarefas_contrato as $t_contrato) {
                             $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
                             echo '
                             <tr>
                              <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td> 
                              <td>'.$nome_tarefa["nome"].'</td>
-                             <td >'.$t_contrato["data_inicio"].'</td>
-                             <td>'.$t_contrato["data_fim"].'</td>                           
+                             <td align="center">'.$t_contrato["data_inicio"].'</td>
+                             <td align="center">'.$t_contrato["data_fim"].'</td>
+                             <td></td>                           
                             </tr>
                             ';
                           }
-                         ?>
-
+                        ?>
                          </tbody>
                         </table>
-
                         <?php
                           }
                         ?>
-
                       </div>  
                     </div>    
                   </div>
@@ -259,11 +254,9 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
               </div>
             </div>
           </div>
-        </div>
-        
+        </div>        
         <div class="clearfix"></div>
         <!-- /page content -->
-
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -272,19 +265,14 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
       </div>
     </div>
     <!-- jQuery -->
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -303,31 +291,7 @@ $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_cont
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
-    <script type="text/javascript">       
-   
-    </script>
-    <script type="text/javascript">
-      
-    </script>
-    <script>
-      $(".datatable").each( function() {
-        var id = this.id;        
-      
-        $('#'+ id).Tabledit({
-         url:'action.php',
-         columns:{
-          identifier:[0, "id_tarefas_contrato"],
-          editable:[[2, 'data_inicio'], [3, 'data_fim']]
-
-         },
-         inputClass: 'form-control input-sm',
-         deleteButton: false,
-         restoreButton:false,
-         onSuccess:function(data, textStatus, jqXHR){    
-         }
-        });
-       });
-    </script>
+    <script src="../../js/editTable.js"></script>
   </body>
 </html>
 

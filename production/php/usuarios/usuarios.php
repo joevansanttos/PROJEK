@@ -14,7 +14,6 @@
   $id_usuario = $usuario['id_usuario'];
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,16 +28,12 @@
     <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->   
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <!-- Datatables -->
-
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -278,55 +273,22 @@
     <script src="../../js/datatable.js"></script> 
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-          // Setup - add a text input to each footer cell
-          $('#tabela tfoot th').each( function () {
-              var title = $(this).text();
-              if(title != ''){
-                $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
-              }
-              
-          } );
-       
-          // DataTable
-          var table = $('#tabela').DataTable();
-       
-          // Apply the search
-          table.columns().every( function () {
-              var that = this;
-       
-              $( 'input', this.footer() ).on( 'keyup change', function () {
-                  if ( that.search() !== this.value ) {
-                      that
-                          .search( this.value )
-                          .draw();
-                  }
-              } );
-          } );
-      } );
-    </script>
+    <!-- Filtros Datatable -->
+    <script src="../../js/filtrosDatatable.js"></script>
+    <!-- Notificacoes -->
     <script src="../../js/notify.js"></script>
     <?php
       if(isset($_SESSION['success'])){
+        mostraSucesso();
+        unset($_SESSION['success']);
+      }
     ?>
-      <script>
-        $.notify('<?=$_SESSION['success']?>', "success");
-      </script>
-    <?php
-      unset($_SESSION['success']);
-    }
-    ?>
+      
     <?php
       if(isset($_SESSION['error'])){
+        mostraError();
+        unset($_SESSION['error']);
+      }
     ?>
-      <script>
-        $.notify('<?=$_SESSION['error']?>', "error");
-      </script>
-
-    <?php
-      unset($_SESSION['error']);
-    }
-    ?>  
   </body>
 </html>
