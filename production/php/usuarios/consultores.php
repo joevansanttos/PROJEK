@@ -1,6 +1,6 @@
-<?php 
-  header('Content-Type: text/html; charset=utf-8'); 
-  error_reporting(E_ALL ^ E_NOTICE); 
+<?php
+  header('Content-Type: text/html; charset=utf-8');
+  error_reporting(E_ALL ^ E_NOTICE);
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../bancos/banco-profissao.php";
@@ -43,7 +43,7 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <!-- Sidebar-->      
+        <!-- Sidebar-->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -52,7 +52,7 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <?php                  
+                <?php
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
                   $result=mysqli_fetch_array($sth);
@@ -61,9 +61,9 @@
                   }else{
                 ?>
                 <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                <?php    
-                  }                            
-                  
+                <?php
+                  }
+
                 ?>
                 <img src="" alt="..." >
               </div>
@@ -81,7 +81,7 @@
                     <ul class="nav child_menu">
                       <li><a href="../index/index2.php">Dashboard</a></li>
                     </ul>
-                    
+
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -97,13 +97,13 @@
                       <li><a href="../empresas/leads.php">Leads</a></li>
                       <li><a href="../empresas/suspects.php">Suspects</a></li>
                       <li><a href="../empresas/prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                      <li><a href="../consultoria/projetos.php">Projetos</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -124,9 +124,9 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div>              
+            </div>
           </div>
-        </div>      
+        </div>
         <!-- Col-->
         <!-- top navigation -->
         <div class="top_nav">
@@ -159,7 +159,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation --> 
+        <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -177,8 +177,8 @@
                   </div>
                 </div>
               </div>
-            </div> 
-            <!--Page Title-->             
+            </div>
+            <!--Page Title-->
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -197,7 +197,7 @@
                       <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
                   </div>
-                  <div class="clearfix"></div>                
+                  <div class="clearfix"></div>
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -217,38 +217,38 @@
                             $usuarios = listaUsuarios($conexao);
                               foreach ($usuarios as $usuario) {
                                 if($usuario['id_profissao'] == 1 || $usuario['id_profissao'] == 3 ){
-                                  $profissao = buscaProfissao($conexao , $usuario['id_profissao'] );                   
+                                  $profissao = buscaProfissao($conexao , $usuario['id_profissao'] );
                             ?>
                             <tr>
-                              
-                                  <td><?=$usuario['nome']?></td>                              
+
+                                  <td><?=$usuario['nome']?></td>
                                   <td><?=$usuario['email']?></td>
                                   <td><?=$usuario['estado']?></td>
                                   <td><?=$usuario['telefone']?></td>
                                   <th><?=$profissao['descricao']?></th>
-                                  <td align="center">                                  
+                                  <td align="center">
                                     <a href="../profiles/consultor-profile.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
-                                    
+
                                     <a href="remove-usuario.php?id=<?=$usuario['id_usuario']?>"><button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
                                   </td>
-                                                              
-                            </tr>  
+
+                            </tr>
                             <?php
-                              }                          
+                              }
                             }
-                            ?>                   
+                            ?>
                           </tbody>
                         </table>
                         <div class="ln_solid"></div>
                         </div>
                       </div>
-                    </div>   
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="clearfix"></div>
         <!-- /page content -->
         <!-- footer content -->

@@ -1,4 +1,4 @@
-<?php 
+<?php
   header('Content-Type: text/html; charset=utf-8');
   error_reporting(E_ALL ^ E_NOTICE);
   require_once "../bancos/conecta.php";
@@ -69,7 +69,7 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <!-- Sidebar-->      
+        <!-- Sidebar-->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -78,15 +78,15 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <?php                  
+                <?php
                   $result = buscaImagem($conexao, $id_usuario);
                   if(!empty($result)){
                     echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
                   }else{
                 ?>
                   <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                <?php                        
-                  }                     
+                <?php
+                  }
                 ?>
               </div>
               <div class="profile_info">
@@ -97,13 +97,12 @@
             <br />
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Geral</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../index/index2.php">Dashboard</a></li>
                     </ul>
-                    
+
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -118,13 +117,13 @@
                       <li><a href="../empresas/leads.php">Leads</a></li>
                       <li><a href="../empresas/suspects.php">Suspects</a></li>
                       <li><a href="../empresas/prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                      <li><a href="../consultoria/projetos.php">Projetos</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -144,9 +143,9 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div>   
+            </div>
           </div>
-        </div>      
+        </div>
         <!-- Col-->
 
         <!-- top navigation -->
@@ -180,7 +179,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation --> 
+        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -199,33 +198,34 @@
                   </div>
                 </div>
               </div>
-            </div> 
-            <!--Page Title-->             
+            </div>
+            <!--Page Title-->
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">                  
-                  <div class="clearfix"></div>                
+                <div class="x_panel">
+                  <div class="clearfix"></div>
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
 
                       <?php
                         $i = 1;
-                        foreach ($departamentos_contrato as  $d_contrato) { 
+                        foreach ($departamentos_contrato as  $d_contrato) {
                           $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
                           $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
-                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);              
+                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);
                           $string_i = (string)$i;
-                          $id = 'editable_table' . $string_i; 
-                          $i++;                   
+                          $id = 'editable_table' . $string_i;
+                          $i++;
                       ?>
                         <table id="<?=$id?>" class="table table-bordered table-striped datatable">
                          <thead>
-                          <th><?=$nome_departamento['descricao']?></th>
-                          <th class="col-md-2" >Inicio</th>
-                          <th class="col-md-2">Fim</th>
-                          <th>Consultor</th>                         
+                          <th class="hide"></th>
+                          <th class="col-md-5"><?=$nome_departamento['descricao']?></th>
+                          <th class="col-md-1" >Inicio</th>
+                          <th class="col-md-1">Fim</th>
+                          <th class="col-md-2">Consultor</th>
                          </thead>
                          <tbody>
                         <?php
@@ -233,11 +233,11 @@
                             $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
                             echo '
                             <tr>
-                             <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td> 
+                             <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
                              <td>'.$nome_tarefa["nome"].'</td>
-                             <td align="center">'.$t_contrato["data_inicio"].'</td>
-                             <td align="center">'.$t_contrato["data_fim"].'</td>
-                             <td></td>                           
+                             <td>'.$t_contrato["data_inicio"].'</td>
+                             <td>'.$t_contrato["data_fim"].'</td>
+                             <td></td>
                             </tr>
                             ';
                           }
@@ -247,14 +247,14 @@
                         <?php
                           }
                         ?>
-                      </div>  
-                    </div>    
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="clearfix"></div>
         <!-- /page content -->
         <!-- footer content -->
@@ -294,4 +294,3 @@
     <script src="../../js/editTable.js"></script>
   </body>
 </html>
-

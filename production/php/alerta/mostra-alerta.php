@@ -1,12 +1,10 @@
 <?php
 	ob_start();
-	session_start();	
+	session_start();
 	function mostraUsuarioLogado($logado){
 		if($logado == 1){
 ?>
-		<script>
-		  $.notify('Bem Vindo a Projek!', "success");
-		</script>
+		
 <?php
 		}
 	}
@@ -35,4 +33,3 @@
 <?php
 	}
 ?>
-

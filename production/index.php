@@ -7,7 +7,8 @@
   require_once "php/alerta/mostra-alerta.php";
   if(usuarioEstaLogado()) {
     header("Location: php/index/index2.php");
-  }  
+    $_SESSION["success"] = "Bem Vindo ao Projek Manager";
+  }
 ?>
 
 <!DOCTYPE html>

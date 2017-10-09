@@ -1,8 +1,8 @@
-<?php 
-  header('Content-Type: text/html; charset=utf-8'); 
+<?php
+  header('Content-Type: text/html; charset=utf-8');
   error_reporting(E_ALL ^ E_NOTICE);
   ob_start();
-  session_start(); 
+  session_start();
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once "../logica/logica-usuario.php";
@@ -40,7 +40,7 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <!-- Sidebar-->      
+        <!-- Sidebar-->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -49,7 +49,7 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <?php                  
+                <?php
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
                   $result=mysqli_fetch_array($sth);
@@ -58,9 +58,9 @@
                   }else{
                 ?>
                 <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                <?php    
-                  }                            
-                  
+                <?php
+                  }
+
                 ?>
                 <img src="" alt="..." >
               </div>
@@ -79,7 +79,7 @@
                   <li><a><i class="fa fa-home"></i> Menu<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index2.php">Dashboard</a></li>
-                    </ul>                  
+                    </ul>
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -91,14 +91,14 @@
                   </li>
                   <?php
                     }
-                  ?>   
+                  ?>
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../empresas/market.php">Market</a></li>
                       <li><a href="../empresas/leads.php">Leads</a></li>
                       <li><a href="../empresas/suspects.php">Suspects</a></li>
                       <li><a href="../empresas/prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
@@ -107,13 +107,21 @@
                   ?>
                     <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                        <li><a href="../consultoria/projetos.php">Projetos</a></li>
                       </ul>
                     </li>
                   <?php
                     }
                   ?>
-                  
+                  <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="chartjs.html">CONTAS A PAGAR</a></li>
+                      <li><a href="chartjs2.html">CONTAS A RECEBER</a></li>
+                      <li><a href="morisjs.html">CONCILIAÇÃO</a></li>
+                      <li><a href="echarts.html">FLUXO DE CAIXA</a></li>
+                      <li><a href="other_charts.html">COBRANÇA</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -132,9 +140,9 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div>          
+            </div>
           </div>
-        </div>      
+        </div>
         <!-- Col-->
         <!-- top navigation -->
         <div class="top_nav">
@@ -167,7 +175,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation --> 
+        <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -192,7 +200,7 @@
 
             <div class="row">
               <div class="col-md-12">
-                <div class="x_panel">                  
+                <div class="x_panel">
                   <div class="x_content">
                     <div id='calendario'></div>
                   </div>
@@ -200,7 +208,7 @@
               </div>
             </div>
           </div>
-        </div>      
+        </div>
         <!-- /page content -->
         <!-- footer content -->
         <footer>
@@ -285,7 +293,7 @@
 
     <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    
+
     <!-- jQuery -->
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -310,12 +318,12 @@
 
       });
     </script>
-    
+
     <?php
-    if(isset($_SESSION['usuario_logado'])){
-      $logado++;
-      mostraUsuarioLogado($logado);
+    if(isset($_SESSION['success'])){
+      mostraSucesso();
     }
+    unset($_SESSION['success']);
     ?>
 
   </body>

@@ -1,8 +1,8 @@
-<?php 
-  header('Content-Type: text/html; charset=utf-8'); 
+<?php
+  header('Content-Type: text/html; charset=utf-8');
   error_reporting(E_ALL ^ E_NOTICE);
   ob_start();
-  session_start(); 
+  session_start();
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-market.php";
   require_once "../bancos/banco-lead.php";
@@ -42,14 +42,13 @@
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
-
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
   </head>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <!-- Sidebar-->      
+        <!-- Sidebar-->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -58,7 +57,7 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <?php                  
+                <?php
                   $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                   $sth = $conexao->query($sql);
                   $result=mysqli_fetch_array($sth);
@@ -67,9 +66,9 @@
                   }else{
                 ?>
                 <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                <?php    
-                  }                            
-                  
+                <?php
+                  }
+
                 ?>
                 <img src="" alt="..." >
               </div>
@@ -91,7 +90,7 @@
                     <ul class="nav child_menu">
                       <li><a href="../index/index2.php">Dashboard</a></li>
                     </ul>
-                    
+
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -107,40 +106,40 @@
                       <li><a href="leads.php">Leads</a></li>
                       <li><a href="suspects.php">Suspects</a></li>
                       <li><a href="prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../consultoria/projetos.php">Projetos</a></li>                     
+                      <li><a href="../consultoria/projetos.php">Projetos</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-            </div> 
+            </div>
             <?php
               }else{
             ?>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <ul class="nav side-menu">               
+                <ul class="nav side-menu">
                   <li><a><i class="fa fa-briefcase"></i> Negócios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="market.php">Market</a></li>
                       <li><a href="leads.php">Leads</a></li>
                       <li><a href="suspects.php">Suspects</a></li>
                       <li><a href="prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-            </div> 
+            </div>
             <?php
               }
-            ?>  
+            ?>
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
                 <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -155,12 +154,12 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div> 
+            </div>
             <!-- end footer menu-->
 
-            <!-- End Sidebar Menu-->   
+            <!-- End Sidebar Menu-->
           </div>
-        </div>      
+        </div>
         <!-- Col-->
         <!-- top navigation -->
         <div class="top_nav">
@@ -193,7 +192,7 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation --> 
+        <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -211,8 +210,8 @@
                   </div>
                 </div>
               </div>
-            </div> 
-            <!--Page Title-->             
+            </div>
+            <!--Page Title-->
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -231,75 +230,74 @@
                       <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                     </ul>
                   </div>
-                  <div class="clearfix"></div>                
+                  <div class="clearfix"></div>
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <table id="tabela" class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Empresa</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Telefone</th>
-                                    <th>Cargo</th>
-                                    <th>Ações</th>
-                                  </tr>
-                                </thead>
-                                <tfoot>
-                                  <tr>
-                                    <th>Empresa</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Telefone</th>
-                                    <th>Cargo</th> 
-                                    <th></th>                           
-                                  </tr>
-                                </tfoot>
-                                <tbody>
-                                  <?php
+                          <thead>
+                            <tr>
+                              <th>Empresa</th>
+                              <th>Nome</th>
+                              <th>Email</th>
+                              <th>Telefone</th>
+                              <th>Cargo</th>
+                              <th>Ações</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+                            <tr>
+                              <th>Empresa</th>
+                              <th>Nome</th>
+                              <th>Email</th>
+                              <th>Telefone</th>
+                              <th>Cargo</th>
+                              <th></th>
+                            </tr>
+                          </tfoot>
+                          <tbody>
+                            <?php
                                     if($usuario['id_profissao'] != 4){
                                       $leads_consultores = listaLeads($conexao);
                                     }else{
                                       $leads_consultores = buscaLeadsConsultores($conexao , $id_usuario);
                                     }
-                                    
+
                                     foreach ($leads_consultores as $l_consultor){
                                       $lead = buscaLeadId($conexao, $l_consultor['id_lead']);
-                                      $market = buscaMarket($conexao, $lead['id_clientes']);                                
+                                      $market = buscaMarket($conexao, $lead['id_clientes']);
                                    ?>
                                     <tr>
                                       <td><?=$market['nome']?></td>
                                       <td><?=$lead['nome']?></td>
                                       <td><?=$lead['email']?></td>
                                       <td><?=$lead['tel']?></td>
-                                      <td><?=$lead['cargo']?></td>                                 
+                                      <td><?=$lead['cargo']?></td>
                                       <td align="center">
                                         <a href="../forms/form-lead.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Contato" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../forms/form-suspect.php?id=<?=$lead['id_clientes']?>"><button data-toggle="tooltip" data-placement="top" title="Novo Suspect" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button></a>
                                         <a href="../profiles/cliente-profile.php?id=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Perfil do Market" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button></a>
                                         <a href="../forms/form-altera-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Editar Lead" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                        <a href="../forms/form-historico.php?id_market=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>                                  
-                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>               
-                                      </td>                                      
+                                        <a href="../forms/form-historico.php?id_market=<?=$market['id_market']?>"><button data-toggle="tooltip" data-placement="top" title="Adicionar Histórico" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button></a>
+                                        <a href="../remove/remove-lead.php?id=<?=$lead['id_lead']?>"><button data-toggle="tooltip" data-placement="top" title="Remover Lead" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></a>
+                                      </td>
                                     </tr>
-                                  <?php                                
-                                    }
-                                  ?>
-                                </tbody>                        
+                            <?php
+                              }
+                            ?>
+                          </tbody>
                         </table>
-                        
                         <div class="ln_solid"></div>
                           <a class="btn  btn-default" data-toggle="tooltip" data-placement="top" title="Market" style="" href="../empresas/market.php?"><i class="fa fa-plus"></i></a>
                         </div>
                       </div>
-                    </div>                    
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="clearfix"></div>
         <!-- /page content -->
         <!-- footer content -->
@@ -340,7 +338,7 @@
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js">
-    </script> 
+    </script>
     <script type="text/javascript">
       $(document).ready(function() {
           // Setup - add a text input to each footer cell
@@ -349,16 +347,16 @@
               if(title != ''){
                 $(this).html( '<input class="" type="text" placeholder="'+title+'" />' );
               }
-              
+
           } );
-       
+
           // DataTable
           var table = $('#tabela').DataTable();
-       
+
           // Apply the search
           table.columns().every( function () {
               var that = this;
-       
+
               $( 'input', this.footer() ).on( 'keyup change', function () {
                   if ( that.search() !== this.value ) {
                       that
@@ -392,6 +390,6 @@
       unset($_SESSION['error']);
     }
     ?>
-    
+
   </body>
 </html>
