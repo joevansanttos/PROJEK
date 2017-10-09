@@ -4,13 +4,14 @@
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-contrato.php";
   require_once "../bancos/banco-usuario.php";
+  require_once "../bancos/banco-consultores.php";
   require_once "../bancos/banco-imagem.php";
   require_once "../bancos/banco-feedback.php";
   require_once "../bancos/banco-pos_venda.php";
   require_once "../bancos/banco-market.php";
   require_once "../bancos/banco-contato.php";
   require_once "../logica/logica-usuario.php";
-  require_once"../alerta/mostra-alerta.php";
+  require_once "../alerta/mostra-alerta.php";
   require_once "../bancos/banco-projeto.php";
   require_once "../bancos/banco-departamentos-contrato.php";
   require_once "../bancos/banco-departamentos.php";
@@ -26,6 +27,8 @@
   $market = buscaMarket($conexao, $contrato['id_clientes']);
   $n_contrato = $projeto['n_contrato'];
   $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
+  $consultores_projeto = buscaConsultoresProjeto($conexao, $id_projeto);
+  $size = count($consultores_projeto);
 ?>
 
 
@@ -222,9 +225,9 @@
                         <table id="<?=$id?>" class="table table-bordered table-striped datatable">
                          <thead>
                           <th class="hide"></th>
-                          <th class="col-md-5"><?=$nome_departamento['descricao']?></th>
-                          <th class="col-md-1" >Inicio</th>
-                          <th class="col-md-1">Fim</th>
+                          <th class="col-md-4"><?=$nome_departamento['descricao']?></th>
+                          <th class="col-md-1" >Horas</th>
+                          <th class="col-md-1">Data</th>
                           <th class="col-md-2">Consultor</th>
                          </thead>
                          <tbody>
@@ -235,9 +238,9 @@
                             <tr>
                              <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
                              <td>'.$nome_tarefa["nome"].'</td>
-                             <td>'.$t_contrato["data_inicio"].'</td>
+                             <td>'.$t_contrato["horas"].'</td>
                              <td>'.$t_contrato["data_fim"].'</td>
-                             <td></td>
+                             <td>'.$t_contrato["id_consultor"].'</td>
                             </tr>
                             ';
                           }
@@ -291,6 +294,42 @@
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
     <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
-    <script src="../../js/editTable.js"></script>
+    <script src="../../js/editTable.js">
+    </script>
+    <script>
+    $(".datatable").each( function() {
+      var id = this.id;
+      "consultores" =
+        <?php
+          $i = 1;
+         foreach ($consultores_projeto as $consultor_projeto):
+          $consultor=buscaUsuario($conexao , $consultor_projeto['id_consultor']);
+        ?>
+        <?php
+          if($i == $size){
+        ?>
+        "<?=$consultor['id_usuario']?>": "<?=$consultor['nome']?>"
+        <?php
+        }else{
+        ?>
+        "<?=$consultor['id_usuario']?>": "<?=$consultor['nome']?>",
+        <?php
+        }
+        $i++;
+        ?>
+        <?php endforeach ?>
+      };
+      $('#'+ id).Tabledit({
+        url:'action.php',
+        deleteButton: false,
+        hideIdentifier: true,
+        columns:{
+          identifier:[0, "id_tarefas_contrato"],
+          editable:[[2, 'horas'], [3, 'data_fim'],[4, 'id_consultor','{ consultores}']]
+      }
+
+      });
+    });
+    </script>
   </body>
 </html>

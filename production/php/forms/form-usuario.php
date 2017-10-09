@@ -1,6 +1,6 @@
-<?php 
-  header('Content-Type: text/html; charset=utf-8');  
-  error_reporting(E_ALL ^ E_NOTICE); 
+<?php
+  header('Content-Type: text/html; charset=utf-8');
+  error_reporting(E_ALL ^ E_NOTICE);
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-usuario.php";
   require_once"../bancos/banco-profissao.php";
@@ -38,7 +38,7 @@
               <div class="clearfix"></div>
               <div class="profile clearfix">
                 <div class="profile_pic">
-                  <?php                  
+                  <?php
                     $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
                     $sth = $conexao->query($sql);
                     $result=mysqli_fetch_array($sth);
@@ -47,9 +47,9 @@
                     }else{
                   ?>
                   <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                  <?php    
-                    }                            
-                    
+                  <?php
+                    }
+
                   ?>
                   <img src="" alt="..." >
                 </div>
@@ -76,14 +76,14 @@
                       <ul class="nav child_menu">
                         <li><a href="../clientes/clientes.php">Clientes</a></li>
                         <li><a href="../clientes/departamentos.php">Departamentos</a></li>
-                        <li><a href="../clientes/gestores.php">Gestores</a></li>                          
+                        <li><a href="../clientes/gestores.php">Gestores</a></li>
                       </ul>
                     </li>
                     <li><a><i class="fa fa-file-text"></i> Mapeamentos<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="../processos/processos.php">Processos em Andamento</a></li>
                       </ul>
-                    </li>           
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -102,9 +102,9 @@
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
               </div>
-              <!-- Sidebar--> 
+              <!-- Sidebar-->
             </div>
-          </div> 
+          </div>
         </div>
         <!-- top navigation -->
         <div class="top_nav">
@@ -189,11 +189,11 @@
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="password" id="senha" name="senha" required="required" class="form-control col-md-8 col-xs-12">
                           </div>
-                        </div>           
+                        </div>
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="telefone">Telefone<span class="required">*</span></label>
                           <div class="col-md-3 col-sm-6 col-xs-12">
-                            <input class="form-control col-md-8" type="text" id="telefone" data-inputmask="'mask' : '(99) 9999[9]-9999'" name="telefone" required="required"> 
+                            <input class="form-control col-md-8" type="text" id="telefone" data-inputmask="'mask' : '(99) 9999[9]-9999'" name="telefone" required="required">
                           </div>
                         </div>
                         <div class="form-group">
@@ -203,9 +203,9 @@
                             <select class="form-control col-md-3"  id="sexo" name="sexo" required="required" >
                               <option value="feminino">Feminino</option>
                               <option value="masculino">Masculino</option>
-                            </select>  
+                            </select>
                           </div>
-                        </div>                   
+                        </div>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="profissao">Profissão<span class="required">*</span>
                           </label>
@@ -216,12 +216,12 @@
                             foreach ($profissoes as $profissao) {
                             ?>
                               <option value="<?=$profissao['id_profissao']?>"><?=$profissao['descricao']?></option>
-                            <?php                         
+                            <?php
                             }
                             ?>
                             </select>
                           </div>
-                        </div> 
+                        </div>
                         <div class=" form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estado1">Estado <span class="required">*</span>
                           </label>
@@ -252,7 +252,7 @@
                     </div>
                   </div>
                 </div>
-              </div>  
+              </div>
               <br />
              </div>
             </div>
@@ -272,6 +272,7 @@
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
     <!-- bootstrap-progressbar -->
@@ -295,17 +296,17 @@
       window.ParsleyValidator.setLocale('pt-br');
     </script>
     <script type="text/javascript">
-      $(document).on('click', '#close-preview', function(){ 
+      $(document).on('click', '#close-preview', function(){
           $('.image-preview').popover('hide');
           // Hover befor close the preview
           $('.image-preview').hover(
               function () {
                  $('.image-preview').popover('show');
-              }, 
+              },
                function () {
                  $('.image-preview').popover('hide');
               }
-          );    
+          );
       });
 
       $(function() {
@@ -331,27 +332,27 @@
               $('.image-preview-filename').val("");
               $('.image-preview-clear').hide();
               $('.image-preview-input input:file').val("");
-              $(".image-preview-input-title").text("Browse"); 
-          }); 
+              $(".image-preview-input-title").text("Browse");
+          });
           // Create the preview image
-          $(".image-preview-input input:file").change(function (){     
+          $(".image-preview-input input:file").change(function (){
               var img = $('<img/>', {
                   id: 'dynamic',
                   width:250,
                   height:200
-              });      
+              });
               var file = this.files[0];
               var reader = new FileReader();
               // Set preview image into the popover data-content
               reader.onload = function (e) {
                   $(".image-preview-input-title").text("Change");
                   $(".image-preview-clear").show();
-                  $(".image-preview-filename").val(file.name);            
+                  $(".image-preview-filename").val(file.name);
                   img.attr('src', e.target.result);
                   $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-              }        
+              }
               reader.readAsDataURL(file);
-          });  
+          });
     </script>
   </body>
 </html>
