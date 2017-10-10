@@ -59,7 +59,6 @@
     <!-- Datatables -->
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
-    <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
     <style type="text/css">
       .hide{
 
@@ -227,20 +226,21 @@
                           <th class="hide"></th>
                           <th class="col-md-4"><?=$nome_departamento['descricao']?></th>
                           <th class="col-md-1" >Horas</th>
-                          <th class="col-md-1">Data</th>
-                          <th class="col-md-2">Consultor</th>
+                          <th class="col-md-2">Data</th>
+                          <th  class="col-md-5">Consultor</th>
                          </thead>
                          <tbody>
                         <?php
                           foreach ($tarefas_contrato as $t_contrato) {
                             $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
+                            $consultor = buscaUsuario($conexao,$t_contrato["id_consultor"] );
                             echo '
                             <tr>
                              <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
                              <td>'.$nome_tarefa["nome"].'</td>
                              <td>'.$t_contrato["horas"].'</td>
                              <td>'.$t_contrato["data_fim"].'</td>
-                             <td>'.$t_contrato["id_consultor"].'</td>
+                             <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>
                             </tr>
                             ';
                           }
@@ -299,35 +299,14 @@
     <script>
     $(".datatable").each( function() {
       var id = this.id;
-      "consultores" =
-        <?php
-          $i = 1;
-         foreach ($consultores_projeto as $consultor_projeto):
-          $consultor=buscaUsuario($conexao , $consultor_projeto['id_consultor']);
-        ?>
-        <?php
-          if($i == $size){
-        ?>
-        "<?=$consultor['id_usuario']?>": "<?=$consultor['nome']?>"
-        <?php
-        }else{
-        ?>
-        "<?=$consultor['id_usuario']?>": "<?=$consultor['nome']?>",
-        <?php
-        }
-        $i++;
-        ?>
-        <?php endforeach ?>
-      };
       $('#'+ id).Tabledit({
         url:'action.php',
         deleteButton: false,
         hideIdentifier: true,
         columns:{
           identifier:[0, "id_tarefas_contrato"],
-          editable:[[2, 'horas'], [3, 'data_fim'],[4, 'id_consultor','{ consultores}']]
-      }
-
+          editable:[[2, 'horas'], [3, 'data_fim']]
+        }
       });
     });
     </script>
