@@ -24,6 +24,7 @@
 	adicionaConsultoresSuspect($conexao, $id_consultor, $id_suspect, $today);
 	adicionaHistorico($conexao, $id, $id_consultor, $comentario, $today);
 	$_SESSION["success"] = "Suspect $nome adicionado!";
+	mysqli_close($conexao);
   header("Location: ../empresas/suspects.php");
 ?>
 

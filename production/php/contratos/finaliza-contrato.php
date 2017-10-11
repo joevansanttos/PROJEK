@@ -11,8 +11,9 @@
 	$contrato = buscaContrato($conexao , $n_contrato);
 	$id_clientes = $contrato['id_clientes'];
 	adicionaPosVenda($conexao, $n_contrato, $id_clientes);
-	adicionaProjeto($conexao, $n_contrato);
-	$departamentos_contrato = buscaDepartamentosContrato($conexao, $n_contrato);
+	$projeto = buscaProjetoContrato($conexao, $n_contrato);
+	$id_projeto = $projeto['id_projeto'];
+	$departamentos_contrato = buscaDepartamentosContrato($conexao, $id_projeto );
 	foreach ($departamentos_contrato as $departamento) {
 		$id_departamento_contrato = $departamento['id_departamento_contrato'];
 		$tarefas = listaTarefas($conexao);

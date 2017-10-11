@@ -113,15 +113,7 @@
                   <?php
                     }
                   ?>
-                  <li><a><i class="fa fa-bar-chart-o"></i> FINANCEIRO <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">CONTAS A PAGAR</a></li>
-                      <li><a href="chartjs2.html">CONTAS A RECEBER</a></li>
-                      <li><a href="morisjs.html">CONCILIAÇÃO</a></li>
-                      <li><a href="echarts.html">FLUXO DE CAIXA</a></li>
-                      <li><a href="other_charts.html">COBRANÇA</a></li>
-                    </ul>
-                  </li>
+                  
                 </ul>
               </div>
             </div>

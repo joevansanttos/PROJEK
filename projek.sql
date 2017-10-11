@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Out-2017 às 22:03
+-- Generation Time: 11-Out-2017 às 17:24
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -5683,7 +5683,8 @@ CREATE TABLE `consultores_lead` (
 
 INSERT INTO `consultores_lead` (`id_consultor`, `id_lead`, `data`, `id_c_lead`) VALUES
 (10, 14, '19.09.17', 7),
-(10, 19, '05.10.17', 12);
+(10, 19, '05.10.17', 12),
+(15, 23, '06.10.17', 14);
 
 -- --------------------------------------------------------
 
@@ -5704,7 +5705,9 @@ CREATE TABLE `consultores_market` (
 
 INSERT INTO `consultores_market` (`id_consultor`, `id_market`, `data`, `id_c_market`) VALUES
 (10, 40, '19.09.17', 18),
-(10, 55, '05.10.17', 33);
+(10, 55, '05.10.17', 33),
+(15, 56, '06.10.17', 34),
+(15, 61, '06.10.17', 36);
 
 -- --------------------------------------------------------
 
@@ -5724,7 +5727,8 @@ CREATE TABLE `consultores_prospect` (
 --
 
 INSERT INTO `consultores_prospect` (`id_consultor`, `id_prospect`, `data`, `id_c_prospect`) VALUES
-(10, 10, '19.09.17', 9);
+(10, 10, '19.09.17', 9),
+(15, 11, '06.10.17', 10);
 
 -- --------------------------------------------------------
 
@@ -5745,7 +5749,8 @@ CREATE TABLE `consultores_suspect` (
 
 INSERT INTO `consultores_suspect` (`id_consultor`, `id_suspect`, `data`, `id_c_suspect`) VALUES
 (10, 12, '19.09.17', 5),
-(10, 14, '05.10.17', 7);
+(10, 14, '05.10.17', 7),
+(15, 16, '06.10.17', 8);
 
 -- --------------------------------------------------------
 
@@ -5755,8 +5760,17 @@ INSERT INTO `consultores_suspect` (`id_consultor`, `id_suspect`, `data`, `id_c_s
 
 CREATE TABLE `consultor_projeto` (
   `id_c_projeto` int(11) NOT NULL,
-  `id_consultor` int(11) DEFAULT NULL
+  `id_consultor` int(11) DEFAULT NULL,
+  `id_projeto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `consultor_projeto`
+--
+
+INSERT INTO `consultor_projeto` (`id_c_projeto`, `id_consultor`, `id_projeto`) VALUES
+(1, 10, 3),
+(3, 16, 3);
 
 -- --------------------------------------------------------
 
@@ -5798,6 +5812,7 @@ CREATE TABLE `contratos` (
 --
 
 INSERT INTO `contratos` (`id_clientes`, `id_produto`, `id_contrato_status`, `id_consultor`, `data_inicio`, `data_fim`, `n_contrato`, `sede`, `razao`, `cnpj`, `id_prospect`) VALUES
+(61, 5, 2, 10, '01.01.2017', '01.05.2017', '2', 'Corcovado', 'Ford Sa', '12.222.222/2222-24', 11),
 (40, 7, 2, 10, '01.09.2017', '20.09.2017', '44444444', 'RUA SÉRGIO CARDOSO, No. 20, SALA 08, CEP: 44.245-000, CENTRO - CONCEIÇÃO DO JACUÍPE – BAHIA', 'P7GO TECNOLOGIA', '26.792.567/0001-31', 10);
 
 -- --------------------------------------------------------
@@ -5853,19 +5868,21 @@ INSERT INTO `departamentos` (`id_departamento`, `descricao`) VALUES
 
 CREATE TABLE `departamentos_contratos` (
   `id_departamento` int(11) DEFAULT NULL,
-  `n_contrato` varchar(50) DEFAULT NULL,
-  `id_departamento_contrato` int(11) NOT NULL
+  `id_departamento_contrato` int(11) NOT NULL,
+  `id_projeto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `departamentos_contratos`
 --
 
-INSERT INTO `departamentos_contratos` (`id_departamento`, `n_contrato`, `id_departamento_contrato`) VALUES
-(1, '44444444', 1),
-(2, '44444444', 2),
-(3, '44444444', 3),
-(4, '44444444', 4);
+INSERT INTO `departamentos_contratos` (`id_departamento`, `id_departamento_contrato`, `id_projeto`) VALUES
+(1, 1, 3),
+(2, 2, 3),
+(3, 3, 3),
+(4, 4, 3),
+(1, 9, 6),
+(3, 10, 6);
 
 -- --------------------------------------------------------
 
@@ -5952,7 +5969,9 @@ INSERT INTO `historico` (`id_market`, `comentario`, `id_consultor`, `id_historic
 (55, 'Conheci a Maria', 10, 15, '05.10.17'),
 (55, 'Contato Maria Alterado', 10, 16, '05.10.17'),
 (55, 'Me apresentei ao Pedro', 10, 17, '05.10.17'),
-(55, 'Realizei a apresentação do projeto', 10, 18, '05.10.17');
+(55, 'Realizei a apresentação do projeto', 10, 18, '05.10.17'),
+(61, 'Visitei a Ford', 15, 20, '06.10.17'),
+(61, 'sasasas', 15, 22, '06.10.17');
 
 -- --------------------------------------------------------
 
@@ -6000,7 +6019,8 @@ CREATE TABLE `leads` (
 
 INSERT INTO `leads` (`nome`, `email`, `tel`, `cargo`, `id_lead`, `id_clientes`) VALUES
 ('WENDERSON MARTINS DE ALMEIDA', 'wenderson@p7go.com', '(71) 83333-3333', 'Diretor', 14, 40),
-('Maria Petrobras', 'maria@petrobras.com', '(71) 98444-4444', 'Coordenador', 19, 55);
+('Maria Petrobras', 'maria@petrobras.com', '(71) 98444-4444', 'Coordenador', 19, 55),
+('José da Forda', 'jose@ford.com', '(71) 98455-5555', 'Coordenador', 23, 61);
 
 -- --------------------------------------------------------
 
@@ -6029,7 +6049,9 @@ CREATE TABLE `market` (
 
 INSERT INTO `market` (`id_market`, `razao`, `nome`, `cnpj`, `site`, `endereco`, `estado`, `cidade`, `tel`, `segmento`, `bairro`, `id_porte`) VALUES
 (40, 'P7GO TECNOLOGIA', 'P7GO', '26.792.567/0001-31', 'p7go.com.br', 'RUA SÉRGIO CARDOSO, No. 20, SALA 08, CEP: 44.245-000, CENTRO - CONCEIÇÃO DO JACUÍPE – BAHIA', 'BA', 'Conceição do Jacuípe', '719233233', 'Comercial', 'Centro', 2),
-(55, 'Petrobras Sa', 'Petrobras', '23.233.333/3333-33', 'petrobras.com.br', 'Corcovado', 'RJ', '3300100', '(71) 98455-5555', 'Calçado', 'Petropolis', 2);
+(55, 'Petrobras Sa', 'Petrobras', '23.233.333/3333-33', 'petrobras.com.br', 'Corcovado', 'RJ', '3300100', '(71) 98455-5555', 'Calçado', 'Petropolis', 2),
+(56, 'Gevan SA', 'Gevan', '34.444.444/4444-44', 'gevan.com.br', 'Corcovado', 'BA', '2901304', '(71) 98444-4444', 'Bebidas', 'Petropolis', 2),
+(61, 'Ford Sa', 'Ford', '12.222.222/2222-24', 'ford.com.br', 'Corcovado', 'PE', '2601409', '(71) 98444-4444', 'Gráfica', 'Petropolis', 2);
 
 -- --------------------------------------------------------
 
@@ -6069,7 +6091,8 @@ CREATE TABLE `pos_venda` (
 --
 
 INSERT INTO `pos_venda` (`id_pos_venda`, `id_clientes`, `id_feedback`, `n_contrato`) VALUES
-(9, 40, NULL, '44444444');
+(9, 40, NULL, '44444444'),
+(11, 61, NULL, '2');
 
 -- --------------------------------------------------------
 
@@ -6156,7 +6179,8 @@ CREATE TABLE `projetos` (
 --
 
 INSERT INTO `projetos` (`id_projeto`, `n_contrato`, `horas`) VALUES
-(3, '44444444', NULL);
+(3, '44444444', NULL),
+(6, '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -6181,7 +6205,21 @@ CREATE TABLE `prospects` (
 --
 
 INSERT INTO `prospects` (`id_prospect`, `id_clientes`, `prob`, `valor_op`, `valor_est`, `recebimento`, `fechamento`, `id_produto`, `id_consultor`) VALUES
-(10, 40, '50.00', '2800.00', '1400.00', '01.01.2017', '10.01.2017', 5, 10);
+(10, 40, '50.00', '2800.00', '1400.00', '01.01.2017', '10.01.2017', 5, 10),
+(11, 61, '25.00', '1874.00', '468.50', '01.01.2018', '01.01.2019', 5, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `relatorios_tarefa`
+--
+
+CREATE TABLE `relatorios_tarefa` (
+  `id_relatorio_tarefa` int(11) NOT NULL,
+  `data_envio` varchar(25) DEFAULT NULL,
+  `id_consultor` int(11) DEFAULT NULL,
+  `id_tarefas_contrato` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -6220,13 +6258,12 @@ CREATE TABLE `socios` (
 --
 
 INSERT INTO `socios` (`id_socio`, `nome`, `cpf`, `residencia`, `nacionalidade`, `profissao`, `civil`, `n_contrato`) VALUES
-(1, 'jjjjjjjjjjjjj', '111-111-111-11', 'rua petrobras', 'brasileiro', 'empresario', 'solteiro', '6666666666'),
-(2, 'Lucas Carvalho', '444-444-444-44', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '233333333333'),
-(3, 'WENDERSON MARTINS DE ALMEIDA', 'n92-866-409-51', 'Rua Juracy Magalhães, No. 403, Edf. Falcão, apto.401. Feira de Santana – Bahia', 'brasileiro', 'empresário', 'solteiro', '123456'),
 (4, 'Lucas Carvalho', '098-888-888-88', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '44444444'),
-(5, 'jhhjhjhj', '090-909-987-77', 'uhbhnhn', 'hnhn', 'hnhnhn', 'hnhnh', '8787'),
-(6, 'José Teste', '333-333-333-33', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '11111'),
-(7, 'Lucas Carvalho', '444-444-444-44', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '12323');
+(11, 'Lucas Carvalho', '333-333-333-33', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '2'),
+(12, 'Lucas Carvalho', '555-555-555-55', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '2'),
+(13, 'Lucas Carvalho', '222-222-222-22', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '2'),
+(14, 'Lucas Carvalho', '222-222-222-22', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '2'),
+(15, 'Lucas Carvalho', '333-333-333-33', 'Rua das Hortênsias, 5', 'Brasileiro', 'Administrador', 'Solteiro', '2');
 
 -- --------------------------------------------------------
 
@@ -6270,6 +6307,26 @@ INSERT INTO `status_contato` (`id_status_contato`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `status_tarefa`
+--
+
+CREATE TABLE `status_tarefa` (
+  `id_status_tarefa` int(11) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `status_tarefa`
+--
+
+INSERT INTO `status_tarefa` (`id_status_tarefa`, `descricao`) VALUES
+(1, 'Inicial'),
+(2, 'Em Andamento'),
+(3, 'Aprovado');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `suspects`
 --
 
@@ -6278,7 +6335,6 @@ CREATE TABLE `suspects` (
   `data` varchar(15) DEFAULT NULL,
   `status` varchar(30) DEFAULT NULL,
   `hora` varchar(10) DEFAULT NULL,
-  `comentario` varchar(255) DEFAULT NULL,
   `id_consultor` int(10) DEFAULT NULL,
   `id_suspect` int(11) NOT NULL,
   `id_clientes` int(11) DEFAULT NULL,
@@ -6290,9 +6346,10 @@ CREATE TABLE `suspects` (
 -- Extraindo dados da tabela `suspects`
 --
 
-INSERT INTO `suspects` (`contato`, `data`, `status`, `hora`, `comentario`, `id_consultor`, `id_suspect`, `id_clientes`, `tel`, `email`) VALUES
-('WENDERSON MARTINS DE ALMEIDA', '19.09.2017', 'Realizado', '14:00', NULL, 10, 12, 40, '(71) 98233-3333', 'wenderson@p7go.com'),
-('Petro Petrobras', '05.10.2017', 'Realizado', '12:20', NULL, 10, 14, 55, '(71) 98443-4445', 'petro@petrobras.com.br');
+INSERT INTO `suspects` (`contato`, `data`, `status`, `hora`, `id_consultor`, `id_suspect`, `id_clientes`, `tel`, `email`) VALUES
+('WENDERSON MARTINS DE ALMEIDA', '19.09.2017', 'Realizado', '14:00', 10, 12, 40, '(71) 98233-3333', 'wenderson@p7go.com'),
+('Petro Petrobras', '05.10.2017', 'Realizado', '12:20', 10, 14, 55, '(71) 98443-4445', 'petro@petrobras.com.br'),
+('Maria Ford', '01.01.2034', 'Agendado', '01:23', 15, 16, 61, '(71) 98984-4444', 'maria@ford.com');
 
 -- --------------------------------------------------------
 
@@ -6328,48 +6385,66 @@ INSERT INTO `tarefas` (`id_tarefa`, `nome`) VALUES
 CREATE TABLE `tarefas_contrato` (
   `id_tarefas_contrato` int(11) NOT NULL,
   `id_departamento_contrato` int(11) DEFAULT NULL,
-  `data_inicio` varchar(20) DEFAULT NULL,
   `data_fim` varchar(20) DEFAULT NULL,
-  `id_tarefa` int(11) DEFAULT NULL
+  `id_tarefa` int(11) DEFAULT NULL,
+  `id_consultor` int(10) DEFAULT NULL,
+  `horas` int(11) DEFAULT NULL,
+  `id_status_tarefa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tarefas_contrato`
 --
 
-INSERT INTO `tarefas_contrato` (`id_tarefas_contrato`, `id_departamento_contrato`, `data_inicio`, `data_fim`, `id_tarefa`) VALUES
-(1, 1, '20/10/2017', '', 1),
-(2, 1, NULL, NULL, 2),
-(3, 1, NULL, NULL, 3),
-(4, 1, NULL, NULL, 4),
-(5, 1, NULL, NULL, 5),
-(6, 1, NULL, NULL, 6),
-(7, 1, NULL, NULL, 7),
-(8, 1, NULL, NULL, 8),
-(9, 2, NULL, NULL, 1),
-(10, 2, NULL, NULL, 2),
-(11, 2, NULL, NULL, 3),
-(12, 2, NULL, NULL, 4),
-(13, 2, NULL, NULL, 5),
-(14, 2, NULL, NULL, 6),
-(15, 2, NULL, NULL, 7),
-(16, 2, NULL, NULL, 8),
-(17, 3, NULL, NULL, 1),
-(18, 3, NULL, NULL, 2),
-(19, 3, NULL, NULL, 3),
-(20, 3, NULL, NULL, 4),
-(21, 3, NULL, NULL, 5),
-(22, 3, NULL, NULL, 6),
-(23, 3, NULL, NULL, 7),
-(24, 3, NULL, NULL, 8),
-(25, 4, NULL, NULL, 1),
-(26, 4, NULL, NULL, 2),
-(27, 4, NULL, NULL, 3),
-(28, 4, NULL, NULL, 4),
-(29, 4, NULL, NULL, 5),
-(30, 4, NULL, NULL, 6),
-(31, 4, NULL, NULL, 7),
-(32, 4, NULL, NULL, 8);
+INSERT INTO `tarefas_contrato` (`id_tarefas_contrato`, `id_departamento_contrato`, `data_fim`, `id_tarefa`, `id_consultor`, `horas`, `id_status_tarefa`) VALUES
+(1, 1, '20/10/2017', 1, 10, 100, 1),
+(2, 1, '20/10/2017', 2, 10, 1000, 1),
+(3, 1, NULL, 3, NULL, NULL, 1),
+(4, 1, NULL, 4, NULL, NULL, 1),
+(5, 1, NULL, 5, NULL, NULL, 1),
+(6, 1, NULL, 6, NULL, NULL, 1),
+(7, 1, NULL, 7, NULL, NULL, 1),
+(8, 1, NULL, 8, NULL, NULL, 1),
+(9, 2, NULL, 1, NULL, NULL, 1),
+(10, 2, NULL, 2, NULL, NULL, 1),
+(11, 2, NULL, 3, NULL, NULL, 1),
+(12, 2, NULL, 4, NULL, NULL, 1),
+(13, 2, NULL, 5, NULL, NULL, 1),
+(14, 2, NULL, 6, NULL, NULL, 1),
+(15, 2, NULL, 7, NULL, NULL, 1),
+(16, 2, NULL, 8, NULL, NULL, 1),
+(17, 3, NULL, 1, NULL, NULL, 1),
+(18, 3, NULL, 2, NULL, NULL, 1),
+(19, 3, NULL, 3, NULL, NULL, 1),
+(20, 3, NULL, 4, NULL, NULL, 1),
+(21, 3, NULL, 5, NULL, NULL, 1),
+(22, 3, NULL, 6, NULL, NULL, 1),
+(23, 3, NULL, 7, NULL, NULL, 1),
+(24, 3, NULL, 8, NULL, NULL, 1),
+(25, 4, NULL, 1, NULL, NULL, 1),
+(26, 4, NULL, 2, NULL, NULL, 1),
+(27, 4, NULL, 3, NULL, NULL, 1),
+(28, 4, NULL, 4, NULL, NULL, 1),
+(29, 4, NULL, 5, NULL, NULL, 1),
+(30, 4, NULL, 6, NULL, NULL, 1),
+(31, 4, NULL, 7, NULL, NULL, 1),
+(32, 4, NULL, 8, NULL, NULL, 1),
+(33, 9, NULL, 1, NULL, NULL, 1),
+(34, 9, NULL, 2, NULL, NULL, 1),
+(35, 9, NULL, 3, NULL, NULL, 1),
+(36, 9, NULL, 4, NULL, NULL, 1),
+(37, 9, NULL, 5, NULL, NULL, 1),
+(38, 9, NULL, 6, NULL, NULL, 1),
+(39, 9, NULL, 7, NULL, NULL, 1),
+(40, 9, NULL, 8, NULL, NULL, 1),
+(41, 10, NULL, 1, NULL, NULL, 1),
+(42, 10, NULL, 2, NULL, NULL, 1),
+(43, 10, NULL, 3, NULL, NULL, 1),
+(44, 10, NULL, 4, NULL, NULL, 1),
+(45, 10, NULL, 5, NULL, NULL, 1),
+(46, 10, NULL, 6, NULL, NULL, 1),
+(47, 10, NULL, 7, NULL, NULL, 1),
+(48, 10, NULL, 8, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -6448,7 +6523,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`senha`, `nome`, `email`, `sexo`, `estado`, `cidade`, `id_profissao`, `telefone`, `id_usuario`, `sobrenome`) VALUES
 ('0b1020edf5fc9f514e6adac231e012aa', 'Fabio', 'fabio@projek.com', 'feminino', 'BA', '2927408', 1, '(71) 92332-2344', 10, 'Martins'),
-('0b1020edf5fc9f514e6adac231e012aa', 'João ', 'joao@partner.com', 'masculino', 'PI', '2201150', 4, '(71) 98444-4444', 15, 'Partner');
+('0b1020edf5fc9f514e6adac231e012aa', 'João ', 'joao@partner.com', 'masculino', 'PI', '2201150', 4, '(71) 98444-4444', 15, 'Partner'),
+('0b1020edf5fc9f514e6adac231e012aa', 'Juliana', 'juliana@projek.com', 'feminino', 'PI', '2201002', 1, '(71) 98666-6666', 16, 'Menezes');
 
 --
 -- Indexes for dumped tables
@@ -6599,6 +6675,12 @@ ALTER TABLE `prospects`
   ADD PRIMARY KEY (`id_prospect`);
 
 --
+-- Indexes for table `relatorios_tarefa`
+--
+ALTER TABLE `relatorios_tarefa`
+  ADD PRIMARY KEY (`id_relatorio_tarefa`);
+
+--
 -- Indexes for table `responsaveis`
 --
 ALTER TABLE `responsaveis`
@@ -6615,6 +6697,12 @@ ALTER TABLE `socios`
 --
 ALTER TABLE `status_contato`
   ADD PRIMARY KEY (`id_status_contato`);
+
+--
+-- Indexes for table `status_tarefa`
+--
+ALTER TABLE `status_tarefa`
+  ADD PRIMARY KEY (`id_status_tarefa`);
 
 --
 -- Indexes for table `suspects`
@@ -6670,27 +6758,27 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `consultores_lead`
 --
 ALTER TABLE `consultores_lead`
-  MODIFY `id_c_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_c_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `consultores_market`
 --
 ALTER TABLE `consultores_market`
-  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_c_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `consultores_prospect`
 --
 ALTER TABLE `consultores_prospect`
-  MODIFY `id_c_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_c_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `consultores_suspect`
 --
 ALTER TABLE `consultores_suspect`
-  MODIFY `id_c_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_c_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `consultor_projeto`
 --
 ALTER TABLE `consultor_projeto`
-  MODIFY `id_c_projeto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_c_projeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `contato`
 --
@@ -6710,7 +6798,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT for table `departamentos_contratos`
 --
 ALTER TABLE `departamentos_contratos`
-  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_departamento_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `feedback`
 --
@@ -6720,7 +6808,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_historico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `information`
 --
@@ -6730,12 +6818,12 @@ ALTER TABLE `information`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_lead` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `market`
 --
 ALTER TABLE `market`
-  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_market` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `porte`
 --
@@ -6745,7 +6833,7 @@ ALTER TABLE `porte`
 -- AUTO_INCREMENT for table `pos_venda`
 --
 ALTER TABLE `pos_venda`
-  MODIFY `id_pos_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pos_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
@@ -6755,7 +6843,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT for table `profileimg`
 --
 ALTER TABLE `profileimg`
-  MODIFY `id_profile_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_profile_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `profissao`
 --
@@ -6765,12 +6853,17 @@ ALTER TABLE `profissao`
 -- AUTO_INCREMENT for table `projetos`
 --
 ALTER TABLE `projetos`
-  MODIFY `id_projeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_projeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `prospects`
 --
 ALTER TABLE `prospects`
-  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_prospect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `relatorios_tarefa`
+--
+ALTER TABLE `relatorios_tarefa`
+  MODIFY `id_relatorio_tarefa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `responsaveis`
 --
@@ -6780,17 +6873,22 @@ ALTER TABLE `responsaveis`
 -- AUTO_INCREMENT for table `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `status_contato`
 --
 ALTER TABLE `status_contato`
   MODIFY `id_status_contato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `status_tarefa`
+--
+ALTER TABLE `status_tarefa`
+  MODIFY `id_status_tarefa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `suspects`
 --
 ALTER TABLE `suspects`
-  MODIFY `id_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_suspect` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tarefas`
 --
@@ -6800,7 +6898,7 @@ ALTER TABLE `tarefas`
 -- AUTO_INCREMENT for table `tarefas_contrato`
 --
 ALTER TABLE `tarefas_contrato`
-  MODIFY `id_tarefas_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id_tarefas_contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
@@ -6815,7 +6913,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;COMMIT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

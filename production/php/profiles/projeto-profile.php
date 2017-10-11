@@ -26,7 +26,7 @@
   $contrato = buscaContrato($conexao, $projeto['n_contrato']);
   $market = buscaMarket($conexao, $contrato['id_clientes']);
   $n_contrato = $projeto['n_contrato'];
-  $departamentos_contrato = buscaDepartamentosContrato($conexao, $contrato['n_contrato']);
+  $departamentos_contrato = buscaDepartamentosContrato($conexao, $id_projeto);
   $consultores_projeto = buscaConsultoresProjeto($conexao, $id_projeto);
   $size = count($consultores_projeto);
 ?>
@@ -227,22 +227,30 @@
                           <th class="col-md-4"><?=$nome_departamento['descricao']?></th>
                           <th class="col-md-1" >Horas</th>
                           <th class="col-md-2">Data</th>
-                          <th  class="col-md-5">Consultor</th>
+                          <th  class="col-md-4">Consultor</th>
+                          <th  class="col-md-1">Ações</th>
                          </thead>
                          <tbody>
                         <?php
                           foreach ($tarefas_contrato as $t_contrato) {
                             $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
                             $consultor = buscaUsuario($conexao,$t_contrato["id_consultor"] );
-                            echo '
-                            <tr>
-                             <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
-                             <td>'.$nome_tarefa["nome"].'</td>
-                             <td>'.$t_contrato["horas"].'</td>
-                             <td>'.$t_contrato["data_fim"].'</td>
-                             <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>
-                            </tr>
-                            ';
+                            if($t_contrato['id_status_tarefa'] == 1){
+                              echo '                            
+                              <tr>
+                               <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
+                               <td>'.$nome_tarefa["nome"].'</td>
+                               <td>'.$t_contrato["horas"].'</td>
+                               <td>'.$t_contrato["data_fim"].'</td>
+                               <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>
+                               <td align="center">
+                                <a href="../forms/form-relatorio-tarefa.php?id_tarefas_contrato='.$t_contrato['id_tarefas_contrato'].'"><button class="btn btn-default btn-xs"><i class="fa fa-file"></i></button></a>
+                                <a href="../adiciona/adiciona-aprovacao.php?id_produto='.$produto['id_produto'].'"><button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
+                               </td>
+                              </tr>
+                              ';
+                            }
+                            
                           }
                         ?>
                          </tbody>
@@ -302,6 +310,7 @@
       $('#'+ id).Tabledit({
         url:'action.php',
         deleteButton: false,
+        editButton: false,
         hideIdentifier: true,
         columns:{
           identifier:[0, "id_tarefas_contrato"],

@@ -2,8 +2,11 @@
 	require_once "../bancos/conecta.php";
 	require_once "../bancos/banco-departamentos-contrato.php";
 	require_once "../bancos/banco-tarefas-contrato.php";
+  require_once "../bancos/banco-projeto.php";
   $n_contrato = $_GET["n_contrato"];
-  $departamentos_contratos = buscaDepartamentosContrato($conexao, $n_contrato);
+  $projeto = buscaProjetoContrato($conexao, $n_contrato);
+  $id_projeto = $projeto['id_projeto'];
+  $departamentos_contratos = buscaDepartamentosContrato($conexao, $id_projeto);
   foreach ($departamentos_contratos as $departamento) {
   	$id_departamento_contrato = $departamento['id_departamento_contrato'];
   	$tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);

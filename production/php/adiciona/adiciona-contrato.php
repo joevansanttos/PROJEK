@@ -2,6 +2,7 @@
    require_once "../bancos/conecta.php";
    require_once "../bancos/banco-contrato.php";
    require_once "../bancos/banco-socio.php";
+   require_once "../bancos/banco-projeto.php";
    require_once "../bancos/banco-departamentos.php";
    require_once "../bancos/banco-departamentos-contrato.php";
    require_once "../bancos/banco-prospect.php";
@@ -31,11 +32,13 @@
    $departamentos = $_GET['my-select']; 
    adicionaContrato($conexao, $n_contrato, $id_cliente, $razao, $cnpj, $sede, $data_inicio, $data_fim, $id_consultor, $id_produto, $id_prospect);
    $contrato = buscaContratoNumero($conexao, $n_contrato);
+   adicionaProjeto($conexao, $n_contrato);
+   $projeto = buscaProjetoContrato($conexao, $n_contrato);
    $i = 0;
    $size = count($departamentos);
    while ($i < $size) {
       $id_departamento = $departamentos[$i];
-      adicionaDepartamentoContrato($conexao, $id_departamento, $n_contrato);
+      adicionaDepartamentoContrato($conexao, $id_departamento, $projeto['id_projeto']);
       $i++;
    }
    $i = 0;
