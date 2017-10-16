@@ -110,6 +110,11 @@
                         <li><a href="../consultoria/projetos.php">Projetos</a></li>
                       </ul>
                     </li>
+                    <li><a><i class="fa fa-bar-chart-o"></i> Financeiro <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="../financeiro/transacoes.php">Transações</a></li>
+                      </ul>
+                    </li>
                   <?php
                     }
                   ?>

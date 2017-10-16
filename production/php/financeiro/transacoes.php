@@ -1,36 +1,20 @@
-<?php
-  header('Content-Type: text/html; charset=utf-8');
-  error_reporting(E_ALL ^ E_NOTICE);
+<?php 
+  header('Content-Type: text/html; charset=utf-8'); 
+  error_reporting(E_ALL ^ E_NOTICE); 
   require_once "../bancos/conecta.php";
   require_once "../bancos/banco-contrato.php";
   require_once "../bancos/banco-usuario.php";
-  require_once "../bancos/banco-consultores.php";
-  require_once "../bancos/banco-imagem.php";
-  require_once "../bancos/banco-feedback.php";
-  require_once "../bancos/banco-pos_venda.php";
   require_once "../bancos/banco-market.php";
-  require_once "../bancos/banco-contato.php";
   require_once "../logica/logica-usuario.php";
   require_once "../alerta/mostra-alerta.php";
   require_once "../bancos/banco-projeto.php";
-  require_once "../bancos/banco-departamentos-contrato.php";
-  require_once "../bancos/banco-departamentos.php";
-  require_once "../bancos/banco-tarefas-contrato.php";
-  require_once "../bancos/banco-tarefas.php";
+  require_once "../bancos/banco-consultores.php";
   verificaUsuario();
   $email = $_SESSION["usuario_logado"];
   $usuario = buscaUsuarioEmail($conexao, $email);
   $id_usuario = $usuario['id_usuario'];
-  $id_projeto = $_GET['id_projeto'];
-  $projeto = buscaProjeto($conexao, $id_projeto);
-  $contrato = buscaContrato($conexao, $projeto['n_contrato']);
-  $market = buscaMarket($conexao, $contrato['id_clientes']);
-  $n_contrato = $projeto['n_contrato'];
-  $departamentos_contrato = buscaDepartamentosContrato($conexao, $id_projeto);
-  $consultores_projeto = buscaConsultoresProjeto($conexao, $id_projeto);
-  $size = count($consultores_projeto);
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +34,8 @@
     <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     <link href="../../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -57,21 +43,14 @@
     <link href="../../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Datatables -->
+
     <!-- Custom Theme Style -->
     <link href="../../../build/css/custom.min.css" rel="stylesheet">
-    <style type="text/css">
-      .hide{
-
-      visibility: hidden
-
-      }
-    </style>
-
   </head>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <!-- Sidebar-->
+        <!-- Sidebar-->      
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -80,16 +59,20 @@
             <div class="clearfix"></div>
             <div class="profile clearfix">
               <div class="profile_pic">
-                <?php
-                  $result = buscaImagem($conexao, $id_usuario);
-                  if(!empty($result)){
+                <?php                  
+                  $sql = "SELECT * FROM profileimg WHERE id_usuario = $id_usuario";
+                  $sth = $conexao->query($sql);
+                  $result=mysqli_fetch_array($sth);
+                  if($result != null){
                     echo '<img class="img-responsive img-circle profile_img" src="data:image/jpeg;base64,'.base64_encode( $result['image'] ).'"/>';
                   }else{
                 ?>
-                  <img class="img-responsive img-circle profile_img" src="../../images/user.png">
-                <?php
-                  }
+                <img class="img-responsive img-circle profile_img" src="../../images/user.png">
+                <?php    
+                  }                            
+                  
                 ?>
+                <img src="" alt="..." >
               </div>
               <div class="profile_info">
                 <span>Bem Vindo,</span>
@@ -104,7 +87,7 @@
                     <ul class="nav child_menu">
                       <li><a href="../index/index2.php">Dashboard</a></li>
                     </ul>
-
+                    
                   </li>
                   <li><a><i class="fa fa-list"></i> Listar<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -119,13 +102,18 @@
                       <li><a href="../empresas/leads.php">Leads</a></li>
                       <li><a href="../empresas/suspects.php">Suspects</a></li>
                       <li><a href="../empresas/prospects.php">Prospects</a></li>
-                      <li><a href="../contratos/contratos.php">Contratos</a></li>
+                      <li><a href="../contratos/contratos.php">Contratos</a></li>                     
                       <li><a href="../pos-venda/pos-venda.php">Pós-venda</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Consultoria <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../consultoria/projetos.php">Projetos</a></li>
+                      <li><a href="projetos.php">Projetos</a></li>                     
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> Financeiro <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../financeiro/transacoes.php">Transações</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -145,9 +133,9 @@
                 <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-            </div>
+            </div>  
           </div>
-        </div>
+        </div>      
         <!-- Col-->
 
         <!-- top navigation -->
@@ -171,7 +159,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Ajuda</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+                    <li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                   </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -181,14 +169,14 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation -->
+        <!-- /top navigation --> 
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Projeto <?=$market['nome']?></h3>
+                <h3>Transações</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -200,78 +188,85 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!--Page Title-->
+            </div> 
+            <!--Page Title-->             
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="clearfix"></div>
+                  <div class="x_title">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a></li>
+                          <li><a href="#">Settings 2</a></li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="clearfix"></div>                
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12">
-
-                      <?php
-                        $i = 1;
-                        foreach ($departamentos_contrato as  $d_contrato) {
-                          $nome_departamento = buscaNomeDepartamento($conexao, $d_contrato['id_departamento']);
-                          $id_departamento_contrato = $d_contrato['id_departamento_contrato'];
-                          $tarefas_contrato = listaTarefasContrato($conexao, $id_departamento_contrato);
-                          $string_i = (string)$i;
-                          $id = 'editable_table' . $string_i;
-                          $i++;
-                      ?>
-                        <table id="<?=$id?>" class="table table-bordered table-striped datatable">
-                         <thead>
-                          <th class="hide"></th>
-                          <th class="col-md-4"><?=$nome_departamento['descricao']?></th>
-                          <th class="col-md-1" >Horas</th>
-                          <th class="col-md-2">Data</th>
-                          <th  class="col-md-4">Consultor</th>
-                          <th  class="col-md-1">Ações</th>
-                         </thead>
-                         <tbody>
-                        <?php
-                          foreach ($tarefas_contrato as $t_contrato) {
-                            $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
-                            $consultor = buscaUsuario($conexao,$t_contrato["id_consultor"] );
-                            if($t_contrato['id_status_tarefa'] == 1){
-                              $relatorio_tarefa = buscaRelatorio($conexao, $t_contrato['id_tarefas_contrato']);
-                                if(!empty($relatorio_tarefa)){
-                                  echo '                            
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                          <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recebimentos</a>
+                            </li>
+                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Despesas</a>
+                            </li>                           
+                          </ul>
+                          <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                              <table id="recebimento" class="table table-striped datatable">
+                                <thead>
                                   <tr>
-                                   <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
-                                   <td>'.$nome_tarefa["nome"].'</td>
-                                   <td>'.$t_contrato["horas"].'</td>
-                                   <td>'.$t_contrato["data_fim"].'</td>
-                                   <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>                               
-                                   <td align="center">
-                                    <a href="../forms/form-relatorio-tarefa.php?id_tarefas_contrato='.$t_contrato['id_tarefas_contrato'].'"><button class="btn btn-primary btn-xs"><i class="fa fa-file"></i></button></a>
-                                    <a href="../adiciona/adiciona-aprovacao.php?id_produto='.$produto['id_produto'].'"><button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                   </td>
+                                    <th>DATA</th>
+                                    <th>DESCRIÇÃO</th>
+                                    <th>RECEBIDO DE</th>
+                                    <th>VALOR</th>
+                                    <th>CATEGORIA</th>
+                                    <th>PAGAMENTO</th>
+                                    <th>PAGO?</th>
+                                  </tr>                                  
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                   </tr>
-                                  ';
-                                }
-                              
-                            }
-                            
-                          }
-                        ?>
-                         </tbody>
-                        </table>
-                        <?php
-                          }
-                        ?>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                              <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                                booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+                            </div>                           
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <a style="justify-content: center;" data-toggle="tooltip" data-placement="top"  class=" btn btn-success  btn-round  btn-block "  href="../forms/recebimento-formulario.php?">+ Adicionar recebimento</a>
+                        </div>
+                        
                       </div>
-                    </div>
+                    </div>    
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div>        
         <div class="clearfix"></div>
         <!-- /page content -->
+
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -280,14 +275,19 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
+
       </div>
     </div>
     <!-- jQuery -->
     <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../../../vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
     <script src="../../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -305,23 +305,21 @@
     <!-- Custom Theme Scripts -->
     <script src="../../../build/js/custom.min.js"></script>
     <script src="../../js/datatable.js"></script>
-    <script src="../../../vendors/jquery-tabledit/jquery.tabledit.min.js"></script>
-    <script src="../../js/editTable.js">
-    </script>
     <script>
-    $(".datatable").each( function() {
-      var id = this.id;
-      $('#'+ id).Tabledit({
-        url:'action.php',
-        deleteButton: false,
-        editButton: false,
-        hideIdentifier: true,
-        columns:{
-          identifier:[0, "id_tarefas_contrato"],
-          editable:[[2, 'horas'], [3, 'data_fim']]
-        }
+      $(".datatable").each( function() {
+        var id = this.id;
+        $('#recebimento').Tabledit({
+          url:'action.php',
+          deleteButton: false,
+          editButton: false,
+          hideIdentifier: true,
+          columns:{
+            identifier:[0, "id_tarefas_contrato"],
+            editable:[[2, 'horas'], [3, 'data_fim']]
+          }
+        });
       });
-    });
-    </script>
+    </script>  
   </body>
 </html>
+
