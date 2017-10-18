@@ -375,5 +375,6 @@
 	      document.getElementById('valor_est').value = parseFloat(Math.round(result * 100) / 100).toFixed(2);
 	    }
 	  </script>
+	  
 	</body>
 </html>

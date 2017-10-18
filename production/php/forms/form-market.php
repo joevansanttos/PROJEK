@@ -185,7 +185,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                    <div class="x_content">
-                     <form action="../adiciona/adiciona-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="../adiciona/adiciona-market.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
                         </label>
@@ -317,7 +317,7 @@
                           <input type="hidden" name="id_consultor" id="id_consultor" value="<?=$usuario['id_usuario']?>" />
                         </div>
                       </div>
-                     </form>
+                    </form>
                   </div>
                 </div>
               </div>

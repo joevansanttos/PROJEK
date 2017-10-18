@@ -24,7 +24,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Projek | Novo Recebimento</title>
+ <title>Projek | Nova Despesa</title>
 
   <link rel="shortcut icon" type="image/x-icon" href="../../ico/favicon.ico"/>
   <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -170,7 +170,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Novo Recebimento</h3>
+                <h3>Nova Despesa</h3>
               </div>
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -204,7 +204,7 @@
                         </div>
                       </div>
                       <div class="item form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_cliente">Recebido de<span class="required">*</span>
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_cliente">Pago a<span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                          <select name="id_cliente" class="form-control col-md-7 col-xs-12">
