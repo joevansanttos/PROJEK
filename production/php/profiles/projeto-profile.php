@@ -235,25 +235,20 @@
                           foreach ($tarefas_contrato as $t_contrato) {
                             $nome_tarefa = buscaTarefaNome($conexao, $t_contrato['id_tarefa']);
                             $consultor = buscaUsuario($conexao,$t_contrato["id_consultor"] );
-                            if($t_contrato['id_status_tarefa'] == 1){
-                              $relatorio_tarefa = buscaRelatorio($conexao, $t_contrato['id_tarefas_contrato']);
-                                if(!empty($relatorio_tarefa)){
-                                  echo '                            
-                                  <tr>
-                                   <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
-                                   <td>'.$nome_tarefa["nome"].'</td>
-                                   <td>'.$t_contrato["horas"].'</td>
-                                   <td>'.$t_contrato["data_fim"].'</td>
-                                   <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>                               
-                                   <td align="center">
-                                    <a href="../forms/form-relatorio-tarefa.php?id_tarefas_contrato='.$t_contrato['id_tarefas_contrato'].'"><button class="btn btn-primary btn-xs"><i class="fa fa-file"></i></button></a>
-                                    <a href="../adiciona/adiciona-aprovacao.php?id_produto='.$produto['id_produto'].'"><button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                   </td>
-                                  </tr>
-                                  ';
-                                }
-                              
-                            }
+                            echo '                            
+                            <tr>
+                             <td class="hide">'.$t_contrato["id_tarefas_contrato"].'</td>
+                             <td>'.$nome_tarefa["nome"].'</td>
+                             <td>'.$t_contrato["horas"].'</td>
+                             <td>'.$t_contrato["data_fim"].'</td>
+                             <td>'.$consultor["nome"]." ".$consultor["sobrenome"].'</td>                               
+                             <td align="center">
+                              <a href="../forms/form-relatorio-tarefa.php?id_tarefas_contrato='.$t_contrato['id_tarefas_contrato'].'"><button class="btn btn-primary btn-xs"><i class="fa fa-file"></i></button></a>
+                              <a href="../adiciona/adiciona-aprovacao.php?id_produto='.$produto['id_produto'].'"><button class="btn btn-success btn-xs"><i class="fa fa-legal"></i></button></a>
+                             </td>
+                            </tr>
+                            ';
+                            
                             
                           }
                         ?>

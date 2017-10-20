@@ -2,9 +2,9 @@
 -- version 4.7.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 18-Out-2017 às 18:38
--- Versão do servidor: 10.0.31-MariaDB-0ubuntu0.16.04.2
+-- Host: localhost
+-- Generation Time: 20-Out-2017 às 21:06
+-- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -5881,18 +5881,19 @@ INSERT INTO `departamentos` (`id_departamento`, `descricao`) VALUES
 CREATE TABLE `departamentos_contratos` (
   `id_departamento` int(11) DEFAULT NULL,
   `n_contrato` varchar(50) DEFAULT NULL,
-  `id_departamento_contrato` int(11) NOT NULL
+  `id_departamento_contrato` int(11) NOT NULL,
+  `id_projeto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `departamentos_contratos`
 --
 
-INSERT INTO `departamentos_contratos` (`id_departamento`, `n_contrato`, `id_departamento_contrato`) VALUES
-(1, '44444444', 1),
-(2, '44444444', 2),
-(3, '44444444', 3),
-(4, '44444444', 4);
+INSERT INTO `departamentos_contratos` (`id_departamento`, `n_contrato`, `id_departamento_contrato`, `id_projeto`) VALUES
+(1, '44444444', 1, 3),
+(2, '44444444', 2, 3),
+(3, '44444444', 3, 3),
+(4, '44444444', 4, 3);
 
 -- --------------------------------------------------------
 
